@@ -17,7 +17,7 @@ const GridItem = ({ icon: Icon, link, title }) => {
             }}>
                 <Link to={link}>
                     <IconButton color="primary" aria-label="add to favorites">
-                        <Icon />
+                        <Icon fontSize="large"  />
                     </IconButton>
                 </Link>
             </Box>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import backgroundImage from './images/background.png';
 
 
@@ -11,13 +11,13 @@ import PageTemplate from './components/PageTemplate';
 import IconCreator from './components/IconCreator'; // Import the new component
 import Instructions from './components/Instructions';
 import PusslePreview from './components/PusslePreview';
-import PdfView from './components/PdfView';
+import PDFViewerPage from './components/PDFViewerPage';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App" style={{  height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
-        <Router basename="/chatgpt-apps3" >
+      <HashRouter>
           <Routes>
           
             <Route path="/" element={<GridComponent />} />
@@ -26,10 +26,10 @@ function App() {
             <Route path="/page-template" element={<PageTemplate/>} />
             <Route path="/instructions" element={<Instructions/>} />
             <Route path="/pussle-preview" element={<PusslePreview/>} />
-            <Route path="/pdf-view" element={<PdfView/>} />
+            <Route path="/pdf-view" element={<PDFViewerPage/>} />
             
           </Routes>
-        </Router>
+        </HashRouter>
         </div>
       
     </ThemeProvider>
