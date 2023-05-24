@@ -4,6 +4,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PatternIcon from '@mui/icons-material/Pattern'; // Import the icon for the pattern generator
 import GridItem from './GridItem';
 import backgroundImage from '../images/background.png';
+import GridOnIcon from '@mui/icons-material/GridOn';
+import WebIcon from '@mui/icons-material/Web';
+import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
+import ExtensionIcon from '@mui/icons-material/Extension';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 function GridComponent() {
     const gridItems = [];
@@ -12,13 +17,21 @@ function GridComponent() {
     while (gridItems.length < 16) {
         gridItems.push({  link: '#',  });
     }
+    while (gridItems.length < 16) {
+        gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
+    }
     gridItems.push(  { icon: PatternIcon, link: '/pattern-generator', title: 'Patterns' })
+    gridItems.push({ icon: GridOnIcon, link: '/icon-creator', title: 'SVG getter' });
+    gridItems.push({ icon: WebIcon, link: '/page-template', title: 'Template' });
+    gridItems.push({ icon: SpeakerNotesIcon, link: '/instructions', title: 'GPT-Promt' });
+    gridItems.push({ icon: ExtensionIcon, link: '/pussle-preview', title: 'View Puzzle' });
+    gridItems.push({ icon: AutoStoriesIcon, link: '/pdf-view', title: 'Story' });
     while (gridItems.length < 24) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
     return (
         <>
-            <div className="App" style={{  height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
+            
                 <Grid container spacing={1} style={{ height: '100%',marginTop: '40px', alignItems: 'stretch' }}>
                     {gridItems.map((item, index) => (
                         <Grid key={index} item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
@@ -27,7 +40,6 @@ function GridComponent() {
                     ))}
 
                 </Grid>
-            </div>
         </>
     );
 }
