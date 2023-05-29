@@ -9,6 +9,8 @@ import WebIcon from '@mui/icons-material/Web';
 import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 
 function GridComponent() {
     const gridItems = [];
@@ -26,6 +28,8 @@ function GridComponent() {
     gridItems.push({ icon: SpeakerNotesIcon, link: '/instructions', title: 'GPT-Promt' });
     gridItems.push({ icon: ExtensionIcon, link: '/pussle-preview', title: 'View Puzzle' });
     gridItems.push({ icon: AutoStoriesIcon, link: '/pdf-view', title: 'Story' });
+    gridItems.push({ icon: SwitchAccountIcon, link: '/rpg-page', title: 'RPG' });
+    gridItems.push({ icon: CollectionsBookmarkIcon, link: '/bookmarklets', title: 'Bookmarklets' });
     while (gridItems.length < 24) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }

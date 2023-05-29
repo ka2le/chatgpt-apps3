@@ -12,6 +12,10 @@ import IconCreator from './components/IconCreator'; // Import the new component
 import Instructions from './components/Instructions';
 import PusslePreview from './components/PusslePreview';
 import PDFViewerPage from './components/PDFViewerPage';
+import RPGCharacter from './components/RPGCharacter';
+import BookmarkletsCollection from './components/BookmarkletsCollection';
+
+
 
 function App() {
   return (
@@ -27,6 +31,8 @@ function App() {
             <Route path="/instructions" element={<Instructions/>} />
             <Route path="/pussle-preview" element={<PusslePreview/>} />
             <Route path="/pdf-view" element={<PDFViewerPage/>} />
+            <Route path="/rpg-page" element={<RPGCharacter/>} />
+            <Route path="/bookmarklets" element={<BookmarkletsCollection/>} />
             
           </Routes>
         </HashRouter>

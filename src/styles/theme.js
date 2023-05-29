@@ -7,7 +7,7 @@ const theme = createTheme({
         },
         text: {
             primary: 'rgb(48, 81, 102)', // Set the primary text color to the primary color
-            secondary: "#FFFFFF"
+            secondary: "black"
         },
     },
     components: {
@@ -15,7 +15,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: 'unset',
-                    background: 'rgba(255,255,255,0.6)',
+                    background: 'rgba(255,255,255,0.9)',
                 },
             },
         },

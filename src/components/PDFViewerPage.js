@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Grid, Paper, Button, Box } from '@mui/material';
 import { Document, Page, pdfjs } from 'react-pdf';
-import PdfFile from '../files/harmony.pdf';
+import PdfFile from '../files/Ebook Harmony of Everything.pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 

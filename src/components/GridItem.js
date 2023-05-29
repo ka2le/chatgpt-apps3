@@ -21,7 +21,7 @@ const GridItem = ({ icon: Icon, link, title }) => {
                     </IconButton>
                 </Link>
             </Box>
-            <Typography variant="body2" color="textSecondary" component="p" style={{ textAlign: 'center', width: '80px' }}>
+            <Typography variant="body2" color="white" component="p" style={{ textAlign: 'center', width: '80px' }}>
                 {title}
             </Typography>
         </div>
