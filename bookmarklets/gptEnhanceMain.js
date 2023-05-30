@@ -17,6 +17,7 @@ function loadScript(url, callback) {
 var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
 var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
 var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
+var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js';
 
 
 
@@ -25,8 +26,9 @@ loadScript(preactCDN, function () {
     loadScript(htmCDN, function () {
         console.log('HTM has been loaded!');
         loadScript(preactHooksCDN, function () {
-
-            initApp();
+            loadScript(bookmarkletUtils, function () {
+                initApp();
+            });
         });
     });
 });
@@ -53,30 +55,7 @@ function initApp() {
     /* END SECTION STYLES */
 
     /* SECTION COMPONENTS */
-    function decodeHtmlEntities(text) {
-        var textArea = document.createElement('textarea');
-        textArea.innerHTML = text;
-        return textArea.value;
-    }
-    function checkCodeBoxType(button, codeboxText) {
-        var nextSibling = button.nextElementSibling;
-        var previousSibling = button.previousElementSibling;
-        if ((nextSibling && nextSibling.tagName.toLowerCase() === 'span' && nextSibling.innerHTML.toLowerCase().includes(codeboxText)) ||
-            (previousSibling && previousSibling.tagName.toLowerCase() === 'span' && previousSibling.innerHTML.toLowerCase().includes(codeboxText))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    /* Your custom function to add elements*/
-    function addElement(parent, element, beforeNode) {
-        element.classList.add('gpt-enhancer');
-        if (beforeNode) {
-            parent.insertBefore(element, beforeNode);
-        } else {
-            parent.appendChild(element);
-        }
-    }
+    
 
 
     function addButtonsToExistingSpans() {
@@ -103,13 +82,7 @@ function initApp() {
         });
     }
 
-    function addStyling() {
-        /* var gap2 = document.querySelectorAll('.gap-2');
-            gap2.forEach(function (gap) {
-                gap.style.gap = "0px"
-            });*/
-    }
-
+   
     function addObserver() {
         var observer = new MutationObserver(function (mutationsList, observer) {
             for (var mutation of mutationsList) {
@@ -121,44 +94,6 @@ function initApp() {
         observer.observe(document, { attributes: false, childList: true, subtree: true });
         return function () {
             observer.disconnect();
-        }
-    }
-    function getGrandParentElement(element) {
-        return element.parentElement.parentElement;
-    }
-    
-    function getCodeElement(grandParentElement) {
-        return grandParentElement.querySelector('code');
-    }
-    
-    function getCleanCode(props) {
-        console.log(props);
-        var grandParentElement = getGrandParentElement(props);
-        console.log(grandParentElement);
-            var codeElement = getCodeElement(grandParentElement);
-            console.log(codeElement);
-            if (!codeElement) {
-                handleNoCodeElement();
-                return;
-            }
-        var allCode = codeElement.innerHTML;
-        console.log(allCode);
-        var theCleanCode = allCode.replace(/<span class="hljs[^"]*">|<\/span>/g, '');
-        console.log(theCleanCode);
-        return decodeHtmlEntities(theCleanCode);
-    }
-    
-    function handleNoCodeElement() {
-        alert('No related code element found');
-    }
-    
-    
-    function runJs(theCleanCode) {
-        try {
-            var newFunction = new Function(theCleanCode);
-            newFunction();
-        } catch (e) {
-            alert('Failed to execute function: ' + e.message);
         }
     }
     
@@ -174,24 +109,10 @@ function initApp() {
                 onClick=${runJsWrapper}><svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon points="8 5 16 12 8 19 8 5"/></svg>Run</button>
         `;
     }
-    
-    function downloadSVG(cleanCode) {
-        const blob = new Blob([cleanCode], { type: 'image/svg+xml;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        const format = "svg";
-        link.download = `icon.${format}`;
-        link.style.display = 'none';  
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-    
 
     function DownloadSVGButton(props) {
         function downloadSVGWrapper() {
-            var theCleanCode = getCleanCode(props.spanElement);
+            var theCleanCode = getCleanCode(props);
             downloadSVG(theCleanCode);
         }
         return html`
@@ -201,6 +122,7 @@ function initApp() {
                 onClick=${downloadSVGWrapper}><svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>Download</button>
         `;
     }
+
     function ToggleEditableButton(props) {
         function toggleEditable() {
             var grandParentElement = props.spanElement.parentElement.parentElement;
@@ -258,27 +180,9 @@ function initApp() {
         return html``;
 
     };
-
-
     /* END SECTION COMPONENTS */
 
-    /* SECTION CLEANUP */
-    var rootId = 'gpt-enhancer-root';
-    var existingRoot = document.getElementById(rootId);
-    if (existingRoot) {
-        existingRoot.remove();
-    }
-    /* END SECTION CLEANUP */
-
-    /* SECTION ADD CODE */
-    var appRoot = document.createElement('div');
-    appRoot.id = rootId;
-    document.body.appendChild(appRoot);
-    /* END SECTION ADD CODE */
-
-    /* SECTION RENDER */
-    render(html`<${TheApp} />`, appRoot);
-    /* END SECTION RENDER */
+    RunTheApp(TheApp);
 };
 
 })();

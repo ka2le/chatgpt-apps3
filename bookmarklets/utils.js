@@ -5,6 +5,11 @@ function getGrandParentElement(element) {
 function getCodeElement(grandParentElement) {
     return grandParentElement.querySelector('code');
 }
+function decodeHtmlEntities(text) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+}
 
 function getCleanCode(props) {
     console.log(props);
@@ -25,4 +30,67 @@ function getCleanCode(props) {
 
 function handleNoCodeElement() {
     alert('No related code element found');
+}
+
+function checkCodeBoxType(button, codeboxText) {
+    var nextSibling = button.nextElementSibling;
+    var previousSibling = button.previousElementSibling;
+    if ((nextSibling && nextSibling.tagName.toLowerCase() === 'span' && nextSibling.innerHTML.toLowerCase().includes(codeboxText)) ||
+        (previousSibling && previousSibling.tagName.toLowerCase() === 'span' && previousSibling.innerHTML.toLowerCase().includes(codeboxText))) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function addElement(parent, element, beforeNode) {
+    element.classList.add('gpt-enhancer');
+    if (beforeNode) {
+        parent.insertBefore(element, beforeNode);
+    } else {
+        parent.appendChild(element);
+    }
+}
+
+function addStyling() {
+    /* var gap2 = document.querySelectorAll('.gap-2');
+        gap2.forEach(function (gap) {
+            gap.style.gap = "0px"
+        });*/
+}
+
+
+function runJs(theCleanCode) {
+    try {
+        var newFunction = new Function(theCleanCode);
+        newFunction();
+    } catch (e) {
+        alert('Failed to execute function: ' + e.message);
+    }
+}
+
+function downloadSVG(cleanCode) {
+    const blob = new Blob([cleanCode], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    const format = "svg";
+    link.download = `icon.${format}`;
+    link.style.display = 'none';  
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+
+function RunTheApp(TheApp){
+    var rootId = 'gpt-enhancer-root';
+    var existingRoot = document.getElementById(rootId);
+    if (existingRoot) {
+        existingRoot.remove();
+    }
+    var appRoot = document.createElement('div');
+    appRoot.id = rootId;
+    document.body.appendChild(appRoot);
+    render(html`<${TheApp} />`, appRoot);
 }
