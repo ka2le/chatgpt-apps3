@@ -127,10 +127,7 @@ function initApp() {
         function toggleEditable() {
             var grandParentElement = props.spanElement.parentElement.parentElement;
             var codeElement = grandParentElement.querySelector('code');
-            if (!codeElement) {
-                alert('No related code element found');
-                return;
-            }
+
             if (codeElement.hasAttribute('contentEditable')) {
                 if (codeElement.getAttribute('contentEditable') == 'true') {
                     codeElement.setAttribute('contentEditable', 'false');
@@ -138,8 +135,7 @@ function initApp() {
                     codeElement.setAttribute('contentEditable', 'true');
                 }
             } else {
-                var code = codeElement.innerHTML;
-                var cleanCode = code.replace(/<span class="hljs[^"]*">|<\/span>/g, '');
+                var cleanCode = getCleanCode(props);
                 codeElement.setAttribute('contentEditable', 'true');
                 codeElement.setAttribute('innerHtml', cleanCode);
             }
@@ -182,7 +178,7 @@ function initApp() {
     };
     /* END SECTION COMPONENTS */
 
-    RunTheApp(TheApp);
+    RunTheApp(TheApp, render);
 };
 
 })();
