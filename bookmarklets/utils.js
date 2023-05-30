@@ -83,7 +83,7 @@ function downloadSVG(cleanCode) {
 }
 
 
-function RunTheApp(TheApp, render){
+function RunTheApp(TheApp, render, html){
     var rootId = 'gpt-enhancer-root';
     var existingRoot = document.getElementById(rootId);
     if (existingRoot) {

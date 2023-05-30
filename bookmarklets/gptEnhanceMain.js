@@ -52,11 +52,42 @@ function initApp() {
     var buttonStyle = {
         margin: "0 5px",
     };
+    var toolWindowStyle = {
+        margin: "0 5px",
+    };
     /* END SECTION STYLES */
 
     /* SECTION COMPONENTS */
     
-
+    function ToolWindow(){
+        return html`
+        <div 
+            style=${toolWindowStyle} 
+            id="toolwindow"
+            class="group w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
+            <h1>Toolwindow id:toolwindow</h1>
+        </div>
+    `;
+    }
+    function addToolWindow(){
+        var toolWindow = document.createElement('div');
+        render(html`<${ToolWindow} />`, toolWindow);
+        const container = document.querySelector('main > .flex-1.overflow-hidden');
+    
+        if (container) {
+            const groupElements = container.querySelectorAll('.group.w-full');
+            if (groupElements.length > 1) {
+                const beforeThis = groupElements[groupElements.length - 2];
+                beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
+            } else if (groupElements.length === 1) {
+                const beforeThis = groupElements[0];
+                beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
+            } else {
+                
+                container.appendChild(toolWindow);
+            }
+        }
+    }
 
     function addButtonsToExistingSpans() {
         var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
@@ -170,6 +201,7 @@ function initApp() {
         useEffect(function () {
             removeElementsByClass("gpt-enhancer");
             addButtonsToExistingSpans();
+            addToolWindow();
             addObserver();
             addStyling();
         }, [haveRemoved]);
@@ -178,7 +210,7 @@ function initApp() {
     };
     /* END SECTION COMPONENTS */
 
-    RunTheApp(TheApp, render);
+    RunTheApp(TheApp, render, html);
 };
 
 })();
