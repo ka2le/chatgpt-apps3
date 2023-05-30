@@ -65,16 +65,16 @@ function initApp() {
                 button.setAttribute('gpt-enhancer-modified', 'true');
                 var newInnerText = button.innerText.replace("Copy code", 'Copy');
                 button.setAttribute("innerHtml", newInnerText);
-                if (checkCodeBoxType(button, "javascript")) {
+               /* if (checkCodeBoxType(button, "javascript")) {*/
                     var runJsButton = document.createElement('div');
                     render(html`<${RunJsButton} spanElement=${button}/>`, runJsButton);
                     addElement(button.parentElement, runJsButton, button.nextSibling);
-                } 
-                if (checkCodeBoxType(button, "html") || checkCodeBoxType(button, "svg")) {
+                /*} 
+                if (checkCodeBoxType(button, "html") || checkCodeBoxType(button, "svg")) {*/
                     var downloadSVGButton = document.createElement('div');
                     render(html`<${DownloadSVGButton} spanElement=${button}/>`, downloadSVGButton);
                     addElement(button.parentElement, downloadSVGButton, button.nextSibling);
-                }
+                /*}*/
                 var toggleEditableButton = document.createElement('div');
                 render(html`<${ToggleEditableButton} spanElement=${button}/>`, toggleEditableButton);
                 addElement(button.parentElement, toggleEditableButton, button.nextSibling);
