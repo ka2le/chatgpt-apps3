@@ -11,16 +11,21 @@ javascript: (function () {
         head.appendChild(script);
     }
     /* END SECTION IMPORTS */
+
+
     /* SECTION LIBRARY LOADERS */
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
+
+
 
     loadScript(preactCDN, function () {
         console.log('Preact has been loaded!');
         loadScript(htmCDN, function () {
             console.log('HTM has been loaded!');
             loadScript(preactHooksCDN, function () {
+
                 initApp();
             });
         });
@@ -30,6 +35,7 @@ javascript: (function () {
 
 
     function initApp() {
+
         /* SECTION INIT PREACT AND HTM, useState and useEffect */
         var h = preact.h;
         var render = preact.render;
@@ -39,7 +45,10 @@ javascript: (function () {
         /* END SECTION INIT PREACT AND HTM */
 
 
+
+
         var buttonStyle = {
+            margin: "0 5px",
         };
         /* END SECTION STYLES */
 
@@ -49,35 +58,50 @@ javascript: (function () {
             textArea.innerHTML = text;
             return textArea.value;
         }
+        /* Your custom function to add elements*/
+        function addElement(parent, element, beforeNode) {
+            console.log("adding " + element.type);
+            element.classList.add('gpt-enhancer');
+            if (beforeNode) {
+                parent.insertBefore(element, beforeNode);
+            } else {
+                parent.appendChild(element);
+            }
+        }
+
 
         function addButtonsToExistingSpans() {
-            var spans = document.querySelectorAll('button:not([data-js-button])');
+            console.log("Adding buttons");
+            var spans = document.querySelectorAll('button:not([gpt-enhancer-modified])');
             spans.forEach(function (span) {
                 if (span.innerText.includes('Copy code')) {
-                    span.setAttribute('data-js-button', 'true');
+                    span.setAttribute('gpt-enhancer-modified', 'true');
                     var newInnerText = span.innerText.replace("Copy code", 'Copy');
                     span.setAttribute("innerHtml", newInnerText);
                     var runJsButton = document.createElement('div');
                     render(html`<${RunJsButton} spanElement=${span}/>`, runJsButton);
-                    span.parentElement.insertBefore(runJsButton, span.nextSibling);
+                    addElement(span.parentElement, runJsButton, span.nextSibling);
                     var toggleEditableButton = document.createElement('div');
                     render(html`<${ToggleEditableButton} spanElement=${span}/>`, toggleEditableButton);
-                    span.parentElement.insertBefore(toggleEditableButton, runJsButton);
+                    addElement(span.parentElement, toggleEditableButton, runJsButton);
                 }
             });
         }
-        
-        function addStyling(){
-            var gap2 = document.querySelectorAll('.gap-2');
-            gap2.forEach(function (gap) {
-                gap.style.gap = "0px"
-            });
+
+        function addStyling() {
+            /* var gap2 = document.querySelectorAll('.gap-2');
+             gap2.forEach(function (gap) {
+                 gap.style.gap = "0px"
+             });*/
         }
 
         function addObserver() {
             var observer = new MutationObserver(function (mutationsList, observer) {
                 for (var mutation of mutationsList) {
                     if (mutation.type === 'childList') {
+                        if (mutation.addedNodes.length > 0 && mutation.addedNodes[0].classList.contains('gpt-enhancer')) {
+                            return;
+                        }
                         addButtonsToExistingSpans();
                     }
                 }
@@ -149,20 +173,45 @@ javascript: (function () {
         }
 
         function TheApp() {
+            const [haveRemoved, setHaveRemoved] = useState(false);
+            console.log(haveRemoved);
+            function removeElementsByClass(className) {
+                console.log("removingExisting");
+                console.log(haveRemoved);
+                if (haveRemoved) {
+                    console.log("Not removingExisting");
+                    return "";
+                } else {
+                    console.log("Indeed removingExisting");
+                    const elements = document.getElementsByClassName(className);
+                    while (elements.length > 0) {
+                        elements[0].parentNode.removeChild(elements[0]);
+                    }
+                    var elements2 = document.querySelectorAll('[gpt-enhancer-modified]');
+                    for (var i = 0; i < elements2.length; i++) {
+                        elements2[i].removeAttribute('gpt-enhancer-modified');
+                    }
+
+                    setHaveRemoved(true);
+                }
+
+            }
+
             useEffect(function () {
+                removeElementsByClass("gpt-enhancer");
                 addButtonsToExistingSpans();
                 addObserver();
                 addStyling();
-            }, []);
+            }, [haveRemoved]);
             return html`${RunJsButton} <${ToggleEditableButton}`;
-            
+
         };
 
 
         /* END SECTION COMPONENTS */
 
         /* SECTION CLEANUP */
-        var rootId = 'my-bookmarklet-root';
+        var rootId = 'gpt-enhancer-root';
         var existingRoot = document.getElementById(rootId);
         if (existingRoot) {
             existingRoot.remove();
