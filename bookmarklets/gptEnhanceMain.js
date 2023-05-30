@@ -58,6 +58,18 @@ javascript: (function () {
             textArea.innerHTML = text;
             return textArea.value;
         }
+        function checkCodeBoxType(button, codeboxText) {
+            var nextSibling = button.nextElementSibling;
+            var previousSibling = button.previousElementSibling;
+            console.log(codeboxText);
+            console.log(previousSibling);
+            if ((nextSibling && nextSibling.tagName.toLowerCase() === 'span' && nextSibling.innerHTML.toLowerCase().includes(codeboxText)) ||
+                (previousSibling && previousSibling.tagName.toLowerCase() === 'span' && previousSibling.innerHTML.toLowerCase().includes(codeboxText))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         /* Your custom function to add elements*/
         function addElement(parent, element, beforeNode) {
             console.log("adding " + element.type);
@@ -72,18 +84,25 @@ javascript: (function () {
 
         function addButtonsToExistingSpans() {
             console.log("Adding buttons");
-            var spans = document.querySelectorAll('button:not([gpt-enhancer-modified])');
-            spans.forEach(function (span) {
-                if (span.innerText.includes('Copy code')) {
-                    span.setAttribute('gpt-enhancer-modified', 'true');
-                    var newInnerText = span.innerText.replace("Copy code", 'Copy');
-                    span.setAttribute("innerHtml", newInnerText);
-                    var runJsButton = document.createElement('div');
-                    render(html`<${RunJsButton} spanElement=${span}/>`, runJsButton);
-                    addElement(span.parentElement, runJsButton, span.nextSibling);
+            var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
+            buttons.forEach(function (button) {
+                if (button.innerText.includes('Copy code')) {
+                    button.setAttribute('gpt-enhancer-modified', 'true');
+                    var newInnerText = button.innerText.replace("Copy code", 'Copy');
+                    button.setAttribute("innerHtml", newInnerText);
+                    if (checkCodeBoxType(button, "javascript")) {
+                        var runJsButton = document.createElement('div');
+                        render(html`<${RunJsButton} spanElement=${button}/>`, runJsButton);
+                        addElement(button.parentElement, runJsButton, button.nextSibling);
+                    } 
+                    if (checkCodeBoxType(button, "html") || checkCodeBoxType(button, "svg")) {
+                        var downloadSVGButton = document.createElement('div');
+                        render(html`<${DownloadSVGButton} spanElement=${button}/>`, downloadSVGButton);
+                        addElement(button.parentElement, downloadSVGButton, button.nextSibling);
+                    }
                     var toggleEditableButton = document.createElement('div');
-                    render(html`<${ToggleEditableButton} spanElement=${span}/>`, toggleEditableButton);
-                    addElement(span.parentElement, toggleEditableButton, runJsButton);
+                    render(html`<${ToggleEditableButton} spanElement=${button}/>`, toggleEditableButton);
+                    addElement(button.parentElement, toggleEditableButton, button.nextSibling);
                 }
             });
         }
@@ -99,9 +118,7 @@ javascript: (function () {
             var observer = new MutationObserver(function (mutationsList, observer) {
                 for (var mutation of mutationsList) {
                     if (mutation.type === 'childList') {
-                        if (mutation.addedNodes.length > 0 && mutation.addedNodes[0].classList.contains('gpt-enhancer')) {
-                            return;
-                        }
+
                         addButtonsToExistingSpans();
                     }
                 }
@@ -143,6 +160,36 @@ javascript: (function () {
             `;
         }
 
+        function DownloadSVGButton(props) {
+            function DownloadSVGButton() {
+                var grandParentElement = props.spanElement.parentElement.parentElement;
+                var codeElement = grandParentElement.querySelector('code');
+                if (!codeElement) {
+                    alert('No related code element found');
+                    return;
+                }
+                var code = codeElement.innerHTML;
+                var cleanCode = code.replace(/<span class="hljs[^"]*">|<\/span>/g, '');
+                cleanCode = decodeHtmlEntities(cleanCode);
+                const blob = new Blob([cleanCode], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                const format = "svg";
+                link.download = `icon.${format}`;
+                link.style.display = 'none';  
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            return html`
+                <button 
+                    style=${buttonStyle} 
+                    class="flex ml-auto gap-2"
+                    onClick=${DownloadSVGButton}><svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>Download</button>
+            `;
+        }
+
         function ToggleEditableButton(props) {
             function toggleEditable() {
                 var grandParentElement = props.spanElement.parentElement.parentElement;
@@ -176,13 +223,9 @@ javascript: (function () {
             const [haveRemoved, setHaveRemoved] = useState(false);
             console.log(haveRemoved);
             function removeElementsByClass(className) {
-                console.log("removingExisting");
-                console.log(haveRemoved);
                 if (haveRemoved) {
-                    console.log("Not removingExisting");
                     return "";
                 } else {
-                    console.log("Indeed removingExisting");
                     const elements = document.getElementsByClassName(className);
                     while (elements.length > 0) {
                         elements[0].parentNode.removeChild(elements[0]);
@@ -191,7 +234,6 @@ javascript: (function () {
                     for (var i = 0; i < elements2.length; i++) {
                         elements2[i].removeAttribute('gpt-enhancer-modified');
                     }
-
                     setHaveRemoved(true);
                 }
 
@@ -203,7 +245,7 @@ javascript: (function () {
                 addObserver();
                 addStyling();
             }, [haveRemoved]);
-            return html`${RunJsButton} <${ToggleEditableButton}`;
+            return html``;
 
         };
 
