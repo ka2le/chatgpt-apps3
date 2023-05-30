@@ -40,8 +40,6 @@ javascript: (function () {
 
 
         var buttonStyle = {
-            float: "right",
-            marginRight: "15px",
         };
         /* END SECTION STYLES */
 
@@ -50,6 +48,44 @@ javascript: (function () {
             var textArea = document.createElement('textarea');
             textArea.innerHTML = text;
             return textArea.value;
+        }
+
+        function addButtonsToExistingSpans() {
+            var spans = document.querySelectorAll('button:not([data-js-button])');
+            spans.forEach(function (span) {
+                if (span.innerText.includes('Copy code')) {
+                    span.setAttribute('data-js-button', 'true');
+                    var newInnerText = span.innerText.replace("Copy code", 'Copy');
+                    span.setAttribute("innerHtml", newInnerText);
+                    var runJsButton = document.createElement('div');
+                    render(html`<${RunJsButton} spanElement=${span}/>`, runJsButton);
+                    span.parentElement.insertBefore(runJsButton, span.nextSibling);
+                    var toggleEditableButton = document.createElement('div');
+                    render(html`<${ToggleEditableButton} spanElement=${span}/>`, toggleEditableButton);
+                    span.parentElement.insertBefore(toggleEditableButton, runJsButton);
+                }
+            });
+        }
+        
+        function addStyling(){
+            var gap2 = document.querySelectorAll('.gap-2');
+            gap2.forEach(function (gap) {
+                gap.style.gap = "0px"
+            });
+        }
+
+        function addObserver() {
+            var observer = new MutationObserver(function (mutationsList, observer) {
+                for (var mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        addButtonsToExistingSpans();
+                    }
+                }
+            });
+            observer.observe(document, { attributes: false, childList: true, subtree: true });
+            return function () {
+                observer.disconnect();
+            }
         }
 
         function RunJsButton(props) {
@@ -61,12 +97,14 @@ javascript: (function () {
                     return;
                 }
                 var code = codeElement.innerHTML;
+                console.log("code");
                 console.log(code);
                 var cleanCode = code.replace(/<span class="hljs[^"]*">|<\/span>/g, '');
                 cleanCode = decodeHtmlEntities(cleanCode);
                 console.log(cleanCode);
                 try {
                     var newFunction = new Function(cleanCode);
+                    console.log("cleanCode");
                     console.log(cleanCode);
                     newFunction();
                 } catch (e) {
@@ -77,10 +115,7 @@ javascript: (function () {
                 <button 
                     style=${buttonStyle} 
                     class="flex ml-auto gap-2"
-                    onClick=${runJs}>
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <polygon points="8 5 16 12 8 19 8 5"/>
-                    </svg>Run Code</button>
+                    onClick=${runJs}><svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon points="8 5 16 12 8 19 8 5"/></svg>Run</button>
             `;
         }
 
@@ -99,54 +134,27 @@ javascript: (function () {
                         codeElement.setAttribute('contentEditable', 'true');
                     }
                 } else {
+                    var code = codeElement.innerHTML;
+                    var cleanCode = code.replace(/<span class="hljs[^"]*">|<\/span>/g, '');
                     codeElement.setAttribute('contentEditable', 'true');
+                    codeElement.setAttribute('innerHtml', cleanCode);
                 }
             }
             return html`
                 <button 
                     style=${buttonStyle} 
                     class="flex ml-auto gap-2"
-                    onClick=${toggleEditable}>
-                    <svg fill="currentColor" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-</svg>
-Edit Code</button>
+                    onClick=${toggleEditable}><svg fill="currentColor" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit</button>
             `;
         }
 
         function TheApp() {
             useEffect(function () {
-                function addButtonsToExistingSpans() {
-                    var spans = document.querySelectorAll('span:not([data-js-button])');
-                    spans.forEach(function (span) {
-                        if (span.innerText.includes('javascript')) {
-                            span.setAttribute('data-js-button', 'true');
-            
-                            var runJsButton = document.createElement('div');
-                            render(html`<${RunJsButton} spanElement=${span}/>`, runJsButton);
-                            span.parentElement.insertBefore(runJsButton, span.nextSibling);
-            
-                            var toggleEditableButton = document.createElement('div');
-                            render(html`<${ToggleEditableButton} spanElement=${span}/>`, toggleEditableButton);
-                            span.parentElement.insertBefore(toggleEditableButton, runJsButton.nextSibling);
-                        }
-                    });
-                }
-            
                 addButtonsToExistingSpans();
-                var observer = new MutationObserver(function (mutationsList, observer) {
-                    for (var mutation of mutationsList) {
-                        if (mutation.type === 'childList') {
-                            addButtonsToExistingSpans();
-                        }
-                    }
-                });
-                observer.observe(document, { attributes: false, childList: true, subtree: true });
-                return function () {
-                    observer.disconnect();
-                }
+                addObserver();
+                addStyling();
             }, []);
-            return html`${html`<${RunJsButton} /><${ToggleEditableButton} />`}`;
+            return html`${RunJsButton} <${ToggleEditableButton}`;
             
         };
 
