@@ -59,12 +59,20 @@ javascript: (function () {
         /* END SECTION STYLES */
 
         /* SECTION COMPONENTS */
-
+        function insertTextInPrompt(text){
+            var textarea = document.getElementById("prompt-textarea");
+            textarea.value += text;
+        }
+        function insertBookmarkletDevCorrections(){
+            insertTextInPrompt(`\nAdditional considerations:\nAlways do comments like /*COMMENT*/ never //Comment  \nNever use arrow functions =>`)
+        }
         function ToolBar() {
             return html`
         <div 
             id="toolBar">
-            <button>Button1</button>
+            <button
+            onclick="${insertBookmarkletDevCorrections}"
+            >Corrections</button>
             <button>Button2</button>
             <button>Button2</button>
             </div>
@@ -91,8 +99,8 @@ javascript: (function () {
             id="toolWindow"
             class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
             <h1>Toolwindow <span>toolWindow</span></h1>
-            <div>Hej</div>
-            <textarea style="color:black"></textarea><button>Button1</button>
+            <div></div>
+            <textarea class="m-0 w-full resize-none border-0 bg-transparent p-0 pr-10 focus:ring-0 focus-visible:ring-0 dark:bg-transparent md:pr-12 pl-3 md:pl-0" style="border: 1px solid darkgray"></textarea><button>Button1</button> <button>Button2</button>
         </div>
     `;
         }
