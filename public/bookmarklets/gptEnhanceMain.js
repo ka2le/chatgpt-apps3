@@ -21,7 +21,7 @@ javascript: (function () {
         script.onload = callback;
         head.appendChild(script);
     }
-    
+
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
@@ -32,29 +32,28 @@ javascript: (function () {
         loadScript(htmCDN, null, function () {
             console.log('HTM has been loaded!');
             loadScript(preactHooksCDN, null, function () {
+                window.h = preact.h;
+                window.render = preact.render;
+                window.html = htm.bind(h);
+                window.useState = preactHooks.useState;
+                window.useEffect = preactHooks.useEffect;
                 loadScript(bookmarkletUtils, bookmarkletUtilsFallback, function () {
-                    initApp();
+                    initApp(window.h, window.render, window.html, window.useState, window.useEffect);
                 });
             });
         });
     });
 
 
-    function initApp() {
+    function initApp(h, render, html, useState, useEffect) {
 
         /* SECTION INIT PREACT AND HTM, useState and useEffect */
-        var h = preact.h;
-        var render = preact.render;
-        var html = htm.bind(h);
-        var useState = preactHooks.useState;
-        var useEffect = preactHooks.useEffect;
+
         /* END SECTION INIT PREACT AND HTM */
 
 
 
-        var buttonStyle = {
-            margin: "0 5px",
-        };
+        
         var toolWindowStyle = {
             minHeight: "100px",
 
@@ -62,26 +61,28 @@ javascript: (function () {
         /* END SECTION STYLES */
 
         /* SECTION COMPONENTS */
-        function insertTextInPrompt(text) {
-            var textarea = document.getElementById("prompt-textarea");
-            textarea.value += text;
-        }
+        
         function insertBookmarkletDevCorrections() {
             insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  \nNever use arrow functions =>`)
         }
 
+        function insertRollDie() {
+            var randomValue = Math.floor(Math.random() * 20) + 1;
+            insertTextInPrompt(`Result: ${randomValue+4} (${randomValue+4} Roll + 1 INT +3 Proficiency)`)
+        }
         function ToolBar() {
             return html`
         <div 
-            id="toolBar">
-            <button
-            onclick="${insertBookmarkletDevCorrections}"
-            >Corrections</button>
-            <button>Button2</button>
-            <button>Button2</button>
+            id="toolBar" >
+            ${Button("Correction", insertBookmarkletDevCorrections)}
+            ${Button("RollD20", insertRollDie)}
+            ${Button("Button3", insertBookmarkletDevCorrections)}
             </div>
     `;
         }
+
+
+       
 
         function ToolWindow() {
             return html`
@@ -89,7 +90,7 @@ javascript: (function () {
             style=${toolWindowStyle} 
             id="toolWindow"
             class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-            <h1>Toolwindow <span>toolWindow</span></h1>
+            <h2>toolWindow</h2>
             <div></div>
             <textarea 
             class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
@@ -131,7 +132,7 @@ javascript: (function () {
             }
             return html`
             <button 
-                style=${buttonStyle} 
+                style=${utilVars?.buttonStyle} 
                 class="flex ml-auto gap-2"
                 onClick=${runJsWrapper}>${html([utilVars?.runIcon])}Run</button>
         `;
@@ -144,7 +145,7 @@ javascript: (function () {
             }
             return html`
             <button 
-                style=${buttonStyle} 
+                style=${utilVars?.buttonStyle} 
                 class="flex ml-auto gap-2"
                 onClick=${downloadSVGWrapper}>${html([utilVars?.downloadIcon])}Download</button>
         `;
@@ -157,7 +158,7 @@ javascript: (function () {
 
             return html`
             <button 
-                style=${buttonStyle} 
+                style=${utilVars?.buttonStyle} 
                 class="flex ml-auto gap-2"
                 onClick=${toggleEditableWrapper}>${html([utilVars?.editIcon])}Edit</button>
         `;
