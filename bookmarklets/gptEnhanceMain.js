@@ -1,66 +1,37 @@
 javascript: (function () {
     /*Version 1.0*/
-    /* SECTION IMPORTS */
-    /* START SECTION IMPORTS */
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
         script.type = 'text/javascript';
-
         script.onerror = function () {
             if (fallbackUrl) {
-                console.log("Using Fallback");
-                console.log(fallbackUrl);
-
                 script.src = fallbackUrl;
                 script.onerror = null;  
                 head.appendChild(script);
             }
         };
-
         script.src = url;
         script.onreadystatechange = callback;
         script.onload = callback;
         head.appendChild(script);
     }
-    /* END SECTION IMPORTS */
-
-    /* SECTION LIBRARY LOADERS */
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
     var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime();
     var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js' + new Date().getTime();
-
-    function getUrlStatus(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                callback(xhr.status);
-            }
-        };
-        xhr.open('GET', url, true);
-        xhr.send('');
-    }
-    
-    getUrlStatus(bookmarkletUtils, function(status) {
-        var url = (status === 200) ? bookmarkletUtils : bookmarkletUtilsFallback;
-        loadScript(preactCDN, function () {
-            console.log('Preact has been loaded!');
-            loadScript(htmCDN, function () {
-                console.log('HTM has been loaded!');
-                loadScript(preactHooksCDN, function () {
-                    loadScript(url, function () {
-                        initApp();
-                    });
+    loadScript(preactCDN, null, function () {
+        console.log('Preact has been loaded!');
+        loadScript(htmCDN, null, function () {
+            console.log('HTM has been loaded!');
+            loadScript(preactHooksCDN, null, function () {
+                loadScript(bookmarkletUtils, bookmarkletUtilsFallback, function () {
+                    initApp();
                 });
             });
         });
     });
-    /* END SECTION LIBRARY LOADERS */
-
-
-    /* END SECTION LIBRARY LOADERS */
 
 
     function initApp() {

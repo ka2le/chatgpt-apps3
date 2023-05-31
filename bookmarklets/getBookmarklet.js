@@ -1,18 +1,15 @@
 javascript:(function(){
-    function reloadScript() {
-        console.log("Reloading");
-        var oldScript = document.getElementById('myBookmarkletScript');
-        var newScript = document.createElement('script');
-        newScript.id = 'myBookmarklet';
-        newScript.src = 'http://localhost:3000/chatgpt-apps3/bookmarklets/gptEnhanceMain.js?' + new Date().getTime();
-        oldScript.parentNode.replaceChild(newScript, oldScript);
-    }
-
+    var head = document.getElementsByTagName('head')[0];
     var element = document.createElement('script');
     element.id = 'myBookmarkletScript';
-    element.src = 'http://localhost:3000/chatgpt-apps3/bookmarklets/gptEnhanceMain.js?' + new Date().getTime();
+    var mainUrl = 'http://localhost:3000/chatgpt-apps3/bookmarklets/gptEnhanceMain.js?' + new Date().getTime();
+    var fallbackUrl = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/gptEnhanceMain.js?' + new Date().getTime();
+    element.onerror = function () {
+        /* If the main URL fails, try the fallback URL */
+        element.src = fallbackUrl;
+        element.onerror = null;
+        head.appendChild(element);
+    };
+    element.src = mainUrl;
     document.body.appendChild(element);
-
-    var reloadInterval = 60000;  
-    /*setInterval(reloadScript, reloadInterval);*/
 })();
