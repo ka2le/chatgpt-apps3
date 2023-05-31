@@ -1,4 +1,5 @@
 /*Version 1.0*/ 
+console.log("utils 1.0");
 function getGrandParentElement(element) {
     return element.parentElement.parentElement;
 }
