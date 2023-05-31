@@ -1,3 +1,4 @@
+/*Version 1.0*/ 
 function getGrandParentElement(element) {
     return element.parentElement.parentElement;
 }
@@ -97,7 +98,6 @@ function RunTheApp(TheApp, render, html){
 
 
 
-
 function addObserver(callbacks) {
     var observer = new MutationObserver(function (mutationsList, observer) {
         observer.disconnect();
@@ -128,15 +128,15 @@ function moveToolWindow(ToolWindow,render,html) {
     const toolWindow = document.getElementById('toolWindow');
     if (!toolWindow) {
         console.log("Tool Window does not exist");
-        addToolWindow(ToolWindow, render );
+        addToolWindow(ToolWindow, render,html );
         return;
     }
     const container = document.querySelector('main > .flex-1.overflow-hidden');
     if (container) {
         const groupElements = container.querySelectorAll('.group.w-full');
         let beforeThis;
-        if (groupElements.length > 1) {
-            beforeThis = groupElements[groupElements.length - 2];
+        if (groupElements.length > 0) {
+            beforeThis = groupElements[groupElements.length - 1];
         } else if (groupElements.length === 1) {
             beforeThis = groupElements[0];
         }
@@ -161,8 +161,8 @@ function addToolWindow(ToolWindow, render,html ) {
 
     if (container) {
         const groupElements = container.querySelectorAll('.group.w-full');
-        if (groupElements.length > 1) {
-            const beforeThis = groupElements[groupElements.length - 2];
+        if (groupElements.length > 0) {
+            const beforeThis = groupElements[groupElements.length - 1];
             beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
         } else if (groupElements.length === 1) {
             const beforeThis = groupElements[0];

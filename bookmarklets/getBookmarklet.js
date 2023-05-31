@@ -14,5 +14,5 @@ javascript:(function(){
     document.body.appendChild(element);
 
     var reloadInterval = 60000;  
-    setInterval(reloadScript, reloadInterval);
+    /*setInterval(reloadScript, reloadInterval);*/
 })();

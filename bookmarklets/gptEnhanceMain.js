@@ -1,32 +1,64 @@
 javascript: (function () {
-
+    /*Version 1.0*/
     /* SECTION IMPORTS */
-    function loadScript(url, callback) {
+    /* START SECTION IMPORTS */
+    function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
         script.type = 'text/javascript';
+
+        script.onerror = function () {
+            if (fallbackUrl) {
+                console.log("Using Fallback");
+                console.log(fallbackUrl);
+
+                script.src = fallbackUrl;
+                script.onerror = null;  
+                head.appendChild(script);
+            }
+        };
+
         script.src = url;
         script.onreadystatechange = callback;
         script.onload = callback;
         head.appendChild(script);
     }
     /* END SECTION IMPORTS */
+
     /* SECTION LIBRARY LOADERS */
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime(); /* 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v7';*/
-    loadScript(preactCDN, function () {
-        console.log('Preact has been loaded!');
-        loadScript(htmCDN, function () {
-            console.log('HTM has been loaded!');
-            loadScript(preactHooksCDN, function () {
-                loadScript(bookmarkletUtils, function () {
-                    initApp();
+    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime();
+    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js' + new Date().getTime();
+
+    function getUrlStatus(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                callback(xhr.status);
+            }
+        };
+        xhr.open('GET', url, true);
+        xhr.send('');
+    }
+    
+    getUrlStatus(bookmarkletUtils, function(status) {
+        var url = (status === 200) ? bookmarkletUtils : bookmarkletUtilsFallback;
+        loadScript(preactCDN, function () {
+            console.log('Preact has been loaded!');
+            loadScript(htmCDN, function () {
+                console.log('HTM has been loaded!');
+                loadScript(preactHooksCDN, function () {
+                    loadScript(url, function () {
+                        initApp();
+                    });
                 });
             });
         });
     });
+    /* END SECTION LIBRARY LOADERS */
+
 
     /* END SECTION LIBRARY LOADERS */
 
@@ -53,14 +85,14 @@ javascript: (function () {
         /* END SECTION STYLES */
 
         /* SECTION COMPONENTS */
-        function insertTextInPrompt(text){
+        function insertTextInPrompt(text) {
             var textarea = document.getElementById("prompt-textarea");
             textarea.value += text;
         }
-        function insertBookmarkletDevCorrections(){
-            insertTextInPrompt(`\nAdditional considerations:\nAlways do comments like /*COMMENT*/ never //Comment  \nNever use arrow functions =>`)
+        function insertBookmarkletDevCorrections() {
+            insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  \nNever use arrow functions =>`)
         }
-        
+
         function ToolBar() {
             return html`
         <div 
@@ -81,13 +113,15 @@ javascript: (function () {
             id="toolWindow"
             class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
             <h1>Toolwindow <span>toolWindow</span></h1>
-            <div>Hej</div>
+            <div></div>
             <textarea 
             class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
             style=""></textarea><button>Button1</button>
         </div>
     `;
         }
+
+
 
         function addButtonsToExistingSpans() {
             var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
@@ -140,10 +174,10 @@ javascript: (function () {
         }
 
         function ToggleEditableButton(props) {
-            function toggleEditableWrapper(){
+            function toggleEditableWrapper() {
                 toggleEditable(props);
             }
-            
+
             return html`
             <button 
                 style=${buttonStyle} 
@@ -155,14 +189,14 @@ javascript: (function () {
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
             useEffect(function () {
-                removeElementsByClass("gpt-enhancer", haveRemoved,setHaveRemoved);
+                removeElementsByClass("gpt-enhancer", haveRemoved, setHaveRemoved);
                 addButtonsToExistingSpans();
-                addToolWindow(ToolWindow, render,html  );
-                replaceWithToolBar(ToolBar, render,html);
+                addToolWindow(ToolWindow, render, html);
+                replaceWithToolBar(ToolBar, render, html);
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
-                    function () { moveToolWindow(ToolWindow, render,html ); },
-                    function () { replaceWithToolBar(ToolBar, render,html); },
+                    function () { moveToolWindow(ToolWindow, render, html); },
+                    function () { replaceWithToolBar(ToolBar, render, html); },
                 ]);
                 addStyling();
             }, [haveRemoved]);
