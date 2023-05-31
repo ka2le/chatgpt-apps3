@@ -7,9 +7,13 @@ javascript: (function () {
         script.type = 'text/javascript';
         script.onerror = function () {
             if (fallbackUrl) {
-                script.src = fallbackUrl;
-                script.onerror = null;  
-                head.appendChild(script);
+                console.log("Fallback");
+                var fallbackScript = document.createElement('script');
+                fallbackScript.type = 'text/javascript';
+                fallbackScript.src = fallbackUrl;
+                fallbackScript.onreadystatechange = callback;
+                fallbackScript.onload = callback;
+                head.appendChild(fallbackScript);
             }
         };
         script.src = url;
@@ -17,11 +21,12 @@ javascript: (function () {
         script.onload = callback;
         head.appendChild(script);
     }
+    
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
     var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime();
-    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js' + new Date().getTime();
+    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime();
     loadScript(preactCDN, null, function () {
         console.log('Preact has been loaded!');
         loadScript(htmCDN, null, function () {
