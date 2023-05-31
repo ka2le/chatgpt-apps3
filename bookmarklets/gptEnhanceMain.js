@@ -73,15 +73,21 @@ javascript: (function () {
         function ToolBar() {
             return html`
         <div 
-            id="toolBar">
-            <button
-            style="${buttonStyle}"
-            onclick="${insertBookmarkletDevCorrections}"
-            > Corrections </button> 
-            <button style="${buttonStyle}"> Button2 </button> 
-            <button style="${buttonStyle}"> Button3 </button> 
+            id="toolBar" >
+            ${Button("Correction", insertBookmarkletDevCorrections)}
+            ${Button("Button2", insertBookmarkletDevCorrections)}
+            ${Button("Button3", insertBookmarkletDevCorrections)}
             </div>
     `;
+        }
+
+
+        function Button(title, onClickFunction) {
+            return html`
+                <button style="${buttonStyle}" onclick=${onClickFunction}>
+                    ${title}
+                </button>
+            `;
         }
 
         function ToolWindow() {
@@ -90,7 +96,7 @@ javascript: (function () {
             style=${toolWindowStyle} 
             id="toolWindow"
             class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-            <h1>Toolwindow <span>toolWindow</span></h1>
+            <h2>toolWindow</h2>
             <div></div>
             <textarea 
             class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
