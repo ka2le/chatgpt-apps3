@@ -17,7 +17,7 @@ javascript: (function () {
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v4';
+    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v6';
 
 
 
@@ -70,19 +70,7 @@ javascript: (function () {
             </div>
     `;
         }
-        function replaceWithToolBar() {
-            var toolBar = document.createElement('div');
-            render(html`<${ToolBar} />`, toolBar);
-            const parentElement = document.querySelector('.absolute.bottom-0');
-            if (parentElement) {
-                const childElements = parentElement.querySelectorAll('div.text-center');
-                if (childElements.length > 0) {
-                    const lastChildElement = childElements[childElements.length - 1];
-                    lastChildElement.innerHTML = '';
-                    lastChildElement.appendChild(toolBar);
-                }
-            }
-        }
+       
 
         function ToolWindow() {
             return html`
@@ -98,82 +86,11 @@ javascript: (function () {
         </div>
     `;
         }
-        function moveToolWindow() {
-            const toolWindow = document.getElementById('toolWindow');
-            if (!toolWindow) {
-                console.log("Tool Window does not exist");
-                addToolWindow();
-                return;
-            }
-            const container = document.querySelector('main > .flex-1.overflow-hidden');
-            if (container) {
-                const groupElements = container.querySelectorAll('.group.w-full');
-                let beforeThis;
-                if (groupElements.length > 1) {
-                    beforeThis = groupElements[groupElements.length - 2];
-                } else if (groupElements.length === 1) {
-                    beforeThis = groupElements[0];
-                }
-                if (beforeThis && beforeThis.previousElementSibling !== toolWindow) {
-                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-                } else if (!beforeThis && container.lastChild !== toolWindow) {
-                    container.appendChild(toolWindow);
-                }
-            }
-        }
 
 
         
-function addObserver(callbacks) {
-    var observer = new MutationObserver(function (mutationsList, observer) {
-        observer.disconnect();
-        for (var mutation of mutationsList) {
-            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                for (var i = 0; i < mutation.addedNodes.length; i++) {
-                    if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
-                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))
-                        || mutation.target instanceof HTMLTitleElement) {
 
-                        for (var j = 0; j < callbacks.length; j++) {
-                            callbacks[j]();
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-        observer.observe(document, { attributes: false, childList: true, subtree: true });
-    });
-    observer.observe(document, { attributes: false, childList: true, subtree: true });
-    return function () {
-        observer.disconnect();
-    }
-}
 
-        function addToolWindow() {
-            const existingToolWindow = document.getElementById('toolWindow');
-            if (existingToolWindow) {
-                console.log("Tool Window already exists");
-                return;
-            }
-            var toolWindow = document.createElement('div');
-            render(html`<${ToolWindow} />`, toolWindow);
-            const container = document.querySelector('main > .flex-1.overflow-hidden');
-
-            if (container) {
-                const groupElements = container.querySelectorAll('.group.w-full');
-                if (groupElements.length > 1) {
-                    const beforeThis = groupElements[groupElements.length - 2];
-                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-                } else if (groupElements.length === 1) {
-                    const beforeThis = groupElements[0];
-                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-                } else {
-
-                    container.appendChild(toolWindow);
-                }
-            }
-        }
 
         function addButtonsToExistingSpans() {
             var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
@@ -200,7 +117,7 @@ function addObserver(callbacks) {
         }
 
 
-        
+
 
 
         function RunJsButton(props) {
@@ -212,22 +129,24 @@ function addObserver(callbacks) {
             <button 
                 style=${buttonStyle} 
                 class="flex ml-auto gap-2"
-                onClick=${runJsWrapper}><svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon points="8 5 16 12 8 19 8 5"/></svg>Run</button>
+                onClick=${runJsWrapper}>${html([utilVars?.runIcon])}Run</button>
         `;
         }
 
         function DownloadSVGButton(props) {
             function downloadSVGWrapper() {
-                var theCleanCode = getCleanCode(props);
+                var theCleanCode = getCleanCode(props.spanElement);
                 downloadSVG(theCleanCode);
             }
             return html`
             <button 
                 style=${buttonStyle} 
                 class="flex ml-auto gap-2"
-                onClick=${downloadSVGWrapper}>${utilVars?.downloadIcon}Download</button>
+                onClick=${downloadSVGWrapper}>${html([utilVars?.downloadIcon])}Download</button>
         `;
         }
+
+
 
         function ToggleEditableButton(props) {
             function toggleEditable() {
@@ -241,7 +160,7 @@ function addObserver(callbacks) {
                         codeElement.setAttribute('contentEditable', 'true');
                     }
                 } else {
-                    var cleanCode = getCleanCode(props);
+                    var cleanCode = getCleanCode(props.spanElement);
                     codeElement.setAttribute('contentEditable', 'true');
                     codeElement.setAttribute('innerHtml', cleanCode);
                 }
@@ -250,7 +169,7 @@ function addObserver(callbacks) {
             <button 
                 style=${buttonStyle} 
                 class="flex ml-auto gap-2"
-                onClick=${toggleEditable}><svg fill="currentColor" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Edit</button>
+                onClick=${toggleEditable}>${html([utilVars?.editIcon])}Edit</button>
         `;
         }
 
@@ -276,12 +195,12 @@ function addObserver(callbacks) {
             useEffect(function () {
                 removeElementsByClass("gpt-enhancer");
                 addButtonsToExistingSpans();
-                addToolWindow();
-                replaceWithToolBar();
+                addToolWindow(ToolWindow);
+                replaceWithToolBar(ToolBar);
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
-                    function () { moveToolWindow(); },
-                    function () { replaceWithToolBar(); },
+                    function () { moveToolWindow(ToolWindow); },
+                    function () { replaceWithToolBar(ToolBar); },
                 ]);
                 addStyling();
             }, [haveRemoved]);
