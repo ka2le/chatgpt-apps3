@@ -1,6 +1,7 @@
 javascript:(function(){
     function reloadScript() {
-        var oldScript = document.getElementById('myBookmarklet');
+        console.log("Reloading");
+        var oldScript = document.getElementById('myBookmarkletScript');
         var newScript = document.createElement('script');
         newScript.id = 'myBookmarklet';
         newScript.src = 'http://localhost:3000/chatgpt-apps3/bookmarklets/gptEnhanceMain.js?' + new Date().getTime();
@@ -8,7 +9,7 @@ javascript:(function(){
     }
 
     var element = document.createElement('script');
-    element.id = 'myBookmarklet';
+    element.id = 'myBookmarkletScript';
     element.src = 'http://localhost:3000/chatgpt-apps3/bookmarklets/gptEnhanceMain.js?' + new Date().getTime();
     document.body.appendChild(element);
 
