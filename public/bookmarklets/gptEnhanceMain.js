@@ -53,13 +53,21 @@ javascript: (function () {
         /* END SECTION STYLES */
 
         /* SECTION COMPONENTS */
-
-
+        function insertTextInPrompt(text){
+            var textarea = document.getElementById("prompt-textarea");
+            textarea.value += text;
+        }
+        function insertBookmarkletDevCorrections(){
+            insertTextInPrompt(`\nAdditional considerations:\nAlways do comments like /*COMMENT*/ never //Comment  \nNever use arrow functions =>`)
+        }
+        
         function ToolBar() {
             return html`
         <div 
             id="toolBar">
-            <button>Button1</button>
+            <button
+            onclick="${insertBookmarkletDevCorrections}"
+            >Corrections</button>
             <button>Button2</button>
             <button>Button2</button>
             </div>
