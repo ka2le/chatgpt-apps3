@@ -124,11 +124,11 @@ function addObserver(callbacks) {
     }
 }
 
-function moveToolWindow(ToolWindow) {
+function moveToolWindow(ToolWindow,render ) {
     const toolWindow = document.getElementById('toolWindow');
     if (!toolWindow) {
         console.log("Tool Window does not exist");
-        addToolWindow(ToolWindow);
+        addToolWindow(ToolWindow, render );
         return;
     }
     const container = document.querySelector('main > .flex-1.overflow-hidden');
@@ -147,7 +147,7 @@ function moveToolWindow(ToolWindow) {
         }
     }
 }
-function addToolWindow(ToolWindow) {
+function addToolWindow(ToolWindow, render) {
     const existingToolWindow = document.getElementById('toolWindow');
     if (existingToolWindow) {
         console.log("Tool Window already exists");

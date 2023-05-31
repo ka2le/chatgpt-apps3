@@ -17,7 +17,7 @@ javascript: (function () {
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v6';
+    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v7';
 
 
 
@@ -195,11 +195,11 @@ javascript: (function () {
             useEffect(function () {
                 removeElementsByClass("gpt-enhancer");
                 addButtonsToExistingSpans();
-                addToolWindow(ToolWindow);
+                addToolWindow(ToolWindow, render );
                 replaceWithToolBar(ToolBar);
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
-                    function () { moveToolWindow(ToolWindow); },
+                    function () { moveToolWindow(ToolWindow, render ); },
                     function () { replaceWithToolBar(ToolBar); },
                 ]);
                 addStyling();
