@@ -95,7 +95,36 @@ function RunTheApp(TheApp, render, html){
     render(html`<${TheApp} />`, appRoot);
 }
 
-window.bookmarkletUtils = {
+
+
+
+function addObserver(callbacks) {
+    var observer = new MutationObserver(function (mutationsList, observer) {
+        observer.disconnect();
+        for (var mutation of mutationsList) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                for (var i = 0; i < mutation.addedNodes.length; i++) {
+                    if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
+                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))
+                        || mutation.target instanceof HTMLTitleElement) {
+
+                        for (var j = 0; j < callbacks.length; j++) {
+                            callbacks[j]();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        observer.observe(document, { attributes: false, childList: true, subtree: true });
+    });
+    observer.observe(document, { attributes: false, childList: true, subtree: true });
+    return function () {
+        observer.disconnect();
+    }
+}
+
+var utilVars = {
     downloadIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>`,
 
 };

@@ -17,7 +17,7 @@ javascript: (function () {
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v1';
+    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v2';
 
 
 
@@ -92,7 +92,9 @@ javascript: (function () {
             class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
             <h1>Toolwindow <span>toolWindow</span></h1>
             <div>Hej</div>
-            <textarea style="color:black"></textarea><button>Button1</button>
+            <textarea 
+            class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
+            style=""></textarea><button>Button1</button>
         </div>
     `;
         }
@@ -100,6 +102,7 @@ javascript: (function () {
             const toolWindow = document.getElementById('toolWindow');
             if (!toolWindow) {
                 console.log("Tool Window does not exist");
+                addToolWindow();
                 return;
             }
             const container = document.querySelector('main > .flex-1.overflow-hidden');
@@ -110,7 +113,7 @@ javascript: (function () {
                     beforeThis = groupElements[groupElements.length - 2];
                 } else if (groupElements.length === 1) {
                     beforeThis = groupElements[0];
-                } 
+                }
                 if (beforeThis && beforeThis.previousElementSibling !== toolWindow) {
                     beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
                 } else if (!beforeThis && container.lastChild !== toolWindow) {
@@ -118,8 +121,35 @@ javascript: (function () {
                 }
             }
         }
+
+
         
-        
+function addObserver(callbacks) {
+    var observer = new MutationObserver(function (mutationsList, observer) {
+        observer.disconnect();
+        for (var mutation of mutationsList) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                for (var i = 0; i < mutation.addedNodes.length; i++) {
+                    if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
+                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))
+                        || mutation.target instanceof HTMLTitleElement) {
+
+                        for (var j = 0; j < callbacks.length; j++) {
+                            callbacks[j]();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        observer.observe(document, { attributes: false, childList: true, subtree: true });
+    });
+    observer.observe(document, { attributes: false, childList: true, subtree: true });
+    return function () {
+        observer.disconnect();
+    }
+}
+
         function addToolWindow() {
             const existingToolWindow = document.getElementById('toolWindow');
             if (existingToolWindow) {
@@ -170,33 +200,8 @@ javascript: (function () {
         }
 
 
-        function addObserver(callbacks) {
-            var observer = new MutationObserver(function (mutationsList, observer) {
-                observer.disconnect();
-                
-                for (var mutation of mutationsList) {
-                    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                        for (let i = 0; i < mutation.addedNodes.length; i++) {
-                            if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE && 
-                                mutation.addedNodes[i].classList.contains('group') &&
-                                mutation.addedNodes[i].classList.contains('w-full')) {
-                                for (let callback of callbacks) {
-                                    callback();
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-                observer.observe(document, { attributes: false, childList: true, subtree: true });
-            });
         
-            observer.observe(document, { attributes: false, childList: true, subtree: true });
-            
-            return function () {
-                observer.disconnect();
-            }
-        }
+
 
         function RunJsButton(props) {
             function runJsWrapper() {
@@ -269,13 +274,15 @@ javascript: (function () {
             }
 
             useEffect(function () {
+                console.log(window.bookmarkletUtils.downloadIcon);
                 removeElementsByClass("gpt-enhancer");
                 addButtonsToExistingSpans();
                 addToolWindow();
                 replaceWithToolBar();
                 addObserver([
-                    function() {  addButtonsToExistingSpans(); },
-                    function() { moveToolWindow();  },
+                    function () { addButtonsToExistingSpans(); },
+                    function () { moveToolWindow(); },
+                    function () { replaceWithToolBar(); },
                 ]);
                 addStyling();
             }, [haveRemoved]);
