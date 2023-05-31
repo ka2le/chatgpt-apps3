@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Paper, Typography, Link, List, ListItem, ListItemText } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Grid, Paper, Typography, Link, List, ListItem, ListItemText, Button } from '@mui/material';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 
 const BookmarkletsCollection = () => {
     const [bookmarklets, setBookmarklets] = useState([]);
 
     useEffect(() => {
         const files = [
+            {
+                name: "GPT Enhancer MAIN  - Bookmarklet",
+                path: 'bookmarklets/gptEnhanceMain.js',
+                description: "Add a button that allows running of chatGPT-generated javascript directly in the chat and edit the code directyly in the code box, and eventually much more",
+            },
             {
                 name: "GPT Enhancer Run Code Button  - Bookmarklet",
                 path: 'bookmarklets/gptEnhanceJsButton.js',
@@ -35,21 +41,32 @@ const BookmarkletsCollection = () => {
         )).then(bookmarklets => setBookmarklets(bookmarklets));
     }, []);
     
-
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
+    }
     return (
                 <Paper style={{ minHeight: '100vh', padding: 0 }}>
                     <List>
                         {bookmarklets.map((bookmarklet, index) => (
-                            <ListItem key={index}>
-                                <ListItemText 
-                                    primary={
-                                        <Typography variant="h6">
-                                            <Link href={bookmarklet.script}>{bookmarklet.name}</Link>
-                                        </Typography>
-                                    } 
-                                    secondary={bookmarklet.description} 
-                                />
-                            </ListItem>
+                           <ListItem key={index}>
+                           <ListItemText 
+                               primary={
+                                   <Typography variant="h6">
+                                       <Link href={bookmarklet.script}>{bookmarklet.name}</Link>
+                                       <Button 
+                                           style={{ marginLeft: 10 }}
+                                           variant="outlined" 
+                                           size="small"
+                                           startIcon={<FileCopyIcon />}
+                                           onClick={() => copyToClipboard(bookmarklet.script)}
+                                       >
+                                           Copy Code
+                                       </Button>
+                                   </Typography>
+                               } 
+                               secondary={bookmarklet.description} 
+                           />
+                       </ListItem>
                         ))}
                     </List>
                 </Paper>

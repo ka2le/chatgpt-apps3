@@ -1,6 +1,5 @@
-javascript: (function () {
+javascript:(function () {
 
-    /* SECTION IMPORTS */
     function loadScript(url, callback) {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
@@ -10,35 +9,26 @@ javascript: (function () {
         script.onload = callback;
         head.appendChild(script);
     }
-    /* END SECTION IMPORTS */
-    /* SECTION LIBRARY LOADERS */
+
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
 
     loadScript(preactCDN, function () {
-        console.log('Preact has been loaded!');
         loadScript(htmCDN, function () {
-            console.log('HTM has been loaded!');
             loadScript(preactHooksCDN, function () {
                 initApp();
             });
         });
     });
 
-    /* END SECTION LIBRARY LOADERS */
-
-
     function initApp() {
-        /* SECTION INIT PREACT AND HTM, useState and useEffect */
         var h = preact.h;
         var render = preact.render;
         var html = htm.bind(h);
         var useState = preactHooks.useState;
         var useEffect = preactHooks.useEffect;
-        /* END SECTION INIT PREACT AND HTM */
 
-        /* SECTION STYLES */
         var bubblesBaseStyle = {
             width: '40px',
             height: '40px',
@@ -53,29 +43,14 @@ javascript: (function () {
             position: 'fixed',
             top: '20px',
             left: '20px',
-            /* Mobile specific styles */
             '-webkit-user-drag': 'none',
             '-webkit-tap-highlight-color': 'transparent',
             'touch-action': 'none',
         };
-        var bubbleButtonStyle = {
-            padding: "0px",
-            minWidth: "0px",
-            minHeight: "0px",
-            color: "white",
-            backgroundColor: "rgb(68,70,84)",
-            borderRadius: "100%",
-        };
-        /* END SECTION STYLES */
 
-        /* SECTION COMPONENTS */
-
-
-
-        function Bubble() {
+        function Bubble({ onButtonClick }) {
             const [pos, setPos] = useState({ x: 20, y: 20 });
             const [dragging, setDragging] = useState(false);
-
             function updatePositionMouse(e) {
                 if (dragging) {
                     setPos({
@@ -84,7 +59,6 @@ javascript: (function () {
                     });
                 }
             }
-
             function updatePositionTouch(e) {
                 if (dragging) {
                     setPos({
@@ -93,8 +67,6 @@ javascript: (function () {
                     });
                 }
             }
-            
-
             useEffect(function f1() {
                 window.addEventListener('mousemove', updatePositionMouse);
                 window.addEventListener('mouseup', () => setDragging(false));
@@ -111,51 +83,47 @@ javascript: (function () {
 
             let style = { ...mainBubbles, left: `${pos.x}px`, top: `${pos.y}px` };
 
-
-            function pasteAndRunJs() {
-                navigator.clipboard.readText().then(function (text) {
-                    try {
-                        const newFunction = new Function(text);
-                        newFunction();
-                    } catch (e) {
-                        alert('Failed to execute function: ' + e.message);
-                    }
-                });
-            };
-            
             return html`
                 <button 
                     style=${style} 
                     onmousedown=${() => setDragging(true)}
                     ontouchstart=${() => setDragging(true)}
-                    onClick=${pasteAndRunJs}>
-                 JS</div>
+                    onClick=${onButtonClick}>P</div>
             `;
         };
 
-
         function TheApp() {
-            return html`<div>${html`<${Bubble} />`}</div>`;
-        };
-        /* END SECTION COMPONENTS */
+            function pasteReminder() {
+                const reminders = [
+                    "Always write comments like /*COMMENT*/ never //Comment",
+                    /* Add more reminders here*/
+                ];
+            
+                const reminderText = "\n\nRemember to keep the following additional instructions in mind:\n\n" + reminders.join("\n");
+            
+                const textArea = document.getElementById("prompt-textarea");
+            
+                if (textArea) {
+                    textArea.value += reminderText;
+                } else {
+                    console.error("Textarea with id 'prompt-textarea' not found.");
+                }
+            };
 
-        /* SECTION CLEANUP */
+            return html`<div>${html`<${Bubble} onButtonClick=${pasteReminder} />`}</div>`;
+        };
+
         var rootId = 'my-bookmarklet-root';
         var existingRoot = document.getElementById(rootId);
         if (existingRoot) {
             existingRoot.remove();
         }
-        /* END SECTION CLEANUP */
 
-        /* SECTION ADD CODE */
         var appRoot = document.createElement('div');
         appRoot.id = rootId;
         document.body.appendChild(appRoot);
-        /* END SECTION ADD CODE */
 
-        /* SECTION RENDER */
         render(html`<${TheApp} />`, appRoot);
-        /* END SECTION RENDER */
     };
 
 })();
