@@ -75,10 +75,11 @@ javascript: (function () {
         <div 
             id="toolBar">
             <button
+            style="${buttonStyle}"
             onclick="${insertBookmarkletDevCorrections}"
             > Corrections </button> 
-            <button> Button2 </button> 
-            <button> Button3 </button> 
+            <button style="${buttonStyle}"> Button2 </button> 
+            <button style="${buttonStyle}"> Button3 </button> 
             </div>
     `;
         }
