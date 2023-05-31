@@ -124,7 +124,7 @@ function addObserver(callbacks) {
     }
 }
 
-var utilVars = {
+window.utilVars = {
     downloadIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>`,
 
 };
