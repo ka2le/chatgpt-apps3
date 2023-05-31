@@ -76,9 +76,9 @@ javascript: (function () {
             id="toolBar">
             <button
             onclick="${insertBookmarkletDevCorrections}"
-            >Corrections</button>
-            <button>Button2</button>
-            <button>Button2</button>
+            > Corrections </button> 
+            <button> Button2 </button> 
+            <button> Button3 </button> 
             </div>
     `;
         }
