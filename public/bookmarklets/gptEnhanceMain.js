@@ -11,16 +11,11 @@ javascript: (function () {
         head.appendChild(script);
     }
     /* END SECTION IMPORTS */
-
-
     /* SECTION LIBRARY LOADERS */
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v7';
-
-
-
+    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime(); /* 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?v7';*/
     loadScript(preactCDN, function () {
         console.log('Preact has been loaded!');
         loadScript(htmCDN, function () {
@@ -48,7 +43,6 @@ javascript: (function () {
 
 
 
-
         var buttonStyle = {
             margin: "0 5px",
         };
@@ -60,6 +54,7 @@ javascript: (function () {
 
         /* SECTION COMPONENTS */
 
+
         function ToolBar() {
             return html`
         <div 
@@ -70,7 +65,6 @@ javascript: (function () {
             </div>
     `;
         }
-       
 
         function ToolWindow() {
             return html`
@@ -86,11 +80,6 @@ javascript: (function () {
         </div>
     `;
         }
-
-
-        
-
-
 
         function addButtonsToExistingSpans() {
             var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
@@ -115,10 +104,6 @@ javascript: (function () {
                 }
             });
         }
-
-
-
-
 
         function RunJsButton(props) {
             function runJsWrapper() {
@@ -146,61 +131,30 @@ javascript: (function () {
         `;
         }
 
-
-
         function ToggleEditableButton(props) {
-            function toggleEditable() {
-                var grandParentElement = props.spanElement.parentElement.parentElement;
-                var codeElement = grandParentElement.querySelector('code');
-
-                if (codeElement.hasAttribute('contentEditable')) {
-                    if (codeElement.getAttribute('contentEditable') == 'true') {
-                        codeElement.setAttribute('contentEditable', 'false');
-                    } else {
-                        codeElement.setAttribute('contentEditable', 'true');
-                    }
-                } else {
-                    var cleanCode = getCleanCode(props.spanElement);
-                    codeElement.setAttribute('contentEditable', 'true');
-                    codeElement.setAttribute('innerHtml', cleanCode);
-                }
+            function toggleEditableWrapper(){
+                toggleEditable(props);
             }
+            
             return html`
             <button 
                 style=${buttonStyle} 
                 class="flex ml-auto gap-2"
-                onClick=${toggleEditable}>${html([utilVars?.editIcon])}Edit</button>
+                onClick=${toggleEditableWrapper}>${html([utilVars?.editIcon])}Edit</button>
         `;
         }
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
-            function removeElementsByClass(className) {
-                if (haveRemoved) {
-                    return "";
-                } else {
-                    const elements = document.getElementsByClassName(className);
-                    while (elements.length > 0) {
-                        elements[0].parentNode.removeChild(elements[0]);
-                    }
-                    var elements2 = document.querySelectorAll('[gpt-enhancer-modified]');
-                    for (var i = 0; i < elements2.length; i++) {
-                        elements2[i].removeAttribute('gpt-enhancer-modified');
-                    }
-                    setHaveRemoved(true);
-                }
-
-            }
-
             useEffect(function () {
-                removeElementsByClass("gpt-enhancer");
+                removeElementsByClass("gpt-enhancer", haveRemoved,setHaveRemoved);
                 addButtonsToExistingSpans();
-                addToolWindow(ToolWindow);
-                replaceWithToolBar(ToolBar);
+                addToolWindow(ToolWindow, render,html  );
+                replaceWithToolBar(ToolBar, render,html);
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
-                    function () { moveToolWindow(ToolWindow); },
-                    function () { replaceWithToolBar(ToolBar); },
+                    function () { moveToolWindow(ToolWindow, render,html ); },
+                    function () { replaceWithToolBar(ToolBar, render,html); },
                 ]);
                 addStyling();
             }, [haveRemoved]);

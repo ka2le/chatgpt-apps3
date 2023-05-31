@@ -124,11 +124,11 @@ function addObserver(callbacks) {
     }
 }
 
-function moveToolWindow(ToolWindow) {
+function moveToolWindow(ToolWindow,render,html) {
     const toolWindow = document.getElementById('toolWindow');
     if (!toolWindow) {
         console.log("Tool Window does not exist");
-        addToolWindow(ToolWindow);
+        addToolWindow(ToolWindow, render );
         return;
     }
     const container = document.querySelector('main > .flex-1.overflow-hidden');
@@ -147,7 +147,9 @@ function moveToolWindow(ToolWindow) {
         }
     }
 }
-function addToolWindow(ToolWindow, render) {
+
+
+function addToolWindow(ToolWindow, render,html ) {
     const existingToolWindow = document.getElementById('toolWindow');
     if (existingToolWindow) {
         console.log("Tool Window already exists");
@@ -172,7 +174,7 @@ function addToolWindow(ToolWindow, render) {
     }
 }
 
-function replaceWithToolBar(ToolBar) {
+function replaceWithToolBar(ToolBar, render, html) {
     var toolBar = document.createElement('div');
     render(html`<${ToolBar} />`, toolBar);
     const parentElement = document.querySelector('.absolute.bottom-0');
@@ -185,7 +187,38 @@ function replaceWithToolBar(ToolBar) {
         }
     }
 }
+function removeElementsByClass(className, haveRemoved,setHaveRemoved) {
+    if (haveRemoved) {
+        return "";
+    } else {
+        const elements = document.getElementsByClassName(className);
+        while (elements.length > 0) {
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+        var elements2 = document.querySelectorAll('[gpt-enhancer-modified]');
+        for (var i = 0; i < elements2.length; i++) {
+            elements2[i].removeAttribute('gpt-enhancer-modified');
+        }
+        setHaveRemoved(true);
+    }
+}
 
+function toggleEditable(props) {
+    var grandParentElement = props.spanElement.parentElement.parentElement;
+    var codeElement = grandParentElement.querySelector('code');
+
+    if (codeElement.hasAttribute('contentEditable')) {
+        if (codeElement.getAttribute('contentEditable') == 'true') {
+            codeElement.setAttribute('contentEditable', 'false');
+        } else {
+            codeElement.setAttribute('contentEditable', 'true');
+        }
+    } else {
+        var cleanCode = getCleanCode(props.spanElement);
+        codeElement.setAttribute('contentEditable', 'true');
+        codeElement.setAttribute('innerHtml', cleanCode);
+    }
+}
 function addObserver(callbacks) {
     var observer = new MutationObserver(function (mutationsList, observer) {
         observer.disconnect();
