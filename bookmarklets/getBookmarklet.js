@@ -3,8 +3,8 @@ javascript:(function(){
     var head = document.getElementsByTagName('head')[0];
     var element = document.createElement('script');
     element.id = 'myBookmarkletScript';
-    var mainUrl = 'http://localhost:3000/chatgpt-apps3/bookmarklets/gptEnhanceMain.min.js?' + new Date().getTime();
-    var fallbackUrl = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/gptEnhanceMain..min.js?' + new Date().getTime();
+    var mainUrl = 'http://localhost:3000/chatgpt-apps3/bookmarklets/min/gptEnhanceMain.min.js?' + new Date().getTime();
+    var fallbackUrl = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/min/gptEnhanceMain.min.js?' + new Date().getTime();
     element.src = mainUrl;
     element.onload = function() {
         console.log('Main script loaded successfully');

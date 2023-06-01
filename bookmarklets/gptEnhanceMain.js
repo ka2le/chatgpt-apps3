@@ -1,5 +1,5 @@
 javascript: (function () {
-    console.log("gptEnchanceMain 1.5");
+    console.log("gptEnchanceMain 1.8")
     /*Version 1.0*/
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
@@ -25,8 +25,8 @@ javascript: (function () {
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.min.js?' + new Date().getTime();
-    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.min.js?' + new Date().getTime();
+    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/min/utils.min.js?' + new Date().getTime();
+    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/min/utils.min.js?' + new Date().getTime();
     loadScript(preactCDN, null, function () {
         console.log('Preact has been loaded!');
         loadScript(htmCDN, null, function () {
