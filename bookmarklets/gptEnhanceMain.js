@@ -1,5 +1,5 @@
 javascript: (function () {
-    console.log("gptEnchanceMain 1.22");
+    console.log("GPT MAIN: /*version-number*/");
     /*Version 1.0*/
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
@@ -47,21 +47,114 @@ javascript: (function () {
             minHeight: "100px",
         };
         /* SECTION COMPONENTS */
-        function Checkbox({ id,  checked = false }) {
+
+        function sendOverAllText() {
+            var text = document.getElementById("overAllText").value;
+            sendText(text);
+        }
+
+        function Overlay() {
             return html`
-                <input type="checkbox" id="${id}" style="${utilVars.checkboxStyle}" ${checked ? 'checked' : ''} />
+                <div id="overAll" style=${utilVars.overlayStyle}>
+                <${TextArea}
+                id="overAllText"/>
+                ${Button("Send Message", sendOverAllText)}
+                <${ToggleOverAllButton}/>
+                <div id="overAllAnswers"></div>
+                </div>
             `;
         }
-        
-        function Dropdown({ id,  options = [] }) {
+        function toggleOverAll(){
+            var overAll = document.getElementById("overAll");
+            console.log(overAll.style.display);
+            if(overAll.style.display == "block"){
+                overAll.style.display = "none";
+            }else{
+                overAll.style.display = "block";
+            }
+        }
+        function ToggleOverAllButton(){
+            return html`${Button("ToggleOverAll", toggleOverAll)}`;
+        }
+        function ToolBar() {
             return html`
-                <select id="${id}" style="${utilVars.dropdownStyle}">
-                    ${options.map((option) => html`<option value="${option}">${option}</option>`)}
-                </select>
+        <div 
+            id="toolBar" >
+            ${Button("Correction", insertBookmarkletDevCorrections)}
+            ${Button("RollD20", insertRollDie)}
+            ${Button("RunJS", runRoolwindowJs)}
+            ${Button("SendTest", function () { sendText("Tell me something interesting") })}
+            
+            </div>
+    `;
+        }
+        function TextArea({ id, style = "", value = "", class: className = "" }) {
+            return html`
+                <textarea id="${id}" style="${style}" class="${className}">
+                    ${value}
+                </textarea>
             `;
         }
+
+        function insertCheckboxes() {
+            /* Get all ordered lists in the document */
+            var mainElement = document.getElementsByTagName('main')[0];
+            var orderedLists = mainElement.getElementsByTagName('ol');
         
-        function Ability({ name,  scores = [] }) {
+            for (var i = 0; i < orderedLists.length; i++) {
+                var listItems = orderedLists[i].getElementsByTagName('li');
+                for (var j = 0; j < listItems.length; j++) {
+        
+                    /* If this list item already has a checkbox, skip this iteration */
+                    if (listItems[j].classList.contains('has-checkbox')) {
+                        continue;
+                    }
+        
+                    var checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    var listItemNumber = j + 1;
+                    var listItemText = listItems[j].innerHTML.replace(/<[^>]*>?/gm, '');
+                    checkbox.onclick = (function(num, text) {
+                        return function() {
+                            insertIntoTextarea(num, text);
+                        };
+                    })(listItemNumber, listItemText);
+                    listItems[j].style.display = 'flex';
+                    listItems[j].style.alignItems = 'center';
+                    listItems[j].insertBefore(checkbox, listItems[j].firstChild);
+        
+                    /* Add a class to this list item to indicate that a checkbox has been added */
+                    listItems[j].classList.add('has-checkbox');
+                }
+            }
+        }
+        
+        
+        function insertIntoTextarea(listItemNumber, listItemText) {
+            var textarea = document.getElementById('prompt-textarea');
+            textarea.value += listItemNumber + '. ' + listItemText + '\n';
+        }
+        
+        
+        
+
+        function ToolWindow() {
+            return html`
+                <div 
+                    style=${toolWindowStyle} 
+                    id="toolWindow"
+                    class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
+                    <div><h2>toolWindow</h2></div>
+                    <${TextArea}
+                        id="codeBox"
+                        class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
+                        style=""
+                    />${Button("RunJS", runRoolwindowJs)}
+                </div>
+            `;
+        }
+
+        function Ability({ name, scores = [] }) {
             return html`
                 <div style="${utilVars.abilityStyle}" class="ability">
                     <span>${name}</span>
@@ -71,26 +164,29 @@ javascript: (function () {
             `;
         }
         const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-        const scores = [-2,-1,0,1,2,3,4,5];
-        
+        const scores = [-2, -1, 0, 1, 2, 3, 4, 5];
+
         function DnDStatBlock({ abilities, style = "", scores = [] }) {
             return html`
                 <div style="${style}" class="statBlock">
-                    ${abilities.map(function(ability){ return html`<${Ability} name=${ability} scores=${scores} />`})}
+                    ${abilities.map(function (ability) { return html`<${Ability} name=${ability} scores=${scores} />` })}
                 </div>
             `;
         }
-        
+
         function addDndStatBlock() {
             var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
             addToToolWindow(dndStatBlock);
         }
-        
+
         function addToToolWindow(element) {
             const existingToolWindow = document.getElementById('toolWindow');
-            render(element, existingToolWindow);
+            if(existingToolWindow != null){
+                render(element, existingToolWindow);
+            }
+            
         }
-        
+
         function InputBox(id, value = "") {
             return html`
                 <input type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
@@ -110,39 +206,6 @@ javascript: (function () {
             var code = document.getElementById("codeBox").value;
             console.log(code);
             runJs(code)
-        }
-        function ToolBar() {
-            return html`
-        <div 
-            id="toolBar" >
-            ${Button("Correction", insertBookmarkletDevCorrections)}
-            ${Button("RollD20", insertRollDie)}
-            ${Button("RunJS", runRoolwindowJs)}
-            </div>
-    `;
-        }
-        function TextArea({ id, style = "", value = "", class: className = "" }) {
-            return html`
-                <textarea id="${id}" style="${style}" class="${className}">
-                    ${value}
-                </textarea>
-            `;
-        }
-        
-        function ToolWindow() {
-            return html`
-                <div 
-                    style=${toolWindowStyle} 
-                    id="toolWindow"
-                    class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-                    <div><h2>toolWindow</h2></div>
-                    <${TextArea}
-                        id="codeBox"
-                        class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
-                        style=""
-                    />${Button("RunJS", runRoolwindowJs)}
-                </div>
-            `;
         }
 
 
@@ -170,7 +233,17 @@ javascript: (function () {
             });
         }
 
-
+        function copyGPTAnswer(){
+            const container = document.querySelector('main > .flex-1.overflow-hidden');
+            if (container) {
+                const groupElements = container.querySelectorAll('.group.w-full');
+                if (groupElements.length > 0) {
+                    const gptPost = groupElements[groupElements.length - 1].innerHTML;
+                    document.getElementById("overAllAnswers").innerHTML += gptPost;
+                    
+                } 
+            }
+        }
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
@@ -180,10 +253,15 @@ javascript: (function () {
                 addToolWindow(ToolWindow, render, html);
                 replaceWithToolBar(ToolBar, render, html);
                 addDndStatBlock();
+                insertCheckboxes();
+               /* addOverlay(Overlay);*/
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
+                    function () { insertCheckboxes(); },
+                    /*function () { copyGPTAnswer(); },*/
                     function () { moveToolWindow(ToolWindow, render, html); },
                     function () { replaceWithToolBar(ToolBar, render, html); },
+                    
                 ]);
                 addStyling();
             }, [haveRemoved]);

@@ -1,5 +1,5 @@
 javascript:(function() {
-    console.log("55");
+    console.log("GET BOOKMARKLET: /*version-number*/");
     var head = document.getElementsByTagName('head')[0];
     var mainUrl = 'http://localhost:3000/chatgpt-apps3/bookmarklets/min/gptEnhanceMain.min.js?' + new Date().getTime();
     var fallbackUrl = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/min/gptEnhanceMain.min.js?' + new Date().getTime();
@@ -17,7 +17,6 @@ javascript:(function() {
         loadFallback();
     };
     head.appendChild(element);
-
     /* Load the fallback script if the main script fails */
     function loadFallback() {
         var fallbackElement = document.createElement('script');
