@@ -25,8 +25,8 @@ javascript: (function () {
     var preactCDN = 'https://unpkg.com/preact@latest/dist/preact.umd.js';
     var preactHooksCDN = 'https://unpkg.com/preact@latest/hooks/dist/hooks.umd.js';
     var htmCDN = 'https://unpkg.com/htm@latest/dist/htm.umd.js';
-    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime();
-    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.js?' + new Date().getTime();
+    var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/utils.min.js?' + new Date().getTime();
+    var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/utils.min.js?' + new Date().getTime();
     loadScript(preactCDN, null, function () {
         console.log('Preact has been loaded!');
         loadScript(htmCDN, null, function () {
@@ -70,18 +70,22 @@ javascript: (function () {
             var randomValue = Math.floor(Math.random() * 20) + 1;
             insertTextInPrompt(`Result: ${randomValue+4} (${randomValue+4} Roll + 1 INT +3 Proficiency)`)
         }
+        function runRoolwindowJs() {
+            var code = document.getElementById("codeBox").value;
+            console.log(code);
+            runJs(code)  
+        }
+        
         function ToolBar() {
             return html`
         <div 
             id="toolBar" >
             ${Button("Correction", insertBookmarkletDevCorrections)}
             ${Button("RollD20", insertRollDie)}
-            ${Button("Button3", insertBookmarkletDevCorrections)}
+            ${Button("RunJS", runRoolwindowJs)}
             </div>
     `;
         }
-
-
        
 
         function ToolWindow() {
@@ -92,9 +96,9 @@ javascript: (function () {
             class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
             <h2>toolWindow</h2>
             <div></div>
-            <textarea 
+            <textarea id="codeBox"
             class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
-            style=""></textarea><button>Button1</button>
+            style=""></textarea>${Button("RunJS", runRoolwindowJs)}
         </div>
     `;
         }
