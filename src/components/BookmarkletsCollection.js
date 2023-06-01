@@ -13,6 +13,11 @@ const BookmarkletsCollection = () => {
                 description: "Add a button that allows running of chatGPT-generated javascript directly in the chat and edit the code directyly in the code box, and eventually much more",
             },
             {
+                name: "Get Latest GPT Main Enhancer",
+                path: 'bookmarklets/getBookmarklet.js',
+                description: "Loads the latest script, to avoid having to edit script while developing. Can be modifed to get other script-file",
+            },
+            {
                 name: "GPT Enhancer Run Code Button  - Bookmarklet",
                 path: 'bookmarklets/gptEnhanceJsButton.js',
                 description: "Add a button that allows running of chatGPT-generated javascript directly in the chat",
