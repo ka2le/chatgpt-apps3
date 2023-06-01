@@ -1,5 +1,5 @@
 javascript: (function () {
-    console.log("gptEnchanceMain 1.20")
+    console.log("gptEnchanceMain 1.22");
     /*Version 1.0*/
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
@@ -47,19 +47,69 @@ javascript: (function () {
             minHeight: "100px",
         };
         /* SECTION COMPONENTS */
+        function Checkbox({ id,  checked = false }) {
+            return html`
+                <input type="checkbox" id="${id}" style="${utilVars.checkboxStyle}" ${checked ? 'checked' : ''} />
+            `;
+        }
         
+        function Dropdown({ id,  options = [] }) {
+            return html`
+                <select id="${id}" style="${utilVars.dropdownStyle}">
+                    ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+                </select>
+            `;
+        }
+        
+        function Ability({ name,  scores = [] }) {
+            return html`
+                <div style="${utilVars.abilityStyle}" class="ability">
+                    <span>${name}</span>
+                    <${Checkbox} id="${name}Checkbox" />
+                    <${Dropdown} id="${name}Dropdown" options=${scores} />
+                </div>
+            `;
+        }
+        const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+        const scores = [-2,-1,0,1,2,3,4,5];
+        
+        function DnDStatBlock({ abilities, style = "", scores = [] }) {
+            return html`
+                <div style="${style}" class="statBlock">
+                    ${abilities.map(function(ability){ return html`<${Ability} name=${ability} scores=${scores} />`})}
+                </div>
+            `;
+        }
+        
+        function addDndStatBlock() {
+            var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
+            addToToolWindow(dndStatBlock);
+        }
+        
+        function addToToolWindow(element) {
+            const existingToolWindow = document.getElementById('toolWindow');
+            render(element, existingToolWindow);
+        }
+        
+        function InputBox(id, value = "") {
+            return html`
+                <input type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
+            `;
+        }
+
+
         function insertBookmarkletDevCorrections() {
             insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  \nNever use arrow functions =>`)
         }
 
         function insertRollDie() {
             var randomValue = Math.floor(Math.random() * 20) + 1;
-            insertTextInPrompt(`Result: ${randomValue+4} (${randomValue+4} Roll + 1 INT +3 Proficiency)`)
+            insertTextInPrompt(`Result: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`)
         }
         function runRoolwindowJs() {
             var code = document.getElementById("codeBox").value;
             console.log(code);
-            runJs(code)  
+            runJs(code)
         }
         function ToolBar() {
             return html`
@@ -71,30 +121,36 @@ javascript: (function () {
             </div>
     `;
         }
-       
-
+        function TextArea({ id, style = "", value = "", class: className = "" }) {
+            return html`
+                <textarea id="${id}" style="${style}" class="${className}">
+                    ${value}
+                </textarea>
+            `;
+        }
+        
         function ToolWindow() {
             return html`
-        <div 
-            style=${toolWindowStyle} 
-            id="toolWindow"
-            class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-            <h2>toolWindow</h2>
-            <div></div>
-            <textarea id="codeBox"
-            class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
-            style=""></textarea>${Button("RunJS", runRoolwindowJs)}
-        </div>
-    `;
+                <div 
+                    style=${toolWindowStyle} 
+                    id="toolWindow"
+                    class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
+                    <div><h2>toolWindow</h2></div>
+                    <${TextArea}
+                        id="codeBox"
+                        class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
+                        style=""
+                    />${Button("RunJS", runRoolwindowJs)}
+                </div>
+            `;
         }
-
 
 
         function addButtonsToExistingSpans() {
             var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
             buttons.forEach(function (button) {
                 if (button.innerText.includes('Copy code')) {
-                    button.setAttribute('gpt-enhancer-modified', 'true'); 
+                    button.setAttribute('gpt-enhancer-modified', 'true');
                     var newInnerText = button.innerText.replace("Copy code", 'Copy');
                     button.setAttribute("innerHtml", newInnerText);
                     /* if (checkCodeBoxType(button, "javascript")) {*/
@@ -114,7 +170,7 @@ javascript: (function () {
             });
         }
 
- 
+
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
@@ -123,6 +179,7 @@ javascript: (function () {
                 addButtonsToExistingSpans();
                 addToolWindow(ToolWindow, render, html);
                 replaceWithToolBar(ToolBar, render, html);
+                addDndStatBlock();
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
                     function () { moveToolWindow(ToolWindow, render, html); },
@@ -135,7 +192,7 @@ javascript: (function () {
         };
         /* END SECTION COMPONENTS */
 
-        RunTheApp(TheApp, render, html);
+        RunTheApp(TheApp);
     };
 
 })();
