@@ -1,5 +1,5 @@
 javascript: (function () {
-    console.log("gptEnchanceMain 1.9")
+    console.log("gptEnchanceMain 1.20")
     /*Version 1.0*/
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
@@ -7,7 +7,6 @@ javascript: (function () {
         script.type = 'text/javascript';
         script.onerror = function () {
             if (fallbackUrl) {
-                console.log("Fallback2");
                 var fallbackScript = document.createElement('script');
                 fallbackScript.type = 'text/javascript';
                 fallbackScript.src = fallbackUrl;
@@ -28,9 +27,7 @@ javascript: (function () {
     var bookmarkletUtils = 'http://localhost:3000/chatgpt-apps3/bookmarklets/min/utils.min.js?' + new Date().getTime();
     var bookmarkletUtilsFallback = 'https://ka2le.github.io/chatgpt-apps3/bookmarklets/min/utils.min.js?' + new Date().getTime();
     loadScript(preactCDN, null, function () {
-        console.log('Preact has been loaded!');
         loadScript(htmCDN, null, function () {
-            console.log('HTM has been loaded!');
             loadScript(preactHooksCDN, null, function () {
                 window.h = preact.h;
                 window.render = preact.render;
@@ -46,20 +43,9 @@ javascript: (function () {
 
 
     function initApp(h, render, html, useState, useEffect) {
-
-        /* SECTION INIT PREACT AND HTM, useState and useEffect */
-
-        /* END SECTION INIT PREACT AND HTM */
-
-
-
-        
         var toolWindowStyle = {
             minHeight: "100px",
-
         };
-        /* END SECTION STYLES */
-
         /* SECTION COMPONENTS */
         
         function insertBookmarkletDevCorrections() {
@@ -75,7 +61,6 @@ javascript: (function () {
             console.log(code);
             runJs(code)  
         }
-        
         function ToolBar() {
             return html`
         <div 
@@ -109,7 +94,7 @@ javascript: (function () {
             var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
             buttons.forEach(function (button) {
                 if (button.innerText.includes('Copy code')) {
-                    button.setAttribute('gpt-enhancer-modified', 'true');
+                    button.setAttribute('gpt-enhancer-modified', 'true'); 
                     var newInnerText = button.innerText.replace("Copy code", 'Copy');
                     button.setAttribute("innerHtml", newInnerText);
                     /* if (checkCodeBoxType(button, "javascript")) {*/
@@ -129,44 +114,7 @@ javascript: (function () {
             });
         }
 
-        function RunJsButton(props) {
-            function runJsWrapper() {
-                var theCleanCode = getCleanCode(props.spanElement);
-                runJs(theCleanCode);
-            }
-            return html`
-            <button 
-                style=${utilVars?.buttonStyle} 
-                class="flex ml-auto gap-2"
-                onClick=${runJsWrapper}>${html([utilVars?.runIcon])}Run</button>
-        `;
-        }
-
-        function DownloadSVGButton(props) {
-            function downloadSVGWrapper() {
-                var theCleanCode = getCleanCode(props.spanElement);
-                downloadSVG(theCleanCode);
-            }
-            return html`
-            <button 
-                style=${utilVars?.buttonStyle} 
-                class="flex ml-auto gap-2"
-                onClick=${downloadSVGWrapper}>${html([utilVars?.downloadIcon])}Download</button>
-        `;
-        }
-
-        function ToggleEditableButton(props) {
-            function toggleEditableWrapper() {
-                toggleEditable(props);
-            }
-
-            return html`
-            <button 
-                style=${utilVars?.buttonStyle} 
-                class="flex ml-auto gap-2"
-                onClick=${toggleEditableWrapper}>${html([utilVars?.editIcon])}Edit</button>
-        `;
-        }
+ 
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);

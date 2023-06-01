@@ -11,14 +11,19 @@ const DEST_PATH = 'public/bookmarklets/min';
 gulp.task('minify-js', function (done) {
     gulp.src(SRC_PATH)
         .pipe(changed(DEST_PATH))
+        .pipe(tap(function (file) {
+            file.contents.toString().startsWith('javascript:') ? file.isBookmarklet = true : file.isBookmarklet = false;
+        }))
         .pipe(replace(/console\.log\([^;]*\)[^;]*$/gm, function(match){
             return match.slice(-1) === ')' ? match + ';' : match;
         }))
-        .pipe(tap(function (file) {
-            console.log(file.contents.toString());
-        }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
+        .pipe(tap(function (file) {
+            if (file.isBookmarklet) {
+                file.contents = Buffer.from('javascript:(function() {' + file.contents.toString() + '})();');
+            }
+        }))
         .pipe(gulp.dest(DEST_PATH))
         .on('end', done);
 });
