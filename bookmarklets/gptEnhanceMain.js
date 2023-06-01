@@ -1,5 +1,5 @@
 javascript: (function () {
-    console.log("gptEnchanceMain 1.0");
+    console.log("gptEnchanceMain 1.5");
     /*Version 1.0*/
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
@@ -7,7 +7,7 @@ javascript: (function () {
         script.type = 'text/javascript';
         script.onerror = function () {
             if (fallbackUrl) {
-                console.log("Fallback");
+                console.log("Fallback2");
                 var fallbackScript = document.createElement('script');
                 fallbackScript.type = 'text/javascript';
                 fallbackScript.src = fallbackUrl;
