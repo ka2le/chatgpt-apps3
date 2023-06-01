@@ -1,5 +1,5 @@
-/*Version 1.0*/ 
-console.log("utils 1.1");
+/*Version 1.0*/
+console.log("utils 1.11");
 function getGrandParentElement(element) {
     return element.parentElement.parentElement;
 }
@@ -17,12 +17,12 @@ function getCleanCode(props) {
     console.log(props);
     var grandParentElement = getGrandParentElement(props);
     console.log(grandParentElement);
-        var codeElement = getCodeElement(grandParentElement);
-        console.log(codeElement);
-        if (!codeElement) {
-            handleNoCodeElement();
-            return;
-        }
+    var codeElement = getCodeElement(grandParentElement);
+    console.log(codeElement);
+    if (!codeElement) {
+        handleNoCodeElement();
+        return;
+    }
     var allCode = codeElement.innerHTML;
     console.log(allCode);
     var theCleanCode = allCode.replace(/<span class="hljs[^"]*">|<\/span>/g, '');
@@ -55,10 +55,10 @@ function addElement(parent, element, beforeNode) {
 }
 
 function addStyling() {
-    /* var gap2 = document.querySelectorAll('.gap-2');
-        gap2.forEach(function (gap) {
-            gap.style.gap = "0px"
-        });*/
+     var abilityOptions = document.querySelectorAll('.ability option');
+     abilityOptions.forEach(function (abilityOption) {
+        abilityOption.style.backgroundColor = "rgb(52,53,65)"
+        });
 }
 
 
@@ -78,14 +78,14 @@ function downloadSVG(cleanCode) {
     link.href = url;
     const format = "svg";
     link.download = `icon.${format}`;
-    link.style.display = 'none';  
+    link.style.display = 'none';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 }
 
 
-function RunTheApp(TheApp){
+function RunTheApp(TheApp) {
     var rootId = 'gpt-enhancer-root';
     var existingRoot = document.getElementById(rootId);
     if (existingRoot) {
@@ -168,7 +168,7 @@ function moveToolWindow(ToolWindow) {
     const toolWindow = document.getElementById('toolWindow');
     if (!toolWindow) {
         /*console.log("Tool Window does not exist");*/
-        addToolWindow(ToolWindow, render,html );
+        addToolWindow(ToolWindow, render, html);
         return;
     }
     const container = document.querySelector('main > .flex-1.overflow-hidden');
@@ -192,7 +192,7 @@ function moveToolWindow(ToolWindow) {
 function addToolWindow(ToolWindow) {
     const existingToolWindow = document.getElementById('toolWindow');
     if (existingToolWindow) {
-       // console.log("Tool Window already exists");
+        // console.log("Tool Window already exists");
         return;
     }
     var toolWindow = document.createElement('div');
@@ -238,7 +238,7 @@ function replaceWithToolBar(ToolBar) {
         }
     }
 }
-function removeElementsByClass(className, haveRemoved,setHaveRemoved) {
+function removeElementsByClass(className, haveRemoved, setHaveRemoved) {
     if (haveRemoved) {
         return "";
     } else {
@@ -251,7 +251,7 @@ function removeElementsByClass(className, haveRemoved,setHaveRemoved) {
             elements2[i].removeAttribute('gpt-enhancer-modified');
         }
         setHaveRemoved(true);
-    }
+    } 
 }
 
 function toggleEditable(props) {
@@ -300,7 +300,28 @@ var utilVars = {
     downloadIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>`,
     runIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon points="8 5 16 12 8 19 8 5"/></svg>`,
     editIcon: `<svg fill="currentColor" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
-    buttonStyle : {
+    buttonStyle: {
         margin: "0 5px",
     },
+    textareaStyle: {},
+    dropdownStyle: {
+        boxShadow: 'initial',
+        WebkitAppearance: 'initial',
+        appearance: 'initial',
+        backgroundColor: 'initial',
+        borderColor: 'initial',
+        borderRadius: 'initial',
+        borderWidth: 'initial',
+        fontSize: 'initial',
+        lineHeight: 'initial',
+        padding: 'initial',
+        border:"none",
+    },
+    checkboxStyle: {},
+    inputBoxStyle: {},
+    abilityStyle: {
+        float: "left",
+        margin:"0 10px"
+    },
+    statBlockStyle: {},
 };
