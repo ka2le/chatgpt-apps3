@@ -125,10 +125,49 @@ function addObserver(callbacks) {
     }
 }
 
+function RunJsButton(props) {
+    function runJsWrapper() {
+        var theCleanCode = getCleanCode(props.spanElement);
+        runJs(theCleanCode);
+    }
+    return html`
+    <button 
+        style=${utilVars?.buttonStyle} 
+        class="flex ml-auto gap-2"
+        onClick=${runJsWrapper}>${html([utilVars?.runIcon])}Run</button>
+`;
+}
+
+function DownloadSVGButton(props) {
+    function downloadSVGWrapper() {
+        var theCleanCode = getCleanCode(props.spanElement);
+        downloadSVG(theCleanCode);
+    }
+    return html`
+    <button 
+        style=${utilVars?.buttonStyle} 
+        class="flex ml-auto gap-2"
+        onClick=${downloadSVGWrapper}>${html([utilVars?.downloadIcon])}Download</button>
+`;
+}
+
+function ToggleEditableButton(props) {
+    function toggleEditableWrapper() {
+        toggleEditable(props);
+    }
+
+    return html`
+    <button 
+        style=${utilVars?.buttonStyle} 
+        class="flex ml-auto gap-2"
+        onClick=${toggleEditableWrapper}>${html([utilVars?.editIcon])}Edit</button>
+`;
+}
+
 function moveToolWindow(ToolWindow) {
     const toolWindow = document.getElementById('toolWindow');
     if (!toolWindow) {
-        console.log("Tool Window does not exist");
+        /*console.log("Tool Window does not exist");*/
         addToolWindow(ToolWindow, render,html );
         return;
     }
@@ -153,7 +192,7 @@ function moveToolWindow(ToolWindow) {
 function addToolWindow(ToolWindow) {
     const existingToolWindow = document.getElementById('toolWindow');
     if (existingToolWindow) {
-        console.log("Tool Window already exists");
+       // console.log("Tool Window already exists");
         return;
     }
     var toolWindow = document.createElement('div');
