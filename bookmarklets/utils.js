@@ -90,18 +90,6 @@ function downloadSVG(cleanCode) {
 }
 
 
-function RunTheApp(TheApp) {
-    var rootId = 'gpt-enhancer-root';
-    var existingRoot = document.getElementById(rootId);
-    if (existingRoot) {
-        existingRoot.remove();
-    }
-    var appRoot = document.createElement('div');
-    appRoot.id = rootId;
-    document.body.appendChild(appRoot);
-    render(html`<${TheApp} />`, appRoot);
-}
-
 
 
 function addObserver(callbacks) {
@@ -219,10 +207,6 @@ function addToolWindow(ToolWindow) {
     }
 }
 
-function addOverlay(Overlay){
-    console.log("addingOVerlay");
-    render(html`<${Overlay} />`, document.getElementById("gpt-enhancer-root"));
-}
 
 function insertTextInPrompt(text) {
     var textarea = document.getElementById("prompt-textarea");
