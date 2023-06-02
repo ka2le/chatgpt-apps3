@@ -1,6 +1,5 @@
 javascript: (function () {
-    console.log("gptEnchanceMain 1.22");
-    /*Version 1.0*/
+    console.log("GPT MAIN: /*version-number*/");
     function loadScript(url, fallbackUrl, callback) {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
@@ -34,34 +33,71 @@ javascript: (function () {
                 window.html = htm.bind(h);
                 window.useState = preactHooks.useState;
                 window.useEffect = preactHooks.useEffect;
+                window.useRef = preactHooks.useRef;
+                window.useMemo = preactHooks.useMemo;
                 loadScript(bookmarkletUtils, bookmarkletUtilsFallback, function () {
-                    initApp(window.h, window.render, window.html, window.useState, window.useEffect);
+                    initApp( window.render, window.html, window.useState, window.useEffect, window.useRef,  window.useMemo);
                 });
             });
         });
     });
 
 
-    function initApp(h, render, html, useState, useEffect) {
+    function initApp( render, html, useState, useEffect, useRef, useMemo) {
         var toolWindowStyle = {
             minHeight: "100px",
         };
         /* SECTION COMPONENTS */
-        function Checkbox({ id,  checked = false }) {
+
+        function sendOverAllText() {
+            var text = document.getElementById("overAllText").value;
+            sendText(text);
+        }
+
+
+        function TextArea({ id, style = "", value = "", class: className = "" }) {
             return html`
-                <input type="checkbox" id="${id}" style="${utilVars.checkboxStyle}" ${checked ? 'checked' : ''} />
+                <textarea id="${id}" style="${style}" class="${className}">
+                    ${value}
+                </textarea>
             `;
         }
-        
-        function Dropdown({ id,  options = [] }) {
-            return html`
-                <select id="${id}" style="${utilVars.dropdownStyle}">
-                    ${options.map((option) => html`<option value="${option}">${option}</option>`)}
-                </select>
-            `;
+
+        function insertCheckboxes() {
+            /* Get all ordered lists in the document */
+            var mainElement = document.getElementsByTagName('main')[0];
+            var orderedLists = mainElement.getElementsByTagName('ol');
+
+            for (var i = 0; i < orderedLists.length; i++) {
+                var listItems = orderedLists[i].getElementsByTagName('li');
+                for (var j = 0; j < listItems.length; j++) {
+                    if (listItems[j].classList.contains('has-checkbox')) {
+                        continue;
+                    }
+                    var checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    var listItemNumber = j + 1;
+                    var listItemText = listItems[j].innerHTML.replace(/<[^>]*>?/gm, '');
+                    checkbox.dataset.listText = "Option " + listItemNumber + ": " + listItemText;
+                    listItems[j].style.display = 'flex';
+                    listItems[j].style.alignItems = 'center';
+                    listItems[j].insertBefore(checkbox, listItems[j].firstChild);
+                    listItems[j].classList.add('has-checkbox');
+                }
+            }
         }
-        
-        function Ability({ name,  scores = [] }) {
+
+
+        function insertIntoTextarea(listItemNumber, listItemText) {
+            var textarea = document.getElementById('prompt-textarea');
+            textarea.value += listItemNumber + '. ' + listItemText + '\n';
+        }
+
+
+
+
+
+        function Ability({ name, scores = [] }) {
             return html`
                 <div style="${utilVars.abilityStyle}" class="ability">
                     <span>${name}</span>
@@ -70,27 +106,30 @@ javascript: (function () {
                 </div>
             `;
         }
-        const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-        const scores = [-2,-1,0,1,2,3,4,5];
-        
+        /*const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+        const scores = [-2, -1, 0, 1, 2, 3, 4, 5];*/
+
         function DnDStatBlock({ abilities, style = "", scores = [] }) {
             return html`
                 <div style="${style}" class="statBlock">
-                    ${abilities.map(function(ability){ return html`<${Ability} name=${ability} scores=${scores} />`})}
+                    ${abilities.map(function (ability) { return html`<${Ability} name=${ability} scores=${scores} />` })}
                 </div>
             `;
         }
-        
+
         function addDndStatBlock() {
-            var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
-            addToToolWindow(dndStatBlock);
+            /* var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
+             addToToolWindow(dndStatBlock);*/
         }
-        
+
         function addToToolWindow(element) {
-            const existingToolWindow = document.getElementById('toolWindow');
-            render(element, existingToolWindow);
+            var existingToolWindow = document.getElementById('toolWindow');
+            if (existingToolWindow != null) {
+                render(element, existingToolWindow);
+            }
+
         }
-        
+
         function InputBox(id, value = "") {
             return html`
                 <input type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
@@ -99,37 +138,172 @@ javascript: (function () {
 
 
         function insertBookmarkletDevCorrections() {
-            insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  \nNever use arrow functions =>`)
+            insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  \nNever use arrow functions =>`);
         }
 
         function insertRollDie() {
             var randomValue = Math.floor(Math.random() * 20) + 1;
-            insertTextInPrompt(`Result: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`)
+            insertTextInPrompt(`Result: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`);
         }
         function runRoolwindowJs() {
             var code = document.getElementById("codeBox").value;
             console.log(code);
-            runJs(code)
+            runJs(code);
         }
-        function ToolBar() {
+
+        function getLastListCheckboxes() {
+            var mainElement = document.getElementsByTagName('main')[0];
+            var orderedLists = mainElement.getElementsByTagName('ol');
+            console.log(orderedLists);
+            if (orderedLists.length > 0) {
+                var checkboxes = orderedLists[orderedLists.length - 1].getElementsByTagName('input');
+                console.log(checkboxes);
+                return checkboxes;
+            }
+            return [];
+        }
+
+        function getFirstCheckedText(checkboxes) {
+            for (var j = 0; j < checkboxes.length; j++) {
+                if (checkboxes[j].checked) {
+                    console.log(checkboxes[j]);
+                    return checkboxes[j].dataset.listText;
+                }
+            }
+            return "";
+        }
+
+        function buildDndText() {
+            var randomValue = Math.floor(Math.random() * 20) + 1;
+            var optionText = getFirstCheckedText(getLastListCheckboxes());
+            console.log(optionText);
+            var ResultText = `${optionText} \nResult: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`;
+            replaceInsertText(ResultText);
+        }
+
+        function replaceInsertText(newText) {
+            var textarea = document.getElementById("prompt-textarea");
+            var currentText = textarea.value;
+            var regex = "/\[.*?\]/s";
+            if (currentText.match(regex)) {
+                textarea.value = currentText.replace(regex, '[' + newText + ']');
+            } else {
+                textarea.value = currentText + '[' + newText + ']';
+            }
+        }
+
+        function addButtonsToExistingSpans() {
+            var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
+            buttons.forEach(function (button) {
+                if (button.innerText.includes('Copy code')) {
+                    button.setAttribute('gpt-enhancer-modified', 'true');
+                    var newInnerText = button.innerText.replace("Copy code", 'Copy');
+                    button.setAttribute("innerHtml", newInnerText);
+                    var runJsButton = document.createElement('div');
+                    render(html`<${RunJsButton} spanElement=${button}/>`, runJsButton);
+                    addElement(button.parentElement, runJsButton, button.nextSibling);
+                    var downloadSVGButton = document.createElement('div');
+                    render(html`<${DownloadSVGButton} spanElement=${button}/>`, downloadSVGButton);
+                    addElement(button.parentElement, downloadSVGButton, button.nextSibling);
+                    var toggleEditableButton = document.createElement('div');
+                    render(html`<${ToggleEditableButton} spanElement=${button}/>`, toggleEditableButton);
+                    addElement(button.parentElement, toggleEditableButton, button.nextSibling);
+                }
+            });
+        }
+
+        function copyGPTAnswer() {
+            var container = document.querySelector('main > .flex-1.overflow-hidden');
+            if (container) {
+                var groupElements = container.querySelectorAll('.group.w-full');
+                if (groupElements.length > 0) {
+                    var gptPost = groupElements[groupElements.length - 1].innerHTML;
+                    document.getElementById("overAllAnswers").innerHTML += gptPost;
+
+                }
+            }
+        }
+
+        function Overlay(props) {
+            console.log("Updating Overlay");
+            console.log(props);
+            console.log(props.props.isOverlayOpen);
+            return html`
+                <div id="overAll" style=${{
+                    display: props.props.isOverlayOpen ? 'block' : 'none',
+                    ...utilVars.overlayStyle
+                }}>
+                <${TextArea} id="overAllText"/>
+                ${Button("Send Message", sendOverAllText)}
+                ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
+                <div id="overAllAnswers"></div>
+                </div>
+            `;
+        }
+
+        function findOverlayContainerDOM() {
+            return document.getElementById("__next");
+        }
+
+
+        function ToolBar(props) {
             return html`
         <div 
             id="toolBar" >
             ${Button("Correction", insertBookmarkletDevCorrections)}
             ${Button("RollD20", insertRollDie)}
+            ${Button("RollD20_V2", buildDndText)}
             ${Button("RunJS", runRoolwindowJs)}
+            ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
+            ${Button("SendTest", function () { sendText("Tell me something interesting") })}
+            
             </div>
     `;
         }
-        function TextArea({ id, style = "", value = "", class: className = "" }) {
-            return html`
-                <textarea id="${id}" style="${style}" class="${className}">
-                    ${value}
-                </textarea>
-            `;
+
+
+
+        function addToolWindow(ToolWindow) {
+            const existingToolWindow = document.getElementById('toolWindow');
+            if (existingToolWindow) {
+                // console.log("Tool Window already exists");
+                return;
+            }
+            var toolWindow = document.createElement('div');
+            render(html`<${ToolWindow} />`, toolWindow);
+            const container = document.querySelector('main > .flex-1.overflow-hidden');
+
+            if (container) {
+                const groupElements = container.querySelectorAll('.group.w-full');
+                if (groupElements.length > 0) {
+                    const beforeThis = groupElements[groupElements.length - 1];
+                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
+                } else if (groupElements.length === 1) {
+                    const beforeThis = groupElements[0];
+                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
+                } else {
+
+                    container.appendChild(toolWindow);
+                }
+            }
         }
-        
-        function ToolWindow() {
+
+        function findToolWindowContainerDOM () {
+            const container = document.querySelector('main > .flex-1.overflow-hidden');
+            if (container) {
+                const groupElements = container.querySelectorAll('.group.w-full');
+                if (groupElements.length > 0) {
+                    return groupElements[groupElements.length - 1];
+                } else if (groupElements.length === 1) {
+                    return groupElements[0];
+                } else {
+                    return container;
+                }
+            }
+            return null;
+        }
+
+        function ToolWindow(props) {
             return html`
                 <div 
                     style=${toolWindowStyle} 
@@ -146,51 +320,102 @@ javascript: (function () {
         }
 
 
-        function addButtonsToExistingSpans() {
-            var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
-            buttons.forEach(function (button) {
-                if (button.innerText.includes('Copy code')) {
-                    button.setAttribute('gpt-enhancer-modified', 'true');
-                    var newInnerText = button.innerText.replace("Copy code", 'Copy');
-                    button.setAttribute("innerHtml", newInnerText);
-                    /* if (checkCodeBoxType(button, "javascript")) {*/
-                    var runJsButton = document.createElement('div');
-                    render(html`<${RunJsButton} spanElement=${button}/>`, runJsButton);
-                    addElement(button.parentElement, runJsButton, button.nextSibling);
-                    /*} 
-                    if (checkCodeBoxType(button, "html") || checkCodeBoxType(button, "svg")) {*/
-                    var downloadSVGButton = document.createElement('div');
-                    render(html`<${DownloadSVGButton} spanElement=${button}/>`, downloadSVGButton);
-                    addElement(button.parentElement, downloadSVGButton, button.nextSibling);
-                    /*}*/
-                    var toggleEditableButton = document.createElement('div');
-                    render(html`<${ToggleEditableButton} spanElement=${button}/>`, toggleEditableButton);
-                    addElement(button.parentElement, toggleEditableButton, button.nextSibling);
-                }
-            });
+
+        function findToolBarContainerDOM() {
+            const parentElement = document.querySelector('.absolute.bottom-0');
+            if (parentElement) {
+                return childElement = parentElement.querySelectorAll('div.text-center')[0];
+            }
+            return null;
         }
 
+        function useComponentContainer(Component, findContainerFunction, props) {
+            const containerRef = useRef(null);
+        
+            useEffect(() => {
+                containerRef.current = findContainerFunction ? findContainerFunction() : getDefaultContainerDOM();
+                if (containerRef.current) {
+                    render(html`<${Component} props=${props} />`, containerRef.current);
+                }
+            }, [props]);
+        
+            return containerRef;
+        }
+        function getDefaultContainerDOM() {
+            let element = document.getElementById('__NEXT_DATA__');
+            if (!element) {
+                element = document.createElement('div');
+                element.id = 'gpt-enhancer-root';
+                document.body.appendChild(element);
+            }
+            return element;
+        }
+
+        function moveComponent(containerRef, newContainerFunction) {
+            useEffect(() => {
+                const newContainer = newContainerFunction();
+                if (newContainer && containerRef.current) {
+                    newContainer.appendChild(containerRef.current);
+                }
+            }, [containerRef]);
+        }
 
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
+            const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+            const [dndText, setDndText] = useState("");
+
+            const toggleOverlay = () => {
+                console.log("Toggle " + isOverlayOpen);
+                setIsOverlayOpen(!isOverlayOpen);
+            }
+            const [triggerRender, setTriggerRender] = useState(false);
+            const appProps = useMemo(() => ({
+                toggleOverlay,
+                isOverlayOpen,
+                haveRemoved,
+                setHaveRemoved,
+                triggerRender,
+            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender]);
+            const toolWindowRef = useComponentContainer(ToolWindow, null, appProps);
+            const toolBarRef = useComponentContainer(ToolBar, findToolBarContainerDOM, appProps);
+            const overlayRef = useComponentContainer(Overlay, findOverlayContainerDOM, appProps);
+            
             useEffect(function () {
                 removeElementsByClass("gpt-enhancer", haveRemoved, setHaveRemoved);
                 addButtonsToExistingSpans();
-                addToolWindow(ToolWindow, render, html);
-                replaceWithToolBar(ToolBar, render, html);
+                /*addToolWindow(ToolWindow, render, html);*/
                 addDndStatBlock();
+                insertCheckboxes();
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
-                    function () { moveToolWindow(ToolWindow, render, html); },
-                    function () { replaceWithToolBar(ToolBar, render, html); },
+                    function () { insertCheckboxes(); },
+                    function () { addStyling(); },
+                    /*function () { copyGPTAnswer(); },*/
+                    /*function () { moveToolWindow(ToolWindow, render, html); },*/
+                    /*function () { moveComponent(toolWindowRef, findToolWindowContainerDOM); },*/
+                    function () { setTriggerRender(prevState => !prevState); },
+
                 ]);
                 addStyling();
-            }, [haveRemoved]);
+            }, [haveRemoved, setTriggerRender,triggerRender]);
             return html``;
-
         };
         /* END SECTION COMPONENTS */
+        function RunTheApp(TheApp) {
+            var rootId = 'gpt-enhancer-root';
+            var existingRoot = document.getElementById(rootId);
+            if (existingRoot) {
+                existingRoot.remove();
+            }
+            var appRoot = document.createElement('div');
+            appRoot.id = rootId;
+            document.body.appendChild(appRoot);
+            render(html`<${TheApp} />`, appRoot);
+        }
+
+
 
         RunTheApp(TheApp);
     };
