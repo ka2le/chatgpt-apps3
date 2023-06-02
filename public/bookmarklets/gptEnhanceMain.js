@@ -106,8 +106,8 @@ javascript: (function () {
                 </div>
             `;
         }
-        /*const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-        const scores = [-2, -1, 0, 1, 2, 3, 4, 5];*/
+        const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+        const scores = [-2, -1, 0, 1, 2, 3, 4, 5];
 
         function DnDStatBlock({ abilities, style = "", scores = [] }) {
             return html`
@@ -118,8 +118,8 @@ javascript: (function () {
         }
 
         function addDndStatBlock() {
-            /* var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
-             addToToolWindow(dndStatBlock);*/
+             var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
+             addToToolWindow(dndStatBlock);
         }
 
         function addToToolWindow(element) {
@@ -224,104 +224,13 @@ javascript: (function () {
             }
         }
 
-        function Overlay(props) {
-            console.log("Updating Overlay");
-            console.log(props);
-            console.log(props.props.isOverlayOpen);
-            return html`
-                <div id="overAll" style=${{
-                    display: props.props.isOverlayOpen ? 'block' : 'none',
-                    ...utilVars.overlayStyle
-                }}>
-                <${TextArea} id="overAllText"/>
-                ${Button("Send Message", sendOverAllText)}
-                ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
-                <div id="overAllAnswers"></div>
-                </div>
-            `;
-        }
 
-        function findOverlayContainerDOM() {
+       
+         /*CONTAINER FIND AND INSERT FUNCTION*/ 
+         function findOverlayContainerDOM() {
             return document.getElementById("__next");
         }
-
-
-        function ToolBar(props) {
-            return html`
-        <div 
-            id="toolBar" >
-            ${Button("Correction", insertBookmarkletDevCorrections)}
-            ${Button("RollD20", insertRollDie)}
-            ${Button("RollD20_V2", buildDndText)}
-            ${Button("RunJS", runRoolwindowJs)}
-            ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
-            ${Button("SendTest", function () { sendText("Tell me something interesting") })}
-            
-            </div>
-    `;
-        }
-
-
-
-        function addToolWindow(ToolWindow) {
-            const existingToolWindow = document.getElementById('toolWindow');
-            if (existingToolWindow) {
-                // console.log("Tool Window already exists");
-                return;
-            }
-            var toolWindow = document.createElement('div');
-            render(html`<${ToolWindow} />`, toolWindow);
-            const container = document.querySelector('main > .flex-1.overflow-hidden');
-
-            if (container) {
-                const groupElements = container.querySelectorAll('.group.w-full');
-                if (groupElements.length > 0) {
-                    const beforeThis = groupElements[groupElements.length - 1];
-                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-                } else if (groupElements.length === 1) {
-                    const beforeThis = groupElements[0];
-                    beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-                } else {
-
-                    container.appendChild(toolWindow);
-                }
-            }
-        }
-
-        function findToolWindowContainerDOM () {
-            const container = document.querySelector('main > .flex-1.overflow-hidden');
-            if (container) {
-                const groupElements = container.querySelectorAll('.group.w-full');
-                if (groupElements.length > 0) {
-                    return groupElements[groupElements.length - 1];
-                } else if (groupElements.length === 1) {
-                    return groupElements[0];
-                } else {
-                    return container;
-                }
-            }
-            return null;
-        }
-
-        function ToolWindow(props) {
-            return html`
-                <div 
-                    style=${toolWindowStyle} 
-                    id="toolWindow"
-                    class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-                    <div><h2>toolWindow</h2></div>
-                    <${TextArea}
-                        id="codeBox"
-                        class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
-                        style=""
-                    />${Button("RunJS", runRoolwindowJs)}
-                </div>
-            `;
-        }
-
-
-
-        function findToolBarContainerDOM() {
+         function findToolBarContainerDOM() {
             const parentElement = document.querySelector('.absolute.bottom-0');
             if (parentElement) {
                 return childElement = parentElement.querySelectorAll('div.text-center')[0];
@@ -359,33 +268,94 @@ javascript: (function () {
                 }
             }, [containerRef]);
         }
+        /*END CONTAINER FIND AND INSERT FUNCTION*/ 
 
+        /*MAIN COMPONENTS*/ 
+        function Overlay(props) {
+            console.log("Updating Overlay");
+            console.log(props);
+            console.log(props.props.isOverlayOpen);
+            return html`
+                <div id="overAll" style=${{
+                    display: props.props.isOverlayOpen ? 'block' : 'none',
+                    ...utilVars.overlayStyle
+                }}>
+                <${TextArea} id="overAllText"/>
+                ${Button("Send Message", sendOverAllText)}
+                ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
+                <div id="overAllAnswers"></div>
+                </div>
+            `;
+        }
+
+       
+
+        function ToolBar(props) {
+            return html`
+        <div 
+            id="toolBar" >
+            ${Button("Correction", insertBookmarkletDevCorrections)}
+            ${Button("RollD20", insertRollDie)}
+            ${Button("RollD20_V2", buildDndText)}
+            ${Button("RunJS", runRoolwindowJs)}
+            ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
+            ${Button("Toolwindow", function () { props.props.toggleToolWindow() })}
+            ${Button("SendTest", function () { sendText("Tell me something interesting") })}
+            
+            </div>
+    `;
+        }
+        function ToolWindow(props) {
+            return html`
+                <div 
+                style=${{
+                    display: props.props.isToolWindowVisible ? 'block' : 'none',
+                    ...utilVars.toolWindowStyle
+                }}>
+                    id="toolWindow"
+                    class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
+                    <div><h2>toolWindow</h2></div>
+                    <${TextArea}
+                        id="codeBox"
+                        class="flex flex-col w-full py-[10px] flex-grow md:py-4 md:pl-4 relative border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-xl shadow-xs dark:shadow-xs"
+                        style=""
+                    />${Button("RunJS", runRoolwindowJs)}
+                </div>
+            `;
+        }
+        /*END MAIN COMPONENTS*/ 
+
+       
+
+       
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+            const [isToolWindowVisible, setIsToolWindowVisible] = useState(false);
             const [dndText, setDndText] = useState("");
-
             const toggleOverlay = () => {
-                console.log("Toggle " + isOverlayOpen);
                 setIsOverlayOpen(!isOverlayOpen);
+            }
+            const toggleToolWindow = () => {
+                setIsToolWindowVisible(!isToolWindowVisible);
             }
             const [triggerRender, setTriggerRender] = useState(false);
             const appProps = useMemo(() => ({
                 toggleOverlay,
                 isOverlayOpen,
+                toggleToolWindow,
+                isToolWindowVisible,
                 haveRemoved,
                 setHaveRemoved,
                 triggerRender,
             }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender]);
-            const toolWindowRef = useComponentContainer(ToolWindow, null, appProps);
             const toolBarRef = useComponentContainer(ToolBar, findToolBarContainerDOM, appProps);
             const overlayRef = useComponentContainer(Overlay, findOverlayContainerDOM, appProps);
             
             useEffect(function () {
                 removeElementsByClass("gpt-enhancer", haveRemoved, setHaveRemoved);
                 addButtonsToExistingSpans();
-                /*addToolWindow(ToolWindow, render, html);*/
                 addDndStatBlock();
                 insertCheckboxes();
                 addObserver([
@@ -393,22 +363,24 @@ javascript: (function () {
                     function () { insertCheckboxes(); },
                     function () { addStyling(); },
                     /*function () { copyGPTAnswer(); },*/
-                    /*function () { moveToolWindow(ToolWindow, render, html); },*/
-                    /*function () { moveComponent(toolWindowRef, findToolWindowContainerDOM); },*/
                     function () { setTriggerRender(prevState => !prevState); },
 
                 ]);
                 addStyling();
             }, [haveRemoved, setTriggerRender,triggerRender]);
-            return html``;
+            return html`<${ToolWindow} props=${appProps} />`;
         };
         /* END SECTION COMPONENTS */
-        function RunTheApp(TheApp) {
-            var rootId = 'gpt-enhancer-root';
+        function removeExistingRoot(rootId) {
             var existingRoot = document.getElementById(rootId);
             if (existingRoot) {
                 existingRoot.remove();
             }
+        }
+
+        function RunTheApp(TheApp) {
+            var rootId = 'gpt-enhancer-root';
+            removeExistingRoot(rootId);
             var appRoot = document.createElement('div');
             appRoot.id = rootId;
             document.body.appendChild(appRoot);
