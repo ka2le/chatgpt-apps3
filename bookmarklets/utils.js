@@ -55,15 +55,20 @@ function addElement(parent, element, beforeNode) {
 }
 
 function addStyling() {
-     var abilityOptions = document.querySelectorAll('.ability option');
-     abilityOptions.forEach(function (abilityOption) {
+    var abilityOptions = document.querySelectorAll('.ability option');
+    abilityOptions.forEach(function (abilityOption) {
         abilityOption.style.backgroundColor = "rgb(52,53,65)";
-        });
+    });
 
-        var overAllChilds = document.querySelectorAll('#overAll');
-        overAllChilds.forEach(function (overAllChild) {
-            overAllChild.style.color = "black";
-        });
+    /*var overAllChilds = document.querySelectorAll('#overAll');
+    overAllChilds.forEach(function (overAllChild) {
+        overAllChild.style.color = "black";
+    });*/
+    var toolbarReplacedText = document.querySelectorAll('.absolute.bottom-0 > .text-center > span');
+    toolbarReplacedText.forEach(function (node) {
+        node.style.display = "none";
+    });
+
 }
 
 
@@ -99,8 +104,7 @@ function addObserver(callbacks) {
             if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 for (var i = 0; i < mutation.addedNodes.length; i++) {
                     if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
-                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))
-                        || mutation.target instanceof HTMLTitleElement) {
+                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))|| mutation.target instanceof HTMLTitleElement) {
 
                         for (var j = 0; j < callbacks.length; j++) {
                             callbacks[j]();
@@ -182,31 +186,6 @@ function moveToolWindow(ToolWindow) {
 }
 
 
-function addToolWindow(ToolWindow) {
-    const existingToolWindow = document.getElementById('toolWindow');
-    if (existingToolWindow) {
-        // console.log("Tool Window already exists");
-        return;
-    }
-    var toolWindow = document.createElement('div');
-    render(html`<${ToolWindow} />`, toolWindow);
-    const container = document.querySelector('main > .flex-1.overflow-hidden');
-
-    if (container) {
-        const groupElements = container.querySelectorAll('.group.w-full');
-        if (groupElements.length > 0) {
-            const beforeThis = groupElements[groupElements.length - 1];
-            beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-        } else if (groupElements.length === 1) {
-            const beforeThis = groupElements[0];
-            beforeThis.parentNode.insertBefore(toolWindow, beforeThis);
-        } else {
-
-            container.appendChild(toolWindow);
-        }
-    }
-}
-
 
 function insertTextInPrompt(text) {
     var textarea = document.getElementById("prompt-textarea");
@@ -216,12 +195,12 @@ function sendText(text) {
     insertTextInPrompt(text);
     pressSend();
 }
-function pressSend(){
+function pressSend() {
     var sendButton = document.getElementById("prompt-textarea").nextElementSibling;
     if (sendButton && sendButton.tagName === 'BUTTON') {
         sendButton.disabled = false;
         sendButton.click();
-      }
+    }
 }
 
 function replaceWithToolBar(ToolBar) {
@@ -243,14 +222,15 @@ function removeElementsByClass(className, haveRemoved, setHaveRemoved) {
     } else {
         const elements = document.getElementsByClassName(className);
         while (elements.length > 0) {
-            elements[0].parentNode.removeChild(elements[0]);
+            if(elements[0].parentNode){elements[0].parentNode.removeChild(elements[0]);}
+            
         }
         var elements2 = document.querySelectorAll('[gpt-enhancer-modified]');
         for (var i = 0; i < elements2.length; i++) {
             elements2[i].removeAttribute('gpt-enhancer-modified');
         }
         setHaveRemoved(true);
-    } 
+    }
 }
 
 function toggleEditable(props) {
@@ -276,8 +256,7 @@ function addObserver(callbacks) {
             if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 for (var i = 0; i < mutation.addedNodes.length; i++) {
                     if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
-                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))
-                        || mutation.target instanceof HTMLTitleElement) {
+                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full')) || mutation.target instanceof HTMLTitleElement) {
 
                         for (var j = 0; j < callbacks.length; j++) {
                             callbacks[j]();
@@ -303,13 +282,13 @@ function Button(title, onClickFunction) {
         </button>
     `;
 }
-function Checkbox({ id,  checked = false }) {
+function Checkbox({ id, checked = false }) {
     return html`
         <input type="checkbox" id="${id}" style="${utilVars.checkboxStyle}" ${checked ? 'checked' : ''} />
     `;
 }
 
-function Dropdown({ id,  options = [] }) {
+function Dropdown({ id, options = [] }) {
     return html`
         <select id="${id}" style="${utilVars.dropdownStyle}">
             ${options.map((option) => html`<option value="${option}">${option}</option>`)}
@@ -321,10 +300,8 @@ var utilVars = {
     buttonStyle: {
         margin: "0 5px",
     },
-    downloadIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>`,
-    runIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon points="8 5 16 12 8 19 8 5"/></svg>`,
-    editIcon: `<svg fill="currentColor" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
-    
+   
+
     textareaStyle: {},
     dropdownStyle: {
         boxShadow: 'initial',
@@ -337,23 +314,25 @@ var utilVars = {
         fontSize: 'initial',
         lineHeight: 'initial',
         padding: 'initial',
-        border:"none",
+        border: "none",
     },
     checkboxStyle: {},
     inputBoxStyle: {},
     abilityStyle: {
         float: "left",
-        margin:"0 10px"
+        margin: "0 10px"
     },
     overlayStyle: {
-        position: 'fixed',
+        position: '',
         top: '0',
         left: '0',
-        width: '100%',
-        height: '100%',
+        width: '100vw',
+        height: '100vh',
         backgroundColor: 'rgb(241,231,211)',
         zIndex: '9999',
-        display:"none",
     },
     statBlockStyle: {},
+    downloadIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-8-8h16l-8 8z"/></svg>`,
+    runIcon: `<svg stroke="currentColor" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon points="8 5 16 12 8 19 8 5"/></svg>`,
+    editIcon: `<svg fill="currentColor" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
 };
