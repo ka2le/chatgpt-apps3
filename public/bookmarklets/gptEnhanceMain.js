@@ -117,18 +117,7 @@ javascript: (function () {
             `;
         }
 
-        function addDndStatBlock() {
-             var dndStatBlock = html`<${DnDStatBlock} abilities=${abilities} scores=${scores} />`;
-             addToToolWindow(dndStatBlock);
-        }
 
-        function addToToolWindow(element) {
-            var existingToolWindow = document.getElementById('toolWindow');
-            if (existingToolWindow != null) {
-                render(element, existingToolWindow);
-            }
-
-        }
 
         function InputBox(id, value = "") {
             return html`
@@ -311,9 +300,10 @@ javascript: (function () {
                 style=${{
                     display: props.props.isToolWindowVisible ? 'block' : 'none',
                     ...utilVars.toolWindowStyle
-                }}>
+                }}
                     id="toolWindow"
                     class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
+                    <${DnDStatBlock} abilities=${abilities} scores=${scores} /><br></br>
                     <div><h2>toolWindow</h2></div>
                     <${TextArea}
                         id="codeBox"
@@ -349,14 +339,13 @@ javascript: (function () {
                 haveRemoved,
                 setHaveRemoved,
                 triggerRender,
-            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender]);
+            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible]);
             const toolBarRef = useComponentContainer(ToolBar, findToolBarContainerDOM, appProps);
             const overlayRef = useComponentContainer(Overlay, findOverlayContainerDOM, appProps);
             
             useEffect(function () {
                 removeElementsByClass("gpt-enhancer", haveRemoved, setHaveRemoved);
                 addButtonsToExistingSpans();
-                addDndStatBlock();
                 insertCheckboxes();
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
