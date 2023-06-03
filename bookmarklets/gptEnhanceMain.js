@@ -280,7 +280,7 @@ javascript: (function () {
             /*MODES DND, CODE, ALL */
             const [mode, setMode] = useState("DND");
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-            const [isToolWindowVisible, setIsToolWindowVisible] = useState(true);
+            const [isToolWindowVisible, setIsToolWindowVisible] = useState(mode == "DND" ? false : true);
             const [additionalText, setAdditionalText] = useState("");
             const textAreaRef = useRef(null);
             const sendButtonRef = useRef(null);
