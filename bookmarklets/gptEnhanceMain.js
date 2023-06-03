@@ -36,32 +36,23 @@ javascript: (function () {
                 window.useRef = preactHooks.useRef;
                 window.useMemo = preactHooks.useMemo;
                 loadScript(bookmarkletUtils, bookmarkletUtilsFallback, function () {
-                    initApp( window.render, window.html, window.useState, window.useEffect, window.useRef,  window.useMemo);
+                    initApp(window.render, window.html, window.useState, window.useEffect, window.useRef, window.useMemo);
                 });
             });
         });
     });
 
 
-    function initApp( render, html, useState, useEffect, useRef, useMemo) {
+    function initApp(render, html, useState, useEffect, useRef, useMemo) {
         var toolWindowStyle = {
             minHeight: "100px",
         };
         /* SECTION COMPONENTS */
 
-        function sendOverAllText() {
-            var text = document.getElementById("overAllText").value;
-            sendText(text);
-        }
 
 
-        function TextArea({ id, style = "", value = "", class: className = "" }) {
-            return html`
-                <textarea id="${id}" style="${style}" class="${className}">
-                    ${value}
-                </textarea>
-            `;
-        }
+
+
 
         function insertCheckboxes() {
             /* Get all ordered lists in the document */
@@ -85,12 +76,6 @@ javascript: (function () {
                     listItems[j].classList.add('has-checkbox');
                 }
             }
-        }
-
-
-        function insertIntoTextarea(listItemNumber, listItemText) {
-            var textarea = document.getElementById('prompt-textarea');
-            textarea.value += listItemNumber + '. ' + listItemText + '\n';
         }
 
 
@@ -119,20 +104,11 @@ javascript: (function () {
 
 
 
-        function InputBox(id, value = "") {
-            return html`
-                <input type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
-            `;
-        }
+       
 
-
-        function insertBookmarkletDevCorrections() {
-            insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  \nNever use arrow functions =>`);
-        }
-
-        function insertRollDie() {
+        function insertRollDie(setText) {
             var randomValue = Math.floor(Math.random() * 20) + 1;
-            insertTextInPrompt(`Result: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`);
+            setText(`Result: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`);
         }
         function runRoolwindowJs() {
             var code = document.getElementById("codeBox").value;
@@ -214,91 +190,50 @@ javascript: (function () {
         }
 
 
-       
-         /*CONTAINER FIND AND INSERT FUNCTION*/ 
-         function findOverlayContainerDOM() {
-            return document.getElementById("__next");
-        }
-         function findToolBarContainerDOM() {
-            const parentElement = document.querySelector('.absolute.bottom-0');
-            if (parentElement) {
-                return childElement = parentElement.querySelectorAll('div.text-center')[0];
-            }
-            return null;
-        }
 
-        function useComponentContainer(Component, findContainerFunction, props) {
-            const containerRef = useRef(null);
-        
-            useEffect(() => {
-                containerRef.current = findContainerFunction ? findContainerFunction() : getDefaultContainerDOM();
-                if (containerRef.current) {
-                    render(html`<${Component} props=${props} />`, containerRef.current);
-                }
-            }, [props]);
-        
-            return containerRef;
-        }
-        function getDefaultContainerDOM() {
-            let element = document.getElementById('__NEXT_DATA__');
-            if (!element) {
-                element = document.createElement('div');
-                element.id = 'gpt-enhancer-root';
-                document.body.appendChild(element);
-            }
-            return element;
-        }
 
-        function moveComponent(containerRef, newContainerFunction) {
-            useEffect(() => {
-                const newContainer = newContainerFunction();
-                if (newContainer && containerRef.current) {
-                    newContainer.appendChild(containerRef.current);
-                }
-            }, [containerRef]);
-        }
-        /*END CONTAINER FIND AND INSERT FUNCTION*/ 
-
-        /*MAIN COMPONENTS*/ 
+        /*MAIN COMPONENTS*/
         function Overlay(props) {
-            console.log("Updating Overlay");
-            console.log(props);
-            console.log(props.props.isOverlayOpen);
+            const [textAreaValue, setTextAreaValue] = useState();
+            function sendOverlayText() {
+                props.sendText(textAreaValue);
+            }
+
             return html`
                 <div id="overAll" style=${{
-                    display: props.props.isOverlayOpen ? 'block' : 'none',
+                    display: props.isOverlayOpen ? 'block' : 'none',
                     ...utilVars.overlayStyle
                 }}>
-                <${TextArea} id="overAllText"/>
-                ${Button("Send Message", sendOverAllText)}
-                ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
+                <${TextArea} id="overAllText" value=${textAreaValue} onChange=${(e) => setTextAreaValue(e.target.value)}/>
+                ${Button("Send Message", sendOverlayText)}
+                ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
                 <div id="overAllAnswers"></div>
                 </div>
             `;
         }
 
-       
-
         function ToolBar(props) {
             return html`
         <div 
             id="toolBar" >
-            ${Button("Correction", insertBookmarkletDevCorrections)}
-            ${Button("RollD20", insertRollDie)}
+            ${Button("Correction", function () { props.insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) } )}
+            ${Button("RollD20", function () { insertRollDie(props.setAdditionalText) })}
             ${Button("RollD20_V2", buildDndText)}
             ${Button("RunJS", runRoolwindowJs)}
-            ${Button("Toggle Overlay", function () { props.props.toggleOverlay() })}
-            ${Button("Toolwindow", function () { props.props.toggleToolWindow() })}
-            ${Button("SendTest", function () { sendText("Tell me something interesting") })}
+            ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
+            ${Button("Toolwindow", function () { props.toggleToolWindow() })}
+            ${Button("SendTest", function () { props.sendText("Tell me something interesting") })}
             
             </div>
     `;
         }
         function ToolWindow(props) {
+            console.log(props);
+            console.log(props.isToolWindowVisible);
             return html`
                 <div 
                 style=${{
-                    display: props.props.isToolWindowVisible ? 'block' : 'none',
+                    display: props.isToolWindowVisible ? 'block' : 'none',
                     ...utilVars.toolWindowStyle
                 }}
                     id="toolWindow"
@@ -313,17 +248,41 @@ javascript: (function () {
                 </div>
             `;
         }
-        /*END MAIN COMPONENTS*/ 
+        /*END MAIN COMPONENTS*/
 
-       
 
-       
+
+
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
             const [isToolWindowVisible, setIsToolWindowVisible] = useState(false);
+            const [additionalText, setAdditionalText] = useState(false);
             const [dndText, setDndText] = useState("");
+            const textAreaRef = useRef(null);
+            const sendButtonRef = useRef(null);
+            const insertTextInPrompt = (text) => {
+                console.log("inserting" + text);
+                if (textAreaRef.current) {
+                    textAreaRef.current.value += text;
+                }
+            };
+            const sendText = (text) => {
+                console.log("Sending" + text);
+                insertTextInPrompt(text);
+                pressSend();
+            };
+            const pressSend = () => {
+                if (sendButtonRef.current && sendButtonRef.current.tagName === 'BUTTON') {
+                    sendButtonRef.current.disabled = false;
+                    sendButtonRef.current.click();
+                }
+            };
+            useEffect(()=>{
+                insertTextInPrompt(additionalText)
+            },[additionalText])
+
             const toggleOverlay = () => {
                 setIsOverlayOpen(!isOverlayOpen);
             }
@@ -336,14 +295,26 @@ javascript: (function () {
                 isOverlayOpen,
                 toggleToolWindow,
                 isToolWindowVisible,
+                setAdditionalText,
                 haveRemoved,
                 setHaveRemoved,
                 triggerRender,
-            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible]);
+                textAreaRef,
+                sendButtonRef,
+                insertTextInPrompt,
+                sendText,
+                pressSend
+            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible, textAreaRef, sendButtonRef]);
+
             const toolBarRef = useComponentContainer(ToolBar, findToolBarContainerDOM, appProps);
             const overlayRef = useComponentContainer(Overlay, findOverlayContainerDOM, appProps);
-            
+            useEffect(() => {
+                textAreaRef.current = document.getElementById("prompt-textarea");
+                sendButtonRef.current = document.getElementById("prompt-textarea").nextElementSibling;
+            }, []);
+
             useEffect(function () {
+
                 removeElementsByClass("gpt-enhancer", haveRemoved, setHaveRemoved);
                 addButtonsToExistingSpans();
                 insertCheckboxes();
@@ -356,8 +327,8 @@ javascript: (function () {
 
                 ]);
                 addStyling();
-            }, [haveRemoved, setTriggerRender,triggerRender]);
-            return html`<${ToolWindow} props=${appProps} />`;
+            }, [haveRemoved, setTriggerRender, triggerRender]);
+            return html`<${ToolWindow} ...${appProps} />`;
         };
         /* END SECTION COMPONENTS */
         function removeExistingRoot(rootId) {
