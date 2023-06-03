@@ -365,7 +365,7 @@ var utilVars = {
     inputBoxStyle: {},
     abilityStyle: {
         float: "left",
-        margin: "0 10px"
+        margin: "0 4px"
     },
     overlayStyle: {
         position: '',
