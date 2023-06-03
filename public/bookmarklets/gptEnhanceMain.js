@@ -190,6 +190,7 @@ javascript: (function () {
         function DndToolBarContent(props) {
             if(props.mode == "DND"  ||  props.mode == "ALL"){
             return html`
+            <${DnDStatBlock} ...${props} />
             ${Button("Roll D20", function () { buildDndText(props.setAdditionalText, props.standardAbilities) })}            
             ${Button("Correction", function () { props.addToAddtionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
             `;
@@ -228,7 +229,6 @@ javascript: (function () {
                 }}
                     id="toolWindow"
                     class="gpt-enhancer group  w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-                    <${DnDStatBlock} ...${props} /><br></br>
                     <div><h2>toolWindow</h2></div>
                     <${TextArea}
                         id="codeBox"
@@ -280,7 +280,7 @@ javascript: (function () {
             /*MODES DND, CODE, ALL */
             const [mode, setMode] = useState("DND");
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-            const [isToolWindowVisible, setIsToolWindowVisible] = useState(true);
+            const [isToolWindowVisible, setIsToolWindowVisible] = useState(mode == "DND" ? false : true);
             const [additionalText, setAdditionalText] = useState("");
             const textAreaRef = useRef(null);
             const sendButtonRef = useRef(null);
