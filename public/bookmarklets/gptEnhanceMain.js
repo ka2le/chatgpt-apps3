@@ -119,10 +119,8 @@ javascript: (function () {
         function getLastListCheckboxes() {
             var mainElement = document.getElementsByTagName('main')[0];
             var orderedLists = mainElement.getElementsByTagName('ol');
-            console.log(orderedLists);
             if (orderedLists.length > 0) {
                 var checkboxes = orderedLists[orderedLists.length - 1].getElementsByTagName('input');
-                console.log(checkboxes);
                 return checkboxes;
             }
             return [];
@@ -131,31 +129,21 @@ javascript: (function () {
         function getFirstCheckedText(checkboxes) {
             for (var j = 0; j < checkboxes.length; j++) {
                 if (checkboxes[j].checked) {
-                    console.log(checkboxes[j]);
                     return checkboxes[j].dataset.listText;
                 }
             }
             return "";
         }
 
-        function buildDndText() {
+        function buildDndText(setText) {
             var randomValue = Math.floor(Math.random() * 20) + 1;
             var optionText = getFirstCheckedText(getLastListCheckboxes());
+            console.log(randomValue);
             console.log(optionText);
-            var ResultText = `${optionText} \nResult: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`;
-            replaceInsertText(ResultText);
+            console.log("setTest");
+            setText(`${optionText} \nResult: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`);
         }
 
-        function replaceInsertText(newText) {
-            var textarea = document.getElementById("prompt-textarea");
-            var currentText = textarea.value;
-            var regex = "/\[.*?\]/s";
-            if (currentText.match(regex)) {
-                textarea.value = currentText.replace(regex, '[' + newText + ']');
-            } else {
-                textarea.value = currentText + '[' + newText + ']';
-            }
-        }
 
         function addButtonsToExistingSpans() {
             var buttons = document.querySelectorAll('button:not([gpt-enhancer-modified])');
@@ -216,9 +204,9 @@ javascript: (function () {
             return html`
         <div 
             id="toolBar" >
-            ${Button("Correction", function () { props.setAdditionalText(`\nWhen giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) })}
+            ${Button("Correction", function () { props.setAdditionalText(`When giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) })}
             ${Button("RollD20", function () { insertRollDie(props.setAdditionalText) })}
-            ${Button("RollD20_V2", buildDndText)}
+            ${Button("RollD20_V2", function () { buildDndText(props.setAdditionalText) })}
             ${Button("RunJS", runRoolwindowJs)}
             ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
             ${Button("Toolwindow", function () { props.toggleToolWindow() })}
@@ -263,17 +251,12 @@ javascript: (function () {
             const textAreaRef = useRef(null);
             const sendButtonRef = useRef(null);
             const insertTextInPrompt = (text) => {
-                console.log("inserting" + text);
-
                 if (textAreaRef.current) {
-                    textAreaRef.current.value += text;
-                    const event = new Event('input', { bubbles: true });
-                    textAreaRef.current.dispatchEvent(event);
+                    var currentText =  textAreaRef.current.value
+                    var cleanedCurrentText =  currentText.replace(/\[.*?\]/s, '');
+                    textAreaRef.current.value = cleanedCurrentText+"["+text+"]";
+                    textAreaRef.current.dispatchEvent(new Event('input', { bubbles: true }));
                 }
-                if (sendButtonRef.current) {
-                    sendButtonRef.current.disabled = false;
-                }
-
             };
             const sendText = (text) => {
                 console.log("Sending" + text);
