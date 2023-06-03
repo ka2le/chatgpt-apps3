@@ -1,5 +1,8 @@
 console.log("UTILS : /*version-number*/");
 
+
+
+
 function getGrandParentElement(element) {
     return element.parentElement.parentElement;
 }
@@ -104,7 +107,7 @@ function addObserver(callbacks) {
             if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 for (var i = 0; i < mutation.addedNodes.length; i++) {
                     if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
-                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full'))|| mutation.target instanceof HTMLTitleElement) {
+                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full')) || mutation.target instanceof HTMLTitleElement) {
 
                         for (var j = 0; j < callbacks.length; j++) {
                             callbacks[j]();
@@ -187,22 +190,6 @@ function moveToolWindow(ToolWindow) {
 
 
 
-function insertTextInPrompt(text) {
-    var textarea = document.getElementById("prompt-textarea");
-    textarea.value += text;
-}
-function sendText(text) {
-    insertTextInPrompt(text);
-    pressSend();
-}
-function pressSend() {
-    var sendButton = document.getElementById("prompt-textarea").nextElementSibling;
-    if (sendButton && sendButton.tagName === 'BUTTON') {
-        sendButton.disabled = false;
-        sendButton.click();
-    }
-}
-
 function replaceWithToolBar(ToolBar) {
     var toolBar = document.createElement('div');
     render(html`<${ToolBar} />`, toolBar);
@@ -222,8 +209,8 @@ function removeElementsByClass(className, haveRemoved, setHaveRemoved) {
     } else {
         const elements = document.getElementsByClassName(className);
         while (elements.length > 0) {
-            if(elements[0].parentNode){elements[0].parentNode.removeChild(elements[0]);}
-            
+            if (elements[0].parentNode) { elements[0].parentNode.removeChild(elements[0]); }
+
         }
         var elements2 = document.querySelectorAll('[gpt-enhancer-modified]');
         for (var i = 0; i < elements2.length; i++) {
@@ -275,6 +262,9 @@ function addObserver(callbacks) {
 }
 
 
+
+/*Helper Components */
+
 function Button(title, onClickFunction) {
     return html`
         <button style="${utilVars.buttonStyle}" onclick=${onClickFunction}>
@@ -296,11 +286,73 @@ function Dropdown({ id, options = [] }) {
     `;
 }
 
+
+function InputBox(id, value = "") {
+    return html`
+        <input type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
+    `;
+}
+
+function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
+    return html`
+        <textarea id="${id}" style="${style}" class="${className}" onInput=${onChange}>
+            ${value}
+        </textarea>
+    `;
+}
+
+/*END Helper Components */
+
+
+/*CONTAINER FIND AND INSERT FUNCTION*/
+function findOverlayContainerDOM() {
+    return document.getElementById("__next");
+}
+function findToolBarContainerDOM() {
+    const parentElement = document.querySelector('.absolute.bottom-0');
+    if (parentElement) {
+        return childElement = parentElement.querySelectorAll('div.text-center')[0];
+    }
+    return null;
+}
+
+function useComponentContainer(Component, findContainerFunction, props) {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        containerRef.current = findContainerFunction ? findContainerFunction() : getDefaultContainerDOM();
+        if (containerRef.current) {
+            render(html`<${Component} ...${props} />`, containerRef.current);
+        }
+    }, [props]);
+
+    return containerRef;
+}
+function getDefaultContainerDOM() {
+    let element = document.getElementById('__NEXT_DATA__');
+    if (!element) {
+        element = document.createElement('div');
+        element.id = 'gpt-enhancer-root';
+        document.body.appendChild(element);
+    }
+    return element;
+}
+
+function moveComponent(containerRef, newContainerFunction) {
+    useEffect(() => {
+        const newContainer = newContainerFunction();
+        if (newContainer && containerRef.current) {
+            newContainer.appendChild(containerRef.current);
+        }
+    }, [containerRef]);
+}
+/*END CONTAINER FIND AND INSERT FUNCTION*/
+
 var utilVars = {
     buttonStyle: {
         margin: "0 5px",
     },
-   
+
 
     textareaStyle: {},
     dropdownStyle: {
