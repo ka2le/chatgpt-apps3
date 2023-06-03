@@ -104,7 +104,7 @@ javascript: (function () {
 
 
 
-       
+
 
         function insertRollDie(setText) {
             var randomValue = Math.floor(Math.random() * 20) + 1;
@@ -216,7 +216,7 @@ javascript: (function () {
             return html`
         <div 
             id="toolBar" >
-            ${Button("Correction", function () { props.insertTextInPrompt(`\nWhen giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) } )}
+            ${Button("Correction", function () { props.setAdditionalText(`\nWhen giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) })}
             ${Button("RollD20", function () { insertRollDie(props.setAdditionalText) })}
             ${Button("RollD20_V2", buildDndText)}
             ${Button("RunJS", runRoolwindowJs)}
@@ -264,9 +264,16 @@ javascript: (function () {
             const sendButtonRef = useRef(null);
             const insertTextInPrompt = (text) => {
                 console.log("inserting" + text);
+
                 if (textAreaRef.current) {
                     textAreaRef.current.value += text;
+                    const event = new Event('input', { bubbles: true });
+                    textAreaRef.current.dispatchEvent(event);
                 }
+                if (sendButtonRef.current) {
+                    sendButtonRef.current.disabled = false;
+                }
+
             };
             const sendText = (text) => {
                 console.log("Sending" + text);
@@ -279,9 +286,9 @@ javascript: (function () {
                     sendButtonRef.current.click();
                 }
             };
-            useEffect(()=>{
+            useEffect(() => {
                 insertTextInPrompt(additionalText)
-            },[additionalText])
+            }, [additionalText])
 
             const toggleOverlay = () => {
                 setIsOverlayOpen(!isOverlayOpen);
