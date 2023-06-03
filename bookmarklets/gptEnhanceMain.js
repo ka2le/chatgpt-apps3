@@ -82,25 +82,6 @@ javascript: (function () {
 
 
 
-        function Ability({ name, scores = [] }) {
-            return html`
-                <div style="${utilVars.abilityStyle}" class="ability">
-                    <span>${name}</span>
-                    <${Checkbox} id="${name}Checkbox" />
-                    <${Dropdown} id="${name}Dropdown" options=${scores} />
-                </div>
-            `;
-        }
-        const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-        const scores = [-2, -1, 0, 1, 2, 3, 4, 5];
-
-        function DnDStatBlock({ abilities, style = "", scores = [] }) {
-            return html`
-                <div style="${style}" class="statBlock">
-                    ${abilities.map(function (ability) { return html`<${Ability} name=${ability} scores=${scores} />` })}
-                </div>
-            `;
-        }
 
 
 
@@ -135,13 +116,19 @@ javascript: (function () {
             return "";
         }
 
-        function buildDndText(setText) {
+        function buildDndText(setText, abilities) {
             var randomValue = Math.floor(Math.random() * 20) + 1;
             var optionText = getFirstCheckedText(getLastListCheckboxes());
-            console.log(randomValue);
-            console.log(optionText);
-            console.log("setTest");
-            setText(`${optionText} \nResult: ${randomValue + 4} (${randomValue + 4} Roll + 1 INT +3 Proficiency)`);
+            let currentAbility;
+            abilities.forEach(ability => {
+                if (optionText.includes("(" + ability + ")")) {
+                    currentAbility = ability;
+                }
+            });
+            const abilityScore = parseInt(document.getElementById(currentAbility + "Dropdown")?.value ?? 0);
+            const abilityText = (currentAbility != null ? (abilityScore > -1 ? " + " + abilityScore + " " + currentAbility : abilityScore + " " + currentAbility) : "");
+            const resultNumber = randomValue + parseInt(abilityScore);
+            setText(`${optionText} Result: ${resultNumber} (${randomValue} Roll ${abilityText})`);
         }
 
 
@@ -188,7 +175,7 @@ javascript: (function () {
             }
 
             return html`
-                <div id="overAll" style=${{
+                <div class="gpt-enhancer" id="overAll" style=${{
                     display: props.isOverlayOpen ? 'block' : 'none',
                     ...utilVars.overlayStyle
                 }}>
@@ -200,20 +187,35 @@ javascript: (function () {
             `;
         }
 
+        function DndToolBarContent(props) {
+            if(props.mode == "DND"  ||  props.mode == "ALL"){
+            return html`
+            ${Button("Roll D20", function () { buildDndText(props.setAdditionalText, props.standardAbilities) })}            
+            ${Button("Correction", function () { props.addToAddtionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
+            `;
+            }
+            return "";
+        }
+        function DefaultToolBarContent(props) {
+            if(props.mode == "CODE"  ||  props.mode == "ALL"){
+                return html`
+                ${Button("Toolwindow", function () { props.toggleToolWindow() })}
+                ${Button("RunJS", runRoolwindowJs)}
+                ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
+                ${Button("Correction", function () { props.addToAddtionalText(`When giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) })}
+                ${Button("SendTest", function () { props.sendText("Tell me something interesting") })}
+                `;
+            }
+        }
+
         function ToolBar(props) {
             return html`
-        <div 
-            id="toolBar" >
-            ${Button("Correction", function () { props.setAdditionalText(`When giving the answer, keep this in mind:\nI am using Preact and Htm in this Bookmarklet code. The main app i the function TheApp and i want to keep most states in that parent \nAlways do comments in the code like /*COMMENT HERE*/ never do // like //COMMENT HERE  `) })}
-            ${Button("RollD20", function () { insertRollDie(props.setAdditionalText) })}
-            ${Button("RollD20_V2", function () { buildDndText(props.setAdditionalText) })}
-            ${Button("RunJS", runRoolwindowJs)}
-            ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
-            ${Button("Toolwindow", function () { props.toggleToolWindow() })}
-            ${Button("SendTest", function () { props.sendText("Tell me something interesting") })}
-            
-            </div>
-    `;
+                <div 
+                    id="toolBar" class="gpt-enhancer">
+                    <${DndToolBarContent} ...${props} />
+                    <${DefaultToolBarContent} ...${props} />
+                </div>
+            `;
         }
         function ToolWindow(props) {
             console.log(props);
@@ -225,8 +227,8 @@ javascript: (function () {
                     ...utilVars.toolWindowStyle
                 }}
                     id="toolWindow"
-                    class="group gpt-enhancer w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
-                    <${DnDStatBlock} abilities=${abilities} scores=${scores} /><br></br>
+                    class="gpt-enhancer group  w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50 dark:bg-gray-800">
+                    <${DnDStatBlock} ...${props} /><br></br>
                     <div><h2>toolWindow</h2></div>
                     <${TextArea}
                         id="codeBox"
@@ -236,6 +238,37 @@ javascript: (function () {
                 </div>
             `;
         }
+
+        function DnDStatBlock(props) {
+            return html`
+              <div class="statBlock">
+                ${props.standardAbilities.map((ability) => html`<${Ability} ability=${ability} ...${props} />`)}
+              </div>
+            `;
+        }
+        function Ability({ ability, ...props }) {
+            /*<${Checkbox} id="${ability}Checkbox" /> */
+            return html`
+              <div style="${utilVars.abilityStyle}" class="ability">
+                <span>${ability} </span>
+                <${Dropdown} ability="${ability}" options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
+              </div>
+            `;
+        }
+
+        function Dropdown({ ability, options = [], value, setValue }) {
+            const handleChange = (event) => {
+                setValue(prevValues => ({ ...prevValues, [ability]: event.target.value }));
+            };
+
+            return html`
+              <select class="gpt-enhancer" id="${ability}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
+                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+              </select>
+            `;
+        }
+
+
         /*END MAIN COMPONENTS*/
 
 
@@ -244,17 +277,28 @@ javascript: (function () {
 
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
+            /*MODES DND, CODE, ALL */
+            const [mode, setMode] = useState("DND");
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-            const [isToolWindowVisible, setIsToolWindowVisible] = useState(false);
-            const [additionalText, setAdditionalText] = useState(false);
-            const [dndText, setDndText] = useState("");
+            const [isToolWindowVisible, setIsToolWindowVisible] = useState(true);
+            const [additionalText, setAdditionalText] = useState("");
             const textAreaRef = useRef(null);
             const sendButtonRef = useRef(null);
+            const standardAbilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+            const standardScoreOptions = [-2, -1, 0, 1, 2, 3, 4, 5];
+            const [abilityScores, setAbilityScores] = useState({
+                STR: 0,
+                DEX: 0,
+                CON: 0,
+                INT: 0,
+                WIS: 0,
+                CHA: 0,
+            });
             const insertTextInPrompt = (text) => {
                 if (textAreaRef.current) {
-                    var currentText =  textAreaRef.current.value
-                    var cleanedCurrentText =  currentText.replace(/\[.*?\]/s, '');
-                    textAreaRef.current.value = cleanedCurrentText+"["+text+"]";
+                    var currentText = textAreaRef.current.value
+                    var cleanedCurrentText = currentText.replace(/\[.*?\]/s, '');
+                    textAreaRef.current.value = cleanedCurrentText + "[" + text + "]";
                     textAreaRef.current.dispatchEvent(new Event('input', { bubbles: true }));
                 }
             };
@@ -269,6 +313,9 @@ javascript: (function () {
                     sendButtonRef.current.click();
                 }
             };
+            const addToAddtionalText = (text) => {
+                setAdditionalText(additionalText + text);
+            };
             useEffect(() => {
                 insertTextInPrompt(additionalText)
             }, [additionalText])
@@ -281,11 +328,16 @@ javascript: (function () {
             }
             const [triggerRender, setTriggerRender] = useState(false);
             const appProps = useMemo(() => ({
+                standardAbilities,
+                standardScoreOptions,
                 toggleOverlay,
                 isOverlayOpen,
                 toggleToolWindow,
                 isToolWindowVisible,
                 setAdditionalText,
+                mode,
+                setMode,
+                addToAddtionalText,
                 haveRemoved,
                 setHaveRemoved,
                 triggerRender,
@@ -293,8 +345,10 @@ javascript: (function () {
                 sendButtonRef,
                 insertTextInPrompt,
                 sendText,
-                pressSend
-            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible, textAreaRef, sendButtonRef]);
+                pressSend,
+                abilityScores,
+                setAbilityScores,
+            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible, textAreaRef, sendButtonRef, abilityScores]);
 
             const toolBarRef = useComponentContainer(ToolBar, findToolBarContainerDOM, appProps);
             const overlayRef = useComponentContainer(Overlay, findOverlayContainerDOM, appProps);
