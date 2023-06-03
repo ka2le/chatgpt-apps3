@@ -267,35 +267,28 @@ function addObserver(callbacks) {
 
 function Button(title, onClickFunction) {
     return html`
-        <button style="${utilVars.buttonStyle}" onclick=${onClickFunction}>
+        <button class="gpt-enhancer" style="${utilVars.buttonStyle}" onclick=${onClickFunction}>
             ${title}
         </button>
     `;
 }
 function Checkbox({ id, checked = false }) {
     return html`
-        <input type="checkbox" id="${id}" style="${utilVars.checkboxStyle}" ${checked ? 'checked' : ''} />
+        <input class="gpt-enhancer" type="checkbox" id="${id}" style="${utilVars.checkboxStyle}" ${checked ? 'checked' : ''} />
     `;
 }
 
-function Dropdown({ id, options = [] }) {
-    return html`
-        <select id="${id}" style="${utilVars.dropdownStyle}">
-            ${options.map((option) => html`<option value="${option}">${option}</option>`)}
-        </select>
-    `;
-}
 
 
 function InputBox(id, value = "") {
     return html`
-        <input type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
+        <input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
     `;
 }
 
 function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
     return html`
-        <textarea id="${id}" style="${style}" class="${className}" onInput=${onChange}>
+        <textarea id="${id}" style="${style}" class="${className} gpt-enhancer " onInput=${onChange}>
             ${value}
         </textarea>
     `;
