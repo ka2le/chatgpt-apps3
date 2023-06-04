@@ -165,27 +165,50 @@ javascript: (function () {
         }
 
 
+        function DnDStatBlock(props) {
+            return html`
+              <div class="statBlock">
+                ${props.standardAbilities.map((ability) => html`<${Ability} ability=${ability} ...${props} />`)}
+              </div>
+            `;
+        }
+        function Ability({ ability, ...props }) {
+            /*<${Checkbox} id="${ability}Checkbox" /> */
+            return html`
+              <div style="${utilVars.abilityStyle}" class="ability">
+                <span>${ability} </span>
+                <${Dropdown} name="${ability}" options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
+              </div>
+            `;
+        }
+
+        function Dropdown({ name , options = [], value, setValue }) {
+            const handleChange = (event) => {
+                setValue(prevValues => ({ ...prevValues, [name]: event.target.value }));
+            };
+
+            return html`
+              <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
+                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+              </select>
+            `;
+        }
+        function Dropdown2({ name , options = [], value, setValue }) {
+            const handleChange = (event) => {
+                setValue( event.target.value );
+            };
+
+            return html`
+              <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
+                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+              </select>
+            `;
+        }
+
 
 
         /*MAIN COMPONENTS*/
-        function Overlay(props) {
-            const [textAreaValue, setTextAreaValue] = useState();
-            function sendOverlayText() {
-                props.sendText(textAreaValue);
-            }
 
-            return html`
-                <div class="gpt-enhancer" id="overAll" style=${{
-                    display: props.isOverlayOpen ? 'block' : 'none',
-                    ...utilVars.overlayStyle
-                }}>
-                <${TextArea} id="overAllText" value=${textAreaValue} onChange=${(e) => setTextAreaValue(e.target.value)}/>
-                ${Button("Send Message", sendOverlayText)}
-                ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
-                <div id="overAllAnswers"></div>
-                </div>
-            `;
-        }
 
         function DndToolBarContent(props) {
             if (props.mode == "DND" || props.mode == "ALL") {
@@ -222,6 +245,7 @@ javascript: (function () {
                     id="toolBar" class="gpt-enhancer">
                     <${DndToolBarContent} ...${props} />
                     <${DefaultToolBarContent} ...${props} />
+                    ${Button("Settings", function(){props.setIsPopupOpen(true); })}
                 </div>
             `;
         }
@@ -243,88 +267,48 @@ javascript: (function () {
                 </div>
             `;
         }
-
-        function DnDStatBlock(props) {
-            return html`
-              <div class="statBlock">
-                ${props.standardAbilities.map((ability) => html`<${Ability} ability=${ability} ...${props} />`)}
-              </div>
-            `;
-        }
-        function Ability({ ability, ...props }) {
-            /*<${Checkbox} id="${ability}Checkbox" /> */
-            return html`
-              <div style="${utilVars.abilityStyle}" class="ability">
-                <span>${ability} </span>
-                <${Dropdown} ability="${ability}" options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
-              </div>
-            `;
-        }
-
-        function Dropdown({ ability, options = [], value, setValue }) {
-            const handleChange = (event) => {
-                setValue(prevValues => ({ ...prevValues, [ability]: event.target.value }));
-            };
+        function Overlay(props) {
+            const [textAreaValue, setTextAreaValue] = useState();
+            function sendOverlayText() {
+                props.sendText(textAreaValue);
+            }
 
             return html`
-              <select class="gpt-enhancer" id="${ability}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
-                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
-              </select>
+                <div class="gpt-enhancer" id="overAll" style=${{
+                    display: props.isOverlayOpen ? 'block' : 'none',
+                    ...utilVars.overlayStyle
+                }}>
+                <${TextArea} id="overAllText" value=${textAreaValue} onChange=${(e) => setTextAreaValue(e.target.value)}/>
+                ${Button("Send Message", sendOverlayText)}
+                ${Button("Toggle Overlay", function () { props.toggleOverlay() })}
+                <div id="overAllAnswers"></div>
+                </div>
             `;
         }
+        function Popup(props) {
 
+            return html`
+                <div class="gpt-enhancer" id="enhancerPopup" style=${{
+                    display: props.isPopupOpen ? 'block' : 'none',
+                    ...utilVars.popupStyle
+                }}>
+                
+                ${Button("Send Message", function(){console.log("Test");})}
+                Mode:<${Dropdown2} ability="${"mode"}" options=${["DND", "ALL", "CODE"]} value=${props.mode} setValue=${props.setMode} />
+                ${Button("X", function(){props.setIsPopupOpen(false)}, { float:"right"})}
+
+                <div id="overAllAnswers"></div>
+                </div>
+            `;
+        }
 
         /*END MAIN COMPONENTS*/
-
-
-
-
-
-        function addClassObserver(callbacks) {
-            const targetNode = document.querySelector('main');
-            console.log("Adding class Observer with "+ targetNode.classList + "as the selected wathcer");
-
-            const config = { attributes: true, childList: true, subtree: true, attributeFilter: ['class'],  attributeOldValue: true, };
-
-            const callback = function (mutationsList, observer) {
-                let shouldRunCallBacks = false;
-                for (let mutation of mutationsList) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        const targetElement = mutation.target;
-                        const oldClassState = mutation.oldValue && mutation.oldValue.split(' ').includes('result-streaming');
-                        const newClassState = targetElement.classList.contains('result-streaming');
-
-                        if (!oldClassState && newClassState) {
-                            console.log('A node has gained the class "result-streaming".');
-                        }
-                        else if (oldClassState && !newClassState) {
-                            console.log('A node has lost the class "result-streaming".');
-                            shouldRunCallBacks = true;
-                        }
-                    }
-                }
-                if(shouldRunCallBacks){
-                    console.log("Running CallBacks")
-                    for (var j = 0; j < callbacks.length; j++) {
-                        callbacks[j]();
-                    }
-                }
-            };
-
-            const observer = new MutationObserver(callback);
-
-            observer.observe(targetNode, config);
-        }
-
-
-
-
-
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
             /*MODES DND, CODE, ALL */
             const [mode, setMode] = useState("ALL");
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+            const [isPopupOpen, setIsPopupOpen] = useState(false);
             const [isToolWindowVisible, setIsToolWindowVisible] = useState(mode == "DND" ? false : true);
             const [additionalText, setAdditionalText] = useState("");
             const textAreaRef = useRef(null);
@@ -368,6 +352,7 @@ javascript: (function () {
             const toggleOverlay = () => {
                 setIsOverlayOpen(!isOverlayOpen);
             }
+           
             const toggleToolWindow = () => {
                 setIsToolWindowVisible(!isToolWindowVisible);
             }
@@ -387,6 +372,8 @@ javascript: (function () {
                 standardScoreOptions,
                 toggleOverlay,
                 isOverlayOpen,
+                isPopupOpen,
+                setIsPopupOpen,
                 toggleToolWindow,
                 isToolWindowVisible,
                 setAdditionalText,
@@ -403,10 +390,11 @@ javascript: (function () {
                 pressSend,
                 abilityScores,
                 setAbilityScores,
-            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible, textAreaRef, sendButtonRef, abilityScores]);
+            }), [toggleOverlay, isOverlayOpen, haveRemoved, setHaveRemoved, triggerRender, isToolWindowVisible, setIsToolWindowVisible, textAreaRef, sendButtonRef, abilityScores,isPopupOpen]);
 
             const toolBarRef = useComponentContainer(ToolBar, findToolBarContainerDOM, appProps);
             const overlayRef = useComponentContainer(Overlay, findOverlayContainerDOM, appProps);
+            const popupRef = useComponentContainer(Popup, findOverlayContainerDOM, appProps);
             useEffect(() => {
                 textAreaRef.current = document.getElementById("prompt-textarea");
                 sendButtonRef.current = document.getElementById("prompt-textarea").nextElementSibling;
