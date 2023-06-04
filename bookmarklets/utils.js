@@ -209,6 +209,7 @@ function removeElementsByClass(className, haveRemoved, setHaveRemoved) {
     } else {
         const elements = document.getElementsByClassName(className);
         while (elements.length > 0) {
+            
             if (elements[0].parentNode) { elements[0].parentNode.removeChild(elements[0]); }
 
         }
@@ -381,6 +382,119 @@ function moveComponent(containerRef, newContainerFunction) {
     }, [containerRef]);
 }
 /*END CONTAINER FIND AND INSERT FUNCTION*/
+
+ /*CUSTOM HOOKS*/
+ function useTextArea() {
+    const textAreaRef = useRef(null);
+    const [additionalText, setAdditionalText] = useState("");
+    useEffect(() => {
+        textAreaRef.current = document.getElementById("prompt-textarea");
+    }, []);
+    const insertTextInPrompt = useCallback((text) => {
+        if (textAreaRef.current) {
+            var currentText = textAreaRef.current.value;
+            var cleanedCurrentText = currentText.replace(/\[.*?\]/s, '');
+            textAreaRef.current.value = cleanedCurrentText + "[" + text + "]";
+            textAreaRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    }, []);
+
+    const addAdditionalText = useCallback((text) => {
+        setAdditionalText(prevText => prevText + text);
+    }, []);
+
+    useEffect(() => {
+        insertTextInPrompt(additionalText);
+    }, [additionalText, insertTextInPrompt]);
+
+    return {
+        insertTextInPrompt,
+        textAreaRef,
+        addAdditionalText,
+        setAdditionalText
+    };
+}
+
+function useSendButton() {
+    const sendButtonRef = useRef(null);
+    const pressSend = useCallback(() => {
+        if (sendButtonRef.current && sendButtonRef.current.tagName === 'BUTTON') {
+            sendButtonRef.current.disabled = false;
+            sendButtonRef.current.click();
+        }
+    }, []);
+
+    const sendText = useCallback((text, insertTextInPrompt) => {
+        console.log("Sending" + text);
+        insertTextInPrompt(text);
+        pressSend();
+    }, [pressSend]);
+
+    useEffect(() => {
+        sendButtonRef.current = document.getElementById("prompt-textarea").nextElementSibling;
+    }, []);
+    const handleClick = () => {
+        console.log('Button clicked!');
+    };
+    const sendButtonClickListener = () => {
+        if (sendButtonRef.current) {
+            sendButtonRef.current.addEventListener('click', handleClick);
+        }
+    };
+
+    return {
+        sendButtonRef,
+        sendText,
+        pressSend,
+        sendButtonClickListener,
+    };
+}
+function useDndVariables(){
+    const standardAbilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+    const standardScoreOptions = [-2, -1, 0, 1, 2, 3, 4, 5];
+    const [abilityScores, setAbilityScores] = useState({
+        STR: 0,
+        DEX: 0,
+        CON: 0,
+        INT: 0,
+        WIS: 0,
+        CHA: 0,
+    });
+    return {
+        standardAbilities,
+        standardScoreOptions,
+        abilityScores, setAbilityScores,
+
+
+    }
+}
+function useContainerVisibility(initialMode = "ALL") {
+    const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isToolWindowVisible, setIsToolWindowVisible] = useState(initialMode == "DND" ? false : true);
+
+    const toggleOverlay = useCallback(() => {
+        setIsOverlayOpen(prevIsOverlayOpen => !prevIsOverlayOpen);
+    }, []);
+
+    const toggleToolWindow = useCallback(() => {
+        setIsToolWindowVisible(prevIsToolWindowVisible => !prevIsToolWindowVisible);
+    }, []);
+
+    return {
+        isOverlayOpen,
+        setIsOverlayOpen,
+        isPopupOpen,
+        setIsPopupOpen,
+        isToolWindowVisible,
+        setIsToolWindowVisible,
+        toggleOverlay,
+        toggleToolWindow
+    };
+}
+
+
+/*END CUSTOM HOOKS*/
 
 var utilVars = {
     buttonStyle: {
