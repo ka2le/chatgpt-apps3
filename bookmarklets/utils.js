@@ -238,22 +238,32 @@ function toggleEditable(props) {
 }
 function addObserver(callbacks) {
     var observer = new MutationObserver(function (mutationsList, observer) {
-        observer.disconnect();
+        /*observer.disconnect();*/
+        let shouldRunCallBacks = false;
         for (var mutation of mutationsList) {
             if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 for (var i = 0; i < mutation.addedNodes.length; i++) {
                     if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
-                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full')) || mutation.target instanceof HTMLTitleElement) {
-
-                        for (var j = 0; j < callbacks.length; j++) {
-                            callbacks[j]();
-                        }
-                        break;
+                        (mutation.addedNodes[i].classList.contains('result-streaming'))) {
+                            console.log("New results-streaming")
+                            shouldRunCallBacks = true;
                     }
                 }
             }
         }
-        observer.observe(document, { attributes: false, childList: true, subtree: true });
+        if(shouldRunCallBacks){
+            console.log("Running CallBacks")
+            for (var j = 0; j < callbacks.length; j++) {
+                callbacks[j]();
+            }
+        }
+        /*  if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
+                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full')) || mutation.target instanceof HTMLTitleElement) {
+                            console.log("New Group w fulltext")
+                            shouldRunCallBacks = true;
+                       
+                    }*/
+        /*observer.observe(document, { attributes: false, childList: true, subtree: true });*/
     });
     observer.observe(document, { attributes: false, childList: true, subtree: true });
     return function () {
