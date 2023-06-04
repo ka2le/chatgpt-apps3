@@ -188,8 +188,8 @@ javascript: (function () {
         }
 
         function DndToolBarContent(props) {
-            if(props.mode == "DND"  ||  props.mode == "ALL"){
-            return html`
+            if (props.mode == "DND" || props.mode == "ALL") {
+                return html`
             <${DnDStatBlock} ...${props} />
             ${Button("Roll D20", function () { buildDndText(props.setAdditionalText, props.standardAbilities) })}            
             ${Button("Correction", function () { props.addToAddtionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
@@ -197,8 +197,15 @@ javascript: (function () {
             }
             return "";
         }
+        function Resultstreaming() {
+            return html`
+            <div class="results-streaming">
+            Result
+            </div>
+        `;
+        }
         function DefaultToolBarContent(props) {
-            if(props.mode == "CODE"  ||  props.mode == "ALL"){
+            if (props.mode == "CODE" || props.mode == "ALL") {
                 return html`
                 ${Button("Toolwindow", function () { props.toggleToolWindow() })}
                 ${Button("RunJS", runRoolwindowJs)}
@@ -219,8 +226,6 @@ javascript: (function () {
             `;
         }
         function ToolWindow(props) {
-            console.log(props);
-            console.log(props.isToolWindowVisible);
             return html`
                 <div 
                 style=${{
@@ -275,10 +280,50 @@ javascript: (function () {
 
 
 
+        function addClassObserver(callbacks) {
+            const targetNode = document.querySelector('main');
+            console.log("Adding class Observer with "+ targetNode.classList + "as the selected wathcer");
+
+            const config = { attributes: true, childList: true, subtree: true, attributeFilter: ['class'],  attributeOldValue: true, };
+
+            const callback = function (mutationsList, observer) {
+                let shouldRunCallBacks = false;
+                for (let mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const targetElement = mutation.target;
+                        const oldClassState = mutation.oldValue && mutation.oldValue.split(' ').includes('result-streaming');
+                        const newClassState = targetElement.classList.contains('result-streaming');
+
+                        if (!oldClassState && newClassState) {
+                            console.log('A node has gained the class "result-streaming".');
+                        }
+                        else if (oldClassState && !newClassState) {
+                            console.log('A node has lost the class "result-streaming".');
+                            shouldRunCallBacks = true;
+                        }
+                    }
+                }
+                if(shouldRunCallBacks){
+                    console.log("Running CallBacks")
+                    for (var j = 0; j < callbacks.length; j++) {
+                        callbacks[j]();
+                    }
+                }
+            };
+
+            const observer = new MutationObserver(callback);
+
+            observer.observe(targetNode, config);
+        }
+
+
+
+
+
         function TheApp() {
             const [haveRemoved, setHaveRemoved] = useState(false);
             /*MODES DND, CODE, ALL */
-            const [mode, setMode] = useState("DND");
+            const [mode, setMode] = useState("ALL");
             const [isOverlayOpen, setIsOverlayOpen] = useState(false);
             const [isToolWindowVisible, setIsToolWindowVisible] = useState(mode == "DND" ? false : true);
             const [additionalText, setAdditionalText] = useState("");
@@ -326,6 +371,16 @@ javascript: (function () {
             const toggleToolWindow = () => {
                 setIsToolWindowVisible(!isToolWindowVisible);
             }
+            const handleClick = () => {
+                // Handle button click event
+                console.log('Button clicked!');
+            };
+
+            const attachEventListener = () => {
+                if (sendButtonRef.current) {
+                    sendButtonRef.current.addEventListener('click', handleClick);
+                }
+            };
             const [triggerRender, setTriggerRender] = useState(false);
             const appProps = useMemo(() => ({
                 standardAbilities,
@@ -362,9 +417,18 @@ javascript: (function () {
                 removeElementsByClass("gpt-enhancer", haveRemoved, setHaveRemoved);
                 addButtonsToExistingSpans();
                 insertCheckboxes();
+                attachEventListener();
+                addClassObserver([
+                    function () { console.log("Callbak from Class Observer function running"); },
+                    function () { insertCheckboxes(); },
+                    function () { addButtonsToExistingSpans(); },
+                    function () { addStyling(); },
+                    function () { setTriggerRender(prevState => !prevState); },
+                ]);
                 addObserver([
                     function () { addButtonsToExistingSpans(); },
                     function () { insertCheckboxes(); },
+                    function () { console.log("Callbak function running"); },
                     function () { addStyling(); },
                     /*function () { copyGPTAnswer(); },*/
                     function () { setTriggerRender(prevState => !prevState); },
@@ -372,6 +436,12 @@ javascript: (function () {
                 ]);
                 addStyling();
             }, [haveRemoved, setTriggerRender, triggerRender]);
+
+
+
+            // To start checking:
+
+
             return html`<${ToolWindow} ...${appProps} />`;
         };
         /* END SECTION COMPONENTS */
