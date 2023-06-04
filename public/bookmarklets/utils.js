@@ -257,13 +257,6 @@ function addObserver(callbacks) {
                 callbacks[j]();
             }
         }
-        /*  if (mutation.addedNodes[i].nodeType === Node.ELEMENT_NODE &&
-                        (mutation.addedNodes[i].classList.contains('group') && mutation.addedNodes[i].classList.contains('w-full')) || mutation.target instanceof HTMLTitleElement) {
-                            console.log("New Group w fulltext")
-                            shouldRunCallBacks = true;
-                       
-                    }*/
-        /*observer.observe(document, { attributes: false, childList: true, subtree: true });*/
     });
     observer.observe(document, { attributes: false, childList: true, subtree: true });
     return function () {
@@ -273,11 +266,49 @@ function addObserver(callbacks) {
 
 
 
+function addClassObserver(callbacks) {
+    const targetNode = document.querySelector('main');
+    console.log("Adding class Observer with "+ targetNode.classList + "as the selected wathcer");
+
+    const config = { attributes: true, childList: true, subtree: true, attributeFilter: ['class'],  attributeOldValue: true, };
+
+    const callback = function (mutationsList, observer) {
+        let shouldRunCallBacks = false;
+        for (let mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const targetElement = mutation.target;
+                const oldClassState = mutation.oldValue && mutation.oldValue.split(' ').includes('result-streaming');
+                const newClassState = targetElement.classList.contains('result-streaming');
+
+                if (!oldClassState && newClassState) {
+                    console.log('A node has gained the class "result-streaming".');
+                }
+                else if (oldClassState && !newClassState) {
+                    console.log('A node has lost the class "result-streaming".');
+                    shouldRunCallBacks = true;
+                }
+            }
+        }
+        if(shouldRunCallBacks){
+            console.log("Running CallBacks")
+            for (var j = 0; j < callbacks.length; j++) {
+                callbacks[j]();
+            }
+        }
+    };
+
+    const observer = new MutationObserver(callback);
+
+    observer.observe(targetNode, config);
+}
+
+
 /*Helper Components */
 
-function Button(title, onClickFunction) {
+function Button(title, onClickFunction, customStyle={}) {
+
     return html`
-        <button class="gpt-enhancer" style="${utilVars.buttonStyle}" onclick=${onClickFunction}>
+        <button class="gpt-enhancer" style="${{...utilVars.buttonStyle, ...customStyle}}" onclick=${onClickFunction}>
             ${title}
         </button>
     `;
@@ -378,12 +409,24 @@ var utilVars = {
         margin: "0 4px"
     },
     overlayStyle: {
-        position: '',
+        position: 'fixed',
         top: '0',
         left: '0',
         width: '100vw',
         height: '100vh',
         backgroundColor: 'rgb(241,231,211)',
+        zIndex: '9999',
+    },
+    popupStyle: {
+        position: 'fixed',
+        padding: "10px",
+        top: 'calc(15vh)',
+        left: 'calc(15vw)',
+        width: '70vw',
+        height: '70vh',
+        backgroundColor: 'rgb(32,33,35)',
+        border:"1px solid rgba(68,70,84,0.7)",
+        borderRadius: "10px",
         zIndex: '9999',
     },
     statBlockStyle: {},
