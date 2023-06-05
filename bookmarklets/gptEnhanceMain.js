@@ -117,20 +117,7 @@ javascript: (function () {
             return "";
         }
 
-        function buildDndText(setText, abilities) {
-            var randomValue = Math.floor(Math.random() * 20) + 1;
-            var optionText = getFirstCheckedText(getLastListCheckboxes());
-            let currentAbility;
-            abilities.forEach(ability => {
-                if (optionText.includes("(" + ability + ")")) {
-                    currentAbility = ability;
-                }
-            });
-            const abilityScore = parseInt(document.getElementById(currentAbility + "Dropdown")?.value ?? 0);
-            const abilityText = (currentAbility != null ? (abilityScore > -1 ? " + " + abilityScore + " " + currentAbility : abilityScore + " " + currentAbility) : "");
-            const resultNumber = randomValue + parseInt(abilityScore);
-            setText(`${optionText} Result: ${resultNumber} (${randomValue} Roll ${abilityText})`);
-        }
+        
 
 
         function addButtonsToExistingSpans() {
@@ -211,23 +198,8 @@ javascript: (function () {
         /*MAIN COMPONENTS*/
 
 
-        function DndToolBarContent(props) {
-            if (props.mode == "DND" || props.mode == "ALL") {
-                return html`
-            <${DnDStatBlock} ...${props} />
-            ${Button("Roll D20", function () { buildDndText(props.setAdditionalText, props.standardAbilities) })}            
-            ${Button("Reminders", function () { props.addAdditionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
-            `;
-            }
-            return "";
-        }
-        function Resultstreaming() {
-            return html`
-            <div class="results-streaming">
-            Result
-            </div>
-        `;
-        }
+        
+
         function DefaultToolBarContent(props) {
             if (props.mode == "CODE" || props.mode == "ALL") {
                 return html`
@@ -285,8 +257,100 @@ javascript: (function () {
                 </div>
             `;
         }
-    
-        function useDndVariables(){
+
+
+        function visualEffect() {
+            let text1 = "Rolling D20:";
+            let text2 = "Result: {result} ({roll} + 2 WIS)";
+            let text3 = "Complete Success";
+
+            let div = document.createElement('div');
+            div.style.position = 'absolute';
+            div.style.top = '50%';
+            div.style.width = '100%';
+            div.style.textAlign = 'center';
+            div.style.fontSize = '32px';
+            div.style.color = 'white';
+            div.style.opacity = '0';
+            div.style.backgroundColor = 'transparent';
+            div.style.transition = 'opacity 1s';
+            document.body.appendChild(div);
+
+            let span = document.createElement('span');
+            span.style.display = 'inline-block';
+            span.style.width = '50px';  
+            span.style.textAlign = 'right';
+            div.appendChild(document.createTextNode(text1 + ' '));
+            div.appendChild(span);
+
+            let lastRandomNumber;
+            let rollAnimationIntervalId;
+
+            function displayText1() {
+                rollAnimationIntervalId = setInterval(() => {
+                    lastRandomNumber = Math.floor(Math.random() * 20) + 1;
+                    span.textContent = lastRandomNumber;
+                }, 100);
+
+                div.style.opacity = '1';
+                setTimeout(displayText2, 2000);  
+            }
+
+            function displayText2() {
+                clearInterval(rollAnimationIntervalId);
+                div.style.opacity = '0';
+                setTimeout(() => {
+                    div.textContent = text2.replace('{roll}', lastRandomNumber).replace('{result}', lastRandomNumber + 2);
+                    div.style.opacity = '1';
+                }, 1000);
+                setTimeout(displayText3, 2000);
+            }
+            function displayText3() {
+                div.style.opacity = '0';
+                setTimeout(() => {
+                    div.textContent = text3;
+                    div.style.opacity = '1';
+                }, 1000);
+                setTimeout(removeDiv, 2000);  
+            }
+            function removeDiv() {
+                div.style.opacity = '0';
+                setTimeout(() => {
+                    div.parentNode.removeChild(div);
+                }, 1000);
+            }
+            displayText1();
+        }
+        function DndToolBarContent(props) {
+            if (props.mode == "DND" || props.mode == "ALL") {
+                return html`
+            <${DnDStatBlock} ...${props} />
+            ${Button("Roll D20", function () {
+                    buildDndText(props.setAdditionalText, props.standardAbilities);
+                    visualEffect();
+                })}            
+            ${Button("Reminders", function () { props.addAdditionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
+            `;
+            }
+            return "";
+        }
+        function buildDndText(setText, abilities) {
+            var randomValue = Math.floor(Math.random() * 20) + 1;
+            var optionText = getFirstCheckedText(getLastListCheckboxes());
+            let currentAbility;
+            abilities.forEach(ability => {
+                if (optionText.includes("(" + ability + ")")) {
+                    currentAbility = ability;
+                }
+            });
+            const abilityScore = parseInt(document.getElementById(currentAbility + "Dropdown")?.value ?? 0);
+            const abilityText = (currentAbility != null ? (abilityScore > -1 ? " + " + abilityScore + " " + currentAbility : abilityScore + " " + currentAbility) : "");
+            const resultNumber = parseInt(randomValue + parseInt(abilityScore)) ||  randomValue;
+            
+            setText(`${optionText} Result: ${resultNumber} (${randomValue} Roll ${abilityText})`);
+        }
+
+        function useDndVariables() {
             const standardAbilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
             const standardScoreOptions = [-2, -1, 0, 1, 2, 3, 4, 5];
             const [abilityScores, setAbilityScores] = useState({
@@ -302,17 +366,17 @@ javascript: (function () {
             const [characterName, setCharacterName] = useState('');
             const getStoredCharacters = () => {
                 let keys = Object.keys(localStorage);
-                if(keys && keys.length>1){
+                if (keys && keys.length > 1) {
                     let characterNames = keys.filter(key => key.startsWith('CHARACTER_')).map(key => key.split('_')[1]);
                     var filtered = characterNames.filter(function (el) {
-                        if( el != null && el != "null"){
+                        if (el != null && el != "null") {
                             return el;
                         }
-                        
+
                     });
                     return filtered;
                 }
-               return [""];
+                return [""];
             }
             const saveCharacter = () => {
                 const characterData = {
@@ -320,7 +384,7 @@ javascript: (function () {
                     description,
                     questDescription,
                 };
-                console.log(characterName +" Saving with: "+ JSON.stringify(characterData));
+                console.log(characterName + " Saving with: " + JSON.stringify(characterData));
                 localStorage.setItem('CHARACTER_' + characterName, JSON.stringify(characterData));
             }
             const loadCharacter = () => {
@@ -346,11 +410,11 @@ javascript: (function () {
                 setDescription,
                 questDescription,
                 setQuestDescription,
-        
-        
+
+
             }
         }
-        
+
         function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
             return html`
                 <textarea id="${id}" style="${style}" class="${className} gpt-enhancer " onInput=${onChange}>
@@ -358,7 +422,7 @@ javascript: (function () {
                 </textarea>
             `;
         }
-        function InputBox({id = "", value = "", setValue}) {
+        function InputBox({ id = "", value = "", setValue }) {
             const handleChange = (event) => {
                 setValue(event.target.value);
             };
@@ -366,7 +430,7 @@ javascript: (function () {
                 ${id}:<input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value=${value} onInput=${handleChange} />
             `;
         }
-        
+
         function DndPopupContent(props) {
             if (props.mode == "DND" || props.mode == "ALL") {
                 return html`
