@@ -178,7 +178,7 @@ javascript: (function () {
             return html`
               <div style="${utilVars.abilityStyle}" class="ability">
                 <span>${ability} </span>
-                <${Dropdown} name="${ability}" options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
+                <${Dropdown} name="${ability}"  options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
               </div>
             `;
         }
@@ -190,7 +190,7 @@ javascript: (function () {
 
             return html`
               <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
-                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+                ${options.map((option) => html`<option class="enhance-option" value="${option}">${option}</option>`)}
               </select>
             `;
         }
@@ -200,8 +200,8 @@ javascript: (function () {
             };
 
             return html`
-              <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
-                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+              <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle2}" value="${value}" onchange="${handleChange}">
+                ${options.map((option) => html`<option class="enhance-option" value="${option}">${option}</option>`)}
               </select>
             `;
         }
@@ -273,7 +273,6 @@ javascript: (function () {
             function sendOverlayText() {
                 props.sendText(textAreaValue, props.insertTextInPrompt);
             }
-
             return html`
                 <div class="gpt-enhancer" id="overAll" style=${{
                     display: props.isOverlayOpen ? 'block' : 'none',
@@ -286,19 +285,112 @@ javascript: (function () {
                 </div>
             `;
         }
+    
+        function useDndVariables(){
+            const standardAbilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+            const standardScoreOptions = [-2, -1, 0, 1, 2, 3, 4, 5];
+            const [abilityScores, setAbilityScores] = useState({
+                STR: 0,
+                DEX: 0,
+                CON: 0,
+                INT: 0,
+                WIS: 0,
+                CHA: 0,
+            });
+            const [description, setDescription] = useState('');
+            const [questDescription, setQuestDescription] = useState('');
+            const [characterName, setCharacterName] = useState('');
+            const getStoredCharacters = () => {
+                let keys = Object.keys(localStorage);
+                if(keys && keys.length>1){
+                    let characterNames = keys.filter(key => key.startsWith('CHARACTER_')).map(key => key.split('_')[1]);
+                    var filtered = characterNames.filter(function (el) {
+                        if( el != null && el != "null"){
+                            return el;
+                        }
+                        
+                    });
+                    return filtered;
+                }
+               return [""];
+            }
+            const saveCharacter = () => {
+                const characterData = {
+                    abilityScores,
+                    description,
+                    questDescription,
+                };
+                console.log(characterName +" Saving with: "+ JSON.stringify(characterData));
+                localStorage.setItem('CHARACTER_' + characterName, JSON.stringify(characterData));
+            }
+            const loadCharacter = () => {
+                const loadedCharacterData = JSON.parse(localStorage.getItem('CHARACTER_' + characterName));
+                if (loadedCharacterData) {
+                    setAbilityScores(loadedCharacterData.abilityScores);
+                    setDescription(loadedCharacterData.description);
+                    setQuestDescription(loadedCharacterData.questDescription);
+                } else {
+                    alert('No saved data for this character');
+                }
+            }
+            return {
+                standardAbilities,
+                standardScoreOptions,
+                abilityScores, setAbilityScores,
+                saveCharacter,
+                loadCharacter,
+                getStoredCharacters,
+                characterName,
+                setCharacterName,
+                description,
+                setDescription,
+                questDescription,
+                setQuestDescription,
+        
+        
+            }
+        }
+        
+        function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
+            return html`
+                <textarea id="${id}" style="${style}" class="${className} gpt-enhancer " onInput=${onChange}>
+                    ${value}
+                </textarea>
+            `;
+        }
+        function InputBox({id = "", value = "", setValue}) {
+            const handleChange = (event) => {
+                setValue(event.target.value);
+            };
+            return html`
+                ${id}:<input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value=${value} onInput=${handleChange} />
+            `;
+        }
+        
+        function DndPopupContent(props) {
+            if (props.mode == "DND" || props.mode == "ALL") {
+                return html`
+                    <${DnDStatBlock} ...${props} />
+                    ${Button("Reminders", function () { props.addAdditionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}<br/>
+                    <${InputBox} setValue=${props.setCharacterName} value=${props.characterName} id="CharacterName"   /> 
+                    ${Button("Save", props.saveCharacter)}
+                    ${Button("Load", props.loadCharacter)}<br/>
+                    <${InputBox} setValue=${props.setDescription} value=${props.description} id="CharacterDescription" /> <br/>
+                    <${InputBox} setValue=${props.setQuestDescription} value=${props.questDescription} id="QuestDescription" /><br/> 
+                `;
+            }
+            return "";
+        }
         function Popup(props) {
-
             return html`
                 <div class="gpt-enhancer" id="enhancerPopup" style=${{
                     display: props.isPopupOpen ? 'block' : 'none',
                     ...utilVars.popupStyle
                 }}>
                 
-                ${Button("Send Message", function () { console.log("Test"); })}
+                ${Button("Send Message", function () { console.log("Test"); })}${Button("X", function () { props.setIsPopupOpen(false) }, { float: "right" })}<br></br>
                 Mode:<${Dropdown2} ability="${"mode"}" options=${props.availableModes} value=${props.mode} setValue=${props.setMode} />
-                ${Button("X", function () { props.setIsPopupOpen(false) }, { float: "right" })}
-
-                <div id="overAllAnswers"></div>
+                <${DndPopupContent} ...${props} />
                 </div>
             `;
         }
