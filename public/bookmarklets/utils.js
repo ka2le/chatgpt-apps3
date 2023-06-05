@@ -322,19 +322,7 @@ function Checkbox({ id, checked = false }) {
 
 
 
-function InputBox(id, value = "") {
-    return html`
-        <input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}">
-    `;
-}
 
-function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
-    return html`
-        <textarea id="${id}" style="${style}" class="${className} gpt-enhancer " onInput=${onChange}>
-            ${value}
-        </textarea>
-    `;
-}
 
 /*END Helper Components */
 
@@ -449,25 +437,7 @@ function useSendButton() {
         sendButtonClickListener,
     };
 }
-function useDndVariables(){
-    const standardAbilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
-    const standardScoreOptions = [-2, -1, 0, 1, 2, 3, 4, 5];
-    const [abilityScores, setAbilityScores] = useState({
-        STR: 0,
-        DEX: 0,
-        CON: 0,
-        INT: 0,
-        WIS: 0,
-        CHA: 0,
-    });
-    return {
-        standardAbilities,
-        standardScoreOptions,
-        abilityScores, setAbilityScores,
 
-
-    }
-}
 function useContainerVisibility(initialMode = "ALL") {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
