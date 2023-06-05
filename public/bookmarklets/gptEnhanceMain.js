@@ -273,7 +273,6 @@ javascript: (function () {
             function sendOverlayText() {
                 props.sendText(textAreaValue, props.insertTextInPrompt);
             }
-
             return html`
                 <div class="gpt-enhancer" id="overAll" style=${{
                     display: props.isOverlayOpen ? 'block' : 'none',
@@ -286,8 +285,96 @@ javascript: (function () {
                 </div>
             `;
         }
+    
+        function useDndVariables(){
+            const standardAbilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
+            const standardScoreOptions = [-2, -1, 0, 1, 2, 3, 4, 5];
+            const [abilityScores, setAbilityScores] = useState({
+                STR: 0,
+                DEX: 0,
+                CON: 0,
+                INT: 0,
+                WIS: 0,
+                CHA: 0,
+            });
+            const [description, setDescription] = useState('');
+            const [questDescription, setQuestDescription] = useState('');
+            const [characterName, setCharacterName] = useState('');
+            const getStoredCharacters = () => {
+                let keys = Object.keys(localStorage);
+                let characterNames = keys.filter(key => key.startsWith('CHARACTER_')).map(key => key.split('_')[1]);
+                var filtered = characterNames.filter(function (el) {
+                    if( el != null && el != "null"){
+                        return el;
+                    }
+                    
+                });
+                return filtered;
+            }
+            const saveCharacter = () => {
+                const characterData = {
+                    abilityScores,
+                    description,
+                    questDescription,
+                };
+                console.log(characterName +" Saving with: "+ JSON.stringify(characterData));
+                localStorage.setItem('CHARACTER_' + characterName, JSON.stringify(characterData));
+            }
+            const loadCharacter = () => {
+                const loadedCharacterData = JSON.parse(localStorage.getItem('CHARACTER_' + characterName));
+                if (loadedCharacterData) {
+                    setAbilityScores(loadedCharacterData.abilityScores);
+                    setDescription(loadedCharacterData.description);
+                    setQuestDescription(loadedCharacterData.questDescription);
+                } else {
+                    alert('No saved data for this character');
+                }
+            }
+            return {
+                standardAbilities,
+                standardScoreOptions,
+                abilityScores, setAbilityScores,
+                saveCharacter,
+                loadCharacter,
+                getStoredCharacters,
+                characterName,
+                setCharacterName,
+                description,
+                setDescription,
+                questDescription,
+                setQuestDescription,
+        
+        
+            }
+        }
+        function InputBox(id, value = "", onChange) {
+            const InputLabel = id.split("-").join(" ");
+            return html`
+                ${InputLabel}:<input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}" onInput=${onChange}>
+            `;
+        }
+        function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
+            return html`
+                <textarea id="${id}" style="${style}" class="${className} gpt-enhancer " onInput=${onChange}>
+                    ${value}
+                </textarea>
+            `;
+        }
+        function DndPopupContent(props) {
+            if (props.mode == "DND" || props.mode == "ALL") {
+                return html`
+                    <${DnDStatBlock} ...${props} />
+                    ${Button("Reminders", function () { props.addAdditionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
+                    <${InputBox} onChange=${(e) => props.setCharacterName(e.target.value)} value=${props.characterName} id="character-description" /> 
+                    ${Button("Save", props.saveCharacter)}
+                    ${Button("Load", props.loadCharacter)}
+                    <${InputBox} onChange=${(e) => props.setDescription(e.target.value)} value=${props.description} id="character-description" /> 
+                    <${InputBox} onChange=${(e) => props.setQuestDescription(e.target.value)} value=${props.questDescription} id="quest-description" /> 
+                `;
+            }
+            return "";
+        }
         function Popup(props) {
-
             return html`
                 <div class="gpt-enhancer" id="enhancerPopup" style=${{
                     display: props.isPopupOpen ? 'block' : 'none',
@@ -297,8 +384,7 @@ javascript: (function () {
                 ${Button("Send Message", function () { console.log("Test"); })}
                 Mode:<${Dropdown2} ability="${"mode"}" options=${props.availableModes} value=${props.mode} setValue=${props.setMode} />
                 ${Button("X", function () { props.setIsPopupOpen(false) }, { float: "right" })}
-
-                <div id="overAllAnswers"></div>
+                <${DndPopupContent} ...${props} />
                 </div>
             `;
         }
@@ -314,7 +400,6 @@ javascript: (function () {
             const [mode, setMode] = useState("ALL");
             const [haveRemoved, setHaveRemoved] = useState(false);
             const [triggerRender, setTriggerRender] = useState(false);
-
             const appProps = useMemo(() => ({
                 availableModes,
                 mode,
@@ -344,11 +429,10 @@ javascript: (function () {
                     function () { setTriggerRender(prevState => !prevState); },
                 ]);
                 addObserver([
+                    function () { console.log("Callbak function running"); },
                     function () { addButtonsToExistingSpans(); },
                     function () { insertCheckboxes(); },
-                    function () { console.log("Callbak function running"); },
                     function () { addStyling(); },
-                    /*function () { copyGPTAnswer(); },*/
                     function () { setTriggerRender(prevState => !prevState); },
 
                 ]);
