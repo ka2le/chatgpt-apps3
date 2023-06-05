@@ -58,9 +58,13 @@ function addElement(parent, element, beforeNode) {
 }
 
 function addStyling() {
-    var abilityOptions = document.querySelectorAll('.ability option');
+    var abilityOptions = document.querySelectorAll('.enhance-option');
     abilityOptions.forEach(function (abilityOption) {
         abilityOption.style.backgroundColor = "rgb(52,53,65)";
+    });
+    var popupInputs = document.querySelectorAll('#enhancerPopup input');
+    popupInputs.forEach(function (popupInput) {
+        popupInput.style.backgroundColor = "rgb(52,53,65)";
     });
 
     /*var overAllChilds = document.querySelectorAll('#overAll');
@@ -208,11 +212,11 @@ function removeElementsByClass(className, haveRemoved, setHaveRemoved) {
         return "";
     } else {
         const elements = document.getElementsByClassName(className);
-        while (elements.length > 0) {
+        /*while (elements.length > 0) {
             
             if (elements[0].parentNode) { elements[0].parentNode.removeChild(elements[0]); }
 
-        }
+        }*/
         var elements2 = document.querySelectorAll('[gpt-enhancer-modified]');
         for (var i = 0; i < elements2.length; i++) {
             elements2[i].removeAttribute('gpt-enhancer-modified');
@@ -382,8 +386,10 @@ function moveComponent(containerRef, newContainerFunction) {
         if (textAreaRef.current) {
             var currentText = textAreaRef.current.value;
             var cleanedCurrentText = currentText.replace(/\[.*?\]/s, '');
-            textAreaRef.current.value = cleanedCurrentText + "[" + text + "]";
-            textAreaRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+            if(text != ""){
+                textAreaRef.current.value = cleanedCurrentText + "[" + text + "]";
+                textAreaRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+            }
         }
     }, []);
 
@@ -486,11 +492,29 @@ var utilVars = {
         padding: 'initial',
         border: "none",
     },
+    dropdownStyle2: {
+        boxShadow: 'initial',
+        WebkitAppearance: 'initial',
+        appearance: 'initial',
+        backgroundColor: 'initial',
+        borderColor: 'initial',
+        borderRadius: 'initial',
+        borderWidth: 'initial',
+        fontSize: 'initial',
+        lineHeight: 'initial',
+        padding: 'initial',
+        border: "none",
+        width: "80px",
+    },
     checkboxStyle: {},
-    inputBoxStyle: {},
+    inputBoxStyle: {
+        backgroundColor:"rgb(32,33,35)",
+        padding: "0",
+    },
     abilityStyle: {
         float: "left",
-        margin: "0 4px"
+        margin: "0 4px",
+        
     },
     overlayStyle: {
         position: 'fixed',

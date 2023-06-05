@@ -178,7 +178,7 @@ javascript: (function () {
             return html`
               <div style="${utilVars.abilityStyle}" class="ability">
                 <span>${ability} </span>
-                <${Dropdown} name="${ability}" options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
+                <${Dropdown} name="${ability}"  options=${props.standardScoreOptions} value=${props.abilityScores[ability]} setValue=${props.setAbilityScores} />
               </div>
             `;
         }
@@ -190,7 +190,7 @@ javascript: (function () {
 
             return html`
               <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
-                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+                ${options.map((option) => html`<option class="enhance-option" value="${option}">${option}</option>`)}
               </select>
             `;
         }
@@ -200,8 +200,8 @@ javascript: (function () {
             };
 
             return html`
-              <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle}" value="${value}" onchange="${handleChange}">
-                ${options.map((option) => html`<option value="${option}">${option}</option>`)}
+              <select class="gpt-enhancer" id="${name}Dropdown" style="${utilVars.dropdownStyle2}" value="${value}" onchange="${handleChange}">
+                ${options.map((option) => html`<option class="enhance-option" value="${option}">${option}</option>`)}
               </select>
             `;
         }
@@ -302,14 +302,17 @@ javascript: (function () {
             const [characterName, setCharacterName] = useState('');
             const getStoredCharacters = () => {
                 let keys = Object.keys(localStorage);
-                let characterNames = keys.filter(key => key.startsWith('CHARACTER_')).map(key => key.split('_')[1]);
-                var filtered = characterNames.filter(function (el) {
-                    if( el != null && el != "null"){
-                        return el;
-                    }
-                    
-                });
-                return filtered;
+                if(keys && keys.length>1){
+                    let characterNames = keys.filter(key => key.startsWith('CHARACTER_')).map(key => key.split('_')[1]);
+                    var filtered = characterNames.filter(function (el) {
+                        if( el != null && el != "null"){
+                            return el;
+                        }
+                        
+                    });
+                    return filtered;
+                }
+               return [""];
             }
             const saveCharacter = () => {
                 const characterData = {
@@ -347,12 +350,7 @@ javascript: (function () {
         
             }
         }
-        function InputBox(id, value = "", onChange) {
-            const InputLabel = id.split("-").join(" ");
-            return html`
-                ${InputLabel}:<input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value="${value}" onInput=${onChange}>
-            `;
-        }
+        
         function TextArea({ id, style = "", value = "", onChange, class: className = "" }) {
             return html`
                 <textarea id="${id}" style="${style}" class="${className} gpt-enhancer " onInput=${onChange}>
@@ -360,16 +358,25 @@ javascript: (function () {
                 </textarea>
             `;
         }
+        function InputBox({id = "", value = "", setValue}) {
+            const handleChange = (event) => {
+                setValue(event.target.value);
+            };
+            return html`
+                ${id}:<input class="gpt-enhancer" type="text" id="${id}" style="${utilVars.inputBoxStyle}" value=${value} onInput=${handleChange} />
+            `;
+        }
+        
         function DndPopupContent(props) {
             if (props.mode == "DND" || props.mode == "ALL") {
                 return html`
                     <${DnDStatBlock} ...${props} />
-                    ${Button("Reminders", function () { props.addAdditionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}
-                    <${InputBox} onChange=${(e) => props.setCharacterName(e.target.value)} value=${props.characterName} id="character-description" /> 
+                    ${Button("Reminders", function () { props.addAdditionalText(`\nRemember that a poor Result below 10 should have negative consequenses and below 5 should be really bad. Also remember to always advance the story and offer interesting options. The options should always contain one related ability in paranthesis like (STR)`) })}<br/>
+                    <${InputBox} setValue=${props.setCharacterName} value=${props.characterName} id="CharacterName"   /> 
                     ${Button("Save", props.saveCharacter)}
-                    ${Button("Load", props.loadCharacter)}
-                    <${InputBox} onChange=${(e) => props.setDescription(e.target.value)} value=${props.description} id="character-description" /> 
-                    <${InputBox} onChange=${(e) => props.setQuestDescription(e.target.value)} value=${props.questDescription} id="quest-description" /> 
+                    ${Button("Load", props.loadCharacter)}<br/>
+                    <${InputBox} setValue=${props.setDescription} value=${props.description} id="CharacterDescription" /> <br/>
+                    <${InputBox} setValue=${props.setQuestDescription} value=${props.questDescription} id="QuestDescription" /><br/> 
                 `;
             }
             return "";
@@ -381,9 +388,8 @@ javascript: (function () {
                     ...utilVars.popupStyle
                 }}>
                 
-                ${Button("Send Message", function () { console.log("Test"); })}
+                ${Button("Send Message", function () { console.log("Test"); })}${Button("X", function () { props.setIsPopupOpen(false) }, { float: "right" })}<br></br>
                 Mode:<${Dropdown2} ability="${"mode"}" options=${props.availableModes} value=${props.mode} setValue=${props.setMode} />
-                ${Button("X", function () { props.setIsPopupOpen(false) }, { float: "right" })}
                 <${DndPopupContent} ...${props} />
                 </div>
             `;
