@@ -14,6 +14,9 @@ import PusslePreview from './components/PusslePreview';
 import PDFViewerPage from './components/PDFViewerPage';
 import RPGCharacter from './components/RPGCharacter';
 import BookmarkletsCollection from './components/BookmarkletsCollection';
+import MysteryGame from './components/mysteryGame/MysteryGame';
+import Character1 from './components/mysteryGame/Character1';
+import SimplePokerContainer from './components/SimplePoker';
 
 
 
@@ -33,6 +36,9 @@ function App() {
             <Route path="/pdf-view" element={<PDFViewerPage/>} />
             <Route path="/rpg-page" element={<RPGCharacter/>} />
             <Route path="/bookmarklets" element={<BookmarkletsCollection/>} />
+            <Route path="/mystery-game" element={<MysteryGame/>} />
+            <Route path="/mystery-game/character1" element={<Character1/>} />
+            <Route path="/simple-poker-ai" element={<SimplePokerContainer/>} />
             
           </Routes>
         </HashRouter>

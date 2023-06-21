@@ -11,15 +11,17 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
+import HubIcon from '@mui/icons-material/Hub';
 
 function GridComponent() {
     const gridItems = [];
 
     // Fill the rest of the grid with empty items
-    while (gridItems.length < 16) {
+    while (gridItems.length < 12) {
         gridItems.push({  link: '#',  });
     }
-    while (gridItems.length < 16) {
+    while (gridItems.length < 12) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
     gridItems.push(  { icon: PatternIcon, link: '/pattern-generator', title: 'Patterns' })
@@ -30,6 +32,8 @@ function GridComponent() {
     gridItems.push({ icon: AutoStoriesIcon, link: '/pdf-view', title: 'Story' });
     gridItems.push({ icon: SwitchAccountIcon, link: '/rpg-page', title: 'RPG' });
     gridItems.push({ icon: CollectionsBookmarkIcon, link: '/bookmarklets', title: 'Bookmarklets' });
+    gridItems.push({ icon: FaceRetouchingOffIcon, link: '/mystery-game', title: 'Mystery Game' });
+    gridItems.push({ icon: HubIcon, link: '/simple-poker-ai', title: 'Ai Nerual Net Simple Game' });
     while (gridItems.length < 24) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
