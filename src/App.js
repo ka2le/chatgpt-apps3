@@ -17,13 +17,15 @@ import BookmarkletsCollection from './components/BookmarkletsCollection';
 import MysteryGame from './components/mysteryGame/MysteryGame';
 import Character1 from './components/mysteryGame/Character1';
 import SimplePokerContainer from './components/SimplePoker';
+import ArTest from './components/ArTest';
+import SingularityCards from './components/SingularityCards';
 
 
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App" style={{  height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
+       <div className="App" style={{  height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}> 
       <HashRouter>
           <Routes>
           
@@ -39,10 +41,12 @@ function App() {
             <Route path="/mystery-game" element={<MysteryGame/>} />
             <Route path="/mystery-game/character1" element={<Character1/>} />
             <Route path="/simple-poker-ai" element={<SimplePokerContainer/>} />
+            <Route path="/ar-test" element={<ArTest/>} />
+            <Route path="/singularity-cards" element={<SingularityCards/>} />
             
           </Routes>
         </HashRouter>
-        </div>
+         </div> 
       
     </ThemeProvider>
   );
