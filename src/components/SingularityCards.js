@@ -22,8 +22,13 @@ import processingIcon from '../images/singularitySprint/processing.png';
 import processingIcon2 from '../images/singularitySprint/processing_3.png';
 import background2 from '../images/singularitySprint/sci-fi-background.svg';
 import background from '../images/singularitySprint/background2.svg';
+import processing_background from '../images/singularitySprint/processing_background.svg';
+import score_background from '../images/singularitySprint/score_background.svg';
+import data_background from '../images/singularitySprint/data_background.svg';
 import RegularFont from '../fonts/TitilliumWeb-Regular.ttf';
 import BoldFont from '../fonts/TitilliumWeb-Bold.ttf';
+import RegularFont2 from '../fonts/Orbit-Regular.ttf';
+import RegularFont3 from '../fonts/DIGITALDREAM.ttf';
 
 
 
@@ -50,7 +55,7 @@ const cards = [
         img: img3,
         title: "Genetic Algorithms",
         action1: "Mutate Variables",
-        details1: "+4 Processing +2 Processing for every 10 Processing ",6
+        details1: "+4 Processing +2 Processing for every 10 Processing ",
         action2: "Initiate Evolutionary Sequence",
         details2: "+3 Score for every 10 Score",
         cost: "15 Processing"
@@ -83,7 +88,7 @@ const cards = [
     //     cost: ""
     // },
 
-  
+
 ]
 
 function CardActions({ title, details, cost = null }) {
@@ -91,7 +96,7 @@ function CardActions({ title, details, cost = null }) {
     const costComponents = cost ? textToComponents("Cost: " + cost) : null;
 
     return (
-        <CardText font='Titillium Web'>
+        <CardText>
             <TextTitle>{"" + title}:</TextTitle>
             {cost && <Cost>{costComponents}</Cost>}
             <Details>{detailsComponents}</Details>
@@ -101,11 +106,11 @@ function CardActions({ title, details, cost = null }) {
 
 const iconSize2 = "84px";
 const iconStyle2 = { width: iconSize2, height: iconSize2, verticalAlign: 'middle', opacity: "1" };
-const ScoreIconLarge = () => <img src={scoreIcon} alt="score" style={iconStyle2} />
-const DataIconLarge = () => <img src={dataIcon} alt="data" style={iconStyle2} />
-const ProcessingIconLarge = () => <img src={processingIcon2} alt="processing" style={iconStyle2} />
-
-const IconLarge = ({ type }) => {
+const iconStyle3 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", top: "20px" };
+const iconStyle4 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", bottom: "20px" };
+const iconStyle5 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", top: "20px" };
+const iconStyle6 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", bottom: "20px" };
+const IconLarge = ({ type, style = iconStyle2 }) => {
     let iconSrc = '';
     switch (type) {
         case 'score':
@@ -118,25 +123,31 @@ const IconLarge = ({ type }) => {
             iconSrc = processingIcon2;
             break;
     }
-    return <img src={iconSrc} alt={type} style={iconStyle2} />;
+    return <img src={iconSrc} alt={type} style={style} />;
 };
 
 const convertColor = (rgbString) => {
     const [r, g, b] = rgbString.split(',');
     return `rgb(${r.trim()}, ${g.trim()}, ${b.trim()})`;
-  };
-  
-const TrackerCard = React.forwardRef(({ iconType, color }, ref) => {
+};
+
+const TrackerCard = React.forwardRef(({ iconType, color,backgroundImg=processing_background }, ref) => {
     const formattedColor = convertColor(color);
     console.log(formattedColor)
     const darkenedColor = darken(0.7, formattedColor);
     console.log(darkenedColor)
     return (
-        <TrackerContainer ref={ref} color={darkenedColor}>
+        <TrackerContainer ref={ref} color={darkenedColor} backgroundImg={backgroundImg}>
+
             <Row>
+
                 <LeftColumn>
+                    <IconLarge type={iconType} style={iconStyle3}></IconLarge>
+                    <IconLarge type={iconType} style={iconStyle4}></IconLarge>
+                    <IconLarge type={iconType} style={iconStyle5}></IconLarge>
+                    <IconLarge type={iconType} style={iconStyle6}></IconLarge>
                     {Array.from({ length: 10 }, (_, i) => (
-                        <NumberBox key={i} color={color}>{i}</NumberBox>
+                        <NumberBox  key={i} color={color}>{i}</NumberBox>
                     ))}
                 </LeftColumn>
                 <CenterColumn>
@@ -170,7 +181,7 @@ const CardContainer = styled.div`
 const Text = styled.p`
   color:aqua;
   font-size:9px;
-  font-family: ${props => props.font || 'Arial'};
+  font-family: ${props => props.font || 'Titillium Web'};
   text-shadow: 0 0 5px rgba(0,255,255,0.5);
 
   @font-face {
@@ -178,6 +189,18 @@ const Text = styled.p`
     font-style: normal;
     font-weight: 400;
     src: url(${RegularFont}) format('woff2');
+  }
+  @font-face {
+    font-family: 'Orbit';
+    font-style: normal;
+    font-weight: 400;
+    src: url(${RegularFont2}) format('woff2');
+  }
+  @font-face {
+    font-family: 'Digital Dream';
+    font-style: normal;
+    font-weight: 400;
+    src: url(${RegularFont3}) format('woff2');
   }
 
   @font-face {
@@ -190,7 +213,7 @@ const Text = styled.p`
 
 const TrackerContainer = styled(CardContainer)`
 background-color: ${props => props.color};
-    background-image: url('${background}');
+    background-image: url('${props => props.backgroundImg}');
 `;
 
 const NumberBox = styled(Text)`
@@ -202,6 +225,7 @@ const NumberBox = styled(Text)`
     width: 30px;
     margin: 4%;
     height: 10%;
+    font-family: "Digital Dream";
     background: ${props => `rgba(${props.color}, 0.2)`};
     border-left: 1px solid ${props => `rgb(${props.color})`};
 `;
@@ -249,7 +273,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
                     <ImageContainer>
                         <Image src={imgUrl} />
                         <TitleWrapper>
-                            <Title font='Titillium Web'>{cardTitle}</Title>
+                            <Title >{cardTitle}</Title>
                         </TitleWrapper>
                     </ImageContainer>
                 </Border>
@@ -305,9 +329,9 @@ const SingularityCards = () => {
             <Grid item xs={1} ><button onClick={saveAsImage}>Save as Image</button><button onClick={nextCard}>Next Card</button></Grid>
             <Grid item xs={1} ><button onClick={saveTracker1}>Save Tracker1</button><button onClick={saveTracker2}>Save Tracker2</button><button onClick={saveTracker3}>Save Tracker3</button></Grid>
             <Grid item xs={1} ><button onClick={saveAllCards}>Save All Cards</button></Grid> {/* Button to save all cards */}
-            <TrackerCard ref={trackerRef1} iconType="processing" color="83,200,152" />
-            <TrackerCard ref={trackerRef2} iconType="score" color="249,242,172" />
-            <TrackerCard ref={trackerRef3} iconType="data" color="255,127,219" />
+            <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
+            <TrackerCard ref={trackerRef2} iconType="score"  backgroundImg={score_background} color="249,242,172" />
+            <TrackerCard ref={trackerRef3} iconType="data"  backgroundImg={data_background} color="255,127,219" />
             {cards.map((card, index) => (
                 <Card
                     key={index}
@@ -391,6 +415,10 @@ const CardText = styled(Text)`
   clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 95% 0);
   background: rgba(32,219,238,0.1);
   
+`;
+const NumberCardText = styled(Text)`
+ font-family:"Digital Dream";
+ display: inline;
 `;
 /*border-bottom: 2px double aqua;
 border-right: 2px double aqua;*/
@@ -530,6 +558,9 @@ const textToComponents = (text) => {
             case "processing":
                 return <><ProcessingIcon key={index} />{" "}</>;
             default:
+                if (!isNaN(word)) {
+                    return <NumberCardText key={index}>{word}</NumberCardText>;
+                }
                 return word + " ";
         }
     });
