@@ -1,17 +1,21 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.e6cb464b.js",
+    "main.js": "/chatgpt-apps3/static/js/main.d65b908e.js",
     "static/js/787.00e8474e.chunk.js": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js",
     "static/media/Ebook Harmony of Everything.pdf": "/chatgpt-apps3/static/media/Ebook Harmony of Everything.4e846cd9d9e2f077b6e6.pdf",
     "static/media/backside2.png": "/chatgpt-apps3/static/media/backside2.b92bb8da3c6836451617.png",
     "static/media/italian-landscape.jpg": "/chatgpt-apps3/static/media/italian-landscape.73b47302037964c5a225.jpg",
+    "static/media/backside3.png": "/chatgpt-apps3/static/media/backside3.8a21d74fe3f927992d26.png",
     "static/media/background.png": "/chatgpt-apps3/static/media/background.d366a3eb5ac10d1e0a2d.png",
     "static/media/Backside.png": "/chatgpt-apps3/static/media/Backside.d8e7fe001cc78577dff0.png",
     "static/media/Orbit-Regular.ttf": "/chatgpt-apps3/static/media/Orbit-Regular.c0af669bb30721cce497.ttf",
+    "static/media/art.png": "/chatgpt-apps3/static/media/art.15524fc746520f7a5f51.png",
+    "static/media/rat.png": "/chatgpt-apps3/static/media/rat.0bf170f7c2648d2ae2d3.png",
     "static/media/quantum.png": "/chatgpt-apps3/static/media/quantum.7bfe0eefa868e37309cc.png",
     "static/media/adversarial.png": "/chatgpt-apps3/static/media/adversarial.ab008227e94273666165.png",
     "static/media/defence_robot.png": "/chatgpt-apps3/static/media/defence_robot.f3f4b9cc5556489bfdca.png",
+    "static/media/lightning.png": "/chatgpt-apps3/static/media/lightning.713bd6ae7f297148207a.png",
     "static/media/swarm_intelligence.png": "/chatgpt-apps3/static/media/swarm_intelligence.a9455745f80438b00ea9.png",
     "static/media/supervised.png": "/chatgpt-apps3/static/media/supervised.50188772e009817d9169.png",
     "static/media/processing_3.png": "/chatgpt-apps3/static/media/processing_3.b30a2e1e415d7bc4efa0.png",
@@ -20,6 +24,7 @@
     "static/media/balance.png": "/chatgpt-apps3/static/media/balance.1cf18f4a9bb77ab8f425.png",
     "static/media/iot.png": "/chatgpt-apps3/static/media/iot.3ed0f1cb9d625e32bbc9.png",
     "static/media/chess.png": "/chatgpt-apps3/static/media/chess.0d1354cf31bb0336f28a.png",
+    "static/media/puzzle.png": "/chatgpt-apps3/static/media/puzzle.d7c371cc7f912c382961.png",
     "static/media/score2.png": "/chatgpt-apps3/static/media/score2.1d8291c524be79cd3116.png",
     "static/media/data2.png": "/chatgpt-apps3/static/media/data2.a2ec94f8033b975fb686.png",
     "static/media/processing.png": "/chatgpt-apps3/static/media/processing.5f165a440231286c64f6.png",
@@ -36,11 +41,11 @@
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.d8fda7e051f2325462a263eed48ba9a3.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.d6f4af8b5a83ce139487d32755ef08bc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.e6cb464b.js.map": "/chatgpt-apps3/static/js/main.e6cb464b.js.map",
+    "main.d65b908e.js.map": "/chatgpt-apps3/static/js/main.d65b908e.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.e6cb464b.js"
+    "static/js/main.d65b908e.js"
   ]
 }
