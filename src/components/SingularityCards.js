@@ -22,6 +22,8 @@ import processingIcon from '../images/singularitySprint/processing.png';
 import processingIcon2 from '../images/singularitySprint/processing_3.png';
 import background2 from '../images/singularitySprint/sci-fi-background.svg';
 import background from '../images/singularitySprint/background2.svg';
+import background_backside from '../images/singularitySprint/Backside.png';
+import background_backside2 from '../images/singularitySprint/backside2.png';
 import processing_background from '../images/singularitySprint/processing_background.svg';
 import score_background from '../images/singularitySprint/score_background.svg';
 import data_background from '../images/singularitySprint/data_background.svg';
@@ -101,6 +103,7 @@ const SingularityCards = () => {
     const [trackerRef1, saveTracker1] = useSave("Tracker");
     const [trackerRef2, saveTracker2] = useSave("Tracker");
     const [trackerRef3, saveTracker3] = useSave("Tracker");
+    const [backsideRef, saveBackside] = useSave("Backside");
     const [shouldSave, setShouldSave] = useState(false);
     const [saveIndex, setSaveIndex] = useState(0);
     const [saveAll] = useSaveAll();
@@ -131,12 +134,24 @@ const SingularityCards = () => {
             ></Card>
 
 
-            <Grid item xs={1} ><button onClick={saveAsImage}>Save as Image</button><button onClick={nextCard}>Next Card</button></Grid>
-            <Grid item xs={1} ><button onClick={saveTracker1}>Save Tracker1</button><button onClick={saveTracker2}>Save Tracker2</button><button onClick={saveTracker3}>Save Tracker3</button></Grid>
-            <Grid item xs={1} ><button onClick={saveAllCards}>Save All Cards</button></Grid> {/* Button to save all cards */}
+            <Grid item xs={1} >
+                <button onClick={saveAsImage}>Save as Image</button>
+                <button onClick={nextCard}>Next Card</button>
+            </Grid>
+            <Grid item xs={1} >
+                <button onClick={saveTracker1}>Save Tracker1</button>
+                <button onClick={saveTracker2}>Save Tracker2</button>
+                <button onClick={saveTracker3}>Save Tracker3</button>
+                <button onClick={saveBackside}>Save Backside</button>
+            </Grid>
+            <Grid item xs={1} >
+                <button onClick={saveAllCards}>Save All Cards</button>
+            </Grid> {/* Button to save all cards */}
+            <BackCard ref={backsideRef}></BackCard>
             <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
-            <TrackerCard ref={trackerRef2} iconType="score"  backgroundImg={score_background} color="249,242,172" />
-            <TrackerCard ref={trackerRef3} iconType="data"  backgroundImg={data_background} color="255,127,219" />
+            <TrackerCard ref={trackerRef2} iconType="score" backgroundImg={score_background} color="249,242,172" />
+            <TrackerCard ref={trackerRef3} iconType="data" backgroundImg={data_background} color="255,127,219" />
+
             {cards.map((card, index) => (
                 <Card
                     key={index}
@@ -161,7 +176,7 @@ function CardActions({ title, details, cost = null }) {
     const costComponents = cost ? textToComponents("Cost: " + cost) : null;
 
     return (
-        <CardText height={cost == null ? "0px" : "52px" }>
+        <CardText height={cost == null ? "0px" : "52px"}>
             <TextTitle>{"" + title}</TextTitle>
             {cost && <Cost>{costComponents}</Cost>}
             <Details>{detailsComponents}</Details>
@@ -187,7 +202,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
             </TopHalf>
             <BottomHalf>
                 <CardActions title={action1} details={details1}></CardActions>
-                <CardActions  title={action2} details={details2} cost={cost}></CardActions>
+                <CardActions title={action2} details={details2} cost={cost}></CardActions>
             </BottomHalf>
         </CardContainer>
     );
@@ -246,6 +261,8 @@ const TrackerContainer = styled(CardContainer)`
 background-color: ${props => props.color};
     background-image: url('${props => props.backgroundImg}');
 `;
+
+
 
 const NumberBox = styled(Text)`
     color: ${props => `rgb(${props.color})`};
@@ -377,6 +394,7 @@ const Title = styled(Text)`
 
   
 `;
+
 const TopHalf = styled.div`
   position: absolute;
   top: 0;
@@ -510,10 +528,12 @@ const textToComponents = (text) => {
 
 const iconSize2 = "84px";
 const iconStyle2 = { width: iconSize2, height: iconSize2, verticalAlign: 'middle', opacity: "1" };
+
 const iconStyle3 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", top: "20px" };
 const iconStyle4 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", bottom: "20px" };
 const iconStyle5 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", top: "20px" };
 const iconStyle6 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", bottom: "20px" };
+const iconStyle7 = { width: "60px", height: "60px", verticalAlign: 'middle', opacity: "1" };
 const IconLarge = ({ type, style = iconStyle2 }) => {
     let iconSrc = '';
     switch (type) {
@@ -535,7 +555,7 @@ const convertColor = (rgbString) => {
     return `rgb(${r.trim()}, ${g.trim()}, ${b.trim()})`;
 };
 
-const TrackerCard = React.forwardRef(({ iconType, color,backgroundImg=processing_background }, ref) => {
+const TrackerCard = React.forwardRef(({ iconType, color, backgroundImg = processing_background }, ref) => {
     const formattedColor = convertColor(color);
     console.log(formattedColor)
     const darkenedColor = darken(0.7, formattedColor);
@@ -551,7 +571,7 @@ const TrackerCard = React.forwardRef(({ iconType, color,backgroundImg=processing
                     <IconLarge type={iconType} style={iconStyle5}></IconLarge>
                     <IconLarge type={iconType} style={iconStyle6}></IconLarge>
                     {Array.from({ length: 10 }, (_, i) => (
-                        <NumberBox  key={i} color={color}>{i}</NumberBox>
+                        <NumberBox key={i} color={color}>{i}</NumberBox>
                     ))}
                 </LeftColumn>
                 <CenterColumn>
@@ -570,5 +590,31 @@ const TrackerCard = React.forwardRef(({ iconType, color,backgroundImg=processing
                 </RightColumn>
             </Row>
         </TrackerContainer>
+    );
+});
+
+
+
+
+
+const BacksideContainer = styled(CardContainer)`
+background-image: url('${background_backside2}');
+background-size: contain;
+`;
+
+const BacksideText = styled(Text)`
+  font-size: 30px;
+  color: rgb(249,242,172);
+  text-transform: uppercase;
+    text-align:center;
+  
+`;
+
+const BackCard = React.forwardRef(({ }, ref) => {
+    return (
+        <BacksideContainer ref={ref} >
+
+            
+        </BacksideContainer>
     );
 });
