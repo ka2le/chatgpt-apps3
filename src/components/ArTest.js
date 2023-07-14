@@ -1,12 +1,12 @@
 import React from 'react'
 import { Canvas } from '@react-three/fiber'
-import { ARCanvas, DefaultXRControllers, ARMarker } from '@react-three/ar'
+
 import { useGLTF } from '@react-three/drei'
 
 function MyModel() {
-  const gltf = useGLTF('ar/dragons.gltf')
+  // const gltf = useGLTF('ar/dragons.gltf')
 
-  return <primitive object={gltf.scene} />
+  // return <primitive object={gltf.scene} />
 }
 
 const markerOptions = {
@@ -15,13 +15,14 @@ const markerOptions = {
 }
 
 function ArTest() {
-  return (
-    <ARCanvas>
-      <DefaultXRControllers />
-      <ARMarker {...markerOptions}>
-        <MyModel />
-      </ARMarker>
-    </ARCanvas>
+  return (<>
+    {/* // <ARCanvas>
+    //   <DefaultXRControllers />
+    //   <ARMarker {...markerOptions}>
+    //     <MyModel />
+    //   </ARMarker>
+    // </ARCanvas> */}
+    </>
   )
 }
 

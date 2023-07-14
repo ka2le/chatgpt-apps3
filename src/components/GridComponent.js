@@ -14,6 +14,7 @@ import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
 import HubIcon from '@mui/icons-material/Hub';
 import ViewInArIcon from '@mui/icons-material/ViewInAr';
+import SensorWindowIcon from '@mui/icons-material/SensorWindow';
 
 function GridComponent() {
     const gridItems = [];
@@ -36,6 +37,7 @@ function GridComponent() {
     gridItems.push({ icon: FaceRetouchingOffIcon, link: '/mystery-game', title: 'Mystery Game' });
     gridItems.push({ icon: HubIcon, link: '/simple-poker-ai', title: 'Ai Nerual Net Simple Game' });
     gridItems.push({ icon: ViewInArIcon, link: '/ar-test', title: 'AR Cards' });
+    gridItems.push({ icon: SensorWindowIcon, link: '/singularity-cards', title: 'Singularity Cards' });
     while (gridItems.length < 24) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
