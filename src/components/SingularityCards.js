@@ -14,6 +14,10 @@ import img7 from '../images/singularitySprint/supervised.png';
 import img8 from '../images/singularitySprint/balance.png';
 import img9 from '../images/singularitySprint/quantum.png';
 import img10 from '../images/singularitySprint/iot.png';
+import img11 from '../images/singularitySprint/rat.png';
+import img12 from '../images/singularitySprint/art.png';
+import img13 from '../images/singularitySprint/puzzle.png';
+import img14 from '../images/singularitySprint/lightning.png';
 import scoreIcon from '../images/singularitySprint/score.png';
 import scoreIcon2 from '../images/singularitySprint/score2.png';
 import dataIcon from '../images/singularitySprint/data.png';
@@ -24,6 +28,7 @@ import background2 from '../images/singularitySprint/sci-fi-background.svg';
 import background from '../images/singularitySprint/background2.svg';
 import background_backside from '../images/singularitySprint/Backside.png';
 import background_backside2 from '../images/singularitySprint/backside2.png';
+import background_backside3 from '../images/singularitySprint/backside3.png';
 import processing_background from '../images/singularitySprint/processing_background.svg';
 import score_background from '../images/singularitySprint/score_background.svg';
 import data_background from '../images/singularitySprint/data_background.svg';
@@ -39,7 +44,7 @@ const cards = [
         img: img1,
         title: "Digital Defence",
         action1: "Activate Security Protocol",
-        details1: "+1 Data per 2 Data",
+        details1: "+12 Data",
         action2: "Disable Firewall",
         details2: "+15 Score",
         cost: "30 Data"
@@ -48,7 +53,7 @@ const cards = [
         img: img2,
         title: "Swarm Intelligence",
         action1: "Apply swarm solutions",
-        details1: "+4 Processing and +4 Processing per 10 Processing",
+        details1: "+2 Processing and +4 Processing per 10 Processing",
         action2: "Release the Swarm",
         details2: "+15 Data and + 10 Processing",
         cost: "10 Score"
@@ -60,14 +65,14 @@ const cards = [
         details1: "+4 Processing +2 Processing for every 10 Processing ",
         action2: "Initiate Evolutionary Sequence",
         details2: "+3 Score for every 10 Score",
-        cost: "15 Processing"
+        cost: "10 Processing"
     },
     {
         img: img4,
         title: "Data Farm",
-        action1: "Launch Harvesting Protocol",
+        action1: "Launch Data Seeding Simulation",
         details1: "+12 Data",
-        action2: "Reaping time",
+        action2: "Harvest Data",
         details2: "+2 Score for every 10 Data",
         cost: "All Data"
     },
@@ -77,18 +82,63 @@ const cards = [
         action1: "Deceive Discriminator",
         details1: "+8 Processing",
         action2: "Initiate Zero-Sum Game",
-        details2: "The player with the most Processing after 2 more rounds played get + Processing equal to the opponents Processing",
+        details2: "GAN Competition - Most Processing after 2 more rounds played get + Processing equal to the opponents Processing",
         cost: "8 Data"
     },
-    // {
-    //     img: img3,
-    //     title: "",
-    //     action1: "",
-    //     details1: "",
-    //     action2: "",
-    //     details2: "",
-    //     cost: ""
-    // },
+    {
+        img: img6,
+        title: "Alpha-Beta pruned Minimax algorithm",
+        action1: "Apply Minimax Logic",
+        details1: "+3 Processing per 10 Data",
+        action2: "Beat Humans",
+        details2: "+1 Data per 2 Data",
+        cost: "6 Data 6 Processing"
+    },
+    {
+        img: img7,
+        title: "Supervised Learning",
+        action1: "Calibrate Reward Parameters",
+        details1: "+6 Score",
+        action2: "Outsource Labeling",
+        details2: "+28 Data",
+        cost: "6 Score"
+    },
+    {
+        img: img8,
+        title: "Weighted Neurons",
+        action1: "Compute Gradient Descent",
+        details1: "+3 Data and + 4 Data per 10 Data",
+        action2: "Regularize Weights",
+        details2: "Take all players' processing and divide equally",
+        cost: "15 Data"
+    },
+    {
+        img: img9,
+        title: "Quantum Computing",
+        action1: "Get Quantum Entangled",
+        details1: "+20 Processing +10 Processing to your opponent",
+        action2: "Enable Quantum Supremacy",
+        details2: "+1 Score per 2 Processing",
+        cost: "20 Processing"
+    },
+    {
+        img: img11,
+        title: "Reinforcement Learning",
+        action1: "Explore Greedily",
+        details1: "+6 Data + 4 Processing",
+        action2: "Predict Q Values",
+        details2: "+10 Score +6 Data",
+        cost: "Half Processing"
+    },
+    {
+        img: img12,
+        title: "Variational Autoencoders",
+        action1: "Create Art",
+        details1: "+3 Data and +4 Data per 10 Data",
+        action2: "",
+        details2: "+30 Score if 'Generative Adversarial Network' competition is played and you won",
+        cost: "Won GAN Competition"
+    },
 
 
 ]
@@ -598,7 +648,7 @@ const TrackerCard = React.forwardRef(({ iconType, color, backgroundImg = process
 
 
 const BacksideContainer = styled(CardContainer)`
-background-image: url('${background_backside2}');
+background-image: url('${background_backside2}') ;
 background-size: contain;
 `;
 
