@@ -91,84 +91,115 @@ const cards = [
 
 ]
 
+
+const SingularityCards = () => {
+
+    const [currentCard, nextCard] = useCurrentCard();
+    const [card, setCard] = useState(cards[currentCard])
+    const cardRefs = cards.map(() => React.createRef());
+    const [cardRef, saveAsImage] = useSave(card.title);
+    const [trackerRef1, saveTracker1] = useSave("Tracker");
+    const [trackerRef2, saveTracker2] = useSave("Tracker");
+    const [trackerRef3, saveTracker3] = useSave("Tracker");
+    const [shouldSave, setShouldSave] = useState(false);
+    const [saveIndex, setSaveIndex] = useState(0);
+    const [saveAll] = useSaveAll();
+
+    useEffect(() => {
+        setCard(cards[currentCard]);
+    }, [currentCard]);
+
+    const saveAllCards = async () => {
+        for (let i = 0; i < cards.length; i++) {
+            await saveAll(cardRefs[i], cards[i].title);
+            // Giving some time for the card change to take effect
+            await new Promise((resolve) => setTimeout(resolve, 1));
+        }
+    };
+
+    return (
+        <Grid container spacing={0} style={{ height: '100%', margin: 0, padding: 0 }}>
+            <Card
+                ref={cardRef}
+                imgUrl={card.img}
+                cardTitle={card.title}
+                action1={card.action1}
+                details1={card.details1}
+                action2={card.action2}
+                details2={card.details2}
+                cost={card.cost}
+            ></Card>
+
+
+            <Grid item xs={1} ><button onClick={saveAsImage}>Save as Image</button><button onClick={nextCard}>Next Card</button></Grid>
+            <Grid item xs={1} ><button onClick={saveTracker1}>Save Tracker1</button><button onClick={saveTracker2}>Save Tracker2</button><button onClick={saveTracker3}>Save Tracker3</button></Grid>
+            <Grid item xs={1} ><button onClick={saveAllCards}>Save All Cards</button></Grid> {/* Button to save all cards */}
+            <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
+            <TrackerCard ref={trackerRef2} iconType="score"  backgroundImg={score_background} color="249,242,172" />
+            <TrackerCard ref={trackerRef3} iconType="data"  backgroundImg={data_background} color="255,127,219" />
+            {cards.map((card, index) => (
+                <Card
+                    key={index}
+                    ref={cardRefs[index]}
+                    imgUrl={card.img}
+                    cardTitle={card.title}
+                    action1={card.action1}
+                    details1={card.details1}
+                    action2={card.action2}
+                    details2={card.details2}
+                    cost={card.cost}
+                />
+            ))}
+        </Grid>
+    );
+};
+export default SingularityCards;
+
+
 function CardActions({ title, details, cost = null }) {
     const detailsComponents = textToComponents(details);
     const costComponents = cost ? textToComponents("Cost: " + cost) : null;
 
     return (
-        <CardText>
-            <TextTitle>{"" + title}:</TextTitle>
+        <CardText height={cost == null ? "0px" : "52px" }>
+            <TextTitle>{"" + title}</TextTitle>
             {cost && <Cost>{costComponents}</Cost>}
             <Details>{detailsComponents}</Details>
         </CardText>
     );
 };
 
-const iconSize2 = "84px";
-const iconStyle2 = { width: iconSize2, height: iconSize2, verticalAlign: 'middle', opacity: "1" };
-const iconStyle3 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", top: "20px" };
-const iconStyle4 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", bottom: "20px" };
-const iconStyle5 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", top: "20px" };
-const iconStyle6 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", bottom: "20px" };
-const IconLarge = ({ type, style = iconStyle2 }) => {
-    let iconSrc = '';
-    switch (type) {
-        case 'score':
-            iconSrc = scoreIcon;
-            break;
-        case 'data':
-            iconSrc = dataIcon;
-            break;
-        default:  // For 'processing' or any other value
-            iconSrc = processingIcon2;
-            break;
-    }
-    return <img src={iconSrc} alt={type} style={style} />;
-};
 
-const convertColor = (rgbString) => {
-    const [r, g, b] = rgbString.split(',');
-    return `rgb(${r.trim()}, ${g.trim()}, ${b.trim()})`;
-};
 
-const TrackerCard = React.forwardRef(({ iconType, color,backgroundImg=processing_background }, ref) => {
-    const formattedColor = convertColor(color);
-    console.log(formattedColor)
-    const darkenedColor = darken(0.7, formattedColor);
-    console.log(darkenedColor)
+
+const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, details2, cost }, ref) => {
     return (
-        <TrackerContainer ref={ref} color={darkenedColor} backgroundImg={backgroundImg}>
-
-            <Row>
-
-                <LeftColumn>
-                    <IconLarge type={iconType} style={iconStyle3}></IconLarge>
-                    <IconLarge type={iconType} style={iconStyle4}></IconLarge>
-                    <IconLarge type={iconType} style={iconStyle5}></IconLarge>
-                    <IconLarge type={iconType} style={iconStyle6}></IconLarge>
-                    {Array.from({ length: 10 }, (_, i) => (
-                        <NumberBox  key={i} color={color}>{i}</NumberBox>
-                    ))}
-                </LeftColumn>
-                <CenterColumn>
-                    <IconLarge type={iconType}></IconLarge>
-                    <br></br>
-                    <br></br>
-                    <IconLarge type={iconType}></IconLarge>
-                    <br></br>
-                    <br></br>
-                    <IconLarge type={iconType}></IconLarge>
-                </CenterColumn>
-                <RightColumn>
-                    {Array.from({ length: 10 }, (_, i) => (
-                        <NumberBox key={i} color={color}>{i * 10}</NumberBox>
-                    ))}
-                </RightColumn>
-            </Row>
-        </TrackerContainer>
+        <CardContainer ref={ref}>
+            <TopHalf>
+                <Border>
+                    <ImageContainer>
+                        <Image src={imgUrl} />
+                        <TitleWrapper>
+                            <Title >{cardTitle}</Title>
+                        </TitleWrapper>
+                    </ImageContainer>
+                </Border>
+            </TopHalf>
+            <BottomHalf>
+                <CardActions title={action1} details={details1}></CardActions>
+                <CardActions  title={action2} details={details2} cost={cost}></CardActions>
+            </BottomHalf>
+        </CardContainer>
     );
 });
 
+
+
+const iconSize = "18px";
+const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle' };
+const ScoreIcon = () => <img src={scoreIcon} alt="score" style={iconStyle} />
+const DataIcon = () => <img src={dataIcon} alt="data" style={iconStyle} />
+const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={iconStyle} />
 const CardContainer = styled.div`
   width: 63mm;
   height: 88mm;
@@ -264,102 +295,6 @@ const RightColumn = styled.div`
   /* Additional styles here */
 `;
 
-
-const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, details2, cost }, ref) => {
-    return (
-        <CardContainer ref={ref}>
-            <TopHalf>
-                <Border>
-                    <ImageContainer>
-                        <Image src={imgUrl} />
-                        <TitleWrapper>
-                            <Title >{cardTitle}</Title>
-                        </TitleWrapper>
-                    </ImageContainer>
-                </Border>
-            </TopHalf>
-            <BottomHalf>
-                <CardActions title={action1} details={details1}></CardActions>
-                <CardActions title={action2} details={details2} cost={cost}></CardActions>
-            </BottomHalf>
-        </CardContainer>
-    );
-});
-
-
-const SingularityCards = () => {
-
-    const [currentCard, nextCard] = useCurrentCard();
-    const [card, setCard] = useState(cards[currentCard])
-    const cardRefs = cards.map(() => React.createRef());
-    const [cardRef, saveAsImage] = useSave(card.title);
-    const [trackerRef1, saveTracker1] = useSave("Tracker");
-    const [trackerRef2, saveTracker2] = useSave("Tracker");
-    const [trackerRef3, saveTracker3] = useSave("Tracker");
-    const [shouldSave, setShouldSave] = useState(false);
-    const [saveIndex, setSaveIndex] = useState(0);
-    const [saveAll] = useSaveAll();
-
-    useEffect(() => {
-        setCard(cards[currentCard]);
-    }, [currentCard]);
-
-    const saveAllCards = async () => {
-        for (let i = 0; i < cards.length; i++) {
-            await saveAll(cardRefs[i], cards[i].title);
-            // Giving some time for the card change to take effect
-            await new Promise((resolve) => setTimeout(resolve, 1));
-        }
-    };
-
-    return (
-        <Grid container spacing={0} style={{ height: '100%', margin: 0, padding: 0 }}>
-            <Card
-                ref={cardRef}
-                imgUrl={card.img}
-                cardTitle={card.title}
-                action1={card.action1}
-                details1={card.details1}
-                action2={card.action2}
-                details2={card.details2}
-                cost={card.cost}
-            ></Card>
-
-
-            <Grid item xs={1} ><button onClick={saveAsImage}>Save as Image</button><button onClick={nextCard}>Next Card</button></Grid>
-            <Grid item xs={1} ><button onClick={saveTracker1}>Save Tracker1</button><button onClick={saveTracker2}>Save Tracker2</button><button onClick={saveTracker3}>Save Tracker3</button></Grid>
-            <Grid item xs={1} ><button onClick={saveAllCards}>Save All Cards</button></Grid> {/* Button to save all cards */}
-            <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
-            <TrackerCard ref={trackerRef2} iconType="score"  backgroundImg={score_background} color="249,242,172" />
-            <TrackerCard ref={trackerRef3} iconType="data"  backgroundImg={data_background} color="255,127,219" />
-            {cards.map((card, index) => (
-                <Card
-                    key={index}
-                    ref={cardRefs[index]}
-                    imgUrl={card.img}
-                    cardTitle={card.title}
-                    action1={card.action1}
-                    details1={card.details1}
-                    action2={card.action2}
-                    details2={card.details2}
-                    cost={card.cost}
-                />
-            ))}
-        </Grid>
-    );
-};
-export default SingularityCards;
-
-
-
-
-const iconSize = "14px";
-const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle' };
-const ScoreIcon = () => <img src={scoreIcon} alt="score" style={iconStyle} />
-const DataIcon = () => <img src={dataIcon} alt="data" style={iconStyle} />
-const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={iconStyle} />
-
-
 const TitleWrapper = styled.div`
   position: relative;
   padding: 2px; // This is to avoid the title text being hidden by the border
@@ -411,6 +346,7 @@ const CardText = styled(Text)`
   position: relative;
   padding: 3px;
   margin: 4px 0;
+  min-height:  ${props => props.height};
   border-left: 1px solid aqua;
   clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 95% 0);
   background: rgba(32,219,238,0.1);
@@ -419,6 +355,8 @@ const CardText = styled(Text)`
 const NumberCardText = styled(Text)`
  font-family:"Digital Dream";
  display: inline;
+ font-weight:bold;
+ font-size:10px;
 `;
 /*border-bottom: 2px double aqua;
 border-right: 2px double aqua;*/
@@ -467,8 +405,8 @@ const Details = styled.span`
     //margin-left: 10px;
     width:100%;
     display: inline-block;
-    margin-top:1px;
-    margin-bottom:1px;
+    margin-top:0px;
+    margin-bottom:0px;
 `;
 
 const Cost = styled.b`
@@ -565,3 +503,72 @@ const textToComponents = (text) => {
         }
     });
 };
+
+
+
+
+
+const iconSize2 = "84px";
+const iconStyle2 = { width: iconSize2, height: iconSize2, verticalAlign: 'middle', opacity: "1" };
+const iconStyle3 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", top: "20px" };
+const iconStyle4 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", bottom: "20px" };
+const iconStyle5 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", top: "20px" };
+const iconStyle6 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", bottom: "20px" };
+const IconLarge = ({ type, style = iconStyle2 }) => {
+    let iconSrc = '';
+    switch (type) {
+        case 'score':
+            iconSrc = scoreIcon;
+            break;
+        case 'data':
+            iconSrc = dataIcon;
+            break;
+        default:  // For 'processing' or any other value
+            iconSrc = processingIcon2;
+            break;
+    }
+    return <img src={iconSrc} alt={type} style={style} />;
+};
+
+const convertColor = (rgbString) => {
+    const [r, g, b] = rgbString.split(',');
+    return `rgb(${r.trim()}, ${g.trim()}, ${b.trim()})`;
+};
+
+const TrackerCard = React.forwardRef(({ iconType, color,backgroundImg=processing_background }, ref) => {
+    const formattedColor = convertColor(color);
+    console.log(formattedColor)
+    const darkenedColor = darken(0.7, formattedColor);
+    console.log(darkenedColor)
+    return (
+        <TrackerContainer ref={ref} color={darkenedColor} backgroundImg={backgroundImg}>
+
+            <Row>
+
+                <LeftColumn>
+                    <IconLarge type={iconType} style={iconStyle3}></IconLarge>
+                    <IconLarge type={iconType} style={iconStyle4}></IconLarge>
+                    <IconLarge type={iconType} style={iconStyle5}></IconLarge>
+                    <IconLarge type={iconType} style={iconStyle6}></IconLarge>
+                    {Array.from({ length: 10 }, (_, i) => (
+                        <NumberBox  key={i} color={color}>{i}</NumberBox>
+                    ))}
+                </LeftColumn>
+                <CenterColumn>
+                    <IconLarge type={iconType}></IconLarge>
+                    <br></br>
+                    <br></br>
+                    <IconLarge type={iconType}></IconLarge>
+                    <br></br>
+                    <br></br>
+                    <IconLarge type={iconType}></IconLarge>
+                </CenterColumn>
+                <RightColumn>
+                    {Array.from({ length: 10 }, (_, i) => (
+                        <NumberBox key={i} color={color}>{i * 10}</NumberBox>
+                    ))}
+                </RightColumn>
+            </Row>
+        </TrackerContainer>
+    );
+});
