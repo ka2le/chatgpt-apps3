@@ -381,11 +381,12 @@ const SingularityCards = () => {
       };
       const newCards = [...cards, newCard];
       setCards(newCards);
+      
       setTextAreaValue(JSON.stringify(newCards, null, 2));
     };
-
+    
     const [cards, setCards] = useState(initialCards);
-    const [currentCard, nextCard] = useCurrentCard(cards);
+    const [currentCard, nextCard,prevCard] = useCurrentCard(cards);
     const [card, setCard] = useState(cards[currentCard])
     const cardRefs = cards.map(() => React.createRef());
     const [cardRef, saveAsImage] = useSave(card.title);
@@ -400,6 +401,9 @@ const SingularityCards = () => {
     useEffect(() => {
         setCard(cards[currentCard]);
     }, [currentCard]);
+    useEffect(()=>{
+        setCard(cards[currentCard]);
+    },[cards])
 
     const saveAllCards = async () => {
         for (let i = 0; i < cards.length; i++) {
@@ -423,17 +427,20 @@ const SingularityCards = () => {
             ></Card>
 
 
-            <Grid item xs={1} >
-                <button onClick={saveAsImage}>Save as Image</button>
+            <Grid item xs={3} >
+                
                 <button onClick={nextCard}>Next Card</button>
+                <button onClick={prevCard}>Prev Card</button>
+                <br></br>
+                <button onClick={saveAsImage}>Save as Image</button>
                 <button onClick={saveAllCards}>Save All Cards</button>
-            </Grid>
-            <Grid item xs={1} >
+                <br></br>
                 <button onClick={saveTracker1}>Save Tracker1</button>
                 <button onClick={saveTracker2}>Save Tracker2</button>
                 <button onClick={saveTracker3}>Save Tracker3</button>
                 <button onClick={saveBackside}>Save Backside</button>
             </Grid>
+
             <Grid item xs={12} >
             <textarea
           value={textAreaValue}
@@ -795,7 +802,10 @@ const useCurrentCard = (cards) => {
     const next = () => {
         setCurrentCard(currentCard < max ? (currentCard + 1) : 0);
     }
-    return [currentCard, next];
+    const prev = () => {
+        setCurrentCard(currentCard > 0 ? (currentCard - 1) : max);
+    }
+    return [currentCard, next,prev];
 }
 
 
