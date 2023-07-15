@@ -18,6 +18,23 @@ import img11 from '../images/singularitySprint/rat.png';
 import img12 from '../images/singularitySprint/art.png';
 import img13 from '../images/singularitySprint/puzzle.png';
 import img14 from '../images/singularitySprint/lightning.png';
+import img15 from '../images/singularitySprint/brain.png';
+import img16 from '../images/singularitySprint/drive.png';
+import img17 from '../images/singularitySprint/chip.png';
+import img18 from '../images/singularitySprint/vault.png';
+import img19 from '../images/singularitySprint/bulb.png';
+import img20 from '../images/singularitySprint/vr.png';
+import img21 from '../images/singularitySprint/mining.png';
+import img22 from '../images/singularitySprint/net.png';
+import img23 from '../images/singularitySprint/server.png';
+import img24 from '../images/singularitySprint/hacker.png';
+import img25 from '../images/singularitySprint/vials.png';
+import img26 from '../images/singularitySprint/vision.png';
+import img27 from '../images/singularitySprint/computer.png';
+import img28 from '../images/singularitySprint/microscope.png';
+import img29 from '../images/singularitySprint/telescope.png';
+import img30 from '../images/singularitySprint/stair.png';
+import img31 from '../images/singularitySprint/scientist.jpg';
 import scoreIcon from '../images/singularitySprint/score.png';
 import scoreIcon2 from '../images/singularitySprint/score2.png';
 import dataIcon from '../images/singularitySprint/data.png';
@@ -39,7 +56,7 @@ import RegularFont3 from '../fonts/DIGITALDREAM.ttf';
 
 
 
-const cards = [
+const initialCards = [
     {
         img: img1,
         title: "Digital Defence",
@@ -139,14 +156,236 @@ const cards = [
         details2: "+30 Score if 'Generative Adversarial Network' competition is played and you won",
         cost: "Won GAN Competition"
     },
+    {
+        img: img13,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img14,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img10,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img15,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img16,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img17,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img18,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img19,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img20,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img21,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img22,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img23,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img24,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img25,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img26,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img27,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img28,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img29,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img30,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
+    {
+        img: img31,
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+    },
 
 
 ]
 
-
 const SingularityCards = () => {
+    const [textAreaValue, setTextAreaValue] = useState(JSON.stringify(initialCards, null, 2));
+  
+    const handleTextAreaChange = (event) => {
+      setTextAreaValue(event.target.value);
+      try {
+        const newValue = JSON.parse(event.target.value);
+        setCards(newValue);
+      } catch (err) {
+        console.error("Invalid JSON", err);
+      }
+    };
+  
+    const handleCopy = async () => {
+      await navigator.clipboard.writeText(textAreaValue);
+      alert('Copied to clipboard');
+    };
+  
+    const handlePaste = async () => {
+      const pastedValue = await navigator.clipboard.readText();
+      setTextAreaValue(pastedValue);
+      try {
+        const newValue = JSON.parse(pastedValue);
+        setCards(newValue);
+      } catch (err) {
+        console.error("Invalid JSON", err);
+      }
+    };
+  
+    const handleAddCard = () => {
+      const newCard = {
+        img: "img1",
+        title: "",
+        action1: "",
+        details1: "",
+        action2: "",
+        details2: "",
+        cost: ""
+      };
+      const newCards = [...cards, newCard];
+      setCards(newCards);
+      setTextAreaValue(JSON.stringify(newCards, null, 2));
+    };
 
-    const [currentCard, nextCard] = useCurrentCard();
+    const [cards, setCards] = useState(initialCards);
+    const [currentCard, nextCard] = useCurrentCard(cards);
     const [card, setCard] = useState(cards[currentCard])
     const cardRefs = cards.map(() => React.createRef());
     const [cardRef, saveAsImage] = useSave(card.title);
@@ -187,6 +426,7 @@ const SingularityCards = () => {
             <Grid item xs={1} >
                 <button onClick={saveAsImage}>Save as Image</button>
                 <button onClick={nextCard}>Next Card</button>
+                <button onClick={saveAllCards}>Save All Cards</button>
             </Grid>
             <Grid item xs={1} >
                 <button onClick={saveTracker1}>Save Tracker1</button>
@@ -194,8 +434,16 @@ const SingularityCards = () => {
                 <button onClick={saveTracker3}>Save Tracker3</button>
                 <button onClick={saveBackside}>Save Backside</button>
             </Grid>
-            <Grid item xs={1} >
-                <button onClick={saveAllCards}>Save All Cards</button>
+            <Grid item xs={12} >
+            <textarea
+          value={textAreaValue}
+          onChange={handleTextAreaChange}
+          rows="10"
+          cols="50"
+        /><br></br>
+        <button onClick={handleCopy}>Copy</button>
+        <button onClick={handlePaste}>Paste</button>
+        <button onClick={handleAddCard}>Add Card</button>
             </Grid> {/* Button to save all cards */}
             <BackCard ref={backsideRef}></BackCard>
             <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
@@ -540,7 +788,7 @@ const useSaveAll = () => {
     return [saveAsImage];
 }
 
-const useCurrentCard = () => {
+const useCurrentCard = (cards) => {
     const max = cards.length - 1;
     const [currentCard, setCurrentCard] = useState(0)
     console.log(currentCard)
