@@ -348,6 +348,7 @@ const SingularityCards = () => {
       try {
         const newValue = JSON.parse(event.target.value);
         setCards(newValue);
+        saveToLocalStorage(newValue);
       } catch (err) {
         console.error("Invalid JSON", err);
       }
@@ -364,9 +365,15 @@ const SingularityCards = () => {
       try {
         const newValue = JSON.parse(pastedValue);
         setCards(newValue);
+        
       } catch (err) {
         console.error("Invalid JSON", err);
       }
+    };
+    const handleReset = () => {
+        localStorage.clear();
+        setCards(initialCards);
+        setTextAreaValue(JSON.stringify(initialCards, null, 2));
     };
   
     const handleAddCard = () => {
@@ -384,8 +391,16 @@ const SingularityCards = () => {
       
       setTextAreaValue(JSON.stringify(newCards, null, 2));
     };
+    const saveToLocalStorage = (cards) => {
+        localStorage.setItem('singularityCards', JSON.stringify(cards));
+    };
     
-    const [cards, setCards] = useState(initialCards);
+    const loadFromLocalStorage = () => {
+        const storedCards = localStorage.getItem('singularityCards');
+        return storedCards ? JSON.parse(storedCards) : initialCards;
+    };
+    
+    const [cards, setCards] = useState(loadFromLocalStorage);
     const [currentCard, nextCard,prevCard] = useCurrentCard(cards);
     const [card, setCard] = useState(cards[currentCard])
     const cardRefs = cards.map(() => React.createRef());
@@ -397,6 +412,8 @@ const SingularityCards = () => {
     const [shouldSave, setShouldSave] = useState(false);
     const [saveIndex, setSaveIndex] = useState(0);
     const [saveAll] = useSaveAll();
+
+    
 
     useEffect(() => {
         setCard(cards[currentCard]);
@@ -432,8 +449,10 @@ const SingularityCards = () => {
                 <button onClick={nextCard}>Next Card</button>
                 <button onClick={prevCard}>Prev Card</button>
                 <br></br>
+                <br></br>
                 <button onClick={saveAsImage}>Save as Image</button>
                 <button onClick={saveAllCards}>Save All Cards</button>
+                <br></br>
                 <br></br>
                 <button onClick={saveTracker1}>Save Tracker1</button>
                 <button onClick={saveTracker2}>Save Tracker2</button>
@@ -451,6 +470,8 @@ const SingularityCards = () => {
         <button onClick={handleCopy}>Copy</button>
         <button onClick={handlePaste}>Paste</button>
         <button onClick={handleAddCard}>Add Card</button>
+        <button onClick={handleReset}>Reset</button>
+
             </Grid> {/* Button to save all cards */}
             <BackCard ref={backsideRef}></BackCard>
             <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
