@@ -403,9 +403,12 @@ const SingularityCards = () => {
     const [card, setCard] = useState(cards[currentCard])
     const cardRefs = cards.map(() => React.createRef());
     const [cardRef, saveAsImage] = useSave(card.title);
-    const [trackerRef1, saveTracker1] = useSave("Tracker");
-    const [trackerRef2, saveTracker2] = useSave("Tracker");
-    const [trackerRef3, saveTracker3] = useSave("Tracker");
+    const [trackerRef1, saveTracker1] = useSave("Tracker1");
+    const [trackerRef11, saveTracker11] = useSave("Tracker11");
+    const [trackerRef2, saveTracker2] = useSave("Tracker2");
+    const [trackerRef22, saveTracker22] = useSave("Tracker22");
+    const [trackerRef3, saveTracker3] = useSave("Tracker3");
+    const [trackerRef33, saveTracker33] = useSave("Tracker33");
     const [backsideRef, saveBackside] = useSave("Backside");
     const [shouldSave, setShouldSave] = useState(false);
     const [saveIndex, setSaveIndex] = useState(0);
@@ -455,6 +458,9 @@ const SingularityCards = () => {
                 <button onClick={saveTracker1}>Save Tracker1</button>
                 <button onClick={saveTracker2}>Save Tracker2</button>
                 <button onClick={saveTracker3}>Save Tracker3</button>
+                <button onClick={saveTracker11}>Save Tracker11</button>
+                <button onClick={saveTracker22}>Save Tracker22</button>
+                <button onClick={saveTracker33}>Save Tracker33</button>
                 <button onClick={saveBackside}>Save Backside</button>
             </Grid>
 
@@ -474,9 +480,12 @@ const SingularityCards = () => {
 
             </Grid> {/* Button to save all cards */}
             <BackCard ref={backsideRef}></BackCard>
-            <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="83,200,152" />
+            <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="93,250,162" />
+            <TrackerCard ref={trackerRef11} iconType="processing" backgroundImg={processing_background} color="93,250,162" hundred={true} />
             <TrackerCard ref={trackerRef2} iconType="score" backgroundImg={score_background} color="249,242,172" />
+            <TrackerCard ref={trackerRef22} iconType="score" backgroundImg={score_background} color="249,242,172" hundred={true} />
             <TrackerCard ref={trackerRef3} iconType="data" backgroundImg={data_background} color="255,127,219" />
+            <TrackerCard ref={trackerRef33} iconType="data" backgroundImg={data_background} color="255,127,219" hundred={true} />
 
             {cards.map((card, index) => (
                 <Card
@@ -611,7 +620,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
 
 
 
-const iconSize = "18px";
+const iconSize = "20px";
 const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle' };
 const ScoreIcon = () => <img src={scoreIcon} alt="score" style={iconStyle} />
 const DataIcon = () => <img src={dataIcon} alt="data" style={iconStyle} />
@@ -627,7 +636,7 @@ const CardContainer = styled.div`
 
 const Text = styled.p`
   color:aqua;
-  font-size:9px;
+  font-size:10px;
   font-family: ${props => props.font || 'Titillium Web'};
   text-shadow: 0 0 5px rgba(0,255,255,0.5);
 
@@ -683,16 +692,16 @@ const Row = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  width: calc(100% - 6px);
+  width: calc(100% - 8px);
   height: 100%;
-  padding: 3px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.5));
+  padding: 2px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
 `;
 const LeftColumn = styled.div`
   display: flex;
   margin-top:2%;
   flex-direction: column;
-  flex: 1;
+  flex: 1.1;
   //border-right: 1px dashed lime;
   align-items: flex-end;  // Add this line to right-align boxes
 `;
@@ -700,7 +709,7 @@ const LeftColumn = styled.div`
 const CenterColumn = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 0.6;
   //border-right: 1px dashed lime;
   /* Additional styles here */
 `;
@@ -709,7 +718,7 @@ const RightColumn = styled.div`
   display: flex;
   flex-direction: column;
   margin-top:2%;
-  flex: 1;
+  flex:  1.1;
   /* Additional styles here */
 `;
 
@@ -746,13 +755,13 @@ const Border = styled.div`
 
 const ImageContainer = styled.div`
   width: 100%;
-  padding-bottom: 95%; 
+  padding-bottom: 90%; 
   position: relative;
 `;
 
 const Image = styled.img`
   position: absolute;
-  object-fit: cover;  
+  object-fit: unset;  
   width: 100%;
   height: 100%;
   
@@ -774,7 +783,7 @@ const NumberCardText = styled(Text)`
  font-family:"Digital Dream";
  display: inline;
  font-weight:bold;
- font-size:10px;
+ font-size:13px;
 `;
 /*border-bottom: 2px double aqua;
 border-right: 2px double aqua;*/
@@ -809,7 +818,7 @@ const BottomHalf = styled.div`
   bottom: 0;
   left: 0;
   width: calc(100% - 6px);
-  height: 31%;
+  height: 34%;
   padding: 3px;
   background: linear-gradient(transparent, rgba(0,0,0,0.5));
 `;
@@ -817,6 +826,8 @@ const BottomHalf = styled.div`
 
 const TextTitle = styled.b`
     margin-right: auto;
+    margin-top:-2px;
+    font-size:9px;
     text-transform: uppercase;
 `;
 
@@ -824,12 +835,13 @@ const Details = styled.span`
     //margin-left: 10px;
     width:100%;
     display: inline-block;
-    margin-top:0px;
+    margin-top:-2px;
     margin-bottom:0px;
 `;
 
 const Cost = styled.b`
 color:rgb(230,177,42);
+font-size:10px;
 text-shadow: 0 0 5px rgba(230,177,42,0.7);
     float:right;
     margin-right:3px;
@@ -930,13 +942,14 @@ const textToComponents = (text) => {
 
 
 
-const iconSize2 = "84px";
+const iconSize2 = "66px";
 const iconStyle2 = { width: iconSize2, height: iconSize2, verticalAlign: 'middle', opacity: "1" };
 
-const iconStyle3 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", top: "20px" };
-const iconStyle4 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", left: "10px", bottom: "20px" };
-const iconStyle5 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", top: "20px" };
-const iconStyle6 = { width: "20px", height: "20px", verticalAlign: 'middle', position: "absolute", right: "10px", bottom: "20px" };
+const iconSize3 = "29px";
+const iconStyle3 = { width: iconSize3, height: iconSize3, verticalAlign: 'middle', position: "absolute", left: "10px", top: "20px" };
+const iconStyle4 = { width: iconSize3, height:iconSize3, verticalAlign: 'middle', position: "absolute", left: "10px", bottom: "20px" };
+const iconStyle5 = { width:iconSize3, height: iconSize3, verticalAlign: 'middle', position: "absolute", right: "10px", top: "20px" };
+const iconStyle6 = { width: iconSize3, height: iconSize3, verticalAlign: 'middle', position: "absolute", right: "10px", bottom: "20px" };
 const iconStyle7 = { width: "60px", height: "60px", verticalAlign: 'middle', opacity: "1" };
 const IconLarge = ({ type, style = iconStyle2 }) => {
     let iconSrc = '';
@@ -959,10 +972,10 @@ const convertColor = (rgbString) => {
     return `rgb(${r.trim()}, ${g.trim()}, ${b.trim()})`;
 };
 
-const TrackerCard = React.forwardRef(({ iconType, color, backgroundImg = processing_background }, ref) => {
+const TrackerCard = React.forwardRef(({ iconType, color, backgroundImg = processing_background, hundred=false }, ref) => {
     const formattedColor = convertColor(color);
     console.log(formattedColor)
-    const darkenedColor = darken(0.7, formattedColor);
+    const darkenedColor = darken(0.63, formattedColor);
     console.log(darkenedColor)
     return (
         <TrackerContainer ref={ref} color={darkenedColor} backgroundImg={backgroundImg}>
@@ -982,14 +995,16 @@ const TrackerCard = React.forwardRef(({ iconType, color, backgroundImg = process
                     <IconLarge type={iconType}></IconLarge>
                     <br></br>
                     <br></br>
+                    <br></br>
                     <IconLarge type={iconType}></IconLarge>
+                    <br></br>
                     <br></br>
                     <br></br>
                     <IconLarge type={iconType}></IconLarge>
                 </CenterColumn>
                 <RightColumn>
                     {Array.from({ length: 10 }, (_, i) => (
-                        <NumberBox key={i} color={color}>{i * 10}</NumberBox>
+                        <NumberBox key={i} color={color}>{(hundred ? 100 +i*10 : i* 10)}</NumberBox>
                     ))}
                 </RightColumn>
             </Row>
