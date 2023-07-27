@@ -55,353 +55,351 @@ import RegularFont2 from '../fonts/Orbit-Regular.ttf';
 import RegularFont3 from '../fonts/DIGITALDREAM.ttf';
 
 
-
 const initialCards = [
     {
-        img: img1,
-        title: "Digital Defence",
-        action1: "Activate Security Protocol",
-        details1: "+12 Data",
-        action2: "Disable Firewall",
-        details2: "+15 Score",
-        cost: "30 Data"
+        "img": "/chatgpt-apps3/static/media/data_harvest.805779d1d474568188ec.png",
+        "title": "Data Farm",
+        "action1": "Launch Data Seeding Simulation",
+        "details1": "Copy free action of the card your opponent plays this turn",
+        "action2": "Harvest Data",
+        "details2": "+1 score and +2 Score for every 10 Data",
+        "cost": "All Data"
     },
     {
-        img: img2,
-        title: "Swarm Intelligence",
-        action1: "Apply swarm solutions",
-        details1: "+2 Processing and +4 Processing per 10 Processing",
-        action2: "Release the Swarm",
-        details2: "+15 Data and + 10 Processing",
-        cost: "10 Score"
+        "img": "/chatgpt-apps3/static/media/chess.0d1354cf31bb0336f28a.png",
+        "title": "Deep Blue",
+        "action1": "Apply Alpha-Beta pruned Minimax algorithm",
+        "details1": "+4 data and +4 data per 10 data",
+        "action2": "Roll out the nodes",
+        "details2": "Before Card Draw, reveal both players hands and choose a free action to copy twice, +1 score",
+        "cost": "8 Data or 6 processing"
     },
     {
-        img: img3,
-        title: "Genetic Algorithms",
-        action1: "Mutate Variables",
-        details1: "+4 Processing +2 Processing for every 10 Processing ",
-        action2: "Initiate Evolutionary Sequence",
-        details2: "+3 Score for every 10 Score",
-        cost: "10 Processing"
+        "img": "/chatgpt-apps3/static/media/supervised.50188772e009817d9169.png",
+        "title": "Supervised Learning",
+        "action1": "Calibrate Reward Parameters",
+        "details1": "+6 data +3 data per 10 data",
+        "action2": "Outsource Labeling",
+        "details2": "After Card Draw, swap hand and processing with your opponent if you have at least 1 more processing",
+        "cost": "Swapping Processing"
     },
     {
-        img: img4,
-        title: "Data Farm",
-        action1: "Launch Data Seeding Simulation",
-        details1: "+12 Data",
-        action2: "Harvest Data",
-        details2: "+2 Score for every 10 Data",
-        cost: "All Data"
+        "img": "/chatgpt-apps3/static/media/balance.1cf18f4a9bb77ab8f425.png",
+        "title": "Weighted Neurons",
+        "action1": "Compute Gradient Descent",
+        "details1": "+6 data and + 12 data if your last played card had 'Data' in the name",
+        "action2": "Regularize Weights",
+        "details2": "Before Card Draw, collect cards on hand and divide equally as you choose",
+        "cost": "10 data or 5 processing"
     },
     {
-        img: img5,
-        title: "Generative Adversarial Network",
-        action1: "Deceive Discriminator",
-        details1: "+8 Processing",
-        action2: "Initiate Zero-Sum Game",
-        details2: "GAN Competition - Most Processing after 2 more rounds played get + Processing equal to the opponents Processing",
-        cost: "8 Data"
+        "img": "/chatgpt-apps3/static/media/art.15524fc746520f7a5f51.png",
+        "title": "Convolutional Neural Network",
+        "action1": "Reconstruct Latent Space",
+        "details1": "+4 processing and +4 processing if your opponent has 0 processing",
+        "action2": "Proclaim Art Contest on",
+        "details2": "Starting now, keep track of the highest reached data player with most get +8 score at end of game",
+        "cost": "10 data or 10 processing"
     },
     {
-        img: img6,
-        title: "Alpha-Beta pruned Minimax algorithm",
-        action1: "Apply Minimax Logic",
-        details1: "+3 Processing per 10 Data",
-        action2: "Beat Humans",
-        details2: "+1 Data per 2 Data",
-        cost: "6 Data 6 Processing"
+        "img": "/chatgpt-apps3/static/media/chip.c3d7f23893543bc644df.png",
+        "title": "Tensor Processing Unit",
+        "action1": "Levrage application-specific integrated circuit",
+        "details1": "Both players get +5 data per 10 data",
+        "action2": "Multiply the Matrix",
+        "details2": "+4 processing and +5 processing per 10 Data and +1 score",
+        "cost": "All data"
     },
     {
-        img: img7,
-        title: "Supervised Learning",
-        action1: "Calibrate Reward Parameters",
-        details1: "+6 Score",
-        action2: "Outsource Labeling",
-        details2: "+28 Data",
-        cost: "6 Score"
+        "img": "/chatgpt-apps3/static/media/vr.494585699c4b95048dcf.png",
+        "title": "Computer Vision",
+        "action1": "Detect objects",
+        "details1": "+4 data and +4 data per 10 data",
+        "action2": "Fine-tune existing model",
+        "details2": "If opponent has more score get half the difference in score",
+        "cost": "Half Processing Half data"
     },
     {
-        img: img8,
-        title: "Weighted Neurons",
-        action1: "Compute Gradient Descent",
-        details1: "+3 Data and + 4 Data per 10 Data",
-        action2: "Regularize Weights",
-        details2: "Take all players' processing and divide equally",
-        cost: "15 Data"
+        "img": "/chatgpt-apps3/static/media/net.767a7ed73de0a2594c7a.png",
+        "title": "Neural Network",
+        "action1": "Select optimizer algorithm",
+        "details1": "+12 processing and +6 processing to your opponent",
+        "action2": "Add deep layers",
+        "details2": "Look at and rearrange the top 4 cards and +3 score",
+        "cost": "8 data or 4 processing"
     },
     {
-        img: img9,
-        title: "Quantum Computing",
-        action1: "Get Quantum Entangled",
-        details1: "+20 Processing +10 Processing to your opponent",
-        action2: "Enable Quantum Supremacy",
-        details2: "+1 Score per 2 Processing",
-        cost: "20 Processing"
+        "img": "/chatgpt-apps3/static/media/server.d91d74e9ef3fda3423b9.png",
+        "title": "Data Center",
+        "action1": "Establish redundancy",
+        "details1": "+2 and +4 per 10 to data or processing",
+        "action2": "Provide Cloud Storage",
+        "details2": "If you have more Data than your opponent, get +3 score per 10 data spent",
+        "cost": "Data Difference"
     },
     {
-        img: img11,
-        title: "Reinforcement Learning",
-        action1: "Explore Greedily",
-        details1: "+6 Data + 4 Processing",
-        action2: "Predict Q Values",
-        details2: "+10 Score +6 Data",
-        cost: "Half Processing"
+        "img": "/chatgpt-apps3/static/media/defence_robot.f3f4b9cc5556489bfdca.png",
+        "title": "Digital Defence",
+        "action1": "Activate Security Protocol",
+        "details1": "+1 score Both players lose up to 12 data",
+        "action2": "Disable Firewall",
+        "details2": "+8 score in 1 more round",
+        "cost": "32 data or 16 processing"
     },
     {
-        img: img12,
-        title: "Variational Autoencoders",
-        action1: "Create Art",
-        details1: "+3 Data and +4 Data per 10 Data",
-        action2: "",
-        details2: "+30 Score if 'Generative Adversarial Network' competition is played and you won",
-        cost: "Won GAN Competition"
+        "img": "/chatgpt-apps3/static/media/swarm_intelligence.a9455745f80438b00ea9.png",
+        "title": "Swarm Intelligence",
+        "action1": "Apply swarm solutions",
+        "details1": "+4 Data and +4 Data per 10 Data",
+        "action2": "Release the Swarm",
+        "details2": "+2 data per 1 processing spent or +1 processing per 2 data spent and +2 score ",
+        "cost": "All data or All processing"
     },
     {
-        img: img13,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/genetic.b0f76ce73af7050b8a2e.png",
+        "title": "Genetic Algorithms",
+        "action1": "Mutate Variables",
+        "details1": "+5 processing and +5 processing per 10 processing",
+        "action2": "Initiate Evolutionary Sequence",
+        "details2": "In one more round, get +3 Score per 10 data spent now",
+        "cost": "All Data"
     },
     {
-        img: img14,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/adversarial.ab008227e94273666165.png",
+        "title": "Generative Adversarial Network",
+        "action1": "Deceive Discriminator",
+        "details1": "+2 data per card in your discard pile",
+        "action2": "Initiate Zero-Sum Game",
+        "details2": "GAN Competition: Most Processing after 2 more rounds played get +8 score",
+        "cost": "4 data or 4 processing"
     },
     {
-        img: img10,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/quantum.7bfe0eefa868e37309cc.png",
+        "title": "Quantum Computing",
+        "action1": "Get Quantum Entangled",
+        "details1": "+4 data and +4 data per 10 data",
+        "action2": "Enable Quantum Supremacy",
+        "details2": "+2 score +4 Score per 10 Processing spent",
+        "cost": "All Processing"
     },
     {
-        img: img15,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/rat.0bf170f7c2648d2ae2d3.png",
+        "title": "Reinforcement Learning",
+        "action1": "Explore Greedily",
+        "details1": "+6 data and + 3 data per 10 data after Card Draw, both players show their hand",
+        "action2": "Predict Q Values",
+        "details2": "+2 score per 10 total data and processing spent",
+        "cost": "All data and All processing"
     },
     {
-        img: img16,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/puzzle.d7c371cc7f912c382961.png",
+        "title": "Recurrent Neural Network",
+        "action1": "Recall Long Short-Term Memory",
+        "details1": "Loan 20 data pay back up to 26 data in 2 rounds",
+        "action2": "Backpropegate Errors",
+        "details2": "+1 score per card in your discard pile",
+        "cost": "3 data per card"
     },
     {
-        img: img17,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/lightning.713bd6ae7f297148207a.png",
+        "title": "CPU Voltage Spike",
+        "action1": "Accidentally Overclock",
+        "details1": "Set your data to the next whole 10 ",
+        "action2": "Overload transistors",
+        "details2": "Start competition, the player who has Digital Defence in their discard pile at game end get +8 score",
+        "cost": "10 data or 6 processing"
     },
     {
-        img: img18,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/mining.931e49fa7de6b9ebddf0.png",
+        "title": "Data Mining",
+        "action1": "Test Linear Regression",
+        "details1": "+4 data and +12 data if below 16 data",
+        "action2": "Use Deep Learning",
+        "details2": "Take a card from any discard pile and play the action with a cost immediately, first pay this cards cost then that cards",
+        "cost": "Original and 8 processing or 14 data"
     },
     {
-        img: img19,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/hacker.0852a0e8fb3a4240e8d6.png",
+        "title": "Hacker",
+        "action1": "security by obscurity",
+        "details1": "+3 Data +2 Processing +1 score",
+        "action2": "Hire the hacker",
+        "details2": "Steal up to 4 score from the opponent",
+        "cost": "14 processing"
     },
     {
-        img: img20,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/scientist.bee1bef9f5a88882a994.jpg",
+        "title": "Data Scientist",
+        "action1": "Produce Graphs",
+        "details1": "+6 data +3 data per 10 data",
+        "action2": "Raise Ethical Concerns",
+        "details2": "This round, block all actions, delayed actions, and costs except this; all affected cards go to your discard pile",
+        "cost": "14 data"
     },
     {
-        img: img21,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/iot.3ed0f1cb9d625e32bbc9.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img22,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/brain.3b36f28da467f35f299d.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img23,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/drive.421e2754c85e33fe88de.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img24,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/vault.690f8d1387cdd694fefc.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img25,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/bulb.81e65dc1634dc531c62b.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img26,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/vials.a0f831bc14fc450118e8.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img27,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/vision.6b9a60803254c9d73cd9.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img28,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/computer.45b4aa45ed512fe728d4.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img29,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/microscope.40c4648469ebbc45e7c2.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img30,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
+        "img": "/chatgpt-apps3/static/media/telescope.5c48881f6a73fb4042ba.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
     },
     {
-        img: img31,
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
-    },
-
-
+        "img": "/chatgpt-apps3/static/media/stair.740cb2efe884e577146b.png",
+        "title": "",
+        "action1": "",
+        "details1": "",
+        "action2": "",
+        "details2": "",
+        "cost": ""
+    }
 ]
 
 const SingularityCards = () => {
-    const [textAreaValue, setTextAreaValue] = useState(JSON.stringify(initialCards, null, 2));
-  
+
+
     const handleTextAreaChange = (event) => {
-      setTextAreaValue(event.target.value);
-      try {
-        const newValue = JSON.parse(event.target.value);
-        setCards(newValue);
-        saveToLocalStorage(newValue);
-      } catch (err) {
-        console.error("Invalid JSON", err);
-      }
+        setTextAreaValue(event.target.value);
+        try {
+            const newValue = JSON.parse(event.target.value);
+            setCards(newValue);
+            saveToLocalStorage(newValue);
+        } catch (err) {
+            console.error("Invalid JSON", err);
+        }
     };
-  
+
     const handleCopy = async () => {
-      await navigator.clipboard.writeText(textAreaValue);
-      alert('Copied to clipboard');
+        await navigator.clipboard.writeText(textAreaValue);
+        alert('Copied to clipboard');
     };
-  
+
     const handlePaste = async () => {
-      const pastedValue = await navigator.clipboard.readText();
-      setTextAreaValue(pastedValue);
-      try {
-        const newValue = JSON.parse(pastedValue);
-        setCards(newValue);
-        
-      } catch (err) {
-        console.error("Invalid JSON", err);
-      }
+        const pastedValue = await navigator.clipboard.readText();
+        setTextAreaValue(pastedValue);
+        try {
+            const newValue = JSON.parse(pastedValue);
+            setCards(newValue);
+
+        } catch (err) {
+            console.error("Invalid JSON", err);
+        }
     };
     const handleReset = () => {
         localStorage.clear();
         setCards(initialCards);
         setTextAreaValue(JSON.stringify(initialCards, null, 2));
     };
-  
+
     const handleAddCard = () => {
-      const newCard = {
-        img: "img1",
-        title: "",
-        action1: "",
-        details1: "",
-        action2: "",
-        details2: "",
-        cost: ""
-      };
-      const newCards = [...cards, newCard];
-      setCards(newCards);
-      
-      setTextAreaValue(JSON.stringify(newCards, null, 2));
+        const newCard = {
+            img: "img1",
+            title: "",
+            action1: "",
+            details1: "",
+            action2: "",
+            details2: "",
+            cost: ""
+        };
+        const newCards = [...cards, newCard];
+        setCards(newCards);
+
+        setTextAreaValue(JSON.stringify(newCards, null, 2));
     };
     const saveToLocalStorage = (cards) => {
         localStorage.setItem('singularityCards', JSON.stringify(cards));
     };
-    
+
     const loadFromLocalStorage = () => {
         const storedCards = localStorage.getItem('singularityCards');
         return storedCards ? JSON.parse(storedCards) : initialCards;
     };
-    
+
     const [cards, setCards] = useState(loadFromLocalStorage);
-    const [currentCard, nextCard,prevCard] = useCurrentCard(cards);
+    const [textAreaValue, setTextAreaValue] = useState(JSON.stringify(cards, null, 2));
+    const [currentCard, nextCard, prevCard] = useCurrentCard(cards);
     const [card, setCard] = useState(cards[currentCard])
     const cardRefs = cards.map(() => React.createRef());
     const [cardRef, saveAsImage] = useSave(card.title);
@@ -413,14 +411,14 @@ const SingularityCards = () => {
     const [saveIndex, setSaveIndex] = useState(0);
     const [saveAll] = useSaveAll();
 
-    
+
 
     useEffect(() => {
         setCard(cards[currentCard]);
     }, [currentCard]);
-    useEffect(()=>{
+    useEffect(() => {
         setCard(cards[currentCard]);
-    },[cards])
+    }, [cards])
 
     const saveAllCards = async () => {
         for (let i = 0; i < cards.length; i++) {
@@ -445,7 +443,7 @@ const SingularityCards = () => {
 
 
             <Grid item xs={3} >
-                
+
                 <button onClick={nextCard}>Next Card</button>
                 <button onClick={prevCard}>Prev Card</button>
                 <br></br>
@@ -461,16 +459,18 @@ const SingularityCards = () => {
             </Grid>
 
             <Grid item xs={12} >
-            <textarea
-          value={textAreaValue}
-          onChange={handleTextAreaChange}
-          rows="10"
-          cols="50"
-        /><br></br>
-        <button onClick={handleCopy}>Copy</button>
-        <button onClick={handlePaste}>Paste</button>
-        <button onClick={handleAddCard}>Add Card</button>
-        <button onClick={handleReset}>Reset</button>
+                <textarea
+                    value={textAreaValue}
+                    onChange={handleTextAreaChange}
+                    rows="60"
+                    cols="50"
+                /><br></br>
+                <button onClick={handleCopy}>Copy</button>
+                <button onClick={handlePaste}>Paste</button>
+                <button onClick={handleAddCard}>Add Card</button>
+                <button onClick={handleReset}>Reset</button>
+                
+
 
             </Grid> {/* Button to save all cards */}
             <BackCard ref={backsideRef}></BackCard>
@@ -491,7 +491,9 @@ const SingularityCards = () => {
                     cost={card.cost}
                 />
             ))}
+            <Table data={cards} setData={setCards} setTextAreaValue={setTextAreaValue} />
         </Grid>
+        
     );
 };
 export default SingularityCards;
@@ -511,7 +513,80 @@ function CardActions({ title, details, cost = null }) {
 };
 
 
+const Table = ({ data, setData, setTextAreaValue }) => {
+    const onCellClick = useCellSwap();
 
+    const handleUpdate = () => {
+        const newJson = JSON.stringify(data, null, 2);
+        setTextAreaValue(newJson);
+    };
+
+    return (
+        <div>
+            <button onClick={handleUpdate}>Update</button>
+            <table style={{ width: "100%" }}>
+                {data.map((item, i) => (
+                    <tr key={i}>
+                        <td>{item.title}</td>
+                        <EditableCell
+                            value={item.details1}
+                            onChange={newValue => {
+                                const newData = [...data];
+                                newData[i].details1 = newValue;
+                                setData(newData);
+                            }}
+                            onCellClick={onCellClick}
+                        />
+                        <EditableCell
+                            value={item.details2}
+                            onChange={newValue => {
+                                const newData = [...data];
+                                newData[i].details2 = newValue;
+                                setData(newData);
+                            }}
+                            onCellClick={onCellClick}
+                        />
+                        <td>{item.cost}</td>
+                    </tr>
+                ))}
+            </table>
+        </div>
+    );
+};
+
+const EditableCell = ({ value, onChange, onCellClick }) => {
+    const [cellContent, setCellContent] = useState(value);
+
+    useEffect(() => {
+        setCellContent(value);
+    }, [value]);
+
+    const handleClick = () => {
+        onCellClick(cellContent, setCellContent);
+    };
+
+    useEffect(() => {
+        onChange(cellContent);
+    }, [cellContent]);
+
+    return <td onClick={handleClick}>{cellContent}</td>;
+};
+
+const useCellSwap = () => {
+    const [lastClickedCell, setLastClickedCell] = useState(null);
+
+    const onCellClick = (cellContent, setCellContent) => {
+        if (lastClickedCell && lastClickedCell.content !== cellContent) {
+            setCellContent(lastClickedCell.content);
+            lastClickedCell.setCellContent(cellContent);
+            setLastClickedCell(null);
+        } else {
+            setLastClickedCell({ content: cellContent, setCellContent });
+        }
+    };
+
+    return onCellClick;
+};
 
 const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, details2, cost }, ref) => {
     return (
@@ -826,7 +901,7 @@ const useCurrentCard = (cards) => {
     const prev = () => {
         setCurrentCard(currentCard > 0 ? (currentCard - 1) : max);
     }
-    return [currentCard, next,prev];
+    return [currentCard, next, prev];
 }
 
 
@@ -943,7 +1018,7 @@ const BackCard = React.forwardRef(({ }, ref) => {
     return (
         <BacksideContainer ref={ref} >
 
-            
+
         </BacksideContainer>
     );
 });
