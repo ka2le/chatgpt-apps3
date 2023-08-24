@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.d916c158.js",
+    "main.js": "/chatgpt-apps3/static/js/main.47aad0c5.js",
     "static/js/787.00e8474e.chunk.js": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js",
     "static/media/Ebook Harmony of Everything.pdf": "/chatgpt-apps3/static/media/Ebook Harmony of Everything.4e846cd9d9e2f077b6e6.pdf",
     "static/media/backside2.png": "/chatgpt-apps3/static/media/backside2.b92bb8da3c6836451617.png",
@@ -69,6 +69,8 @@
     "static/media/data.png": "/chatgpt-apps3/static/media/data.2849674cc9dc5b07982b.png",
     "static/media/base3.png": "/chatgpt-apps3/static/media/base3.600069a506df7b08ecea.png",
     "static/media/space1.png": "/chatgpt-apps3/static/media/space1.8e5c8e51e9f68c2c7ce1.png",
+    "static/media/animals.png": "/chatgpt-apps3/static/media/animals.7e04cc21c7081fc430ee.png",
+    "static/media/expansion2.png": "/chatgpt-apps3/static/media/expansion2.82a9cf521d1d686ac7dc.png",
     "static/media/base2.png": "/chatgpt-apps3/static/media/base2.10ef0776961779f8b392.png",
     "static/media/base_icon.png": "/chatgpt-apps3/static/media/base_icon.6a7e929482c0890f02a2.png",
     "static/media/TitilliumWeb-Regular.ttf": "/chatgpt-apps3/static/media/TitilliumWeb-Regular.e53e0538893d432e0635.ttf",
@@ -82,11 +84,11 @@
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.50a11e589c6bdbe6fcc20d068ec25c03.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.43886756af1c452af06aae99d986a6cc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.d916c158.js.map": "/chatgpt-apps3/static/js/main.d916c158.js.map",
+    "main.47aad0c5.js.map": "/chatgpt-apps3/static/js/main.47aad0c5.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.d916c158.js"
+    "static/js/main.47aad0c5.js"
   ]
 }
