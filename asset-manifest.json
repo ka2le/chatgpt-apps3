@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.d0574428.js",
+    "main.js": "/chatgpt-apps3/static/js/main.54e3650c.js",
     "static/js/787.00e8474e.chunk.js": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js",
     "static/media/Ebook Harmony of Everything.pdf": "/chatgpt-apps3/static/media/Ebook Harmony of Everything.4e846cd9d9e2f077b6e6.pdf",
     "static/media/backside2.png": "/chatgpt-apps3/static/media/backside2.b92bb8da3c6836451617.png",
@@ -89,11 +89,11 @@
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.50a11e589c6bdbe6fcc20d068ec25c03.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.43886756af1c452af06aae99d986a6cc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.d0574428.js.map": "/chatgpt-apps3/static/js/main.d0574428.js.map",
+    "main.54e3650c.js.map": "/chatgpt-apps3/static/js/main.54e3650c.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.d0574428.js"
+    "static/js/main.54e3650c.js"
   ]
 }
