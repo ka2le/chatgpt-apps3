@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.07f9a08b.js",
+    "main.js": "/chatgpt-apps3/static/js/main.7dd96100.js",
     "static/js/787.00e8474e.chunk.js": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js",
     "static/media/Ebook Harmony of Everything.pdf": "/chatgpt-apps3/static/media/Ebook Harmony of Everything.4e846cd9d9e2f077b6e6.pdf",
     "static/media/backside2.png": "/chatgpt-apps3/static/media/backside2.b92bb8da3c6836451617.png",
@@ -83,16 +83,17 @@
     "static/media/DIGITALDREAM.ttf": "/chatgpt-apps3/static/media/DIGITALDREAM.a73dceeac9213d0ee0e7.ttf",
     "index.html": "/chatgpt-apps3/index.html",
     "static/media/background2.svg": "/chatgpt-apps3/static/media/background2.475fe69369b1346d285ce101103deee3.svg",
+    "static/media/scorekeeper_background.svg": "/chatgpt-apps3/static/media/scorekeeper_background.1c28957871253b8ef243bbfd941c3914.svg",
     "static/media/data_background.svg": "/chatgpt-apps3/static/media/data_background.05a497fa34fdf837a1ccf23d11ca9282.svg",
     "static/media/score_background.svg": "/chatgpt-apps3/static/media/score_background.9ebe7dd2d6812ab2e0092cea0e43f0d4.svg",
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.50a11e589c6bdbe6fcc20d068ec25c03.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.43886756af1c452af06aae99d986a6cc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.07f9a08b.js.map": "/chatgpt-apps3/static/js/main.07f9a08b.js.map",
+    "main.7dd96100.js.map": "/chatgpt-apps3/static/js/main.7dd96100.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.07f9a08b.js"
+    "static/js/main.7dd96100.js"
   ]
 }
