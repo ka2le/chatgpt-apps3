@@ -19,6 +19,7 @@ import Character1 from './components/mysteryGame/Character1';
 import SimplePokerContainer from './components/SimplePoker';
 import ArTest from './components/ArTest';
 import SingularityCards from './components/SingularityCards';
+import ScoreKeeper from './components/ScoreKeeper';
 
 
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/simple-poker-ai" element={<SimplePokerContainer/>} />
             <Route path="/ar-test" element={<ArTest/>} />
             <Route path="/singularity-cards" element={<SingularityCards/>} />
+            <Route path="/score-keeper" element={<ScoreKeeper/>} />
             
           </Routes>
         </HashRouter>
