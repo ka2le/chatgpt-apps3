@@ -93,7 +93,7 @@ export const SimplePokerContainer = () => {
 (()=>{
     const console_log = window.console.log;
     window.console.log = function(...args){
-      console_log(...args);
+      //console_log(...args);
       var textarea = document.getElementById('my_console');
       if(!textarea) return;
       args.forEach(arg=>textarea.value += `${JSON.stringify(arg)}\n`);
