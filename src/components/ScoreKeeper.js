@@ -18,7 +18,7 @@ import RegularFont3 from '../fonts/DIGITALDREAM.ttf';
 const NUMBER_OF_ROWS = 7;
 const ROW_HEIGHT = "calc(" + 100 / NUMBER_OF_ROWS + "%)";
 const NUMBER_FONT_SIZE = "7.2vh";
-const BUTTON_FONT_SIZE = "16px";
+const BUTTON_FONT_SIZE = "18px";
 
 
 const styles = {
@@ -99,7 +99,7 @@ const ScoreKeeper = () => {
                 }}>
                   <Divider style={{
                     backgroundColor: " rgb(0 237 255 / 28%)",
-                    height: "0px",
+                    height: "2px",
                   }} />
                 </Grid>
               )}
@@ -141,7 +141,8 @@ const ScoreRow = ({ label, type, updateRound, updateRowState, history, isLandsca
   useEffect(() => {
     updateRowState(label, text);
   }, []);
-
+  const textColor = type == "score" ? "rgb(248 255 153)" : type == "data" ? "rgb(253 126 189)" : type == "round" ? "rgb(126 228 253)" : "rgb(146 255 181)";
+  const backgroundColor = convertRgbToRgba(textColor, 0.1);
   return (
     <React.Fragment>
       <Grid item xs={isLandscape ? 3 : 6} style={{ height: ROW_HEIGHT }}>
@@ -150,26 +151,30 @@ const ScoreRow = ({ label, type, updateRound, updateRowState, history, isLandsca
       </Grid>
       <Grid item xs={isLandscape ? 3 : 6} style={{ height: ROW_HEIGHT, paddingLeft: "10px" }}>
         {type != "round" &&
-          <Grid container direction="row" style={{ justifyContent: 'space-between', height: "100%" }}>
+          <Grid container direction="row" style={{ justifyContent: 'space-around', height: "100%",  borderRadius:"5px", padding:"0 3px" }}>
 
             {/* First row of buttons */}
-            <Grid container spacing={1} style={{ alignItems: 'flex-start' }}>
+            <Grid container spacing={1} style={{ alignItems: 'flex-end' }}>
               {[-1, -10, -100].map((value, colIndex) => (
                 <Grid item xs={4} key={colIndex}>
                   <CustomButton
                     label={value === 'reset' ? '-All' : value.toString()}
                     onClick={() => handleButtonClick(value)}
+                    color={textColor}
+                    
                   />
                 </Grid>
               ))}
             </Grid>
             {/* Second row of buttons */}
-            <Grid container spacing={1} >
+            <Grid container spacing={1 } style={{ alignItems: 'flex-start' }} >
               {[1, 10, "half"].map((value, colIndex) => (
                 <Grid item xs={4} key={colIndex}>
                   <CustomButton
                     label={value === 'half' ? '/2' : "+" + value.toString()}
                     onClick={() => handleButtonClick(value)}
+                    color={textColor}
+                   
                   />
                 </Grid>
               ))}
@@ -192,10 +197,20 @@ const ScoreRow = ({ label, type, updateRound, updateRowState, history, isLandsca
   );
 };
 
-const CustomButton = ({ label, onClick }) => {
+const CustomButton = ({ label, onClick, color = "#aaffff"}) => {
+  // Split the label into the sign and the number
+  const sign = label[0];
+  const number = label.slice(1);
+  const backgroundColor = sign != "+" ? convertRgbToRgba(color, 0.07) :convertRgbToRgba(color, 0.14);
   return (
-    <Button variant="outlined" style={{ padding: "4px 0", margin: "2px 0", fontSize: BUTTON_FONT_SIZE, minWidth: "100%", fontFamily: "Titillium Web" }} onClick={onClick}>
-      {label}
+    <Button 
+      variant="outlined" 
+      style={{ padding: "4px 0", margin: "0px 0", fontSize: BUTTON_FONT_SIZE, minWidth: "100%", fontFamily: "Titillium Web", color:color , backgroundColor:backgroundColor}} 
+      onClick={onClick}
+    >
+      {/* Inline elements for the sign and the number */}
+      <span style={{ fontSize: "28px" , lineHeight:"90%", marginTop:"-6px"}}>{sign}</span>
+      <span>{number}</span>
     </Button>
   );
 };

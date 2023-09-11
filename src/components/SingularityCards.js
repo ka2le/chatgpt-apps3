@@ -139,7 +139,7 @@ const initialCards =[
     "details1": "+4 processing and +4 processing if opponent has 0 processing",
     "action2": "Disable Firewall",
     "details2": "+8 score in 1 \nmore round",
-    "cost": "32 data or 16 processing",
+    "cost": "30 data or 14 processing",
     "id": "1",
     "type": "base"
   },
@@ -220,7 +220,7 @@ const initialCards =[
     "id": 8,
     "type": "base"
   },
-{
+  {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139670504286998558/ka2ledionysuz_bionic_eye_artificial_eye_wires_circuits_in_eye___604957da-d751-4a0d-bd2e-ffa8d2b15203.jpg",
     "title": "Computer Vision",
     "action1": "Detect objects",
@@ -236,7 +236,7 @@ const initialCards =[
     "title": "Recurrent Neural Network",
     "action1": "Recall Long Short-Term Memory",
     "details1": "Loan 20 data pay back up to 26 data in 2 \nrounds",
-    "action2": "Backpropgate errors",
+    "action2": "Backpropagate errors",
     "details2": "+1 score per card in your discard pile",
     "cost": "3 data per card",
     "id": "10",
@@ -489,7 +489,7 @@ const initialCards =[
     "title": "Explainable AI",
     "action1": "Boost Transparency",
     "details1": "Flip and spread each card in the draw pile",
-    "cost": "22 data or 10 processing or 4 score ",
+    "cost": "18 data or 8 processing or 4 score ",
     "action2": "Explain model",
     "details2": "Next time including this round, opponent gain score gain same amount of score",
     "id": "33",
@@ -535,7 +535,7 @@ const initialCards =[
     "details1": "+4 data and +2 data per total 10 data of both players",
     "action2": "Follow back",
     "details2": "Next round, both players also get the result of their opponents action ",
-    "cost": "12 data or 6 processing ",
+    "cost": "10 data or 6 processing ",
     "id": "37",
     "type": "v2"
   },
@@ -554,10 +554,10 @@ const initialCards =[
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1144297444658659430/ka2ledionysuz_virtual_reality__in_the_style_of_cloudpunk_realis_1448d4d7-e0fc-4ddc-a187-881c7c5fe43b.png",
     "title": "Virtual Reality",
     "action1": "Ready Player One",
-    "details1": "9 data or 5 processing or 2 score",
+    "details1": "10 data or 6 processing or 2 score",
     "action2": "Enter Matrix ",
-    "details2": "18 data or 10 processing or 4 score",
-    "cost": "9 data or 5 processing or 2 score",
+    "details2": "20 data or 12 processing or 4 score",
+    "cost": "8 data or 4 processing or 2 score",
     "id": "39",
     "type": "v2"
   },
@@ -600,7 +600,7 @@ const initialCards =[
     "action1": "Benchmark LINPACK",
     "details1": "+4 processing and +4 processing if you have more score than opponent",
     "action2": "Achieve petaflop",
-    "details2": "+10 score",
+    "details2": "+11 score",
     "cost": "30 data and 10 processing",
     "id": "43",
     "type": "v2"
@@ -649,19 +649,18 @@ const initialCards =[
     "id": "47",
     "type": "v2"
   },
-  
   {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140692625591111910/ka2ledionysuz_lake_in_front_if_sci_fi_city_boats_moon_light__in_8a7a6ab8-c9fb-495c-8af5-c26ed962c578.png",
     "title": "Data Lake",
     "action1": "Stream data",
     "details1": "+4 data per times you have taken this action, including this time",
     "action2": "Store metadata",
-    "details2": "Next round, you can discard 1 card to trigger both actions on this if its in your discard pile",
+    "details2": "Next round, you can discard 1 card to trigger both actions on this if it's in your discard pile",
     "cost": "18 data or 8 processing or 4 score",
     "id": "48",
     "type": "v3"
   },
-{
+  {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140287671328059463/ka2ledionysuz_roomba_tank_very_high_tech_advanced_sci_fi_cleani_f4617fe2-a90d-4b22-b83b-d896103ac3e6.png",
     "title": "Robot vacuum",
     "action1": "Map home",
@@ -672,7 +671,6 @@ const initialCards =[
     "id": "49",
     "type": "v3"
   },
-
   {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140276690422087720/ka2ledionysuz_severl_very_different_video_game_characters_group_47a66963-86f2-4a45-9998-1169117ea41f.jpg",
     "title": "Non Player Character",
@@ -680,7 +678,7 @@ const initialCards =[
     "details1": "Next round, also copy the free action of the card you play",
     "action2": "Adjust difficulty",
     "details2": "At game end, get +2 score per 10 \ntotal data and processing you have left then",
-    "cost": "6 processing or 14 data",
+    "cost": "6 processing or 12 data",
     "id": "50",
     "type": "v3"
   },
@@ -691,7 +689,7 @@ const initialCards =[
     "details1": "Copy free action of the bottom card of your discard pile",
     "action2": "Trick tyrant",
     "details2": "In 2 \nrounds, pick one of +50 data <br> or +25 processing or +10 score",
-    "cost": "30 data or 15 processing or 6 score",
+    "cost": "30 data or 15 processing or 5 score",
     "id": "51",
     "type": "v3"
   },
@@ -702,7 +700,7 @@ const initialCards =[
     "details1": "+4 data and +4 data per 10 data",
     "action2": "Deploy continuously ",
     "details2": "After Card Draw, reveal up to 3 \ncards and declare actions. Play all as stated for +4 score each, cards count as in hand.",
-    "cost": "26 data or 12 processing ",
+    "cost": "22 data or 10 processing ",
     "id": "52",
     "type": "v3"
   },
@@ -713,7 +711,7 @@ const initialCards =[
     "details1": "Next round, no player can affect their opponent",
     "action2": "Disable \"temporarily\"",
     "details2": "Merge discard piles, all cards go in the same pile and it counts as both yours and your opponents",
-    "cost": "14 data or 8 processing ",
+    "cost": "12 data or 6 processing ",
     "id": "53",
     "type": "v3"
   },
@@ -735,7 +733,7 @@ const initialCards =[
     "details1": "+6 data and +3 data per 10 data",
     "action2": "Tokenize world",
     "details2": "Switch up to 4 \ncards you will draw with 4 \ncards\nfrom your discard pile",
-    "cost": "12 data or 6 processing",
+    "cost": "10 data or 4 processing",
     "id": "55",
     "type": "v3"
   },
@@ -746,7 +744,7 @@ const initialCards =[
     "details1": "Swap 1 card from your hand with 1 card from your discard pile",
     "action2": "Simulate Building ",
     "details2": "Reveal 1 card, change all data and processing to the other on both actions and cost, for rest of game",
-    "cost": "18 data or 10 processing ",
+    "cost": "18 data or 8 processing ",
     "id": "56",
     "type": "v3"
   },
@@ -768,12 +766,11 @@ const initialCards =[
     "details1": "+4 data and +4 data per 10 data",
     "action2": "Filter presidents ",
     "details2": "Next round  before playing a card, look at the next card you will draw, also trigger this action again",
-    "cost": "12 data or 6 processing ",
+    "cost": "10 data or 4 processing ",
     "id": "58",
     "type": "v3"
   },
-  
-{
+  {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142532226769231902/ka2ledionysuz_galaxy_vortex_night_sky_above_planet_epic_black_h_a8dc0e2d-762a-4df7-b431-937f168abe65.jpg",
     "title": "Black Hole",
     "action1": "Consume gravitationally",
@@ -813,7 +810,7 @@ const initialCards =[
     "details1": "+4 data per space card activated this round",
     "action2": "Press floor 2",
     "details2": "Play free action of all but 1 space card in your discard pile",
-    "cost": "14 data or 8 processing",
+    "cost": "12 data or 6 processing",
     "id": "62",
     "type": "space"
   },
@@ -824,7 +821,7 @@ const initialCards =[
     "details1": "+2 processing per space card activated this round",
     "action2": "",
     "details2": "Play up to 2 \nfree actions of space cards in your discard pile ",
-    "cost": "6 processing or 14 data",
+    "cost": "4 processing or 10 data",
     "id": "63",
     "type": "space"
   },
@@ -846,7 +843,7 @@ const initialCards =[
     "details1": "+4 data per space card in your discard pile",
     "action2": "Sleep deeply",
     "details2": "Next round, all space card actions are blocked",
-    "cost": "14 data or 8 processing",
+    "cost": "10 data or 4 processing",
     "id": "65",
     "type": "space"
   },
@@ -868,7 +865,7 @@ const initialCards =[
     "details1": "+2 processing  per space card activated this round",
     "action2": "Host olympics",
     "details2": "Play free action of all space cards in your discard pile ",
-    "cost": "18 data or 8 processing",
+    "cost": "16 data or 8 processing",
     "id": "67",
     "type": "space"
   },
@@ -894,26 +891,24 @@ const initialCards =[
     "id": "69",
     "type": "space"
   },
-  
   {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1146782885211295814/ka2ledionysuz_very_cute_raccoon_baby_sci_fi_space_ship_interior_558985ba-6af1-4cb5-975d-dd2e31639093.png",
     "title": "Raccoon",
     "action1": "Guard Galaxy ",
     "details1": "+10 data or +6 processing or +2 score",
     "action2": "Befriend Wall-E",
-    "details2": "+6 score",
+    "details2": "+6 score or activate all free actions of space cards in your discard pile",
     "cost": "12 processing or 22 data",
     "id": "70",
     "type": "animals"
   },
-
   {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143442607100416061/ka2ledionysuz_very_cute_baby_wholly_mammoth_hairy_amd_very_fluf_54081d77-78b2-43ef-a80e-5e451f4b0ddf.png",
     "title": "Woolly Mammoth",
     "action1": "Pose for cave portrait",
     "details1": "+10 data or +6 processing  or 2 score",
     "action2": "Clone from Ice",
-    "details2": "Secret Auction: Both players reveal a data offer, highets win +6 score now and have to pay the data in 2 \nrounds or lose All data and -8 score",
+    "details2": "Secret Auction: Both players reveal a data offer, highest win +6 score now and have to pay the data in 2 \nrounds or lose All data and -8 score",
     "cost": "4 processing or 8 data",
     "id": "71",
     "type": "animals"
@@ -946,7 +941,7 @@ const initialCards =[
     "action1": "Dig for bones",
     "details1": "Steal 1 Robot Dog from an opponent's discard pile, and first card on top of it, if available.",
     "action2": "Howl-to-Text",
-    "details2": "+4 score and +10 processing ",
+    "details2": "+4 score and +12 processing ",
     "cost": "34 data",
     "id": "74",
     "type": "animals"
@@ -980,7 +975,7 @@ const initialCards =[
     "details1": "+5 data and +10 data if you reveal another Robot Dog in hand",
     "action2": "Smell butts",
     "details2": "If you have 3 \nRobot Dog cards in your discard pile +8 score",
-    "cost": "10 data or 4 processing ",
+    "cost": "8 data or 4 processing ",
     "id": "77",
     "type": "animals"
   },
@@ -991,7 +986,7 @@ const initialCards =[
     "details1": "+8 data and +8 data if you have less data than opponent ",
     "action2": "Reboot",
     "details2": "+8 score",
-    "cost": "16 processing",
+    "cost": "14 processing",
     "id": "78",
     "type": "animals"
   },
@@ -1035,7 +1030,7 @@ const initialCards =[
     "details1": "+8 data and +10 data if you have <br> at least 30 data",
     "action2": "Praise hexagons",
     "details2": "Competition: Next turn, +6 score to the player playing a card which name is first alphabetically",
-    "cost": "14 data or 6 processing ",
+    "cost": "10 data or 4 processing ",
     "id": "82",
     "type": "animals"
   },
@@ -1120,20 +1115,76 @@ const initialCards =[
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1146771748130410616/ka2ledionysuz_planet_of_the_baby_apes_very_cute_apes_in_the_sty_f0b129b3-1bc7-4115-9c80-1c0b3accd823.png",
     "title": "Chimpanzee - Albert ii",
     "action1": "Climb out of gravity well",
-    "details1": "",
+    "details1": "+8 data and +10 data if you have <br> at least 30 data",
     "action2": "Rehydrate banan ",
-    "details2": "",
-    "cost": "",
-      "id": "90",
-      "type": "animals"
-    },
- 
+    "details2": "+4 score per 20 data spent",
+    "cost": "20 , 40 \nor 60 data",
+    "id": "90",
+    "type": "animals"
+  }
 ]
 
 
 
 
 
+
+function applyStretchEffect(elementId, originalWidth, originalHeight, extraSpace, stretchFactor) {
+  const imgElement = document.getElementById(elementId);
+  const src = imgElement.src;
+
+  // Create container
+  const container = document.createElement('div');
+  container.className = 'image-container';
+  container.style.width = `${originalWidth + 2 * extraSpace}px`;
+  container.style.height = `${originalHeight + 2 * extraSpace}px`;
+  container.style.position = 'relative';
+  container.style.overflow = 'hidden';
+
+  // Create central image
+  const centralImage = imgElement.cloneNode();
+  centralImage.className = 'central-image';
+  centralImage.style.width = `${originalWidth}px`;
+  centralImage.style.height = `${originalHeight}px`;
+  centralImage.style.top = `${extraSpace}px`;
+  centralImage.style.left = `${extraSpace}px`;
+  centralImage.style.position = 'absolute';
+  centralImage.style.zIndex = '2';
+  centralImage.style.objectFit = 'cover';
+  centralImage.style.objectPosition = 'center';
+
+  // Create and style side images
+  const createSideImage = (className, width, height, top, left, right, clipPath, flip) => {
+    const sideImage = imgElement.cloneNode();
+    sideImage.className = `side-image ${className}`;
+    sideImage.style.width = `${width}px`;
+    sideImage.style.height = `${height}px`;
+    sideImage.style.top = `${top}px`;
+    sideImage.style.left = `${left}px`;
+    sideImage.style.right = `${right}px`;
+    sideImage.style.position = 'absolute';
+    sideImage.style.zIndex = '1';
+    sideImage.style.clipPath = clipPath;
+    sideImage.style.objectFit = 'cover';
+    if (flip) {
+      sideImage.style.transform = 'scaleX(-1)';
+    }
+    return sideImage;
+  };
+
+  const topImage = createSideImage('top-side', originalWidth, originalHeight * stretchFactor, 0, extraSpace, null, 'polygon(0 0, 100% 0, 100% 1%, 0 1%)');
+  const leftImage = createSideImage('left-side', originalWidth * stretchFactor, originalHeight, extraSpace, 0, null, 'polygon(0 0, 1% 0, 1% 100%, 0 100%)');
+  const rightImage = createSideImage('right-side', originalWidth * stretchFactor, originalHeight, extraSpace, null, 0, 'polygon(99% 0, 100% 0, 100% 100%, 99% 100%)', true);
+
+  // Append elements to the container
+  container.appendChild(centralImage);
+  container.appendChild(topImage);
+  container.appendChild(leftImage);
+  container.appendChild(rightImage);
+
+  // Replace original image with the container
+  imgElement.parentNode.replaceChild(container, imgElement);
+}
 
 
 
@@ -1387,11 +1438,25 @@ const SingularityCards = () => {
               {showCardTextAreas ? "Hide Card Edit" : "Show Card Edit"}
             </button>
           </Grid>
-          <br></br>
-          <br></br>
+
         </Grid>
-
-
+        <Grid container item xs={12}>
+        <Grid item xs={3}>
+          <button onClick={handleCopy}>Copy</button>
+        </Grid>
+        <Grid item xs={3}>
+          <button onClick={handlePaste}>Paste</button>
+        </Grid>
+        <Grid item xs={3}>
+          <button onClick={handleAddCard}>Add Card</button>
+        </Grid>
+        <Grid item xs={3}>
+          <button onClick={handleReset}>Reset</button>
+        </Grid>
+      </Grid>
+      <br></br>
+          <br></br>
+          <br></br>
       </Grid>
       <br></br>
       <br></br>
@@ -1633,18 +1698,23 @@ const useIdSwap = () => {
 
   return onIdClick;
 };
+
+
+
+
 const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, details2, cost, id = 1, type = "base" }, ref) => {
   let isStyledTitle = false;
   let title = cardTitle;
-
   // check if cardTitle starts with 'FontS'
   if (cardTitle.startsWith('FontS')) {
     isStyledTitle = true;
     title = cardTitle.replace('FontS', ''); // remove 'FontS' from the beginning
   }
+  useEffect(()=>{
+   // applyStretchEffect(`img-${id}`, 252,251,8,100)
 
 
-
+  },[]);
   const iconImage = type == "base" ? base5 : type == "space" ? space2 : type == "animals" ? animals : type == "v2" ? expansion_droid2 : expansion_mix3;
   const colorCorrection =
     type == "base" ? "hue-rotate(165deg) saturate(4.9) brightness(2)" :
@@ -1658,8 +1728,8 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
           <TopHalf>
             <Border>
               <ImageContainer>
-                <DuplicateImage src={imgUrl} /> {/* Duplicate Image */}
-                <Image src={imgUrl} /> {/* Original Image */}
+                 <DuplicateImage src={imgUrl} /> 
+                <Image  id={`img-${id}`} src={imgUrl} /> {/* Original Image */}
                 <TitleWrapper>
                   {isStyledTitle ? <StyledTitle>{title}<TypeIconTitle colorCorrection={colorCorrection} src={iconImage}></TypeIconTitle></StyledTitle> : <Title>{title}<TypeIconTitle colorCorrection={colorCorrection} src={iconImage}></TypeIconTitle></Title>}
 
@@ -1928,10 +1998,10 @@ const Title = styled(Text)`
 
   background:rgba(0,0,0,0.6);
   position: absolute; 
-  top: ${SIDE_MARGIN}px; 
-  left: ${SIDE_MARGIN}px; 
+  top: ${SIDE_MARGIN+4}px; 
+  left: ${SIDE_MARGIN+2}px; 
   text-transform: uppercase;
-  padding:2px;
+  padding:1px 2px 2px 2px;
   margin: 0;
   font-weight: bold;
   color:#44ffff;
