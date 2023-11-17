@@ -2,6 +2,7 @@ import React from 'react';
 import { ContainerGrid, RowGrid, ItemGrid, ColumnGrid, CustomButton } from './Molecules';
 import { gameContainerStyle } from './Styles';
 
+
 export const GameContainer = () => {
   return (
     <ContainerGrid style={{...gameContainerStyle}}>

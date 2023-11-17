@@ -1,10 +1,48 @@
 import React, { useRef, useState } from 'react';
-import { Grid, Paper, TextField, Checkbox, FormControlLabel } from '@mui/material';
+import { Grid, Paper, TextField, Checkbox, FormControlLabel, Button, InputLabel } from '@mui/material';
+
 import puzzleImg from '../images/italian-landscape.jpg';
 import puzzleOverlay from '../images/jigsaw.svg';
 
 const PusslePreview = () => {
     const [showGrid, setShowGrid] = useState(false);
+
+    const [uploadedImg, setUploadedImg] = useState(null);
+    const [needsRotation, setNeedsRotation] = useState(false);
+
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.getElementById('imageCanvas');
+                    canvas.width = 5850;
+                    canvas.height = 8192;
+                    
+                    const ctx = canvas.getContext('2d');
+                    // Check if rotation is needed
+                    if (img.width > img.height) {
+                        // Rotate and draw the image
+                        ctx.rotate(90 * Math.PI / 180);
+                        ctx.drawImage(img, 0, -5850, 8192, 5850);
+                    } else {
+                        // Draw the image without rotation
+                        ctx.drawImage(img, 0, 0, 5850, 8192);
+                    }
+    
+                    // Convert canvas to image URL
+                    const newImageUrl = canvas.toDataURL('image/jpeg');
+                    setUploadedImg(newImageUrl);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    
+
 
 
     const generateSvgGrid = (width, height, rows, cols) => {
@@ -40,36 +78,42 @@ const PusslePreview = () => {
                 <Paper style={{ height: '100%' }}>
                     <div style={{
                         display: 'flex',
+
                         justifyContent: 'center',
                         alignItems: 'center',
                         overflow: 'auto',
                         height: '100%',
                         position: 'relative', // Added to position the grid overlay
                     }}>
-                        <img src={`${puzzleImg}`} style={{
+                        <img src={uploadedImg || puzzleImg} style={{
                             maxWidth: '100%',
                             maxHeight: '100%',
+                            height: '100%',
+                            width: '100%',
+                            minWidth: "100%",
+                            minHeight: "100%",
+                            top: "1em",
                             objectFit: 'contain',
+                            transformOrigin: 'center',
                             position: 'absolute',
-                            top:"1em",
                         }} />
                         {showGrid && (
                             <div style={{
                                 position: 'absolute',
-                                top: "1em",
+
                                 left: 0,
                                 width: '100vw',
                                 height: 'calc(100vw * 8192 / 5850)', // 
                                 backgroundImage: `url(${puzzleOverlay})`,
                                 backgroundSize: 'cover', // Ensure the grid covers the entire image
-                                opacity: 1, 
+                                opacity: 1,
                             }} />
                         )}
                     </div>
                 </Paper>
             </Grid>
             <Grid item xs={12} md={2} style={{ height: '26vh', padding: 0 }}>
-                <Paper style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', }}>
+                <Paper style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', }}>
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -78,12 +122,33 @@ const PusslePreview = () => {
                                 name="showGrid"
                                 color="primary"
                             />
+
                         }
                         label="Show Grid"
                         style={{ margin: "1em" }}
                     />
+                     <InputLabel htmlFor="upload-image-button">
+                        <input
+                            accept="image/*"
+                            id="upload-image-button"
+                            type="file"
+                            style={{ display: 'none' }}
+                            onChange={handleImageUpload}
+                        />
+                        <Button
+                            component="span"
+                            variant="contained"
+                            style={{ margin: "1em" }}
+                        >
+                            Upload Image
+                        </Button>
+                    </InputLabel>
                 </Paper>
+             
+
             </Grid>
+            <canvas id="imageCanvas" style={{ display: 'none' }}></canvas>
+
 
         </Grid>
     );
