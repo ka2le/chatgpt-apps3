@@ -21,6 +21,7 @@ import ArTest from './components/ArTest';
 import SingularityCards from './components/SingularityCards';
 import ScoreKeeper from './components/ScoreKeeper';
 import { SingularityGameContainer } from './components/SingularityGame/SingularityGameContainer';
+import Critters from './components/Critters';
 
 
 
@@ -47,6 +48,7 @@ function App() {
             <Route path="/singularity-cards" element={<SingularityCards/>} />
             <Route path="/score-keeper" element={<ScoreKeeper/>} />
             <Route path="/singularity-sprint" element={<SingularityGameContainer/>} />
+            <Route path="/critters" element={<Critters/>} />
             
           </Routes>
         </HashRouter>

@@ -17,6 +17,7 @@ import ViewInArIcon from '@mui/icons-material/ViewInAr';
 import SensorWindowIcon from '@mui/icons-material/SensorWindow';
 import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import StarsIcon from '@mui/icons-material/Stars';
+import PetsIcon from '@mui/icons-material/Pets';
 
 function GridComponent() {
     const gridItems = [];
@@ -42,7 +43,8 @@ function GridComponent() {
     gridItems.push({ icon: SensorWindowIcon, link: '/singularity-cards', title: 'Singularity Cards' });
     gridItems.push({ icon: ScoreboardIcon, link: '/score-keeper', title: 'Score Keeper' });
     gridItems.push({ icon: StarsIcon, link: '/singularity-sprint', title: 'Singularity Sprint' });
-    while (gridItems.length < 21) {
+    gridItems.push({ icon: PetsIcon, link: '/critters', title: 'Critters' });
+    while (gridItems.length < 22) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
     return (
