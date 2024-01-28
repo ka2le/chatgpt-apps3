@@ -6,6 +6,7 @@ import Draggable from 'react-draggable';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { position } from 'polished';
+// import critterCollageImg from '../images/critterCollage.png';
 
 
 
@@ -15,30 +16,32 @@ const REFERENCE_WIDTH = 1100;
 
 const Critters = () => {
 
-    return (<CritterCollage />
+    return (<DecorationCollage />
     );
 };
 
-const CritterCollage = () => {
 
-    const savedValues = null; 
+const DecorationCollage = () => {
+
+    const savedValues = null;
     const collageRef = useRef(null);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
     const getSavedValues = () => {
-        const saved = localStorage.getItem('critterCollagePositionsAndSizes');
+        const saved = localStorage.getItem('decorationCollagePositionsAndSizes');
         return saved ? JSON.parse(saved) : null;
     };
 
-    const [defaultPositionAndSizes] = useMemo(() => generateDefaultMapping(), []);
-    const [positionsAndSizes, setPositionsAndSizes] = useState(getSavedValues() || defaultPositionAndSizes); 
-    const [,defaultMappingArray] = generateDefaultMapping();
+    const defaultPositionAndSizes = generateDefaultMapping2();// useMemo(() => generateDefaultMapping(), []);
+    const [positionsAndSizes, setPositionsAndSizes] = useState(getSavedValues() || defaultPositionAndSizes);
     const critters = useMemo(() => {
         const importAll = (r) => r.keys().map(r);
-        return importAll(require.context('../images/critters', false, /\.png$/));
+        return importAll(require.context('../images/decoration', false, /\.png$/));
     }, []);
 
     useEffect(() => {
         // Update localStorage whenever positionsAndSizes changes
-        localStorage.setItem('critterCollagePositionsAndSizes', JSON.stringify(positionsAndSizes));
+        localStorage.setItem('decorationCollagePositionsAndSizes', JSON.stringify(positionsAndSizes));
     }, [positionsAndSizes]);
 
     const updatePositionAndSize = (index, position, size) => {
@@ -46,8 +49,47 @@ const CritterCollage = () => {
         updatedPositionsAndSizes[index] = { ...updatedPositionsAndSizes[index], ...position, ...size };
         setPositionsAndSizes(updatedPositionsAndSizes);
     };
+    const increaseSize = () => {
+        if (selectedImageIndex !== null) {
+            const newSize = {
+                width: positionsAndSizes[selectedImageIndex].width * 1.05, // Increase by 5%
+                height: positionsAndSizes[selectedImageIndex].height * 1.05, // Increase by 5%
+            };
+            updatePositionAndSize(selectedImageIndex, {}, newSize);
+        }
+    };
 
+    const decreaseSize = () => {
+        if (selectedImageIndex !== null) {
+            const newSize = {
+                width: positionsAndSizes[selectedImageIndex].width * 0.95, // Decrease by 5%
+                height: positionsAndSizes[selectedImageIndex].height * 0.95, // Decrease by 5%
+            };
+            updatePositionAndSize(selectedImageIndex, {}, newSize);
+        }
+    };
 
+    const handleKeyPress = (event) => {
+        console.error(event)
+        if (event.key === '+') {
+            increaseSize();
+        } else if (event.key === '-') {
+            decreaseSize();
+        }
+    };
+    
+    
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress);
+    
+        // Cleanup the event listener
+        return () => {
+            
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [selectedImageIndex, positionsAndSizes]); // Dependencies for the effect
+
+    
     const downloadCollage = async () => {
         const collageElement = collageRef.current;
         if (collageElement) {
@@ -65,33 +107,34 @@ const CritterCollage = () => {
         saveAs(blob, "positionsAndSizes.json");
     };
 
-    const defaultPosition = { x: 0, y: 0, width: 300, height: 300 };
+    const defaultPosition = { x: 4000, y: 6880, width: 300, height: 300 };
 
     return (
         <>
-            <button onClick={downloadCollage}>Download Collage</button>
-            <button onClick={downloadPositions}>Download Positions</button>
-            <div ref={collageRef} style={{ width: '5600px', backgroundColor: "white", border: "1px solid black", height: '4200px', position: 'relative' }}>
-                {defaultMappingArray.map(({ critterIndex, positionIndex }, mapIndex) => {
-                    const src = critters[critterIndex];
+              <button onClick={downloadCollage}>Download Collage</button>
+    <button onClick={downloadPositions}>Download Positions</button>
+    {/* <button onClick={increaseSize}>+</button>
+    <button onClick={decreaseSize}>-</button> */}
+            <div ref={collageRef} style={{ width: '5600px', backgroundImage:`url(${""})`,  backgroundSize: 'cover', border: "1px solid black", height: '4200px', position: 'relative' }}>
+                {critters.map((src, index) => {
                     if (!src) return null;
-                    const { x, y, width, height } = positionsAndSizes[positionIndex] || defaultPosition;
-
-
+                    const { x, y, width, height } = positionsAndSizes[index] || defaultPosition;
 
                     return (
                         <Draggable
-                            key={mapIndex}
+                            key={index}
                             defaultPosition={{ x, y }}
-                            onStop={(e, data) => updatePositionAndSize(positionIndex, { x: data.x, y: data.y })}
+                            onStop={(e, data) => updatePositionAndSize(index, { x: data.x, y: data.y })}
                         >
-                            <div style={{ width: width, height: height, position: 'absolute' }}>
-                                {/* <span   style={{fontSize:"50px", position:'absolute'}}>{critterIndex}</span> */}
+                            <div
+                                style={{ width: width, height: height, position: 'absolute' }}
+                                onClick={() => setSelectedImageIndex(index)}
+                            >
                                 <ImageComponent
                                     src={src}
                                     defaultWidth={width}
                                     defaultHeight={height}
-                                    critterIndex={critterIndex}
+                                    critterIndex={index}
                                 />
                             </div>
                         </Draggable>
@@ -100,7 +143,135 @@ const CritterCollage = () => {
             </div>
         </>
     );
+};
 
+
+
+
+
+
+const CritterCollage = () => {
+
+    const savedValues = null;
+    const collageRef = useRef(null);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+    const getSavedValues = () => {
+        const saved = localStorage.getItem('critterCollagePositionsAndSizes');
+        return saved ? JSON.parse(saved) : null;
+    };
+
+    const defaultPositionAndSizes = generateDefaultMapping();// useMemo(() => generateDefaultMapping(), []);
+    const [positionsAndSizes, setPositionsAndSizes] = useState(getSavedValues() || defaultPositionAndSizes);
+    const critters = useMemo(() => {
+        const importAll = (r) => r.keys().map(r);
+        return importAll(require.context('../images/critters', false, /\.png$/));
+    }, []);
+
+    useEffect(() => {
+        // Update localStorage whenever positionsAndSizes changes
+        localStorage.setItem('critterCollagePositionsAndSizes', JSON.stringify(positionsAndSizes));
+    }, [positionsAndSizes]);
+
+    const updatePositionAndSize = (index, position, size) => {
+        const updatedPositionsAndSizes = [...positionsAndSizes];
+        updatedPositionsAndSizes[index] = { ...updatedPositionsAndSizes[index], ...position, ...size };
+        setPositionsAndSizes(updatedPositionsAndSizes);
+    };
+    const increaseSize = () => {
+        if (selectedImageIndex !== null) {
+            const newSize = {
+                width: positionsAndSizes[selectedImageIndex].width * 1.05, // Increase by 5%
+                height: positionsAndSizes[selectedImageIndex].height * 1.05, // Increase by 5%
+            };
+            updatePositionAndSize(selectedImageIndex, {}, newSize);
+        }
+    };
+
+    const decreaseSize = () => {
+        if (selectedImageIndex !== null) {
+            const newSize = {
+                width: positionsAndSizes[selectedImageIndex].width * 0.95, // Decrease by 5%
+                height: positionsAndSizes[selectedImageIndex].height * 0.95, // Decrease by 5%
+            };
+            updatePositionAndSize(selectedImageIndex, {}, newSize);
+        }
+    };
+
+    const handleKeyPress = (event) => {
+        console.error(event)
+        if (event.key === '+') {
+            increaseSize();
+        } else if (event.key === '-') {
+            decreaseSize();
+        }
+    };
+    
+    
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress);
+    
+        // Cleanup the event listener
+        return () => {
+            
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [selectedImageIndex, positionsAndSizes]); // Dependencies for the effect
+
+    
+    const downloadCollage = async () => {
+        const collageElement = collageRef.current;
+        if (collageElement) {
+            const canvas = await html2canvas(collageElement, { scale: 2 });
+            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            const link = document.createElement('a');
+            link.download = 'collage.png';
+            link.href = image;
+            link.click();
+        }
+    };
+
+    const downloadPositions = () => {
+        const blob = new Blob([JSON.stringify(positionsAndSizes)], { type: "application/json" });
+        saveAs(blob, "positionsAndSizes.json");
+    };
+
+    const defaultPosition = { x: 4000, y: 6880, width: 300, height: 300 };
+
+    return (
+        <>
+              <button onClick={downloadCollage}>Download Collage</button>
+    <button onClick={downloadPositions}>Download Positions</button>
+    {/* <button onClick={increaseSize}>+</button>
+    <button onClick={decreaseSize}>-</button> */}
+            <div ref={collageRef} style={{ width: '5600px', backgroundColor: "white", border: "1px solid black", height: '4200px', position: 'relative' }}>
+                {critters.map((src, index) => {
+                    if (!src) return null;
+                    const { x, y, width, height } = positionsAndSizes[index] || defaultPosition;
+
+                    return (
+                        <Draggable
+                            key={index}
+                            defaultPosition={{ x, y }}
+                            onStop={(e, data) => updatePositionAndSize(index, { x: data.x, y: data.y })}
+                        >
+                            <div
+                                style={{ width: width, height: height, position: 'absolute' }}
+                                onClick={() => setSelectedImageIndex(index)}
+                            >
+                                <ImageComponent
+                                    src={src}
+                                    defaultWidth={width}
+                                    defaultHeight={height}
+                                    critterIndex={index}
+                                />
+                            </div>
+                        </Draggable>
+                    );
+                })}
+            </div>
+        </>
+    );
 };
 
 
@@ -125,52 +296,74 @@ const ImageComponent = ({ src, defaultWidth, defaultHeight, critterIndex }) => {
             src={src}
             alt={`Critter ${critterIndex}`}
             style={{
-                maxWidth: defaultWidth * widthScale,
-                maxHeight: defaultHeight * heightScale,
+                maxWidth: defaultWidth * (widthScale),
+                maxHeight: defaultHeight * (heightScale),
                 objectFit: 'contain',
             }}
         />
     );
 };
 
-const  generateOneToOneMapping =() => {
-    const mappingArray =[]
-    for(var i; i<500, i++;){
-        mappingArray.push({ critterIndex: i, positionIndex: i });
-    }
-    
-    return mappingArray
-}
 
-function generateDefaultMapping() {
+
+function generateDefaultMapping2() {
     const positionsAndSizes = [];
-    const mappingArray = [];
+
     const gridWidth = 5600;
-    const gridHeight = 4200;
-    const rowCount = 12; // Calculated based on the dimensions
-    const colCount = 28; // Calculated based on the dimensions
+    const gridHeight = 8400;
+    const rowCount = 38; // Calculated based on the dimensions
+    const colCount = 33; // Calculated based on the dimensions
     const positionWidth = gridWidth / colCount;
     const positionHeight = gridHeight / rowCount;
 
     let index = 0;
     for (let row = 0; row < rowCount; row++) {
         for (let col = 0; col < colCount; col++) {
-            if (index < 450) {
+            if (index < 550) {
                 positionsAndSizes.push({
                     x: col * positionWidth,
-                    y: row * positionHeight +gridHeight,
-                    width: positionWidth *1.2 ,
-                    height: positionHeight*1.2 
+                    y: row * positionHeight + gridHeight/2,
+                    width: positionWidth * 1.6,
+                    height: positionHeight * 1.6
                 });
-                mappingArray.push({ critterIndex: index, positionIndex: index });
+
                 index++;
             }
         }
     }
 
-    console.error('### Positions and Sizes:', positionsAndSizes);
-    console.error('### Mapping Array:', mappingArray);
-    return [positionsAndSizes, mappingArray]
+    // console.error('### Positions and Sizes:', positionsAndSizes);
+    return positionsAndSizes
+}
+
+function generateDefaultMapping() {
+    const positionsAndSizes = [];
+
+    const gridWidth = 5600;
+    const gridHeight = 8400;
+    const rowCount = 22; // Calculated based on the dimensions
+    const colCount = 20; // Calculated based on the dimensions
+    const positionWidth = gridWidth / colCount;
+    const positionHeight = gridHeight / rowCount;
+
+    let index = 0;
+    for (let row = 0; row < rowCount; row++) {
+        for (let col = 0; col < colCount; col++) {
+            if (index < 550) {
+                positionsAndSizes.push({
+                    x: col * positionWidth,
+                    y: row * positionHeight + gridHeight/2,
+                    width: positionWidth * 1.2,
+                    height: positionHeight * 1.2
+                });
+
+                index++;
+            }
+        }
+    }
+
+    // console.error('### Positions and Sizes:', positionsAndSizes);
+    return positionsAndSizes
 }
 
 
@@ -217,9 +410,11 @@ const ImageProcessor = ({ images }) => {
     const processImage = (img, index) => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
+        canvas.width = img.width / 2;
+        canvas.height = img.height / 2;
+
+        // Draw the image scaled down
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         const calculateOpacity = (r, g, b) => {
             // Calculate the perceived brightness
