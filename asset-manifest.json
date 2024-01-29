@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.7f3bf3c4.js",
+    "main.js": "/chatgpt-apps3/static/js/main.f0f079b4.js",
     "static/js/357.c98e61c5.chunk.js": "/chatgpt-apps3/static/js/357.c98e61c5.chunk.js",
     "static/js/683.fbbbb696.chunk.js": "/chatgpt-apps3/static/js/683.fbbbb696.chunk.js",
     "static/js/273.ffe5a67b.chunk.js": "/chatgpt-apps3/static/js/273.ffe5a67b.chunk.js",
@@ -25,6 +25,7 @@
     "static/js/799.4df21988.chunk.js": "/chatgpt-apps3/static/js/799.4df21988.chunk.js",
     "static/js/582.78b4b9e2.chunk.js": "/chatgpt-apps3/static/js/582.78b4b9e2.chunk.js",
     "static/js/833.ab999c96.chunk.js": "/chatgpt-apps3/static/js/833.ab999c96.chunk.js",
+    "static/js/239.ae6dd844.chunk.js": "/chatgpt-apps3/static/js/239.ae6dd844.chunk.js",
     "static/js/356.6306aed7.chunk.js": "/chatgpt-apps3/static/js/356.6306aed7.chunk.js",
     "static/js/291.39ad4c1d.chunk.js": "/chatgpt-apps3/static/js/291.39ad4c1d.chunk.js",
     "static/js/787.00e8474e.chunk.js": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js",
@@ -472,6 +473,7 @@
     "static/media/c_26200.png": "/chatgpt-apps3/static/media/c_26200.d9215cdac80f304f7706.png",
     "static/media/c_11000.png": "/chatgpt-apps3/static/media/c_11000.87ff90d35f394c0c13de.png",
     "static/media/c_14400.png": "/chatgpt-apps3/static/media/c_14400.2aaa29e5b60c48f39635.png",
+    "static/media/textbox2.png": "/chatgpt-apps3/static/media/textbox2.06c5a2bb5c87bfe3dd4a.png",
     "static/media/Orbit-Regular.ttf": "/chatgpt-apps3/static/media/Orbit-Regular.c0af669bb30721cce497.ttf",
     "static/media/66.png": "/chatgpt-apps3/static/media/66.c49a5fe0e4276d3a4c58.png",
     "static/media/47.png": "/chatgpt-apps3/static/media/47.bbe0450fc4f464c9e93c.png",
@@ -776,11 +778,11 @@
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.50a11e589c6bdbe6fcc20d068ec25c03.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.43886756af1c452af06aae99d986a6cc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.7f3bf3c4.js.map": "/chatgpt-apps3/static/js/main.7f3bf3c4.js.map",
+    "main.f0f079b4.js.map": "/chatgpt-apps3/static/js/main.f0f079b4.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.7f3bf3c4.js"
+    "static/js/main.f0f079b4.js"
   ]
 }
