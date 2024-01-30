@@ -18,7 +18,7 @@ const textData = [
     { "id": 7, "text": "\"Det här är Solen. Vår egen fina stjärna. Runt Solen snurrar vår planet, Jorden, och flera andra planeter.  Solen lyser upp planeterna och värmer oss." },
     { "id": 8, "text": "Jorden är ju vår planet där vår familj bor. Vem mer bor på Jorden? Alla kompisar. Och tigrar, kameleonter, kaniner. Ja alla!" },
     { "id": 9, "text": "För länge sen uppstod livet på jorden. Det började litet! Pytte pytte pytte! Småttingar som kallas för bakterier, alger och plankton. Lika små som tandtrollen! Under låååång lång tid så ändrades dom sakta. Deras bebisar och barn och barnbarn var lite annorlunda och fick nya spännande krafter. Amöbor kunde ändra form, som om deras kroppar var gjorda av deg." },
-    { "id": 10, "text": "Så fortsatte det, över många dagar och veckor, över vår, sommar, höst och vinter. Många, många gånger om. Nya barn var lite annorlunda, vissa var mer som maneter. Sen kom sjöstjärnor och fiskar och fler och fler djur! Vissa kunde simma snabbare, andra kunde gömma sig bra. Några hade väldigt vassa tänder. Som hajar." },
+    { "id": 10, "text": "Så fortsatte det, över många dagar och veckor, över vår, sommar, höst och vinter. Många, många gånger om. Nya barn var lite annorlunda, vissa var mer som sjöstjärnor. Sen kom fiskar och fler och fler djur! Vissa kunde simma snabbare, andra kunde gömma sig bra. Några hade väldigt vassa tänder. Som hajar." },
     { "id": 11, "text": "Sen kom andra djur med vassa tänder. Tyrannosaurus Rex som åt andra dinosaurier. " },
     { "id": 12, "text": "Stegosaurus med sina plattor och platta tänder åt växter. Det fanns många olika dinosaurier som såg helt olika ut. Stora som hus stampade dinosaurierna runt på jorden och vrålade." },
     { "id": 13, "text": "Ute i mörka mystiska rymden flög en stor sten, en asteroid. Som om någon kastat den mot jorden, fast man inte får. " },
@@ -71,12 +71,12 @@ const planetLabels = [
     { name: "Jorden", top: "15vw", left: "44vw" },
     { name: "Mars", top: "35.2vw", left: "41.2vw" },
     { name: "Uranus", top: "16.3vw", left: "2vw" },
-    { name: "Neptune", top: "43vw", left: "36vw" }
+    { name: "Neptunus", top: "43vw", left: "36vw" }
 ];
 // Configuration data for each page
 const configData = [
     //BIG BANG
-    { id: 1, hasBackground: true, width: 40,top:42, height: 8.5 },
+    { id: 1, hasBackground: true, width: 40,top:42, height: 8 },
     { id: 2, },
     //GALAXY
     { id: 3, },
@@ -88,19 +88,19 @@ const configData = [
     {id: 7, left: 9, width: 17, top: 40,  opacity: 0.5,  component: PlanetLabels, componentProps: { labels: planetLabels }},
     { id: 8, top: 40, left: 5, width: 40, opacity: 0.4 },
     //BAKTERIER
-    { id: 9, hasBackground: true, top: 43.5, width: 52.1, left: 1, opacity: 0.8, height: 8},
+    { id: 9, hasBackground: true, top: 43.5, width: 53.1, left: 1, opacity: 0.8, height: 8},
     { id: 10, hasBackground: true, top: 43.5, width: 52.5, left: 1.5, opacity: 0.8, height: 8 },
     //DINOSAURIER
     { id: 11, color: 'black', top: 0, width: 44,left:1.5 },
     { id: 12, top: 0, left: 4, opacity: 0.35, width: 33 },
     //METEORIT
-    { id: 13, top: 43.5, width: 38, left: 0 },
+    { id: 13, top: 44, width: 35, left: 2 },
     { id: 14, top: 30, left: 1, width: 30 },
     //MAMMUTAR
-    { id: 15, hasBackground: true, top: 42, width: 40, left: 9, opacity: 0.44, height: 8 },
-    { id: 16, hasBackground: true, top: 30, width: 16, left: 36, opacity: 0.44, height: 17 },
+    { id: 15, hasBackground: true, top: 42.5, width: 40, left: 9, opacity: 0.44, height: 8 },
+    { id: 16, hasBackground: true, top: 30, width: 16, left: 36, opacity: 0.54, height: 17 },
     //APOR
-    { id: 17, hasBackground: true, top: 0, width: 27, left: 2, opacity: 0.5, height: 8 },
+    { id: 17, hasBackground: true, top: 1, width: 27, left: 2, opacity: 0.54, height: 7.7 },
     { id: 18, top: 39, left: 15, width: 32 },
     //ODLA
     { id: 19, color: 'black', left: 1, top: 1, width: 32, opacity: 0.2},
@@ -110,13 +110,13 @@ const configData = [
     { id: 21, top: 40, left: 5, width: 38 },
     { id: 22, top: 0, width: 45, left: 2 },
     //VENUS
-    { id: 23, color: 'black', width: 16, top: 1, left: 1, opacity: 0.2 },
-    { id: 24, opacity: 0.4, width: 25, height: 17, left: 22, top: 1 },
+    { id: 23, color: 'black', width: 16, top: 1, left: 2, opacity: 0.2 },
+    { id: 24, opacity: 0.4, width: 25, height: 17, left: 21, top: 1 },
     //Alient
     { id: 25, top: 38, left: 28, width: 22, height: 9, opacity: 0.5, hasBackground: true },
     { id: 26, width: 24, height: 9, left: 17, opacity: 0.4, hasBackground: true },
     //DREAMS
-    { id: 27, hasBackground: true, opacity: 0.4, height: 11, width: 35 },
+    { id: 27, hasBackground: true, opacity: 0.45, height: 10.5, width: 35 },
     { id: 28 },
 
 ];
@@ -215,7 +215,7 @@ const BookPage = React.forwardRef(({ text, config }, ref) => {
         <div style={pageContainerStyle} ref={ref}>
             {pageImage && <img src={pageImage} alt={`Page ${id}`} style={{ width: '100%', height: 'auto' }} />}
             {hasBackground && <img src={textBoxImg} style={{ position: 'absolute', top: `${top - 0.5}vw`, left: `${left - 1.5}vw`, width: width + "vw", height: height + "vw", opacity: opacity }} />}
-            <Text style={textStyle}>{text}</Text>
+            {text != "" ?  <Text style={textStyle}>{text}</Text> : null }
             {RenderedComponent && <RenderedComponent {...config.componentProps} />}
         </div>
     );
