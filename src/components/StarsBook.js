@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Paper } from '@mui/material';
+import React, { useState, useEffect,useRef } from 'react';
+import { Grid,Button} from '@mui/material';
 import styled from 'styled-components';
-import img9 from '../images/starsBook/9.png';
-import img10 from '../images/starsBook/10.png';
-import img27 from '../images/starsBook/27.jpg';
-import img28 from '../images/starsBook/28.jpg';
 import textBoxImg from '../images/starsBook/textbox2.png';
 import Comfortaa from '../fonts/Comfortaa-VariableFont_wght.ttf';
 import AmaticSC from '../fonts/AmaticSC-Bold.ttf';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 const textData = [
 
@@ -32,7 +30,7 @@ const textData = [
     { "id": 19, "text": "Människorna planterade frön i jorden. Solen lyste på fröna och hjälpte dom växa. Vete som bakades till bröd, som Pita och Bao. Bönor som kokades till soppa. Knapriga morötter. Vad mer kan man odla och äta?" },
     { "id": 20, "text": "Sen byggde människor städer. Uppfinnare uppfann en massa saker: Varm eld, mysiga hus, spännande böcker, roliga leksaker och massa annat. Så uppfanns också raketer. Metallrör som sprutade eld ur rumpan. Högt och snabbt, högre än fåglar flög dom, snabbare än en bil, hela vägen ut i rymden! Hela vägen till..." },
     { "id": 21, "text": "Månen! I raketer flög människor till månen. Först ett litet steg försiktigt ut på månen. Sen hoppandes och studsandes. På månen går det att hoppa högre än på studsmattan! Oj vad astronauterna skrattade. Lyfta tunga saker är lätt på månen." },
-    { "id": 22, "text": "Månen är som en magiskt värld. Fylld med vit sand och många stenar och stora gropar som kallas för kratrar. Ibland ser ju månen ut som en boll, ibland ser den halv ut. Men den är alltid rund. Det mörka är jordens skugga på månen. Precis som din skugga kan göra marken mörk." },
+    { "id": 22, "text": "Månen är som en magiskt värld. Fylld med vit sand och många stenar och stora gropar som kallas för kratrar. Ibland ser ju månen ut som en boll, ibland ser den halv ut. Men den är alltid rund. Det mörka är jordens skugga på månen." },
     { "id": 23, "text": "Det här är planeten Venus. Dit har ingen människa åkt än. Där finns det gula moln som luktar prutt. Det är så varmt på Venus, att glassar smälter direkt. Snabbare än på sommaren. Kladdigt va?" },
     { "id": 24, "text": "Mars är en annan planet som ingen åkt till än. Där är det lite kallare. Fullt med röd sand och berg. Massa plats att bygga nya städer på, nya lekplatser kanske. Mars är lite som månen, det går att hoppa högt och lyfta tungt. Vart skulle du vilja åka och vad skulle du packa med dig?" },
     { "id": 25, "text": "Långt ut i rymden, på planeter som snurrar runt andra stjärnor så kanske det finns rymdvarelser. Kanske har dom många huvuden och kan flyga utan vingar." },
@@ -47,11 +45,11 @@ const PlanetLabels = ({ labels }) => {
 
 
     return (
-        <div style={{ position: "absolute", color: "black", top: 0, left: 0 }}>
+        <div style={{ position: "absolute", color: "white", top: 0, left: 0 }}>
             {labels.map(label => (
                 <Text key={label.name} style={{
                     position: "absolute",
-                    backgroundColor: "beige",
+                    backgroundColor: "rgba(0,0,0,0.7)",
                     padding: "0.4vw",
                     borderRadius: "0.4vw",
                     fontSize: "0.9vw",
@@ -66,19 +64,19 @@ const PlanetLabels = ({ labels }) => {
     );
 };
 const planetLabels = [
-    { name: "Saturnus", top: "5vw", left: "13vw" },
-    { name: "Jupiter", top: "3vw", left: "30vw" },
-    { name: "Venus", top: "45vw", left: "1vw" },
-    { name: "Merkurius", top: "32vw", left: "4.5vw" },
+    { name: "Saturnus", top: "6vw", left: "13vw" },
+    { name: "Jupiter", top: "3vw", left: "30.5vw" },
+    { name: "Venus", top: "44.2vw", left: "1vw" },
+    { name: "Merkurius", top: "32vw", left: "4.9vw" },
     { name: "Jorden", top: "15vw", left: "44vw" },
     { name: "Mars", top: "35.2vw", left: "41.2vw" },
-    { name: "Uranus", top: "16vw", left: "2vw" },
-    { name: "Neptune", top: "43vw", left: "36.5vw" }
+    { name: "Uranus", top: "16.3vw", left: "2vw" },
+    { name: "Neptune", top: "43vw", left: "36vw" }
 ];
 // Configuration data for each page
 const configData = [
     //BIG BANG
-    { id: 1, hasBackground: true, width: 40, height: 12 },
+    { id: 1, hasBackground: true, width: 40,top:42, height: 8.5 },
     { id: 2, },
     //GALAXY
     { id: 3, },
@@ -90,8 +88,8 @@ const configData = [
     {id: 7, left: 9, width: 17, top: 40,  opacity: 0.5,  component: PlanetLabels, componentProps: { labels: planetLabels }},
     { id: 8, top: 40, left: 5, width: 40, opacity: 0.4 },
     //BAKTERIER
-    { id: 9, hasBackground: true, top: 37, width: 35, left: 1, opacity: 0.7, height: 15 },
-    { id: 10, hasBackground: true, top: 36.5, width: 25.5, left: 1, opacity: 0.7, height: 17.5 },
+    { id: 9, hasBackground: true, top: 43.5, width: 52.1, left: 1, opacity: 0.8, height: 8},
+    { id: 10, hasBackground: true, top: 43.5, width: 52.5, left: 1.5, opacity: 0.8, height: 8 },
     //DINOSAURIER
     { id: 11, color: 'black', top: 0, width: 44,left:1.5 },
     { id: 12, top: 0, left: 4, opacity: 0.35, width: 33 },
@@ -107,9 +105,9 @@ const configData = [
     //ODLA
     { id: 19, color: 'black', left: 1, top: 1, width: 32, opacity: 0.2},
     //{ id: 20, top: 1,left:33,width:20},
-    { id: 20, top: 43.5, left: 2, width: 51, hasBackground: true, height: 8, opacity: 0.5, left: 1 },
+    { id: 20, top: 43.5,  width: 51, hasBackground: true, height: 8, opacity: 0.5, left: 1 },
     //MÅNEN
-    { id: 21, top: 38, left: 5, with: 35 },
+    { id: 21, top: 40, left: 5, width: 38 },
     { id: 22, top: 0, width: 45, left: 2 },
     //VENUS
     { id: 23, color: 'black', width: 16, top: 1, left: 1, opacity: 0.2 },
@@ -133,23 +131,43 @@ const DEFAULT_TEXT_WIDTH = 35;
 const DEFAULT_TEXT_HEIGHT = 9;
 const TEXT_SHADOW_OPACITY = 0.3;
 const DEFAULT_TEXTBOX_OPACITY = 0.6;
+const SAVE_SIZE = 4;
+const BRIGHTNESS_ADJUSTMENT = 1.1;
 
 
 
 const StarsBook = () => {
+    const pageRefs = useRef([]); // Array to hold refs for each BookPage
+
+    const downloadAllPages = () => {
+        console.log("Downloading all pages");
+        Promise.all(pageRefs.current.map((pageRef, index) => {
+            if (pageRef) {
+                return saveAsImage(pageRef, `Page_${index + 1}`);
+            }
+            return Promise.resolve();
+        }))
+        .then(() => {
+            console.log("All pages downloaded");
+        })
+        .catch(error => {
+            console.error("Error downloading pages", error);
+        });
+    };
 
     return (
-        <Grid container spacing={0} style={{ background: 'black', margin: 0, padding: 0, fontFamily: Comfortaa }}>
-            {configData.map((config) => {
+        <Grid container spacing={0} style={{ background: 'black', margin: 0, padding: 0, fontFamily: Comfortaa, width:"100vw" }}>
+             <Button fullWidth onClick={downloadAllPages}>Download All</Button>
+            {configData.map((config, index) => {
                 const pageText = textData.find(text => text.id === config.id)?.text || '';
-                return <BookPage key={config.id} text={pageText ?? ""} config={config} />;
+                return <BookPage  ref={el => pageRefs.current[index] = el}  key={config.id} text={pageText ?? ""} config={config} />;
             })}
         </Grid>
     );
 };
 
 
-const BookPage = ({ text, config }) => {
+const BookPage = React.forwardRef(({ text, config }, ref) => {
     const {
         id,
         top = DEFAULT_TOP,
@@ -179,8 +197,8 @@ const BookPage = ({ text, config }) => {
 
     const pageContainerStyle = {
         position: 'relative',
-        width: 'calc(50vw - 9px)', // Adjust width as needed
-        height: 'calc(50vw - 9px)', // Adjust height as needed
+        width: 'calc(50vw )', // Adjust width as needed
+        height: 'calc(50vw)', // Adjust height as needed
         marginBottom: '20px',
     };
     const [pageImage, setPageImage] = useState(img);
@@ -194,17 +212,74 @@ const BookPage = ({ text, config }) => {
     const RenderedComponent = config.component;
 
     return (
-        <div style={pageContainerStyle}>
+        <div style={pageContainerStyle} ref={ref}>
             {pageImage && <img src={pageImage} alt={`Page ${id}`} style={{ width: '100%', height: 'auto' }} />}
             {hasBackground && <img src={textBoxImg} style={{ position: 'absolute', top: `${top - 0.5}vw`, left: `${left - 1.5}vw`, width: width + "vw", height: height + "vw", opacity: opacity }} />}
             <Text style={textStyle}>{text}</Text>
             {RenderedComponent && <RenderedComponent {...config.componentProps} />}
         </div>
     );
+});
+
+
+
+const saveAsImage = (pageRef, title) => {
+    const scale = SAVE_SIZE;
+
+    return new Promise((resolve, reject) => {
+        domtoimage.toBlob(pageRef, {
+            width: pageRef.clientWidth * scale,
+            height: pageRef.clientHeight * scale,
+            style: {
+                transform: 'scale(' + scale + ')',
+                transformOrigin: 'top left'
+            }
+        })
+        .then(blob => adjustGamma(blob))
+        .then((brighterBlob) => {
+            saveAs(brighterBlob, title + '.png');
+            resolve();
+        })
+        .catch((error) => {
+            console.error('oops, something went wrong!', error);
+            reject(error);
+        });
+    });
 };
+const adjustGamma = (blob, gamma = BRIGHTNESS_ADJUSTMENT) => {
+    return new Promise((resolve, reject) => {
+        if (typeof window === 'undefined') {
+            reject(new Error('This function can only be run on the client-side.'));
+            return;
+        }
 
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
+        const img = new window.Image();
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
 
+            ctx.drawImage(img, 0, 0);
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                data[i] = 255 * Math.pow(data[i] / 255, 1 / gamma);     // Red
+                data[i + 1] = 255 * Math.pow(data[i + 1] / 255, 1 / gamma); // Green
+                data[i + 2] = 255 * Math.pow(data[i + 2] / 255, 1 / gamma); // Blue
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+
+            canvas.toBlob(resolve);
+        };
+
+        img.onerror = reject;
+        img.src = URL.createObjectURL(blob);
+    });
+}
 
 
 const loadImage = async (id, setPageImage) => {
