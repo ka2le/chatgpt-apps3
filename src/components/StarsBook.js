@@ -43,52 +43,82 @@ const textData = [
 
 ];
 
+const PlanetLabels = ({ labels }) => {
 
 
+    return (
+        <div style={{ position: "absolute", color: "black", top: 0, left: 0 }}>
+            {labels.map(label => (
+                <Text key={label.name} style={{
+                    position: "absolute",
+                    backgroundColor: "beige",
+                    padding: "0.4vw",
+                    borderRadius: "0.4vw",
+                    fontSize: "0.9vw",
+                    top: label.top,
+                    width: "max-content",
+                    left: label.left
+                }}>
+                    {label.name}
+                </Text>
+            ))}
+        </div>
+    );
+};
+const planetLabels = [
+    { name: "Saturnus", top: "5vw", left: "13vw" },
+    { name: "Jupiter", top: "3vw", left: "30vw" },
+    { name: "Venus", top: "45vw", left: "1vw" },
+    { name: "Merkurius", top: "32vw", left: "4.5vw" },
+    { name: "Jorden", top: "15vw", left: "44vw" },
+    { name: "Mars", top: "35.2vw", left: "41.2vw" },
+    { name: "Uranus", top: "16vw", left: "2vw" },
+    { name: "Neptune", top: "43vw", left: "36.5vw" }
+];
 // Configuration data for each page
 const configData = [
     //BIG BANG
-    { id: 1,  hasBackground: true, width:40, height:12},
+    { id: 1, hasBackground: true, width: 40, height: 12 },
     { id: 2, },
     //GALAXY
-    { id: 3,},
-    { id: 4, top:40,left:12, height:12,opacity:0.4 },
+    { id: 3, },
+    { id: 4, top: 43, left: 12, height:7, width:38, hasBackground:true, opacity: 0.6 },
     //STARS
-    { id: 5,top:0,width:42,opacity:0.4   },
-    { id: 6, top:43,left:12 ,opacity:0.4 },
+    { id: 5, top: 0, width: 42, opacity: 0.4 },
+    { id: 6, top: 43, left: 12, opacity: 0.4 },
     //SOLEN OCH JORDEN
-    { id: 7, left:10,width:40, top:0, hasBackground: true, opacity:0.5,height:7 },
-    { id: 8, top: 40, left: 5, width: 40, opacity: 0.4},
+    {id: 7, left: 9, width: 17, top: 40,  opacity: 0.5,  component: PlanetLabels, componentProps: { labels: planetLabels }},
+    { id: 8, top: 40, left: 5, width: 40, opacity: 0.4 },
     //BAKTERIER
-    { id: 9, hasBackground: true, top: 37, width: 35, left: 1, opacity: 0.7, height: 15},
+    { id: 9, hasBackground: true, top: 37, width: 35, left: 1, opacity: 0.7, height: 15 },
     { id: 10, hasBackground: true, top: 36.5, width: 25.5, left: 1, opacity: 0.7, height: 17.5 },
     //DINOSAURIER
-    { id: 11, color: 'black', top: 0, width: 40 },
-    { id: 12,top:0,left:4, opacity:0.35, width:33 },
+    { id: 11, color: 'black', top: 0, width: 44,left:1.5 },
+    { id: 12, top: 0, left: 4, opacity: 0.35, width: 33 },
     //METEORIT
-    { id: 13, top:43.5,width:38,left:0 },
-    { id: 14, top:30,left:1,width:30 },
+    { id: 13, top: 43.5, width: 38, left: 0 },
+    { id: 14, top: 30, left: 1, width: 30 },
     //MAMMUTAR
-    { id: 15,hasBackground:true, top:4,width:40,left:5,opacity:0.44,height:9},
-    { id: 16,hasBackground:true, top:42,width:40,left:12,opacity:0.44,height:9},
+    { id: 15, hasBackground: true, top: 42, width: 40, left: 9, opacity: 0.44, height: 8 },
+    { id: 16, hasBackground: true, top: 30, width: 16, left: 36, opacity: 0.44, height: 17 },
     //APOR
-    { id: 17,hasBackground:true, top:0,width:27,left:2,opacity:0.5,height:10},
-    { id: 18, top:39,left:15, width:32 },
+    { id: 17, hasBackground: true, top: 0, width: 27, left: 2, opacity: 0.5, height: 8 },
+    { id: 18, top: 39, left: 15, width: 32 },
     //ODLA
-    { id: 19,color:'black',left:1,top:1},
+    { id: 19, color: 'black', left: 1, top: 1, width: 32, opacity: 0.2},
     //{ id: 20, top: 1,left:33,width:20},
-    { id: 20, top: 43,left:2,width:51,hasBackground:true, height:9, opacity:0.5,left:1},
+    { id: 20, top: 43.5, left: 2, width: 51, hasBackground: true, height: 8, opacity: 0.5, left: 1 },
     //MÅNEN
-    { id: 21,top:38, left:5, with:35},
-    { id: 22, top: 0, width:45,left:2 },
+    { id: 21, top: 38, left: 5, with: 35 },
+    { id: 22, top: 0, width: 45, left: 2 },
     //VENUS
-    { id: 23, color: 'black',width:16, top:1,left:1,opacity:0.2},
-    { id: 24 ,opacity:0.4, width:25, height:17, left:22,top:1},
+    { id: 23, color: 'black', width: 16, top: 1, left: 1, opacity: 0.2 },
+    { id: 24, opacity: 0.4, width: 25, height: 17, left: 22, top: 1 },
     //Alient
-    { id: 25, top:38,left:28, width:22, height:13, opacity:0.5,hasBackground:true},
-    { id: 26,  width:24, height:12, left:17, opacity:0.4, hasBackground:true},
+    { id: 25, top: 38, left: 28, width: 22, height: 9, opacity: 0.5, hasBackground: true },
+    { id: 26, width: 24, height: 9, left: 17, opacity: 0.4, hasBackground: true },
     //DREAMS
-    { id: 27,hasBackground:true, opacity:0.4, height:13,width:35},
+    { id: 27, hasBackground: true, opacity: 0.4, height: 11, width: 35 },
     { id: 28 },
 
 ];
@@ -98,7 +128,7 @@ const DEFAULT_TEXT_COLOR = 'white';
 const DEFAULT_TOP = 3;
 const DEFAULT_LEFT = 3;
 const DEFAULT_HAS_BACKGROUND = false;
-const DEFAULT_FONT_SIZE = '1.1vw';
+const DEFAULT_FONT_SIZE = '1vw';
 const DEFAULT_TEXT_WIDTH = 35;
 const DEFAULT_TEXT_HEIGHT = 9;
 const TEXT_SHADOW_OPACITY = 0.3;
@@ -109,7 +139,7 @@ const DEFAULT_TEXTBOX_OPACITY = 0.6;
 const StarsBook = () => {
 
     return (
-        <Grid container spacing={0} style={{ background: 'black',  margin: 0, padding: 0, fontFamily: Comfortaa }}>
+        <Grid container spacing={0} style={{ background: 'black', margin: 0, padding: 0, fontFamily: Comfortaa }}>
             {configData.map((config) => {
                 const pageText = textData.find(text => text.id === config.id)?.text || '';
                 return <BookPage key={config.id} text={pageText ?? ""} config={config} />;
@@ -135,15 +165,15 @@ const BookPage = ({ text, config }) => {
 
     const textStyle = {
         position: 'absolute',
-        color: hasBackground ? "white": color,
+        color: hasBackground ? "white" : color,
         top: `${top}vw`,
-        backgroundColor: hasBackground ? "transparent" : color =="white" ? "rgba(0,0,0,"+opacity+")" : "rgba(255,255,255,"+opacity+")",
+        backgroundColor: hasBackground ? "transparent" : color == "white" ? "rgba(0,0,0," + opacity + ")" : "rgba(255,255,255," + opacity + ")",
         boxShadow: hasBackground ? "none" : `0 0 1vw 1vw ${color === "white" ? `rgba(0,0,0,${opacity})` : `rgba(255,255,255,${opacity})`}`,
-        textShadow: hasBackground ? "none" : `0 0 0.3vw ${color == "white" ? `rgba(0,0,0,${opacity+0.3})` : `rgba(255,255,255,${opacity+0.3})`}`,
-        padding: hasBackground ?  "0.2vw": "0.7vw",
+        textShadow: hasBackground ? "none" : `0 0 0.3vw ${color == "white" ? `rgba(0,0,0,${opacity + 0.3})` : `rgba(255,255,255,${opacity + 0.3})`}`,
+        padding: hasBackground ? "0.2vw" : "0.7vw",
         borderRadius: "4vw",
         left: `${left}vw`,
-        width: hasBackground ? `${width-4}vw` : `${width}vw`,
+        width: hasBackground ? `${width - 4}vw` : `${width}vw`,
         fontSize: fontSize, // Adjust font size as needed
     };
 
@@ -161,14 +191,20 @@ const BookPage = ({ text, config }) => {
         }
     }, [id, img]);
 
+    const RenderedComponent = config.component;
+
     return (
         <div style={pageContainerStyle}>
             {pageImage && <img src={pageImage} alt={`Page ${id}`} style={{ width: '100%', height: 'auto' }} />}
-            {hasBackground && <img src={textBoxImg} style={{ position: 'absolute', top: `${top-1}vw`, left: `${left-1.5}vw`, width: width+"vw", height: height+"vw", opacity:opacity }} />}
+            {hasBackground && <img src={textBoxImg} style={{ position: 'absolute', top: `${top - 0.5}vw`, left: `${left - 1.5}vw`, width: width + "vw", height: height + "vw", opacity: opacity }} />}
             <Text style={textStyle}>{text}</Text>
+            {RenderedComponent && <RenderedComponent {...config.componentProps} />}
         </div>
     );
 };
+
+
+
 
 
 const loadImage = async (id, setPageImage) => {
