@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.742cbdea.js",
+    "main.js": "/chatgpt-apps3/static/js/main.697743eb.js",
     "static/js/357.d84e16d8.chunk.js": "/chatgpt-apps3/static/js/357.d84e16d8.chunk.js",
     "static/js/393.1bbe9ce0.chunk.js": "/chatgpt-apps3/static/js/393.1bbe9ce0.chunk.js",
     "static/js/237.a28838af.chunk.js": "/chatgpt-apps3/static/js/237.a28838af.chunk.js",
@@ -14,8 +14,8 @@
     "static/js/715.0088dc1e.chunk.js": "/chatgpt-apps3/static/js/715.0088dc1e.chunk.js",
     "static/js/125.041f6ea4.chunk.js": "/chatgpt-apps3/static/js/125.041f6ea4.chunk.js",
     "static/js/839.b4ece51b.chunk.js": "/chatgpt-apps3/static/js/839.b4ece51b.chunk.js",
-    "static/js/77.7ded0da6.chunk.js": "/chatgpt-apps3/static/js/77.7ded0da6.chunk.js",
-    "static/js/104.c0320e95.chunk.js": "/chatgpt-apps3/static/js/104.c0320e95.chunk.js",
+    "static/js/330.b09145cf.chunk.js": "/chatgpt-apps3/static/js/330.b09145cf.chunk.js",
+    "static/js/166.1b09b590.chunk.js": "/chatgpt-apps3/static/js/166.1b09b590.chunk.js",
     "static/js/539.f3cb8d99.chunk.js": "/chatgpt-apps3/static/js/539.f3cb8d99.chunk.js",
     "static/js/45.b3cfdafd.chunk.js": "/chatgpt-apps3/static/js/45.b3cfdafd.chunk.js",
     "static/js/601.29b2f608.chunk.js": "/chatgpt-apps3/static/js/601.29b2f608.chunk.js",
@@ -37,6 +37,8 @@
     "static/js/869.0ed2934e.chunk.js": "/chatgpt-apps3/static/js/869.0ed2934e.chunk.js",
     "static/js/812.d8066699.chunk.js": "/chatgpt-apps3/static/js/812.d8066699.chunk.js",
     "static/js/555.f0819d13.chunk.js": "/chatgpt-apps3/static/js/555.f0819d13.chunk.js",
+    "static/js/501.4ca5b4d0.chunk.js": "/chatgpt-apps3/static/js/501.4ca5b4d0.chunk.js",
+    "static/js/454.72fc9d85.chunk.js": "/chatgpt-apps3/static/js/454.72fc9d85.chunk.js",
     "static/js/356.033ff930.chunk.js": "/chatgpt-apps3/static/js/356.033ff930.chunk.js",
     "static/js/291.37cb1917.chunk.js": "/chatgpt-apps3/static/js/291.37cb1917.chunk.js",
     "static/js/843.54de6a1c.chunk.js": "/chatgpt-apps3/static/js/843.54de6a1c.chunk.js",
@@ -67,10 +69,10 @@
     "static/media/9.png": "/chatgpt-apps3/static/media/9.66ac693391cab4c5aebf.png",
     "static/media/13.png": "/chatgpt-apps3/static/media/13.30b4afacf70cb042859c.png",
     "static/media/16.png": "/chatgpt-apps3/static/media/16.66db5402ed6af2d85175.png",
-    "static/media/20.png": "/chatgpt-apps3/static/media/20.b25de15ba57a0bf4e59f.png",
+    "static/media/20_2.png": "/chatgpt-apps3/static/media/20_2.2c89c5634789a5d4a30b.png",
     "static/media/Backside4.jpeg": "/chatgpt-apps3/static/media/Backside4.ff0101a7e1e8a482cf9b.jpeg",
     "static/media/19.png": "/chatgpt-apps3/static/media/19.ef842cb5939d292ae204.png",
-    "static/media/21.png": "/chatgpt-apps3/static/media/21.55e646d036ab26ae60f0.png",
+    "static/media/21_2.png": "/chatgpt-apps3/static/media/21_2.52a240acf7ecf47196aa.png",
     "static/media/14.png": "/chatgpt-apps3/static/media/14.3e91e210875a91d35172.png",
     "static/media/10.png": "/chatgpt-apps3/static/media/10.81768ca75c4fdb5a7437.png",
     "static/media/23.png": "/chatgpt-apps3/static/media/23.96a35c944e7082f932c5.png",
@@ -102,7 +104,9 @@
     "static/media/c_23800.png": "/chatgpt-apps3/static/media/c_23800.d1659f76e00915bff80d.png",
     "static/media/c_24200.png": "/chatgpt-apps3/static/media/c_24200.e5782623a8fe57ae8ed6.png",
     "static/media/c_23100.png": "/chatgpt-apps3/static/media/c_23100.7ced2db5f73c92f7df86.png",
+    "static/media/21.jpg": "/chatgpt-apps3/static/media/21.f27ebb31445b157e5f2f.jpg",
     "static/media/c_8800.png": "/chatgpt-apps3/static/media/c_8800.837d554cd49f67c45ff7.png",
+    "static/media/20.jpg": "/chatgpt-apps3/static/media/20.31792e595d6f608f332b.jpg",
     "static/media/c_24000.png": "/chatgpt-apps3/static/media/c_24000.38d965bcbc96ed54c4b0.png",
     "static/media/c_35400.png": "/chatgpt-apps3/static/media/c_35400.2957199bf246ebafcceb.png",
     "static/media/c_21600.png": "/chatgpt-apps3/static/media/c_21600.397c48da0d8c6ee33d5e.png",
@@ -545,6 +549,7 @@
     "static/media/c_2900 - Copy (3).png": "/chatgpt-apps3/static/media/c_2900 - Copy (3).fdc02f2c3e090a5c73fa.png",
     "static/media/c_2900 - Copy.png": "/chatgpt-apps3/static/media/c_2900 - Copy.fdc02f2c3e090a5c73fa.png",
     "static/media/35.png": "/chatgpt-apps3/static/media/35.0e7e0ff9ca1a67945c97.png",
+    "static/media/21.png": "/chatgpt-apps3/static/media/21.55e646d036ab26ae60f0.png",
     "static/media/brain.png": "/chatgpt-apps3/static/media/brain.3b36f28da467f35f299d.png",
     "static/media/iot.png": "/chatgpt-apps3/static/media/iot.3ed0f1cb9d625e32bbc9.png",
     "static/media/c_4700 - Copy (2).png": "/chatgpt-apps3/static/media/c_4700 - Copy (2).6a4a8d681a61a3fc08a1.png",
@@ -566,6 +571,7 @@
     "static/media/46.png": "/chatgpt-apps3/static/media/46.68786fe838ab6462f068.png",
     "static/media/42.png": "/chatgpt-apps3/static/media/42.330cc837530159d1ad04.png",
     "static/media/bulb.png": "/chatgpt-apps3/static/media/bulb.81e65dc1634dc531c62b.png",
+    "static/media/20.png": "/chatgpt-apps3/static/media/20.b25de15ba57a0bf4e59f.png",
     "static/media/data2.png": "/chatgpt-apps3/static/media/data2.a2ec94f8033b975fb686.png",
     "static/media/26.png": "/chatgpt-apps3/static/media/26.a5ee881e96b77599a0a8.png",
     "static/media/31.png": "/chatgpt-apps3/static/media/31.5ba4b2548f001111117a.png",
@@ -799,11 +805,11 @@
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.50a11e589c6bdbe6fcc20d068ec25c03.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.43886756af1c452af06aae99d986a6cc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.742cbdea.js.map": "/chatgpt-apps3/static/js/main.742cbdea.js.map",
+    "main.697743eb.js.map": "/chatgpt-apps3/static/js/main.697743eb.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.742cbdea.js"
+    "static/js/main.697743eb.js"
   ]
 }
