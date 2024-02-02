@@ -13,8 +13,8 @@ const textData = [
     { "id": 2, "text": "" },
     { "id": 3, "text": "" },
     { "id": 4, "text": "För stjärnstoftet ska va där. Det är fint och färgglatt. Glittrande som den bästa snurrkjolen. Sen började alla små stjärnstoft samlas. Stora dansande snurrande ringar som blev galaxer." },
-    { "id": 5, "text": "I galaxerna kom megamånga stjärnor. Stjärnstoft som höll hand, hårt. Dom blev stora och varma bollar. Varmare än stekpannan." },
-    { "id": 6, "text": "Och stjärnbollarna började lysa starkt. Ljusare än taklampan när du vill sova. “Släck lampan” ropar du! “Nej, tänt ska det va” säger jag. Så blinkar stjärnorna över hela rymden" },
+    { "id": 5, "text": "I galaxerna kom megamånga stjärnor. Stjärnstoft som höll hand, hårt. Dom blev stora och varma bollar. Varmare än stekpannan.Och stjärnbollarna började lysa starkt. Ljusare än taklampan när du vill ha sovmorgon. “Släck lampan” ropar du! “Nej, tänt ska det va” säger jag. Så blinkar stjärnorna över hela rymden" },
+    { "id": 6, "text": "" },
     { "id": 7, "text": "\"Det här är Solen. Vår egen fina stjärna. Runt Solen snurrar vår planet, Jorden, och flera andra planeter.  Solen lyser upp planeterna och värmer oss." },
     { "id": 8, "text": "Jorden är ju vår planet där vår familj bor. Vem mer bor på Jorden? Alla kompisar. Och tigrar, kameleonter, kaniner. Ja alla!" },
     { "id": 9, "text": "För länge sen uppstod livet på jorden. Det började litet! Pytte pytte pytte! Småttingar som kallas för bakterier, alger och plankton. Lika små som tandtrollen! Under låååång lång tid så ändrades dom sakta. Deras bebisar och barn och barnbarn var lite annorlunda och fick nya spännande krafter. Amöbor kunde ändra form, som om deras kroppar var gjorda av deg." },
@@ -22,11 +22,11 @@ const textData = [
     { "id": 11, "text": "Sen kom andra djur med vassa tänder. Tyrannosaurus Rex som åt andra dinosaurier. " },
     { "id": 12, "text": "Stegosaurus med sina plattor och platta tänder åt växter. Det fanns många olika dinosaurier som såg helt olika ut. Stora som hus stampade dinosaurierna runt på jorden och vrålade." },
     { "id": 13, "text": "Ute i mörka mystiska rymden flög en stor sten, en asteroid. Som om någon kastat den mot jorden, fast man inte får. " },
-    { "id": 14, "text": "Dinosaurierna tittade upp i himlen och såg ett stort eldklot. Krash! Den krockade med jorden. När stenen träffat marken kallas den för meteorit. Efter meteoritens krock fanns det inga fler dinosaurier. Förutom leksaksdinosaurier såklart" },
+    { "id": 14, "text": "Dinosaurierna tittade upp i himlen och såg ett stort eldklot. Krash! Den krockade med jorden. När stenen träffat marken kallas den för meteorit. Efter meteoritens krock fanns det inga dinosaurier mer. Förutom leksaksdinosaurier såklart" },
     { "id": 15, "text": "Efter dinosauriernas tid kom nya djur. Mammutar som var som håriga elefanter, stora som bussar. Kolla på den där pälsen, lika tjock som den bästa vinteroverallen. Dom frös inte ens när vintern är som kallast." },
-    { "id": 16, "text": "Det fanns även sabeltandade tigrar. Som dagens tigrar men med längre tänder. Förr i tiden fanns det många olika spännande djur, som är försvunna idag. Men några djur finns kvar." },
-    { "id": 17, "text": "Dom busiga aporna. Kanske kastade dom bananer på sabeltandade tigrar. Apor finns ju fortfarande idag. Schimpanser, gorillor och mandriller." },
-    { "id": 18, "text": "Men det kom också nya apor. Precis som små fiskar i havet blev till stora hajar. På samma sätt så fick aporna barn som hade mindre svans och gick på två ben. Många många barnbarn senare blev sådana apor till människor. Människor som tittade upp på blinkande stjärnor. Såg mönster och drömde." },
+    { "id": 16, "text": "Det fanns även sabeltandade tigrar. Som dagens tigrar men med längre tänder. Förr i tiden fanns det många olika spännande djur. Vissa är försvunna idag, andra finns kvar." },
+    { "id": 17, "text": "Som dom busiga aporna. Kanske kastade dom bananer på sabeltandade tigrar. Apor finns ju fortfarande idag. Schimpanser, gorillor och mandriller." },
+    { "id": 18, "text": "Men det kom också nya apor. Precis som dom små fiskarna i havet blev till stora hajar. På samma sätt fick aporna barn som hade mindre svans och gick på två ben. Många många barnbarn senare blev sådana apor till människor. Människor som tittade upp på blinkande stjärnor. Såg mönster och drömde." },
     { "id": 19, "text": "Människorna planterade frön i jorden. Solen lyste på fröna och hjälpte dom växa. Vete som bakades till bröd, som Pita och Bao. Bönor som kokades till soppa. Knapriga morötter. Vad mer kan man odla och äta?" },
     { "id": 20, "text": "Sen byggde människor städer. Uppfinnare uppfann en massa saker: Varm eld, mysiga hus, spännande böcker, roliga leksaker och massa annat. Så uppfanns också raketer. Metallrör som sprutade eld ur rumpan. Högt och snabbt, högre än fåglar flög dom, snabbare än en bil, hela vägen ut i rymden! Hela vägen till..." },
     { "id": 21, "text": "Månen! I raketer flög människor till månen. Först ett litet steg försiktigt ut på månen. Sen hoppandes och studsandes. På månen går det att hoppa högre än på studsmattan! Oj vad astronauterna skrattade. Lyfta tunga saker är lätt på månen." },
@@ -35,7 +35,7 @@ const textData = [
     { "id": 24, "text": "Mars är en annan planet som ingen åkt till än. Där är det lite kallare. Fullt med röd sand och berg. Massa plats att bygga nya städer på, nya lekplatser kanske. Mars är lite som månen, det går att hoppa högt och lyfta tungt. Vart skulle du vilja åka och vad skulle du packa med dig?" },
     { "id": 25, "text": "Långt ut i rymden, på planeter som snurrar runt andra stjärnor så kanske det finns rymdvarelser. Kanske har dom många huvuden och kan flyga utan vingar." },
     { "id": 26, "text": "Kanske älskar dom att leka kurragömma. Ingen vet, för ingen har kunnat åka så långt än. Då måste vi uppfinna större och snabbare raketer i framtiden." },
-    { "id": 27, "text": "Uppe i rymden finns hela universum. Alla andra planeter som snurrar runt andra stjärnor och helt andra galaxer. Det är spännande att fantisera om allt som finns där uppe. Kanske är det du som uppfinner nya raketer och åker på rymdäventyr. Säg hej till alla rymdvarelser och vinka godnatt till de blinkande stjärnorna." },
+    { "id": 27, "text": "Tänk, allt började med en stor smäll. Stjärnstoft i glittrande galaxer formade varma stjärnbollar, som vår sol, med planeter, som vår jord. Där livet utvecklades. Från pyttesmå bakterier till gigantiska dinosaurier. Sen kom människor som flög till månen i raketer. Kanske blir det du som uppfinner snabbare raketer, flyger på rymdäventyr och träffar utomjordingar. Sånt kan du drömma om när du tittar upp på dom blinkade stjärnorna och vinkar godnatt till universum." },
     { "id": 28, "text": "" }
 
 
@@ -67,11 +67,13 @@ const DinosauLabels = ({ labels }) => {
 
 
     return (
-        <div style={{ position: "absolute", color: "black", top: 0, left: 0 }}>
+        // <div style={{ position: "absolute", color: "black", top: 0, left: 0 }}>
+        <div style={{ position: "absolute", color: "white", top: 0, left: 0 }}>
             {labels.map(label => (
                 <Text key={label.name} style={{
                     position: "absolute",
-                    backgroundColor: "rgba(255,255,255,0.4)",
+                   // backgroundColor: "rgba(255,255,255,0.3)",
+                    backgroundColor: "rgba(0,0,0,0.2)",
                     padding: "0.4vw",
                     borderRadius: "0.4vw",
                     fontSize: "0.9vw",
@@ -97,13 +99,13 @@ const planetLabels = [
 ];
 
 const dinosaurLabels1 = [
-    { name: "Tyrannosaurus Rex", top: "27vw", left: "28.5vw" },
+    { name: "Tyrannosaurus Rex", top: "21vw", left: "9vw" },
     { name: "Stegosaurus", top: "44vw", left: "24.5vw" },
    
 ];
 const dinosaurLabels2 = [
-    { name: "Brachiosaurus", top: "27vw", left: "28.5vw" },
-    { name: "Triceratops", top: "31vw", left: "1vw" },
+    { name: "Brachiosaurus", top: "27vw", left: "25vw" },
+    { name: "Triceratops", top: "31.5vw", left: "1vw" },
     { name: "Pterodactylus", top: "2vw", left: "5vw" },
    
 ];
@@ -119,7 +121,7 @@ const configData = [
     { id: 3, },
     { id: 4, top: 43, left: 12, height:7, width:38, hasBackground:true, opacity: 0.6 },
     //STARS
-    { id: 5, top: 0, width: 42, opacity: 0.4 },
+    { id: 5, top: 0, width: 42, opacity: 0.5 },
     { id: 6, top: 43, left: 12, opacity: 0.4 },
     //SOLEN OCH JORDEN
     {id: 7, left: 9, width: 17, top: 40,  opacity: 0.5,  component: PlanetLabels, componentProps: { labels: planetLabels }},
@@ -142,18 +144,19 @@ const configData = [
     //ODLA
     { id: 19, color: 'black', left: 1, top: 1, width: 32, opacity: 0.2},
     //{ id: 20, top: 1,left:33,width:20},
-    { id: 20, top: 43.5,  width: 51, hasBackground: true, height: 8, opacity: 0.5, left: 1 },
+    //{ id: 20, top: 20,  width: 26.5, color: 'black', height: 12.7, opacity: 0.2, left: 1 },
+    { id: 20, top: 38.5,  width: 22.5, color: 'white', height: 12.7, opacity: 0.4, left: 26.4 },
     //MÅNEN
-    { id: 21, top: 40, left: 5, width: 38 },
-    { id: 22, top: 0, width: 45, left: 2 },
+    { id: 21, top: 40, left: 5, width: 38, opacity: 0.5},
+    { id: 22, top: 0, width: 45, left: 2, opacity: 0.45 },
     //VENUS
     { id: 23, color: 'black', width: 16, top: 1, left: 2, opacity: 0.2 },
-    { id: 24, opacity: 0.4, width: 25, height: 17, left: 21, top: 1 },
+    { id: 24, opacity: 0.45, width: 25, height: 17, left: 21, top: 1 },
     //Alient
     { id: 25, top: 38, left: 28, width: 22, height: 9, opacity: 0.5, hasBackground: true },
-    { id: 26, width: 24, height: 9, left: 17, opacity: 0.4, hasBackground: true },
+    { id: 26, width: 24, height: 9, left: 17, opacity: 0.45, hasBackground: true },
     //DREAMS
-    { id: 27, hasBackground: true, opacity: 0.45, height: 10.5, width: 35 },
+    { id: 27, hasBackground: true, opacity: 0.45, height: 11.8, width: 41 },
     { id: 28 },
 
 ];
