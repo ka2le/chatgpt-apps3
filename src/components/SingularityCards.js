@@ -1126,6 +1126,28 @@ const initialCards =[
 
 
 
+const mergeArrayObjects = (ids, fullArray, detailsArray) => {
+  return ids.map((id, index) => {
+    console.warn(id, index)
+
+    const fullObject = fullArray.find(item => item.id == id);
+    const detailsObject = detailsArray[index];
+    console.warn("fullObject", fullObject, "detailsObject", detailsObject)
+    // Assuming detailsArray has a straightforward structure to extract 'details1', 'details2', and 'cost'
+    // If the structure is different, adjust the extraction logic accordingly
+    if (fullObject && detailsObject) {
+      return {
+        ...fullObject,
+        details1: detailsObject.details1,
+        details2: detailsObject.details2,
+        cost: detailsObject.cost
+      };
+    }
+    // Return null or any suitable value if no matching id is found or if detailsObject does not exist
+
+  }).filter(item => item !== null); // This will filter out any null values if a match wasn't found
+};
+
 
 
 
