@@ -1363,7 +1363,7 @@ const CostNumberText = styled(NumberCardText)`
 border-right: 2px double aqua;*/
 const Title = styled(Text)`
   font-size: 13px;
-  text-shadow: 0 0 5px rgba(0,255,255,0.9);
+  text-shadow: 0 0 5px rgb(0 60 60 / 90%);
  // border: 1px solid aqua;
 
   background:rgba(0,0,0,0.6);
@@ -1377,11 +1377,11 @@ const Title = styled(Text)`
   color:#95ffff;
   //clip-path: polygon(0 0, 100% 0, 100% 75%, 95% 100%, 5% 100%, 0 75%); //Both bottom corners
   //clip-path: polygon(5% 0, 100% 0, 100% 75%, 95% 100%, 0 100%, 0 25%); // top left bottom right
-  clip-path: polygon(5% 0, 100% 0, 100% 65%, 95% 100%, 0 100%, 0 35%);
+  clip-path: polygon(8px 0, 100% 0, 100% 65%, calc(100% - 8px) 100%, 0 100%, 0 35%);
 
   //clip-path: polygon(0 0, 100% 0, 100% 75%, 95% 100%, 0 100%); // right bottom corner cutof
 
-  background: linear-gradient(to bottom, rgba(32,219,238,0.72), rgba(32,219,238,0.32) 30%, rgba(32,219,238,0.12));
+  background: linear-gradient(to bottom, rgba(32,219,238,0.72), rgba(32,219,238,0.32) 30%, rgba(32,119,138,0.32));
   
 `;
 
