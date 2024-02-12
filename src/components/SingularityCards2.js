@@ -1067,6 +1067,7 @@ const useIdSwap = () => {
 const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, details2, cost, id = 1, type = "base" }, ref) => {
   let isStyledTitle = false;
   let title = cardTitle;
+  const hideTitleIcon = true;
   // check if cardTitle starts with 'FontS'
   if (cardTitle.startsWith('FontS')) {
     isStyledTitle = true;
@@ -1093,7 +1094,14 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
                  <DuplicateImage src={imgUrl} /> 
                 <Image  id={`img-${id}`} src={imgUrl} /> {/* Original Image */}
                 <TitleWrapper>
-                  {isStyledTitle ? <StyledTitle>{title}<TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle></StyledTitle> : <Title>{title}<TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle></Title>}
+                  {isStyledTitle ?
+                   (<StyledTitle>{title}
+                   {hideTitleIcon ? null : <TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle>}
+                   </StyledTitle>) 
+                  : 
+                  (<Title>{title}
+                   {hideTitleIcon ? null :<TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle>}
+                  </Title>)}
 
                 </TitleWrapper>
               </ImageContainer>
@@ -1363,7 +1371,7 @@ const Title = styled(Text)`
   top: ${SIDE_MARGIN+4}px; 
   left: ${SIDE_MARGIN+2}px; 
   text-transform: uppercase;
-  padding:1px 2px 2px 6px;
+  padding:1px 6px 2px 6px;
   margin: 0;
   font-weight: bold;
   color:#95ffff;
