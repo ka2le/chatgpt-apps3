@@ -19,6 +19,7 @@ import Character1 from './components/mysteryGame/Character1';
 import SimplePokerContainer from './components/SimplePoker';
 import ArTest from './components/ArTest';
 import SingularityCards from './components/SingularityCards';
+import SingularityCards2 from './components/SingularityCards2';
 import ScoreKeeper from './components/ScoreKeeper';
 import { SingularityGameContainer } from './components/SingularityGame/SingularityGameContainer';
 import Critters from './components/Critters';
@@ -47,6 +48,7 @@ function App() {
             <Route path="/simple-poker-ai" element={<SimplePokerContainer/>} />
             <Route path="/ar-test" element={<ArTest/>} />
             <Route path="/singularity-cards" element={<SingularityCards/>} />
+            <Route path="/singularity-cards2" element={<SingularityCards2/>} />
             <Route path="/score-keeper" element={<ScoreKeeper/>} />
             <Route path="/singularity-sprint" element={<SingularityGameContainer/>} />
             <Route path="/critters" element={<Critters/>} />

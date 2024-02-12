@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 
 const textData = [
 
-    { "id": 1, "text": "Tänk dig en ballong lika stor som hela huset, som smäller. Pang! Fast ännu större! Så började allt! En hög smäll! Boom! Allt som finns hamnade överallt. Som när Någon tappar blåbärsgröten och det målar hela köksgolvet blått. Fast ingen behöver städa." },
+    { "id": 1, "text": "Tänk dig en ballong lika stor som hela huset. Fast större! Som smäller. Pang! Fast högre! Så började allt! En hög smäll! Boom! Allt som finns hamnade överallt. Som när Någon tappar blåbärsgröten och det målar hela köksgolvet blått. Fast ingen behöver städa." },
     { "id": 2, "text": "" },
     { "id": 3, "text": "" },
     { "id": 4, "text": "För stjärnstoftet ska va där. Det är fint och färgglatt. Glittrande som den bästa snurrkjolen. Sen började alla små stjärnstoft samlas. Stora dansande snurrande ringar som blev galaxer." },
@@ -35,7 +35,7 @@ const textData = [
     { "id": 24, "text": "Mars är en annan planet som ingen åkt till än. Där är det lite kallare. Fullt med röd sand och berg. Massa plats att bygga nya städer på, nya lekplatser kanske. Mars är lite som månen, det går att hoppa högt och lyfta tungt. Vart skulle du vilja åka och vad skulle du packa med dig?" },
     { "id": 25, "text": "Långt ut i rymden, på planeter som snurrar runt andra stjärnor så kanske det finns rymdvarelser. Kanske har dom många huvuden och kan flyga utan vingar." },
     { "id": 26, "text": "Kanske älskar dom att leka kurragömma. Ingen vet, för ingen har kunnat åka så långt än. Då måste vi uppfinna större och snabbare raketer i framtiden." },
-    { "id": 27, "text": "Tänk, allt började med en stor smäll. Stjärnstoft i glittrande galaxer formade varma stjärnbollar, som vår sol, med planeter, som vår jord. Där livet utvecklades. Från pyttesmå bakterier till gigantiska dinosaurier. Sen kom människor som flög till månen i raketer. Kanske blir det du som uppfinner snabbare raketer, flyger på rymdäventyr och träffar utomjordingar. Sånt kan du drömma om när du tittar upp på dom blinkade stjärnorna och vinkar godnatt till universum." },
+    { "id": 27, "text": "Tänk, allt började med en stor smäll. Stjärnstoft i glittrande galaxer formade varma stjärnbollar, som vår sol, med planeter, som vår jord. Där utvecklades livet. Från pyttesmå bakterier till gigantiska dinosaurier. Sen kom människor som flög till månen i raketer. Kanske blir det du som uppfinner snabbare raketer, flyger på rymdäventyr och träffar utomjordingar. Sånt kan du drömma om när du tittar upp på dom blinkade stjärnorna och vinkar godnatt till universum." },
     { "id": 28, "text": "" }
 
 
@@ -116,48 +116,49 @@ const dinosaurLabels2 = [
 const configData = [
     //BIG BANG
     { id: 1, hasBackground: true, width: 40,top:42, height: 8 },
-    { id: 2, },
-    //GALAXY
-    { id: 3, },
-    { id: 4, top: 43, left: 12, height:7, width:38, hasBackground:true, opacity: 0.6 },
-    //STARS
-    { id: 5, top: 0, width: 42, opacity: 0.5 },
-    { id: 6, top: 43, left: 12, opacity: 0.4 },
-    //SOLEN OCH JORDEN
-    {id: 7, left: 9, width: 17, top: 40,  opacity: 0.5,  component: PlanetLabels, componentProps: { labels: planetLabels }},
-    { id: 8, top: 40, left: 5, width: 40, opacity: 0.4 },
-    //BAKTERIER
-    { id: 9, hasBackground: true, top: 43.5, width: 53.1, left: 1, opacity: 0.8, height: 8},
-    { id: 10, hasBackground: true, top: 43.5, width: 52.5, left: 1.5, opacity: 0.8, height: 8 },
-    //DINOSAURIER
-    { id: 11, color: 'black', top: 0, width: 44,left:1.5,component: DinosauLabels, componentProps: { labels: dinosaurLabels1 } },
-    { id: 12, top: 0, left: 24, opacity: 0.15, width: 23,color: 'black',component: DinosauLabels, componentProps: { labels: dinosaurLabels2 }  },
-    //METEORIT
-    { id: 13, top: 44, width: 35, left: 2 },
-    { id: 14, top: 30, left: 1, width: 30 },
-    //MAMMUTAR
-    { id: 15, hasBackground: true, top: 42.5, width: 40, left: 9, opacity: 0.44, height: 8 },
-    { id: 16, hasBackground: true, top: 30, width: 16, left: 36, opacity: 0.54, height: 17 },
-    //APOR
-    { id: 17,  top: 43.5,  left: 2.8, opacity: 0.3 },
-    { id: 18, top: 39, left: 15, width: 32 },
-    //ODLA
-    { id: 19, color: 'black', left: 1, top: 1, width: 32, opacity: 0.2},
-    //{ id: 20, top: 1,left:33,width:20},
-    //{ id: 20, top: 20,  width: 26.5, color: 'black', height: 12.7, opacity: 0.2, left: 1 },
-    { id: 20, top: 38.5,  width: 22.5, color: 'white', height: 12.7, opacity: 0.4, left: 26.4 },
-    //MÅNEN
-    { id: 21, top: 40, left: 5, width: 38, opacity: 0.5},
-    { id: 22, top: 0, width: 45, left: 2, opacity: 0.45 },
-    //VENUS
-    { id: 23, color: 'black', width: 16, top: 1, left: 2, opacity: 0.2 },
-    { id: 24, opacity: 0.45, width: 25, height: 17, left: 21, top: 1 },
-    //Alient
-    { id: 25, top: 38, left: 28, width: 22, height: 9, opacity: 0.5, hasBackground: true },
-    { id: 26, width: 24, height: 9, left: 17, opacity: 0.45, hasBackground: true },
-    //DREAMS
-    { id: 27, hasBackground: true, opacity: 0.45, height: 11.8, width: 41 },
-    { id: 28 },
+    // { id: 2, },
+    // //GALAXY
+    // { id: 3, },
+    // { id: 4, top: 43, left: 12, height:7, width:38, hasBackground:true, opacity: 0.6 },
+    // //STARS
+    // { id: 5, top: 0, width: 42, opacity: 0.5 },
+    // { id: 6, top: 43, left: 12, opacity: 0.4 },
+    // //SOLEN OCH JORDEN
+    // {id: 7, left: 9, width: 17, top: 40,  opacity: 0.5,  component: PlanetLabels, componentProps: { labels: planetLabels }},
+    // { id: 8, top: 40, left: 5, width: 40, opacity: 0.4 },
+    // //BAKTERIER
+    // { id: 9, hasBackground: true, top: 43.5, width: 53.1, left: 1, opacity: 0.8, height: 8},
+    // { id: 10, hasBackground: true, top: 43.5, width: 52.5, left: 1.5, opacity: 0.8, height: 8 },
+    // //DINOSAURIER
+    // { id: 11, color: 'black', top: 0, width: 44,left:1.5,component: DinosauLabels, componentProps: { labels: dinosaurLabels1 } },
+    // { id: 12, top: 0, left: 24, opacity: 0.15, width: 23,color: 'black',component: DinosauLabels, componentProps: { labels: dinosaurLabels2 }  },
+    // //METEORIT
+    // { id: 13, top: 44, width: 35, left: 2 },
+    // { id: 14, top: 30, left: 1, width: 30 },
+    // //MAMMUTAR
+    // { id: 15, hasBackground: true, top: 43, width: 40, left: 9, opacity: 0.44, height: 7.2 },
+    // //{ id: 16, hasBackground: true, top: 30, width: 17.4, left: 34, opacity: 0.54, height: 13.2 },
+    // { id: 16, hasBackground: true, top: 42, width: 25.4, left: 27, opacity: 0.54, height: 9 },
+    // //APOR
+    // { id: 17,  top: 43.5,  left: 2.8, opacity: 0.3 },
+    // { id: 18, top: 39, left: 15, width: 32 },
+    // //ODLA
+    // { id: 19, color: 'black', left: 1, top: 1, width: 32, opacity: 0.2},
+    // //{ id: 20, top: 1,left:33,width:20},
+    // //{ id: 20, top: 20,  width: 26.5, color: 'black', height: 12.7, opacity: 0.2, left: 1 },
+    // { id: 20, top: 38.5,  width: 22.5, color: 'white', height: 12.7, opacity: 0.4, left: 26.4 },
+    // //MÅNEN
+    // { id: 21, top: 40, left: 5, width: 38, opacity: 0.5},
+    // { id: 22, top: 0, width: 45, left: 2, opacity: 0.45 },
+    // //VENUS
+    // { id: 23, color: 'black', width: 16, top: 1, left: 2, opacity: 0.2 },
+    // { id: 24, opacity: 0.45, width: 25, height: 17, left: 21, top: 1 },
+    // //Alient
+    // { id: 25, top: 38, left: 28, width: 22, height: 9, opacity: 0.5, hasBackground: true },
+    // { id: 26, width: 24, height: 9, left: 17, opacity: 0.45, hasBackground: true },
+    // //DREAMS
+    // { id: 27, hasBackground: true, opacity: 0.45, height: 11.8, width: 41 },
+    // { id: 28 },
 
 ];
 
@@ -171,7 +172,7 @@ const DEFAULT_TEXT_WIDTH = 35;
 const DEFAULT_TEXT_HEIGHT = 9;
 const TEXT_SHADOW_OPACITY = 0.3;
 const DEFAULT_TEXTBOX_OPACITY = 0.6;
-const SAVE_SIZE = 4;
+const SAVE_SIZE = 6;
 const BRIGHTNESS_ADJUSTMENT = 1.1;
 
 
@@ -277,7 +278,7 @@ const saveAsImage = (pageRef, title) => {
         })
         .then(blob => adjustGamma(blob))
         .then((brighterBlob) => {
-            saveAs(brighterBlob, title + '.png');
+            saveAs(brighterBlob, title + '.jpg');
             resolve();
         })
         .catch((error) => {

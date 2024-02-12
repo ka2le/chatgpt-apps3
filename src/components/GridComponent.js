@@ -24,10 +24,8 @@ function GridComponent() {
     const gridItems = [];
 
     // Fill the rest of the grid with empty items
-    while (gridItems.length < 12) {
-        gridItems.push({  link: '#',  });
-    }
-    while (gridItems.length < 12) {
+    
+    while (gridItems.length < 8) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
     gridItems.push(  { icon: PatternIcon, link: '/pattern-generator', title: 'Patterns' })
@@ -42,6 +40,7 @@ function GridComponent() {
     gridItems.push({ icon: HubIcon, link: '/simple-poker-ai', title: 'Ai Nerual Net Simple Game' });
     gridItems.push({ icon: ViewInArIcon, link: '/ar-test', title: 'AR Cards' });
     gridItems.push({ icon: SensorWindowIcon, link: '/singularity-cards', title: 'Singularity Cards' });
+    gridItems.push({ icon: SensorWindowIcon, link: '/singularity-cards2', title: 'Singularity Cards 2' });
     gridItems.push({ icon: ScoreboardIcon, link: '/score-keeper', title: 'Score Keeper' });
     gridItems.push({ icon: StarsIcon, link: '/singularity-sprint', title: 'Singularity Sprint' });
     gridItems.push({ icon: PetsIcon, link: '/critters', title: 'Critters' });
