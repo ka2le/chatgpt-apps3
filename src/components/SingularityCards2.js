@@ -73,7 +73,7 @@ import processingIcon2 from '../images/singularitySprint/processing_3.png';
 import background2 from '../images/singularitySprint/sci-fi-background.svg';
 import background from '../images/singularitySprint/background2.svg';
 import background_backside from '../images/singularitySprint/Backside.png';
-import back_v3 from '../images/singularitySprint/back_v3.png';
+import back_v3 from '../images/singularitySprint/back_v3_2.png';
 import background_backside2 from '../images/singularitySprint/backside2.png';
 import background_backside_main from '../images/singularitySprint/BackSide_Main.png';
 import background_backside3 from '../images/singularitySprint/backside3.png';
@@ -150,7 +150,7 @@ const initialCards =[
     "action1": "Test Linear Regression",
     "details1": "+16 data if the top card in your discard pile has 'Data' in its name",
     "action2": "Learn Deeply",
-    "details2": "Reveal 1 card, change all data and processing to the other on both actions and cost, for rest of game",
+    "details2": "Reveal 1 card change all data and processing to the other on both actions and cost, for rest of game",
     "cost": "",
     "id": "2",
     "type": "base"
@@ -203,7 +203,7 @@ const initialCards =[
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142550685653676065/ka2ledionysuz_computer_board_city_tilt_shift_lens_circuitry_cit_7129fbec-38e4-4e02-b103-bc5a1f6c9bff.png",
     "title": "Tensor Processing Unit",
     "action1": "Select optimizer algorithm",
-    "details1": "+4 data and then set your data to the next whole 10 data\n",
+    "details1": "+4 data and then set your data to the next whole 10 data",
     "action2": "Multiply the Matrix",
     "details2": "Competition: Player with most Score after 2 \nmore rounds get +40 data",
     "cost": "",
@@ -269,7 +269,7 @@ const initialCards =[
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139672147984404510/ka2ledionysuz_mountain_hall_server_hall_neon_punk_glow_lights_c_bf3fd202-db9f-42b2-bc6f-015769807d36.png",
     "title": "Data Center",
     "action1": "Establish redundancy",
-    "details1": "Shuffle played cards, each draw 1 , player drawing this gets +8 processing the other -8 data",
+    "details1": "Shuffle played cards each draw 1 , player drawing this gets +8 processing the other -8 data",
     "action2": "Provide Storage",
     "details2": "From now, get an additional +6 data each time an action is played that give you data",
     "cost": "",
@@ -293,7 +293,7 @@ const initialCards =[
     "action1": "Select optimizer algorithm",
     "details1": "+3 data per total 10 data of both players",
     "action2": "Add deep layers",
-    "details2": "After Card Draw, discard 1 card, then draw a card from any discard pile ",
+    "details2": "After Card Draw, discard 1 card then draw a card from any discard pile ",
     "cost": "",
     "id": 18,
     "type": "base"
@@ -447,7 +447,7 @@ const initialCards =[
     "action1": "Pre-train generative transformer",
     "details1": "+4 processing and +4 processing if you have more score than opponent\n",
     "action2": "Tokenize world",
-    "details2": "Move top 3 \ncards from opponents discard pile to yours and rearrange your entire discard pile",
+    "details2": "Move top 3 cards from opponents discard pile to yours and rearrange your entire discard pile",
     "cost": "",
     "id": "55",
     "type": "v3"
@@ -1111,7 +1111,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
             <CardActions key={id+"111"} title={action1} details={details1}></CardActions>
             <CardActions  key={id+"222"} title={action2} details={details2} cost={cost}></CardActions>
           </BottomHalf>
-          <TypeIcon colorcorrection={colorcorrection} src={iconImage}></TypeIcon>
+          {hideTitleIcon ? null : <TypeIcon colorcorrection={colorcorrection} src={iconImage}></TypeIcon>}
           <CardId>#{id}</CardId>
         </InsideMargin>
       </FadeBackground>
@@ -1125,9 +1125,13 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
 
 const iconSize = "20px";
 const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
+const iconStyleCard = { width: "12.3px", height: "18px", border:"1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
+const iconStyleCards = { width: "12.3px", height: "18px", border:"1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -4px -9px" };
 const iconStyleSpace = { width: "26px", height: "26px", verticalAlign: 'middle', margin: "-4px -9px -2px -5px", transform: "rotate(45deg)" };
 const ScoreIcon = () => <img src={scoreIcon} alt="score" style={iconStyle} />
 const DataIcon = () => <img src={dataIcon} alt="data" style={iconStyle} />
+const CardIcon = () => <img src={back_v3} alt="card" style={iconStyleCard} />
+const CardsIcon = () => <><img src={back_v3} alt="card" style={iconStyleCard} /><img src={back_v3} alt="card" style={iconStyleCards} /></>
 const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={iconStyle} />
 const SpaceIcon = () => <img src={space2} alt="space" style={iconStyleSpace} />
 const CardContainer = styled.div`
@@ -1218,19 +1222,7 @@ height: 26px;
 margin: -9px 0px;
 filter: sepia(1) ${props => props.colorcorrection};
 `;
-const NumberBox = styled(Text)`
-    color: ${props => `rgb(${props.color})`};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 75% 0);
-    width: 30px;
-    margin: 4%;
-    height: 10%;
-    font-family: "Digital Dream";
-    background: ${props => `rgba(${props.color}, 0.2)`};
-    border-left: 1px solid ${props => `rgb(${props.color})`};
-`;
+const NumberBox = styled(Text)``;
 
 const CardId = styled(Text)`
 
@@ -1261,16 +1253,13 @@ height: 94%;
 const LeftColumn = styled(Column)`
   flex-direction: column;
   flex: 1.2;
-  //border-right: 1px dashed lime;
-  align-items: flex-end;  // Add this line to right-align boxes
+  align-items: flex-end;  
 `;
 
 const CenterColumn = styled(Column)`
   display: flex;
   flex-direction: column;
   flex: 0.3;
-  //border-right: 1px dashed lime;
-  /* Additional styles here */
 `;
 
 const RightColumn = styled(Column)`
@@ -1280,34 +1269,9 @@ const RightColumn = styled(Column)`
   /* Additional styles here */
 `;
 
-const TitleWrapper = styled.div`
-  // position: relative;
-  // padding: 2px; // This is to avoid the title text being hidden by the border
-  // ::before {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  //   border-top: 2px solid aqua;
-  //   border-left: 2px solid transparent;
-  //   width: 50%;
-  //   height: 100%;
-  // }
-  // ::after {
-  //   content: "";
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 0;
-  //   border-bottom: 2px solid aqua;
-  //   border-right: 2px solid transparent;
-  //   width: 50%;
-  //   height: 100%;
-  // }
-`;
+const TitleWrapper = styled.div``;
 
 const Border = styled.div`
- // border-bottom: 1px solid aqua;
-  
   margin: 0px 1px;
 `;
 
@@ -1318,32 +1282,14 @@ const ImageContainer = styled.div`
   
 `;
 
-
-const SideBorder = styled.div`
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(aqua, transparent);
-`;
-const LeftBorder = styled(SideBorder)`
-    left: 0;
-`;
-
-const RightBorder = styled(SideBorder)`
-    right: 0;
-`;
-
-
-
 const CardText = styled(Text)`
   position: relative;
   padding: 3px;
   margin: 4px 0;
   min-height:  ${props => props.height};
   border-left: 1px solid aqua;
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 95% 5%);
-  background: linear-gradient(to bottom, rgba(32,219,238,0.42), rgba(32,219,238,0.22) 24%, rgba(32,219,238,0.12));
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 10px, 95% 0);
+  background: linear-gradient(to bottom, rgb(4 232 255 / 52%), rgb(0 231 255 / 22%) 30%, rgb(32 234 255 / 12%))
   
 `;
 const NumberCardText = styled(Text)`
@@ -1358,12 +1304,9 @@ const CostNumberText = styled(NumberCardText)`
   color:rgb(230,177,42);
 `;
 
-
-/*border-bottom: 2px double aqua;
-border-right: 2px double aqua;*/
 const Title = styled(Text)`
   font-size: 13px;
-  text-shadow: 0 0 5px rgb(0 60 60 / 90%);
+  text-shadow: 0 0 5px rgb(0 0 0 / 90%)
  // border: 1px solid aqua;
 
   background:rgba(0,0,0,0.6);
@@ -1375,13 +1318,13 @@ const Title = styled(Text)`
   margin: 0;
   font-weight: bold;
   color:#95ffff;
-  //clip-path: polygon(0 0, 100% 0, 100% 75%, 95% 100%, 5% 100%, 0 75%); //Both bottom corners
-  //clip-path: polygon(5% 0, 100% 0, 100% 75%, 95% 100%, 0 100%, 0 25%); // top left bottom right
   clip-path: polygon(8px 0, 100% 0, 100% 65%, calc(100% - 8px) 100%, 0 100%, 0 35%);
-
-  //clip-path: polygon(0 0, 100% 0, 100% 75%, 95% 100%, 0 100%); // right bottom corner cutof
-
-  background: linear-gradient(to bottom, rgba(32,219,238,0.72), rgba(32,219,238,0.32) 30%, rgba(32,119,138,0.32));
+  background: linear-gradient(to bottom, 
+    rgb(7 180 198 / 82%), 
+    rgb(0 150 165 / 32%) 18%, 
+    rgb(0 26 32 / 74%) 50%, 
+    rgb(0 150 165 / 32%) 82%, 
+    rgb(7 180 198 / 82%));
   
 `;
 
@@ -1416,7 +1359,7 @@ const TextTitle = styled.b`
     font-size:${default_title_size};
     text-transform: uppercase;
     color: #66ffff;
-    text-shadow: 0 0 5px rgba(0,255,255,0.4);
+    text-shadow:0 0 5px rgb(0 141 141 / 40%)
 `;
 
 const Details = styled.span`
@@ -1578,6 +1521,11 @@ const textToComponents = (text) => {
         return <><ScoreIcon key={index} />{" "}</>;
       case "data":
         return <><DataIcon key={index} />{" "}</>;
+
+      case "card":
+        return <><CardIcon key={index} />{" "}</>;  
+      case "cards":
+        return <><CardsIcon key={index} />{" "}</>;
       case "processing":
         return <><ProcessingIcon key={index} />{" "}</>;
       case "space":
