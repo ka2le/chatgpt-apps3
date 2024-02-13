@@ -101,7 +101,7 @@ const default_title_size = MOBILE_CARDS ? "15px" : "9px";
 const default_number_size = MOBILE_CARDS ? "18px" : "13px";
 const default_img_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "95%" : "98%" : "40%";
 const default_action_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "37%" : "36%" : "66%";
-const save_size = MOBILE_CARDS ? 2 : PRINT_VERSION ? 9 : 4;
+const save_size = MOBILE_CARDS ? 2 : PRINT_VERSION ? 2 : 2;
 const BRIGHTNESS_ADJUSTMENT = 1.4;
 
 const SIDE_MARGIN = 8;
@@ -134,7 +134,7 @@ const DuplicateImage = styled(Image)`
 
 const initialCards = [
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142730316168036352/ka2ledionysuz_robot_in_the_style_of_neon_punk_illustration_glow_a9ac3f6a-c568-4311-af91-2ce8ea251452.png",
+    "img": "https://cdn.midjourney.com/24092342-62c8-45db-ae91-326a5e90476e/0_0.webp",
     "title": "Data Protection",
     "action1": "Activate Security Protocol",
     "details1": "+12 data if below 18 data",
@@ -189,7 +189,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139863103954243634/ka2ledionysuz_robot_insect_flying_over_city_wasps_three_rovot_i_6eb827db-6521-4416-88f0-5e0e7840e6f1.png",
+    "img": "https://cdn.midjourney.com/09392dd9-7fd8-4882-8904-f9854f98e0ed/0_0.webp",
     "title": "Swarm Intelligence",
     "action1": "Apply swarm solutions",
     "details1": "+12 processing and +6 processing to your opponent",
@@ -222,7 +222,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139670504286998558/ka2ledionysuz_bionic_eye_artificial_eye_wires_circuits_in_eye___604957da-d751-4a0d-bd2e-ffa8d2b15203.jpg",
+    "img": "https://cdn.midjourney.com/f58a0612-0df7-428d-ab04-48509b54bc4f/0_0.webp",
     "title": "Computer Vision",
     "action1": "Detect objects",
     "details1": "+4 processing and +6 processing per 10 processing",
@@ -519,8 +519,8 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143446062678413342/ka2ledionysuz_very_cute_robot_dog_happy_cute_puppy_robot_neon_g_41fb5ed3-a31e-4419-862c-6b8edd1b1c3f.png",
-    "title": "Robot dog - K9",
+    "img": "https://cdn.midjourney.com/c9cbd195-a6da-478f-853d-80b459e97667/0_0.webp",
+    "title": "Robot dog - Sparky",
     "action1": "Fetch Algorithm",
     "details1": "",
     "action2": "Bite Encryption",
@@ -528,9 +528,8 @@ const initialCards = [
     "cost": "",
     "id": "76",
     "type": "animals"
-  },
+  }
 ]
-
 
 const mergeArrayObjects = (ids, fullArray, detailsArray) => {
   return ids.map((id, index) => {
@@ -792,7 +791,7 @@ const SingularityCards = () => {
 
         {/* Row 3 */}
         <Grid container item xs={12} spacing={1}>
-        <button onClick={saveBaseActions}>Save Base Rules</button>
+          <button onClick={saveBaseActions}>Save Base Rules</button>
           {['1', '2', '3', '11', '22', '33'].map((tracker, index) => (
             <Grid item xs={4} sm={2} key={index}>
               <button onClick={() => window[`saveTracker${tracker}`]}>Save Tracker{tracker}</button>
@@ -925,7 +924,7 @@ const SingularityCards = () => {
         </Grid>
       </Grid>
       <BackCard ref={backsideRef}></BackCard>
-      
+
       <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="93,250,162" />
       <TrackerCard ref={trackerRef11} iconType="processing" backgroundImg={processing_background} color="93,250,162" hundred={true} />
       <TrackerCard ref={trackerRef2} iconType="score" backgroundImg={score_background} color="249,242,172" />
@@ -1151,12 +1150,13 @@ const BaseRulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
   return (
     <CardContainer id={`card-${id}`} ref={ref}>
       <FadeBackground>
+
         <Border>
           <ImageContainerRules>
             <DuplicateImageRules src={baseImgUrl} />
             <ImageRules id={`img-${id}`} src={baseImgUrl} /> {/* Original Image */}
             <TitleWrapper>
-                <Title>Base Actions</Title>
+              <TitleRules>Base Actions</TitleRules>
             </TitleWrapper>
           </ImageContainerRules>
         </Border>
@@ -1201,12 +1201,13 @@ const ImageRules = styled(Image)`
   width: 100%;
   height: 100%;	
   object-fit: cover;
-  filter: brightness(10%);
+  filter: brightness(25%);
   margin: -20px;
   `;
+
 const DuplicateImageRules = styled.img`
 height: calc(100% );
-filter: brightness(10%);
+filter: brightness(25%);
 width: calc(100% );
 left: 0;
 top: 0;
@@ -1407,7 +1408,10 @@ const Title = styled(Text)`
     rgb(7 180 198 / 82%));
   
 `;
-
+const TitleRules = styled(Title)`
+   margin: 10px;
+   
+  `;
 const StyledTitle = styled(Title)`
   font-size: 12px;
 `;
