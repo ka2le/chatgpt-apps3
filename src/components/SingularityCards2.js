@@ -787,6 +787,10 @@ const SingularityCards = () => {
           <Grid item xs={4}>
             <button onClick={saveAllCards}>Save All Cards</button>
           </Grid>
+          <Grid item xs={4}>
+          <DownloadCSVButton dataArray={initialCards} fileName="ss_import.csv" />
+          </Grid>
+          
         </Grid>
 
         {/* Row 3 */}
@@ -1782,3 +1786,40 @@ function DropdownComponent() {
     </select>
   );
 }
+
+
+const DownloadCSVButton = ({ dataArray }) => {
+  const headers = ['image', 'label', 'item-count', 'item-key'];
+
+  const downloadCSV = () => {
+    const csvRows = [];
+
+    // Adding headers
+    csvRows.push(headers.join(','));
+
+    // Adding row for each item in dataArray
+    dataArray.forEach(data => {
+      const title = data.title; // Extract title for each object
+      const row = [`https://ka2le.github.io/chatgpt-apps3/images/ss_cards/${title}.png`, title, 1, title];
+      csvRows.push(row.join(','));
+    });
+
+    // Creating CSV string
+    const csvString = csvRows.join('\n');
+
+    // Triggering download
+    const blob = new Blob([csvString], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'data.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <button onClick={downloadCSV}>Download CSV</button>
+  );
+};
