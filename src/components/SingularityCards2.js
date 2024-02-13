@@ -132,7 +132,7 @@ const DuplicateImage = styled(Image)`
 
 
 
-const initialCards =[
+const initialCards = [
   {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142730316168036352/ka2ledionysuz_robot_in_the_style_of_neon_punk_illustration_glow_a9ac3f6a-c568-4311-af91-2ce8ea251452.png",
     "title": "Data Protection",
@@ -674,6 +674,7 @@ const SingularityCards = () => {
   const [card, setCard] = useState(cards[currentCard])
   const cardRefs = cards.map(() => React.createRef());
   const [cardRef, saveAsImage] = useSave(card.title);
+  const [baseActionsRef, saveBaseActions] = useSave("BaseActions");
   const [trackerRef1, saveTracker1] = useSave("Tracker1");
   const [trackerRef11, saveTracker11] = useSave("Tracker11");
   const [trackerRef2, saveTracker2] = useSave("Tracker2");
@@ -791,6 +792,7 @@ const SingularityCards = () => {
 
         {/* Row 3 */}
         <Grid container item xs={12} spacing={1}>
+        <button onClick={saveBaseActions}>Save Base Rules</button>
           {['1', '2', '3', '11', '22', '33'].map((tracker, index) => (
             <Grid item xs={4} sm={2} key={index}>
               <button onClick={() => window[`saveTracker${tracker}`]}>Save Tracker{tracker}</button>
@@ -812,28 +814,28 @@ const SingularityCards = () => {
 
         </Grid>
         <Grid container item xs={12}>
-        <Grid item xs={3}>
-          <button onClick={handleCopy}>Copy</button>
+          <Grid item xs={3}>
+            <button onClick={handleCopy}>Copy</button>
+          </Grid>
+          <Grid item xs={3}>
+            <button onClick={handlePaste}>Paste</button>
+          </Grid>
+          <Grid item xs={3}>
+            <button onClick={handleAddCard}>Add Card</button>
+          </Grid>
+          <Grid item xs={3}>
+            <button onClick={handleReset}>Reset</button>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <button onClick={handlePaste}>Paste</button>
-        </Grid>
-        <Grid item xs={3}>
-          <button onClick={handleAddCard}>Add Card</button>
-        </Grid>
-        <Grid item xs={3}>
-          <button onClick={handleReset}>Reset</button>
-        </Grid>
+        <br></br>
+        <br></br>
+        <br></br>
       </Grid>
       <br></br>
-          <br></br>
-          <br></br>
-      </Grid>
-      <br></br>
       <br></br>
 
 
-
+      <BaseRulesCard ref={baseActionsRef}></BaseRulesCard>
       {cards.map((card, index) => (
         checkedTypes[card.type] ? (
           <div key={index}>
@@ -853,6 +855,7 @@ const SingularityCards = () => {
             {showCardTextAreas && (
 
               <div>
+
                 <br></br>
                 {Object.entries(card).map(([key, value]) => (
                   <div key={key} style={{ fontSize: '10px' }}>
@@ -922,6 +925,7 @@ const SingularityCards = () => {
         </Grid>
       </Grid>
       <BackCard ref={backsideRef}></BackCard>
+      
       <TrackerCard ref={trackerRef1} iconType="processing" backgroundImg={processing_background} color="93,250,162" />
       <TrackerCard ref={trackerRef11} iconType="processing" backgroundImg={processing_background} color="93,250,162" hundred={true} />
       <TrackerCard ref={trackerRef2} iconType="score" backgroundImg={score_background} color="249,242,172" />
@@ -968,7 +972,7 @@ const Table = ({ data, setData, setTextAreaValue }) => {
     const sortedData = [...data].sort((a, b) => parseInt(a.id) - parseInt(b.id));
     const newJson = JSON.stringify(sortedData, null, 2);
     //setTextAreaValue(newJson);
-   // setData(sortedData);
+    // setData(sortedData);
   }, [data]);
 
   return (
@@ -1083,11 +1087,11 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
     isStyledTitle = true;
     title = cardTitle.replace('FontS', ''); // remove 'FontS' from the beginning
   }
-  useEffect(()=>{
-   // applyStretchEffect(`img-${id}`, 252,251,8,100)
+  useEffect(() => {
+    // applyStretchEffect(`img-${id}`, 252,251,8,100)
 
 
-  },[]);
+  }, []);
   const iconImage = type == "base" ? base5 : type == "space" ? space2 : type == "animals" ? animals : type == "v2" ? expansion_droid2 : expansion_mix3;
   const colorcorrection =
     type == "base" ? "hue-rotate(165deg) saturate(4.9) brightness(2)" :
@@ -1101,25 +1105,25 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
           <TopHalf>
             <Border>
               <ImageContainer>
-                 <DuplicateImage src={imgUrl} /> 
-                <Image  id={`img-${id}`} src={imgUrl} /> {/* Original Image */}
+                <DuplicateImage src={imgUrl} />
+                <Image id={`img-${id}`} src={imgUrl} /> {/* Original Image */}
                 <TitleWrapper>
                   {isStyledTitle ?
-                   (<StyledTitle>{title}
-                   {hideTitleIcon ? null : <TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle>}
-                   </StyledTitle>) 
-                  : 
-                  (<Title>{title}
-                   {hideTitleIcon ? null :<TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle>}
-                  </Title>)}
+                    (<StyledTitle>{title}
+                      {hideTitleIcon ? null : <TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle>}
+                    </StyledTitle>)
+                    :
+                    (<Title>{title}
+                      {hideTitleIcon ? null : <TypeIconTitle colorcorrection={colorcorrection} src={iconImage}></TypeIconTitle>}
+                    </Title>)}
 
                 </TitleWrapper>
               </ImageContainer>
             </Border>
           </TopHalf>
           <BottomHalf>
-            <CardActions key={id+"111"} title={action1} details={details1}></CardActions>
-            <CardActions  key={id+"222"} title={action2} details={details2} cost={cost}></CardActions>
+            <CardActions key={id + "111"} title={action1} details={details1}></CardActions>
+            <CardActions key={id + "222"} title={action2} details={details2} cost={cost}></CardActions>
           </BottomHalf>
           {hideTypeImage ? null : <TypeIcon colorcorrection={colorcorrection} src={expansion_mix3}></TypeIcon>}
           <CardId>#{id}</CardId>
@@ -1132,11 +1136,51 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
 
 
 
+const BaseRulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
+  let isStyledTitle = false;
+  let title = "Base Actions";
+  const hideTitleIcon = true;
+  const hideTypeImage = false;
+  const baseImgUrl = "https://cdn.midjourney.com/6eae8834-ddee-419d-b39d-f5e461a52407/0_0.webp"
+  const iconImage = type == "base" ? base5 : type == "space" ? space2 : type == "animals" ? animals : type == "v2" ? expansion_droid2 : expansion_mix3;
+  const colorcorrection =
+    type == "base" ? "hue-rotate(165deg) saturate(4.9) brightness(2)" :
+      type == "space" ? "hue-rotate(165deg) saturate(3.5) brightness(1)" :
+        type == "animals" ? "hue-rotate(165deg) saturate(3.9) brightness(2)"
+          : "hue-rotate(165deg) saturate(4.5) brightness(2.5)";
+  return (
+    <CardContainer id={`card-${id}`} ref={ref}>
+      <FadeBackground>
+        <Border>
+          <ImageContainerRules>
+            <DuplicateImageRules src={baseImgUrl} />
+            <ImageRules id={`img-${id}`} src={baseImgUrl} /> {/* Original Image */}
+            <TitleWrapper>
+                <Title>Base Actions</Title>
+            </TitleWrapper>
+          </ImageContainerRules>
+        </Border>
+        <br></br>
+        <br></br>
+        <CardActions key={id + "111"} title={"Data Accumulation"} details={"+4 Data and +4 Data per 10 Data"} ></CardActions>
+        <CardActions key={id + "222"} title={"Processing Optimization"} details={"+1 Processing per card in your discard pile and hand"}></CardActions>
+        <br></br>
+        <CardActions key={id + "222"} title={"Data Conversion"} details={"+2 Score per 10 Data spent"} cost={"All Data"}></CardActions>
+        <CardActions key={id + "222"} title={"Processing Leveraging"} details={"+4 Score per 10 Processing spent"} cost={"All Processing"}></CardActions>
+        <br></br>
+        <CardActions key={id + "111"} title={"ROI"} details={"Any Cost action returns: 16 data or 8 processing"} ></CardActions>
+      </FadeBackground>
+
+    </CardContainer>
+  );
+});
+
+
 
 const iconSize = "20px";
 const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
-const iconStyleCard = { width: "12.3px", height: "18px", border:"1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
-const iconStyleCards = { width: "12.3px", height: "18px", border:"1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -4px -9px" };
+const iconStyleCard = { width: "12.3px", height: "18px", border: "1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
+const iconStyleCards = { width: "12.3px", height: "18px", border: "1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -4px -9px" };
 const iconStyleSpace = { width: "26px", height: "26px", verticalAlign: 'middle', margin: "-4px -9px -2px -5px", transform: "rotate(45deg)" };
 const ScoreIcon = () => <img src={scoreIcon} alt="score" style={iconStyle} />
 const DataIcon = () => <img src={dataIcon} alt="data" style={iconStyle} />
@@ -1144,6 +1188,32 @@ const CardIcon = () => <img src={back_v3} alt="card" style={iconStyleCard} />
 const CardsIcon = () => <><img src={back_v3} alt="card" style={iconStyleCard} /><img src={back_v3} alt="card" style={iconStyleCards} /></>
 const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={iconStyle} />
 const SpaceIcon = () => <img src={space2} alt="space" style={iconStyleSpace} />
+
+
+const ImageContainerRules = styled.div`
+
+  width: 100%;
+	  	
+  `;
+
+const ImageRules = styled(Image)`
+
+  width: 100%;
+  height: 100%;	
+  object-fit: cover;
+  filter: brightness(10%);
+  margin: -20px;
+  `;
+const DuplicateImageRules = styled.img`
+height: calc(100% );
+filter: brightness(10%);
+width: calc(100% );
+left: 0;
+top: 0;
+margin: 0px;
+position: absolute;
+  `;
+
 const CardContainer = styled.div`
   width: ${BRIDGE_VERSION ? bridge_width : poker_width};
   height:  ${BRIDGE_VERSION ? bridge_height : poker_height};
@@ -1321,8 +1391,8 @@ const Title = styled(Text)`
 
   background:rgba(0,0,0,0.6);
   position: absolute; 
-  top: ${SIDE_MARGIN+4}px; 
-  left: ${SIDE_MARGIN+2}px; 
+  top: ${SIDE_MARGIN + 4}px; 
+  left: ${SIDE_MARGIN + 2}px; 
   text-transform: uppercase;
   padding:1px 6px 2px 6px;
   margin: 0;
@@ -1331,9 +1401,9 @@ const Title = styled(Text)`
   clip-path: polygon(8px 0, 100% 0, 100% 65%, calc(100% - 8px) 100%, 0 100%, 0 35%);
   background: linear-gradient(to bottom, 
     rgb(7 180 198 / 82%), 
-    rgb(0 150 165 / 32%) 18%, 
-    rgb(0 26 32 / 74%) 50%, 
-    rgb(0 150 165 / 32%) 82%, 
+    rgb(0 150 165 / 32%) 16%, 
+    rgb(0 0 1 / 84%) 50%, 
+    rgb(0 150 165 / 32%) 84%, 
     rgb(7 180 198 / 82%));
   
 `;
@@ -1533,7 +1603,7 @@ const textToComponents = (text) => {
         return <><DataIcon key={index} />{" "}</>;
 
       case "card":
-        return <><CardIcon key={index} />{" "}</>;  
+        return <><CardIcon key={index} />{" "}</>;
       case "cards":
         return <><CardsIcon key={index} />{" "}</>;
       case "processing":
