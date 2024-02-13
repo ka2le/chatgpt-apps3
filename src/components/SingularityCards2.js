@@ -249,7 +249,7 @@ const initialCards =[
     "action1": "security by obscurity",
     "details1": "Both players change 8 data closer to 24 data",
     "action2": "Hire the hacker",
-    "details2": "+2 Data per 1 Processing or +1 processing per 2 data spent",
+    "details2": "Steal up to 4 score from opponent",
     "cost": "All data or All processing",
     "id": 11,
     "type": "base"
@@ -332,6 +332,17 @@ const initialCards =[
     "type": "v2"
   },
   {
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142733494259298315/ka2ledionysuz_cyborg_neon_punk_ultrarealistic_woman_pink_hair_t_bd4f3d05-d9ca-427b-864c-843f6550c6e3.png",
+    "title": "Cyborg",
+    "action1": "Ascend Humanity",
+    "details1": "",
+    "action2": "Assemble the AI-Team",
+    "details2": "",
+    "cost": "",
+    "id": "30",
+    "type": "v2"
+  },
+  {
     "img": "https://cdn.midjourney.com/7a0a97c8-4b58-46be-8449-2f40d64e62cf/0_3.png",
     "title": "Blockchain",
     "action1": "Pump and dump",
@@ -351,6 +362,17 @@ const initialCards =[
     "details2": "+1 score per card in your discard pile",
     "cost": "",
     "id": "34",
+    "type": "v2"
+  },
+  {
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139660085547774012/ka2ledionysuz_cool_sports_car_city_in_background_sci_fi_neon_pu_b36ed901-d3dc-4821-aeb7-26c7dccbcc3c.png",
+    "title": "Self Driving Car",
+    "action1": "Break for bag",
+    "details1": "",
+    "action2": "Navigate autonomously",
+    "details2": "",
+    "cost": "",
+    "id": "38",
     "type": "v2"
   },
   {
@@ -398,6 +420,17 @@ const initialCards =[
     "type": "v2"
   },
   {
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140375094791778325/ka2ledionysuz_military_quad_copter_drone_flying_extremly_fast_b_4ec0b597-e8a9-4917-ab29-e8994fa3461b.png",
+    "title": "Unmanned Aerial Vehicles",
+    "action1": "Loop in the human",
+    "details1": "",
+    "action2": "Strike Signature",
+    "details2": "",
+    "cost": "",
+    "id": "46",
+    "type": "v2"
+  },
+  {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140396421388964001/ka2ledionysuz_friendly_andronygous_robot_butler_apple_droid_kit_69f5e3ec-3b59-4da3-81dd-307bfedc6627.png",
     "title": "Digital Assistant",
     "action1": "Set timer for 2 minutes",
@@ -407,6 +440,17 @@ const initialCards =[
     "cost": "Min 25 data",
     "id": "47",
     "type": "v2"
+  },
+  {
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140287671328059463/ka2ledionysuz_roomba_tank_very_high_tech_advanced_sci_fi_cleani_f4617fe2-a90d-4b22-b83b-d896103ac3e6.png",
+    "title": "Robot vacuum",
+    "action1": "Map home",
+    "details1": "",
+    "action2": "Clean floors",
+    "details2": "",
+    "cost": "",
+    "id": "49",
+    "type": "v3"
   },
   {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140276690422087720/ka2ledionysuz_severl_very_different_video_game_characters_group_47a66963-86f2-4a45-9998-1169117ea41f.jpg",
@@ -420,13 +464,24 @@ const initialCards =[
     "type": "v3"
   },
   {
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147100135713685514/ka2ledionysuz_neon_punk_style_high_speed_train_tunnel_tron_bf0aed32-07b0-4af6-8463-cb50cb94d486.png",
+    "title": "Virtual Private Network ",
+    "action1": "Tunnel TV",
+    "details1": "",
+    "action2": "Trick tyrant",
+    "details2": "",
+    "cost": "",
+    "id": "51",
+    "type": "v3"
+  },
+  {
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147155155020689492/ka2ledionysuz_realistic_blue_fire_blue_flames_sci_fi_computer_m_0e6538a8-020e-4ea8-b129-523b89e4eb4f_20230901150455211.jpg",
     "title": "Firewall",
     "action1": "Block incoming traffic ",
     "details1": "+1 score and +3 score if you have less score than opponent",
     "action2": "Disable \"temporarily\"",
     "details2": "Competition: The player with \"Data Protection\" in their discard pile at game end get +8 score",
-    "cost": "",
+    "cost": "20 data or 8 processing",
     "id": "53",
     "type": "v3"
   },
@@ -436,7 +491,7 @@ const initialCards =[
     "action1": "Plant root node",
     "details1": "Take 1 \nrandom card from opponent's hand and then give 1 card of your choice",
     "action2": "Prune leaf",
-    "details2": "Steal up to 4 score from opponent",
+    "details2": "+2 Data per 1 Processing or +1 processing per 2 data spent",
     "cost": "",
     "id": "54",
     "type": "v3"
@@ -462,7 +517,18 @@ const initialCards =[
     "cost": "",
     "id": "58",
     "type": "v3"
-  }
+  },
+  {
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143446062678413342/ka2ledionysuz_very_cute_robot_dog_happy_cute_puppy_robot_neon_g_41fb5ed3-a31e-4419-862c-6b8edd1b1c3f.png",
+    "title": "Robot dog - K9",
+    "action1": "Fetch Algorithm",
+    "details1": "",
+    "action2": "Bite Encryption",
+    "details2": "",
+    "cost": "",
+    "id": "76",
+    "type": "animals"
+  },
 ]
 
 
@@ -490,63 +556,6 @@ const mergeArrayObjects = (ids, fullArray, detailsArray) => {
 
 
 
-
-function applyStretchEffect(elementId, originalWidth, originalHeight, extraSpace, stretchFactor) {
-  const imgElement = document.getElementById(elementId);
-  const src = imgElement.src;
-
-  // Create container
-  const container = document.createElement('div');
-  container.className = 'image-container';
-  container.style.width = `${originalWidth + 2 * extraSpace}px`;
-  container.style.height = `${originalHeight + 2 * extraSpace}px`;
-  container.style.position = 'relative';
-  container.style.overflow = 'hidden';
-
-  // Create central image
-  const centralImage = imgElement.cloneNode();
-  centralImage.className = 'central-image';
-  centralImage.style.width = `${originalWidth}px`;
-  centralImage.style.height = `${originalHeight}px`;
-  centralImage.style.top = `${extraSpace}px`;
-  centralImage.style.left = `${extraSpace}px`;
-  centralImage.style.position = 'absolute';
-  centralImage.style.zIndex = '2';
-  centralImage.style.objectFit = 'cover';
-  centralImage.style.objectPosition = 'center';
-
-  // Create and style side images
-  const createSideImage = (className, width, height, top, left, right, clipPath, flip) => {
-    const sideImage = imgElement.cloneNode();
-    sideImage.className = `side-image ${className}`;
-    sideImage.style.width = `${width}px`;
-    sideImage.style.height = `${height}px`;
-    sideImage.style.top = `${top}px`;
-    sideImage.style.left = `${left}px`;
-    sideImage.style.right = `${right}px`;
-    sideImage.style.position = 'absolute';
-    sideImage.style.zIndex = '1';
-    sideImage.style.clipPath = clipPath;
-    sideImage.style.objectFit = 'cover';
-    if (flip) {
-      sideImage.style.transform = 'scaleX(-1)';
-    }
-    return sideImage;
-  };
-
-  const topImage = createSideImage('top-side', originalWidth, originalHeight * stretchFactor, 0, extraSpace, null, 'polygon(0 0, 100% 0, 100% 1%, 0 1%)');
-  const leftImage = createSideImage('left-side', originalWidth * stretchFactor, originalHeight, extraSpace, 0, null, 'polygon(0 0, 1% 0, 1% 100%, 0 100%)');
-  const rightImage = createSideImage('right-side', originalWidth * stretchFactor, originalHeight, extraSpace, null, 0, 'polygon(99% 0, 100% 0, 100% 100%, 99% 100%)', true);
-
-  // Append elements to the container
-  container.appendChild(centralImage);
-  container.appendChild(topImage);
-  container.appendChild(leftImage);
-  container.appendChild(rightImage);
-
-  // Replace original image with the container
-  imgElement.parentNode.replaceChild(container, imgElement);
-}
 
 
 
@@ -1068,6 +1077,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
   let isStyledTitle = false;
   let title = cardTitle;
   const hideTitleIcon = true;
+  const hideTypeImage = false;
   // check if cardTitle starts with 'FontS'
   if (cardTitle.startsWith('FontS')) {
     isStyledTitle = true;
@@ -1111,7 +1121,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
             <CardActions key={id+"111"} title={action1} details={details1}></CardActions>
             <CardActions  key={id+"222"} title={action2} details={details2} cost={cost}></CardActions>
           </BottomHalf>
-          {hideTitleIcon ? null : <TypeIcon colorcorrection={colorcorrection} src={iconImage}></TypeIcon>}
+          {hideTypeImage ? null : <TypeIcon colorcorrection={colorcorrection} src={expansion_mix3}></TypeIcon>}
           <CardId>#{id}</CardId>
         </InsideMargin>
       </FadeBackground>
