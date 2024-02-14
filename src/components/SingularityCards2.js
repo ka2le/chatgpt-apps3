@@ -86,6 +86,8 @@ import BoldFont from '../fonts/TitilliumWeb-Bold.ttf';
 import RegularFont2 from '../fonts/Orbit-Regular.ttf';
 import RegularFont3 from '../fonts/DIGITALDREAM.ttf';
 
+
+const version = "";
 let PRINT_VERSION = localStorage.getItem('PRINT_VERSION') === 'true';
 let MOBILE_CARDS = localStorage.getItem('MOBILE_CARDS') === 'true';
 let BRIDGE_VERSION = MOBILE_CARDS ? false : false;
@@ -1536,7 +1538,7 @@ const useSave = (title) => {
       })
         .then(blob => adjustGamma(blob))
         .then((brighterBlob) => {
-          saveAs(brighterBlob, title + '.png');
+          saveAs(brighterBlob, title +version+ '.png');
           resolve();
         })
         .catch((error) => {
@@ -1569,7 +1571,7 @@ const useSaveAll = () => {
       })
         .then(blob => adjustGamma(blob))
         .then((brighterBlob) => {
-          saveAs(brighterBlob, title + '.png');
+          saveAs(brighterBlob, title +version+ '.png');
           resolve();
         })
         .catch((error) => {
@@ -1800,7 +1802,7 @@ const DownloadCSVButton = ({ dataArray }) => {
     // Adding row for each item in dataArray
     dataArray.forEach(data => {
       const title = data.title; // Extract title for each object
-      const row = [`https://ka2le.github.io/chatgpt-apps3/images/ss_cards/${title}.png`, title, 1, title];
+      const row = [`https://ka2le.github.io/chatgpt-apps3/images/ss_cards/${title+version}.png`, title, 1, title];
       csvRows.push(row.join(','));
     });
 
@@ -1812,7 +1814,7 @@ const DownloadCSVButton = ({ dataArray }) => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'data.csv';
+    link.download = 'cards_import_'+version+'.csv';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
