@@ -94,14 +94,14 @@ let BRIDGE_VERSION = MOBILE_CARDS ? false : false;
 const bridge_width = "57mm";
 const bridge_height = "89mm";
 const poker_width = "63mm";
-const poker_height = MOBILE_CARDS ? "57mm" : "88mm";
+const poker_height = MOBILE_CARDS ? "63mm" : "88mm";
 const print_margin = 18;
 const default_padding = "0px";
 const default_font_size = MOBILE_CARDS ? "17px" : "12px";
 const default_cost_font_size = MOBILE_CARDS ? "17px" : "11px";
 const default_title_size = MOBILE_CARDS ? "15px" : "9px";
 const default_number_size = MOBILE_CARDS ? "18px" : "13px";
-const default_img_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "95%" : "98%" : "40%";
+const default_img_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "95%" : "98%" : "60%";
 const default_action_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "37%" : "36%" : "66%";
 const save_size = MOBILE_CARDS ? 2 : PRINT_VERSION ? 2 : 2;
 const BRIGHTNESS_ADJUSTMENT = 1.4;
@@ -115,7 +115,8 @@ const BIRGHTER_FONT_COLOR = "#99ffff";
 const Image = styled.img`
   position: absolute;
   object-fit: unset;  
-  width: 100%;
+  width: ${MOBILE_CARDS ? "74%" : "100%"} ;
+  left: ${MOBILE_CARDS ? "13%" : "0%"};
   height: 100%;
   -webkit-mask-image: linear-gradient( to bottom, black 0%, black calc(100% - 40px), rgba(0,0,0,0.95) calc(100% - 32px), rgba(0,0,0,0.25) calc(100% - 22px), rgba(0,0,0,0.1) calc(100% - 10px),transparent 100%);
   
@@ -132,17 +133,41 @@ const DuplicateImage = styled(Image)`
   -webkit-mask-image: linear-gradient( to bottom, black 0%, black calc(100% - 40px), rgba(0,0,0,0.4) calc(100% - 32px), rgba(0,0,0,0.1) calc(100% - 22px), rgba(0,0,0,0.0) calc(100% - 10px),transparent 100%);
 `;
 
+const baseActions = [
+  {
+    "title": "Data Accumulation",
+    "details": "+3 Data and +3 Data per 10 Data"
+  },
+  {
+    "title": "Processing Optimization",
+    "details": "+4 processing and +4 processing if you gained processing last round"
+  },
+  {
+    "title": "Data Conversion",
+    "details": "+2 Score per 10 Data spent",
+    "cost": "All Data"
+  },
+  {
+    "title": "Processing Leveraging",
+    "details": "+4 Score per 10 Processing spent",
+    "cost": "All Processing"
+  },
+  {
+    "title": "ROI",
+    "details": "Any Cost action Refunds: 16 data or 8 processing"
+  }
+];
 
 
 const initialCards = [
   {
-    "img": "https://cdn.midjourney.com/24092342-62c8-45db-ae91-326a5e90476e/0_0.webp",
+    "img": "https://cdn.midjourney.com/c2691f20-d825-4d17-9c7a-785a0a993622/0_0.png",
     "title": "Data Protection",
     "action1": "Activate Security Protocol",
     "details1": "+12 data if below 18 data",
     "action2": "Disable Firewall",
-    "details2": "Competition: The player with the most processing after 2 \nmore rounds gets +8 score",
-    "cost": "",
+    "details2": "+10 score in 1 \nmore round",
+    "cost": "40 data or 18 processing",
     "id": "1",
     "type": "base"
   },
@@ -150,10 +175,10 @@ const initialCards = [
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142888684128059553/ka2ledionysuz_miners_axe_sledge_sledge_hammer_axe_coal_miner_ho_b40227a0-9db6-43ab-bf76-c000c78d23aa.jpg",
     "title": "Data Mining",
     "action1": "Test Linear Regression",
-    "details1": "+16 data if the top card in your discard pile has 'Data' in its name",
+    "details1": "Loan 20 data pay back up to 26 data in 2 \nrounds\n",
     "action2": "Learn Deeply",
     "details2": "Reveal 1 card change all data and processing to the other on both actions and cost, for rest of game",
-    "cost": "",
+    "cost": "24 data or 10 processing",
     "id": "2",
     "type": "base"
   },
@@ -163,30 +188,30 @@ const initialCards = [
     "action1": "Explore Greedily",
     "details1": "Both players lose up to 12 data each\n",
     "action2": "Predict Q Values",
-    "details2": "+2 score per 10 \ntotal data and processing spent",
+    "details2": "+2 score and +2 score per 10 \ntotal data and processing spent",
     "cost": "All data and All processing",
     "id": "3",
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142917895148552353/ka2ledionysuz_cute_robot_sitting_at_school_desk_with_papers_and_3e0783c4-2dc1-4963-b6f0-7b84cc45eedf.png",
+    "img": "https://cdn.midjourney.com/e02d4399-92d4-4780-ab6a-a4e69691ffd7/0_0.png",
     "title": "Supervised Learning",
     "action1": "Calibrate Reward Parameters",
-    "details1": "Loan 20 data pay back up to 26 data in 2 \nrounds\n",
+    "details1": "+16 data if the top card in your discard pile has 'Data' in its name",
     "action2": "Outsource Labeling",
-    "details2": "Take any discarded card and immediatly play its cost action, paying that cost without refund ",
-    "cost": "Card cost\n",
+    "details2": "Get half difference in score if opponent has <br> more score",
+    "cost": "32 data or 16 processing",
     "id": 4,
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143094380132048917/ka2ledionysuz_copper_coils_advanced_sci_fi_quantum_engine_hangi_a6c54a8a-a292-46bf-af5a-32cec74bca83.jpg",
+    "img": "https://cdn.midjourney.com/a67a7f7f-c762-4af6-83f5-0fc64f267eb2/0_0.webp",
     "title": "Quantum Computing",
     "action1": "Get Quantum Entangled",
     "details1": "+6 processing and after Card Draw, both players reveal their hand",
     "action2": "Enable Quantum Supremacy",
-    "details2": "Get half difference in score if opponent has <br> more score",
-    "cost": "",
+    "details2": "Take any discarded card and immediatly play its cost action, paying that cost without Refund ",
+    "cost": "Card cost",
     "id": 5,
     "type": "base"
   },
@@ -196,8 +221,8 @@ const initialCards = [
     "action1": "Apply swarm solutions",
     "details1": "+12 processing and +6 processing to your opponent",
     "action2": "Release the Swarm",
-    "details2": "Steal up to as much data from opponent as processing spent",
-    "cost": "",
+    "details2": "Competition: Player with most Score after 2 \nmore rounds get +40 data",
+    "cost": "10 Data or 4 processing",
     "id": 6,
     "type": "base"
   },
@@ -207,8 +232,8 @@ const initialCards = [
     "action1": "Select optimizer algorithm",
     "details1": "+4 data and then set your data to the next whole 10 data",
     "action2": "Multiply the Matrix",
-    "details2": "Competition: Player with most Score after 2 \nmore rounds get +40 data",
-    "cost": "",
+    "details2": "Steal up to as much data from opponent as processing spent",
+    "cost": "All processing",
     "id": 7,
     "type": "base"
   },
@@ -218,8 +243,8 @@ const initialCards = [
     "action1": "Deceive Discriminator",
     "details1": "Both players get +6 data per 10 data",
     "action2": "Begin Zero-Sum Game",
-    "details2": "+8 score in 1 \nmore round",
-    "cost": "",
+    "details2": "Competition: The player with the most processing after 2 \nmore rounds gets +8 score",
+    "cost": "10 Data or 4 processing",
     "id": 8,
     "type": "base"
   },
@@ -227,10 +252,10 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/f58a0612-0df7-428d-ab04-48509b54bc4f/0_0.webp",
     "title": "Computer Vision",
     "action1": "Detect objects",
-    "details1": "+4 processing and +6 processing per 10 processing",
+    "details1": "+4 processing per 10 processing of both players",
     "action2": "Tune model",
     "details2": "Competition: The player with highest reached data starting now get +8 score at end of game",
-    "cost": "",
+    "cost": "16 Data or 8 processing",
     "id": "9",
     "type": "base"
   },
@@ -238,15 +263,15 @@ const initialCards = [
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139938474171048099/ka2ledionysuz_many_puzzle_pieces_neon_lines_shaped_like_jigsaw__12bb6b20-7000-4022-b490-8b3fccc0ff4f.png",
     "title": "Recurrent Neural Network",
     "action1": "Recall Long Short-Term Memory",
-    "details1": "+2 Data Next round trigger this action again",
+    "details1": "+4 Data Next round trigger this action again",
     "action2": "Backpropagate errors",
     "details2": "Reveal 1 \ncard from hand and play the free action of that card 2\ntimes\n",
-    "cost": "",
+    "cost": "20 data or 10 processing",
     "id": "10",
     "type": "base"
   },
   {
-    "img": "/chatgpt-apps3/static/media/hacker2.fafe8a4e4e2ede9b6428.png",
+    "img": "https://cdn.midjourney.com/1fb7c52f-7c2d-4447-84c0-dfce4bc36fe4/0_0.webp",
     "title": "Hacker",
     "action1": "security by obscurity",
     "details1": "Both players change 8 data closer to 24 data",
@@ -257,13 +282,13 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "/chatgpt-apps3/static/media/scientist2.899cf2b08a566a681b4b.png",
+    "img": "https://cdn.midjourney.com/fd140395-3f76-4f12-9a4c-2e272b6c4c64/0_0.webp",
     "title": "Data Scientist",
     "action1": "Produce Graphs",
     "details1": "Copy free action of the top card in your discard pile",
     "action2": "Paus Ethically",
-    "details2": "From now, get an additional +3 processing each time an action is played that give you processing ",
-    "cost": "",
+    "details2": "From now, get an additional +3 processing each time an action gives you processing excluding this card",
+    "cost": "22 data or 8 processing",
     "id": 12,
     "type": "base"
   },
@@ -273,8 +298,8 @@ const initialCards = [
     "action1": "Establish redundancy",
     "details1": "Shuffle played cards each draw 1 , player drawing this gets +8 processing the other -8 data",
     "action2": "Provide Storage",
-    "details2": "From now, get an additional +6 data each time an action is played that give you data",
-    "cost": "",
+    "details2": "From now, get an additional +6 data each time an action gives you data excluding this card",
+    "cost": "22 data or 10 processing",
     "id": 15,
     "type": "base"
   },
@@ -282,59 +307,59 @@ const initialCards = [
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139931604823842906/ka2ledionysuz_very_thick_lightning_bolt_ligthning_storm_lightni_e02a8b76-8a7c-4dab-8832-c59267603976_20230812164042249.jpg",
     "title": "CPU Voltage Spike",
     "action1": "Accidentally Overclock",
-    "details1": "Next round, both players play a card from their discard pile then discard their latest drawn card",
+    "details1": "+18 data if you have 0 data",
     "action2": "Overload game",
     "details2": "Competition: Player with lowest score after last round, before end game bonuses, get +8 score",
-    "cost": "",
+    "cost": "10 Data or 4 processing",
     "id": 17,
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142880266130575470/ka2ledionysuz_spiderweb_thin_web_detailed__city_background_blur_afae3805-496e-42a4-9d04-72114d66d2eb.png",
+    "img": "https://cdn.midjourney.com/7da199d0-a7e6-4710-a110-187fab80a489/0_1.webp",
     "title": "Neural Network",
     "action1": "Select optimizer algorithm",
     "details1": "+3 data per total 10 data of both players",
     "action2": "Add deep layers",
-    "details2": "After Card Draw, discard 1 card then draw a card from any discard pile ",
-    "cost": "",
+    "details2": "+3 score per 10 Data spent or +5 score per 10 processing spent",
+    "cost": "All data or All Processing",
     "id": 18,
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139850326812409896/ka2ledionysuz_dna_helix_dna_strands_dna_helix_on_top_city_in_ba_d929eb0a-0bb6-46e9-aec3-476439ca8d73.png",
+    "img": "https://cdn.midjourney.com/2094539a-a581-4086-9e5a-3c1ddd89a1ce/0_3.webp",
     "title": "Genetic Algorithms",
     "action1": "Mutate Variables",
-    "details1": "+18 data if you have 0 data",
+    "details1": "Before Card Draw, reveal top 2 cards in draw pile and rearrange as you wish",
     "action2": "Evolve Sequence",
-    "details2": "+12 score",
-    "cost": "processing",
+    "details2": "+14 score",
+    "cost": "24 processing",
     "id": 20,
     "type": "base"
   },
   {
-    "img": "/chatgpt-apps3/static/media/cloud.ed08c58a14eed5a82dcc.png",
+    "img": "https://cdn.midjourney.com/94ec55fb-027b-4184-a96c-c16f0ea6a258/0_3.png",
     "title": "Cloud Computing",
     "action1": "Provide Service as a service",
     "details1": "Next round, also copy the free action of the card you play",
     "action2": "Host Everyone",
-    "details2": "After Card Draw, swap hand and processing with your opponent if you have at least 1 \nmore processing",
-    "cost": "",
+    "details2": "After Refund and Card Draw, swap hand and processing with opponent if you have at least 1 more processing",
+    "cost": "Processing advantage",
     "id": "26",
     "type": "v2"
   },
   {
-    "img": "/chatgpt-apps3/static/media/enigma.e3e78ffabe8bec90f8cf.png",
+    "img": "https://cdn.midjourney.com/1089bf1f-e0ee-4f00-b9c4-73301f0d99d3/0_2.webp",
     "title": "Data Encryption",
     "action1": "Reverse the Hash",
-    "details1": "+1 processing Next round trigger this action again\n",
+    "details1": "+2 processing Next round trigger this action again\n",
     "action2": "Imitate the game",
     "details2": "Next round, both players also get the result of their opponents action ",
-    "cost": "",
+    "cost": "26 data or 12 processing",
     "id": "27",
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142733494259298315/ka2ledionysuz_cyborg_neon_punk_ultrarealistic_woman_pink_hair_t_bd4f3d05-d9ca-427b-864c-843f6550c6e3.png",
+    "img": "https://cdn.midjourney.com/ce7a068b-e03e-4893-82e7-378a5116ee19/0_1.webp",
     "title": "Cyborg",
     "action1": "Ascend Humanity",
     "details1": "",
@@ -350,8 +375,8 @@ const initialCards = [
     "action1": "Pump and dump",
     "details1": "After card draw both players reveal hands and take 1 \ncard from their opponents hand",
     "action2": "Hodl",
-    "details2": "+14 processing ",
-    "cost": "",
+    "details2": "Double your processing",
+    "cost": "16 data or 8 processing",
     "id": "31",
     "type": "v2"
   },
@@ -362,12 +387,12 @@ const initialCards = [
     "details1": "+16 data in 2 \nrounds",
     "action2": "Roll over data",
     "details2": "+1 score per card in your discard pile",
-    "cost": "",
+    "cost": "2 data or 1 processing per card",
     "id": "34",
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139660085547774012/ka2ledionysuz_cool_sports_car_city_in_background_sci_fi_neon_pu_b36ed901-d3dc-4821-aeb7-26c7dccbcc3c.png",
+    "img": "https://cdn.midjourney.com/22d4754f-4c13-497d-a8fb-dad9d8523cb3/0_2.png",
     "title": "Self Driving Car",
     "action1": "Break for bag",
     "details1": "",
@@ -378,25 +403,14 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1144297444658659430/ka2ledionysuz_virtual_reality__in_the_style_of_cloudpunk_realis_1448d4d7-e0fc-4ddc-a187-881c7c5fe43b.png",
+    "img": "https://cdn.midjourney.com/553dcd0f-4029-4a32-9b8e-4b57f1c186f3/0_1.png",
     "title": "Virtual Reality",
     "action1": "Ready Player One",
     "details1": "Copy free action of the bottom card of your discard pile",
     "action2": "Enter Matrix ",
-    "details2": "Competition: The player or players with data closest to 26 data after last round win +8 score",
-    "cost": "",
+    "details2": "In 2 \nmore rounds, opponent lose 28 data",
+    "cost": "20 data or 10 processing",
     "id": "39",
-    "type": "v2"
-  },
-  {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1144921400365297704/ka2ledionysuz_smart_watch_with_galaxy_and_planets_on_the_clock__0f21bdb4-66d8-4ab3-b961-2ce81b6d53c9.png",
-    "title": "Wearable Tech",
-    "action1": "Forget to charge",
-    "details1": "Next round, no card can affect the opponent",
-    "action2": "Track steps",
-    "details2": "In 2 \nrounds, pick one of +50 data <br> or +25 processing or +10 score",
-    "cost": "",
-    "id": "40",
     "type": "v2"
   },
   {
@@ -406,18 +420,18 @@ const initialCards = [
     "details1": "Swap 1 card from your hand with 1 card from your discard pile",
     "action2": "Pick and Place",
     "details2": "Next round you get double score data processing from all actions affecting you",
-    "cost": "",
+    "cost": "20 data or 10 processing",
     "id": "41",
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143134582061928458/ka2ledionysuz_advanced_architecture_building_that_looks_like_a__feeef7b7-25b2-4b6c-ba46-f20ec007093b.jpg",
+    "img": "https://cdn.midjourney.com/93e53cee-c8c9-4eea-98c3-bd22211979db/0_1.webp",
     "title": "SuperComputer",
     "action1": "Benchmark LINPACK",
     "details1": "+20 data and in 2 \nrounds opponent also <br> gain +20 data",
     "action2": "Achieve petaflop",
-    "details2": "In 2 \nmore rounds, opponent lose 28 data",
-    "cost": "",
+    "details2": "Competition: The player or players with data closest to 26 data after last round win +8 score",
+    "cost": "10 Data or 4 processing",
     "id": "43",
     "type": "v2"
   },
@@ -425,10 +439,10 @@ const initialCards = [
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140375094791778325/ka2ledionysuz_military_quad_copter_drone_flying_extremly_fast_b_4ec0b597-e8a9-4917-ab29-e8994fa3461b.png",
     "title": "Unmanned Aerial Vehicles",
     "action1": "Loop in the human",
-    "details1": "",
+    "details1": "Next round, no Base Action with Cost can be played",
     "action2": "Strike Signature",
-    "details2": "",
-    "cost": "",
+    "details2": "Both players loose half their data",
+    "cost": "16 processing",
     "id": "46",
     "type": "v2"
   },
@@ -455,13 +469,13 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140276690422087720/ka2ledionysuz_severl_very_different_video_game_characters_group_47a66963-86f2-4a45-9998-1169117ea41f.jpg",
+    "img": "https://cdn.midjourney.com/d286efee-1e5d-49be-a0d4-96a09fed0a37/0_0.png",
     "title": "Non Player Character",
     "action1": "Follow Path",
     "details1": "+16 data if you have less data than opponent \n",
     "action2": "Adjust difficulty",
     "details2": "Before Card Draw, collect cards on hands and divide equally as you choose",
-    "cost": "",
+    "cost": "16 data or 8 processing",
     "id": "50",
     "type": "v3"
   },
@@ -469,10 +483,10 @@ const initialCards = [
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147100135713685514/ka2ledionysuz_neon_punk_style_high_speed_train_tunnel_tron_bf0aed32-07b0-4af6-8463-cb50cb94d486.png",
     "title": "Virtual Private Network ",
     "action1": "Tunnel TV",
-    "details1": "",
+    "details1": "Next round, no card can affect the opponent",
     "action2": "Trick tyrant",
-    "details2": "",
-    "cost": "",
+    "details2": "In 2 \nrounds, pick one of +50 data <br> or +25 processing or +10 score",
+    "cost": "36 data or 18 processing",
     "id": "51",
     "type": "v3"
   },
@@ -494,7 +508,7 @@ const initialCards = [
     "details1": "Take 1 \nrandom card from opponent's hand and then give 1 card of your choice",
     "action2": "Prune leaf",
     "details2": "+2 Data per 1 Processing or +1 processing per 2 data spent",
-    "cost": "",
+    "cost": "All Data or All Processing",
     "id": "54",
     "type": "v3"
   },
@@ -502,10 +516,10 @@ const initialCards = [
     "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147233621837623447/ka2ledionysuz_sound_waves_visual_sound_waves_coming_from_sci_fi_1013556e-c83b-42a7-8744-75427947ca80.png",
     "title": "Natural Language Processing",
     "action1": "Pre-train generative transformer",
-    "details1": "+4 processing and +4 processing if you have more score than opponent\n",
+    "details1": "+6 processing and +4 processing if you have more score than opponent\n",
     "action2": "Tokenize world",
     "details2": "Move top 3 cards from opponents discard pile to yours and rearrange your entire discard pile",
-    "cost": "",
+    "cost": "22 data or 10 processing",
     "id": "55",
     "type": "v3"
   },
@@ -516,12 +530,12 @@ const initialCards = [
     "details1": "+6 data and +12 data per 10 score",
     "action2": "Filter presidents ",
     "details2": "Merge discard piles, all cards go in the same pile and it counts as both yours and your opponents",
-    "cost": "",
+    "cost": "16 data or 8 processing",
     "id": "58",
     "type": "v3"
   },
   {
-    "img": "https://cdn.midjourney.com/c9cbd195-a6da-478f-853d-80b459e97667/0_0.webp",
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143446062678413342/ka2ledionysuz_very_cute_robot_dog_happy_cute_puppy_robot_neon_g_41fb5ed3-a31e-4419-862c-6b8edd1b1c3f.png",
     "title": "Robot dog - Sparky",
     "action1": "Fetch Algorithm",
     "details1": "",
@@ -790,9 +804,9 @@ const SingularityCards = () => {
             <button onClick={saveAllCards}>Save All Cards</button>
           </Grid>
           <Grid item xs={4}>
-          <DownloadCSVButton dataArray={initialCards} fileName="ss_import.csv" />
+            <DownloadCSVButton dataArray={initialCards} fileName="ss_import.csv" />
           </Grid>
-          
+
         </Grid>
 
         {/* Row 3 */}
@@ -945,17 +959,17 @@ const SingularityCards = () => {
 export default SingularityCards;
 
 
-function CardActions({ title, details, cost = null }) {
+function CardActions({ title, details, cost = null, thin = false }) {
   const detailsComponents = textToComponents(details);
   const costComponents = cost ? textToComponents("Cost: " + cost) : null;
   const index = Math.floor(Math.random() * 100000000);
   return (
-    <CardText key={index} height={cost == null ? "0px" : "52px"}>
+    <CardText key={index} height={(cost == null || thin) ? "0px" : "52px"}>
       {!MOBILE_CARDS && <TextTitle>{"" + title}</TextTitle>}
-      {cost && <><Cost>{costComponents}</Cost>
+      {(cost) && <><Cost>{costComponents}</Cost>
         <Details2>{detailsComponents}</Details2></>
       }
-      {!cost && <>
+      {(!cost) && <>
         <Details>{detailsComponents}</Details></>
       }
 
@@ -1021,7 +1035,15 @@ const Table = ({ data, setData, setTextAreaValue }) => {
               }}
               onCellClick={onCellClick}
             />
-            <td>{item.cost}</td>
+            <EditableCell
+              value={item.cost}
+              onChange={newValue => {
+                const newData = [...data];
+                newData[i].cost = newValue;
+                setData(newData);
+              }}
+              onCellClick={onCellClick}
+            />
           </tr>
         ))}
       </table>
@@ -1168,13 +1190,14 @@ const BaseRulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         </Border>
         <br></br>
         <br></br>
-        <CardActions key={id + "111"} title={"Data Accumulation"} details={"+4 Data and +4 Data per 10 Data"} ></CardActions>
-        <CardActions key={id + "222"} title={"Processing Optimization"} details={"+1 Processing per card in your discard pile and hand"}></CardActions>
+        <CardActions key={id + "111"} title={baseActions[0].title} details={baseActions[0].details} ></CardActions>
+        <CardActions key={id + "222"} title={baseActions[1].title} details={baseActions[1].details}></CardActions>
         <br></br>
-        <CardActions key={id + "222"} title={"Data Conversion"} details={"+2 Score per 10 Data spent"} cost={"All Data"}></CardActions>
-        <CardActions key={id + "222"} title={"Processing Leveraging"} details={"+4 Score per 10 Processing spent"} cost={"All Processing"}></CardActions>
+        <CardActions key={id + "333"} thin={true} title={baseActions[2].title} details={baseActions[2].details} cost={baseActions[2].cost}></CardActions>
+        <CardActions key={id + "444"}  thin={true} title={baseActions[3].title} details={baseActions[3].details} cost={baseActions[3].cost}></CardActions>
         <br></br>
-        <CardActions key={id + "111"} title={"ROI"} details={"Any Cost action returns: 16 data or 8 processing"} ></CardActions>
+        <CardActions key={id + "555"} title={baseActions[4].title} details={baseActions[4].details} ></CardActions>
+        <br></br>
       </FadeBackground>
 
     </CardContainer>
@@ -1436,7 +1459,7 @@ const BottomHalf = styled.div`
   z-index:2;
   left: 0;
   width: calc(100% -   ${(0 + 2) * 2}px);
-  height:  ${default_action_size}; 
+  height:  ${MOBILE_CARDS ? "unset" : default_action_size}; 
   padding:   ${0 + 2}px;
   //background: linear-gradient(transparent, rgba(0,0,0,0.5));
 `;
@@ -1538,7 +1561,7 @@ const useSave = (title) => {
       })
         .then(blob => adjustGamma(blob))
         .then((brighterBlob) => {
-          saveAs(brighterBlob, title +version+ '.png');
+          saveAs(brighterBlob, title + version + '.png');
           resolve();
         })
         .catch((error) => {
@@ -1571,7 +1594,7 @@ const useSaveAll = () => {
       })
         .then(blob => adjustGamma(blob))
         .then((brighterBlob) => {
-          saveAs(brighterBlob, title +version+ '.png');
+          saveAs(brighterBlob, title + version + '.png');
           resolve();
         })
         .catch((error) => {
@@ -1802,7 +1825,7 @@ const DownloadCSVButton = ({ dataArray }) => {
     // Adding row for each item in dataArray
     dataArray.forEach(data => {
       const title = data.title; // Extract title for each object
-      const row = [`https://ka2le.github.io/chatgpt-apps3/images/ss_cards/${title+version}.png`, title, 1, title];
+      const row = [`https://ka2le.github.io/chatgpt-apps3/images/ss_cards/${title + version}.png`, title, (data?.details1 == "" || data?.details2 == "") ? 0 : 1, title];
       csvRows.push(row.join(','));
     });
 
@@ -1814,7 +1837,7 @@ const DownloadCSVButton = ({ dataArray }) => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'cards_import_'+version+'.csv';
+    link.download = 'cards_import_' + version + '.csv';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
