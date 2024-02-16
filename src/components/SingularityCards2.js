@@ -133,30 +133,24 @@ const DuplicateImage = styled(Image)`
   -webkit-mask-image: linear-gradient( to bottom, black 0%, black calc(100% - 40px), rgba(0,0,0,0.4) calc(100% - 32px), rgba(0,0,0,0.1) calc(100% - 22px), rgba(0,0,0,0.0) calc(100% - 10px),transparent 100%);
 `;
 
-const baseActions = [
-  {
-    "title": "Data Accumulation",
-    "details": "+3 Data and +3 Data per 10 Data"
-  },
-  {
-    "title": "Processing Optimization",
-    "details": "+4 processing and +4 processing if you gained processing last round"
-  },
-  {
-    "title": "Data Conversion",
-    "details": "+2 Score per 10 Data spent",
-    "cost": "All Data"
-  },
-  {
-    "title": "Processing Leveraging",
-    "details": "+4 Score per 10 Processing spent",
-    "cost": "All Processing"
-  },
-  {
-    "title": "ROI",
-    "details": "Any Cost action Refunds: 16 data or 8 processing"
-  }
-];
+const baseActions = [{
+  "title": "Data Accumulation",
+  "details": "+3 Data and +3 Data per 10 Data"
+}, {
+  "title": "Processing Optimization",
+  "details": "+4 processing and +4 processing if opponent gained data last round"
+}, {
+  "title": "Data Conversion",
+  "details": "+2 Score per 10 Data spent",
+  "cost": "All Data min 10"
+}, {
+  "title": "Processing Leveraging",
+  "details": "+4 Score per 10 Processing spent",
+  "cost": "All Processing min 10"
+}, {
+  "title": "ROI",
+  "details": "Any Cost action Refunds: 16 data or 8 processing"
+}];
 
 
 const initialCards = [
@@ -227,7 +221,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142550685653676065/ka2ledionysuz_computer_board_city_tilt_shift_lens_circuitry_cit_7129fbec-38e4-4e02-b103-bc5a1f6c9bff.png",
+    "img": "https://cdn.midjourney.com/d22dba27-cc34-49ee-bc4a-a29cbc66142f/0_0.png",
     "title": "Tensor Processing Unit",
     "action1": "Select optimizer algorithm",
     "details1": "+4 data and then set your data to the next whole 10 data",
@@ -277,7 +271,7 @@ const initialCards = [
     "details1": "Both players change 8 data closer to 24 data",
     "action2": "Hire the hacker",
     "details2": "Steal up to 4 score from opponent",
-    "cost": "All data or All processing",
+    "cost": "24 data or 12 processing",
     "id": 11,
     "type": "base"
   },
@@ -293,7 +287,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139672147984404510/ka2ledionysuz_mountain_hall_server_hall_neon_punk_glow_lights_c_bf3fd202-db9f-42b2-bc6f-015769807d36.png",
+    "img": "https://cdn.midjourney.com/8d6d4227-7f21-4296-b0a6-30af2190686e/0_0.webp",
     "title": "Data Center",
     "action1": "Establish redundancy",
     "details1": "Shuffle played cards each draw 1 , player drawing this gets +8 processing the other -8 data",
@@ -320,8 +314,8 @@ const initialCards = [
     "action1": "Select optimizer algorithm",
     "details1": "+3 data per total 10 data of both players",
     "action2": "Add deep layers",
-    "details2": "+3 score per 10 Data spent or +5 score per 10 processing spent",
-    "cost": "All data or All Processing",
+    "details2": "+3 score per 10 Data spent ",
+    "cost": "All data",
     "id": 18,
     "type": "base"
   },
@@ -342,8 +336,8 @@ const initialCards = [
     "action1": "Provide Service as a service",
     "details1": "Next round, also copy the free action of the card you play",
     "action2": "Host Everyone",
-    "details2": "After Refund and Card Draw, swap hand and processing with opponent if you have at least 1 more processing",
-    "cost": "Processing advantage",
+    "details2": "+5 score per 10 processing spent",
+    "cost": "All processing",
     "id": "26",
     "type": "v2"
   },
@@ -414,8 +408,8 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1148900580589322240/ka2ledionysuz_industrial_robot_arm_factory_line_with_factory_ro_0c750faf-9785-4fac-bf17-dd6877bdf73f.jpg",
-    "title": "Industrial Automation",
+    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1207961613672652850/0_0.jpg?ex=65e18ceb&is=65cf17eb&hm=53f5eba9958306e0b454f0c60505789ffc6dbcbf993408804d2df6e18c4c7c62&",
+    "title": "Wearable Tech",
     "action1": "Assemble Selectively and Comply",
     "details1": "Swap 1 card from your hand with 1 card from your discard pile",
     "action2": "Pick and Place",
@@ -491,7 +485,7 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147155155020689492/ka2ledionysuz_realistic_blue_fire_blue_flames_sci_fi_computer_m_0e6538a8-020e-4ea8-b129-523b89e4eb4f_20230901150455211.jpg",
+    "img": "https://cdn.midjourney.com/0b858164-a9eb-4590-9daf-d2a945f56404/0_1.png",
     "title": "Firewall",
     "action1": "Block incoming traffic ",
     "details1": "+1 score and +3 score if you have less score than opponent",
@@ -535,7 +529,7 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1143446062678413342/ka2ledionysuz_very_cute_robot_dog_happy_cute_puppy_robot_neon_g_41fb5ed3-a31e-4419-862c-6b8edd1b1c3f.png",
+    "img": "https://cdn.midjourney.com/450d6cf6-4d08-4c12-b762-d7fc493ac25d/0_0.png",
     "title": "Robot dog - Sparky",
     "action1": "Fetch Algorithm",
     "details1": "",
@@ -1194,7 +1188,7 @@ const BaseRulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <CardActions key={id + "222"} title={baseActions[1].title} details={baseActions[1].details}></CardActions>
         <br></br>
         <CardActions key={id + "333"} thin={true} title={baseActions[2].title} details={baseActions[2].details} cost={baseActions[2].cost}></CardActions>
-        <CardActions key={id + "444"}  thin={true} title={baseActions[3].title} details={baseActions[3].details} cost={baseActions[3].cost}></CardActions>
+        <CardActions key={id + "444"} thin={true} title={baseActions[3].title} details={baseActions[3].details} cost={baseActions[3].cost}></CardActions>
         <br></br>
         <CardActions key={id + "555"} title={baseActions[4].title} details={baseActions[4].details} ></CardActions>
         <br></br>
