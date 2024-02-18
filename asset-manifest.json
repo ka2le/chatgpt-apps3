@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt-apps3/static/css/main.e6c13ad2.css",
-    "main.js": "/chatgpt-apps3/static/js/main.0579ae04.js",
+    "main.js": "/chatgpt-apps3/static/js/main.9a751fb4.js",
     "static/js/357.d84e16d8.chunk.js": "/chatgpt-apps3/static/js/357.d84e16d8.chunk.js",
     "static/js/393.1bbe9ce0.chunk.js": "/chatgpt-apps3/static/js/393.1bbe9ce0.chunk.js",
     "static/js/237.a28838af.chunk.js": "/chatgpt-apps3/static/js/237.a28838af.chunk.js",
@@ -806,11 +806,11 @@
     "static/media/processing_background.svg": "/chatgpt-apps3/static/media/processing_background.50a11e589c6bdbe6fcc20d068ec25c03.svg",
     "static/media/sci-fi-background.svg": "/chatgpt-apps3/static/media/sci-fi-background.43886756af1c452af06aae99d986a6cc.svg",
     "main.e6c13ad2.css.map": "/chatgpt-apps3/static/css/main.e6c13ad2.css.map",
-    "main.0579ae04.js.map": "/chatgpt-apps3/static/js/main.0579ae04.js.map",
+    "main.9a751fb4.js.map": "/chatgpt-apps3/static/js/main.9a751fb4.js.map",
     "787.00e8474e.chunk.js.map": "/chatgpt-apps3/static/js/787.00e8474e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.0579ae04.js"
+    "static/js/main.9a751fb4.js"
   ]
 }
