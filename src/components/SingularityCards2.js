@@ -5,18 +5,17 @@ import { Grid, Paper, TextField, Button } from '@mui/material';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import img1 from '../images/singularitySprint/defence_robot.png';
-import img2 from '../images/singularitySprint/swarm_intelligence.png';
-import img3 from '../images/singularitySprint/genetic.png';
-import img4 from '../images/singularitySprint/data_harvest.png';
-import img5 from '../images/singularitySprint/adversarial.png';
-import img6 from '../images/singularitySprint/chess.png';
-import img7 from '../images/singularitySprint/supervised.png';
-import img8 from '../images/singularitySprint/balance.png';
-import img9 from '../images/singularitySprint/quantum.png';
-import img10 from '../images/singularitySprint/iot.png';
-import img11 from '../images/singularitySprint/rat.png';
-import img12 from '../images/singularitySprint/art.png';
-import img13 from '../images/singularitySprint/puzzle.png';
+import img2 from '../images/singularitySprint/v3/miner.jpg';
+import img3 from '../images/singularitySprint/v3/gan.jpg';
+import img4 from '../images/singularitySprint/v3/blixt.jpg';
+import img5 from '../images/singularitySprint/v3/tower.png';
+import img6 from '../images/singularitySprint/v3/drone.png';
+import img7 from '../images/singularitySprint/v3/siri.png';
+import img8 from '../images/singularitySprint/v3/vaccum.png';
+import img9 from '../images/singularitySprint/v3/vpn.png';
+import img10 from '../images/singularitySprint/v3/tree.png';
+import img11 from '../images/singularitySprint/v3/wave.png';
+import img12 from '../images/singularitySprint/v3/seer.png';
 import img14 from '../images/singularitySprint/lightning.png';
 import img15 from '../images/singularitySprint/brain.png';
 import img16 from '../images/singularitySprint/drive.png';
@@ -196,7 +195,7 @@ const initialCards = [
     "type": "hc"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczP0HrXEiLu2moDQOXwVEov_qKY3oCOPfqivJWsQ90eO3QaFop_M550mWd7YDy2vYGx3e8RUzvhYsPmyyYUKQklbyBA0pF0Z4LfZK2CvsDG6iB8wTe-sz1rPQziOKftdgv7UR2HSg8ZS_XAnoThlwAude99B4ZGLF0dXcqUQxzHuErezESTpXhMuytZJ-SJrh97pVVdqWFrqJPHINE8Wnl85hFFU4vjPvETKNayL5m5-CQ-LXquOAZvXCua6Z_AQwu-9VCQCa66bzv_fEr7_pwxtPesEgpNzdTdrFJzieepQMh47M1pBTxcrxO2Np2wqwbN4w_Q_gk9l37qeZJHgJgllyKcQdEo2S631O3S8BmBNaa0cQsfRns6QfVc9L9emUk1AyNpIxxoayU1lYIlf91-O7Wqg3VVmsA9alAthymLTqrrZAwFCvLX7C0bCiuco7WM4ul0VuIRpKwuK9mF_JxSEg0R0t7nnFdXQHpGWE6eZCWIvNCv6FrURSJiVZMW5yHxCkdMozPqcugcidGJuLR5f9UYG2680Ers6MSqP-mZ-e9B_j7e64GYlSyNEzo28xqOvRaBPUVhJSukxMFsMq6j3-5tglF1oBOr-dD2oQa7dqqz5-6uFPgJrKwSDLTYlPUC0w1GMChn5UaFFg10Z5Db3UjV5TV2tDGLsCWtJ72DqbDAR9MHcaYt2PdHXNnkqIrfTOC07g2XfZRBwsqxTcZzj-Mn36SVGBRw1XVreR03A9V2gTxbeQx4ee4r1xdj3WTWcmfEYEtPJVCXne6l3tfbYv1g2L-hTfm1Gm7krYdd9VdMEQQLDXCLrx6dcyS1loXJt40iRY4njqV_luGQoPNiCq4OAggqtYMdmfvWOOo00XCiWcUGtdY5ZKNuxuCi6xZZ8T2S1GNtiIQ3ls0Qq50rSQ5s=w915-h915-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/miner.420d71acefb95e6f2e83.jpg",
     "title": "Data Mining",
     "action1": "Test Linear Regression",
     "details1": "Loan 20 data pay back up to 26 data in 2 \nrounds\n",
@@ -262,7 +261,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczP_G0S_jzvyplZqg-a4K-BBKPxYAOkZ9atbzRdioI6vaHQUJRZIPA1fM4QmT6EIhCh0Qvkhy_Xu2fAE1_hPCzjPX9_UlhhbYsxdnEtWuYgRmN0E9zbpPLF45z_jAp4DF1m8otWzna894U_HRAtuuLqey71qKTQrQH2G7tSgktXT6iiKunCZdRY_guguoUbDphICK-O6SjyFOSXdKK3DNH3eSrpBeQYavcy8GRqBSmsoAuNDGtaoU_R5fj9DdT0qhgGLHB5Y7h_VfjUPzE81o77ZweBdoT_XVfMCCv9CkLo-YbE0rJk4XDJudruv94C75uyEMnsgyN8BftDxMOFMMG5hVxpsp7CWbQ4-YjiP2KBDkLnuCTCLLe5fiJUJllqJS_xMQG1dhX2wR_HOEC62waTF3sN9CJ50oKNVxhZaCgGsVSDR4zTqYQuDP3pGJQSD6J8dUPTvck1X5wv--oAAN1RN8r1WoUpGnRGlP_zvEGNYIa2w51xg-D3hPD3d5TWrsIz2T_YTL2RsJLaqA8FFX8cJFr3EJyHDdYrmfW7RyRTfiJNt7Mm5Cit4TResC8OwK1fvkJOiqHd6BGKvQ2csCogOS2IXxxhuZIjYlPad8SybQMdL-BMX_ItfoqYJ3z9MOWJwzy5uNsXWUQU-88gyokmpb0SDBXXhrKQCovCMK6um5FIV4wxCT2QkMEecxfS2Ll6kjJCDhKwN9iOUcUoJHevlQZ-TsgKlDsdjYzM7-Ar6uVJd0ndlhT7Whq-bQPVuzXXhl5R7ltbRkH076irFphhMuPvJCEMDQ3kfN7JwGoH0LYkGUR-qTlKesZQQF9bRuYtbyAQzPsmZUmufN8ElkZn51Ye7PFbwet_TuujjLgleGYiklqd6jKg49J8kiBCPL0qIr_Kz7H1iKG_jOWqAmvklf-ty=w876-h876-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/gan.c7a1131628c7e0ddca44.jpg",
     "title": "FontSGenerative Adversarial Network",
     "action1": "Deceive Discriminator",
     "details1": "Both players get +6 data per 10 data",
@@ -328,7 +327,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczPeXqxp7RH7WNz0Bf2cGy5Uhq_zDyNYR9iQlxwbwgZzAJ2f8_0kS_D4S-XkJpwxS12Jr86h4nyhmwp74DOk1ew0FrdiV_2mkxkixm1WIba640z9cG0pdi8MMDbBeJle8fufPME5BrLhLdrwsrb-61vkaVZHqbdVOyqJGqNAguBK0EWqzTgzKi8cDsSHBb_C6pnElYshw4IEL8OR4nKznpKk0k9FQXr3UROLyNmFITuIvBQsYMLGIm-fSGEdK4kWMrQGRFTJL6vkF4RT1Yx_9ro-Zg8JNdO4fEM2K_QUPUaLS6xxwGP7M5eiMvEkzw4HZK4WRsKnGRCQASkFnUy2Oc-W-OVujQ2d_FqqXcqTfr9CE-WW7aCb9pAxNSAENnAAZA1YaheiMFmNLmDp2NIB4klN3rMXMSXzJny0PHzGVj0YIJ9sFzLCYw_qRzeIC9Q9_IWveGPjJKqyywVWK-1ttSeSm8XBEfyY-HV-RU05CEy2cZrftt3kUHJdMyFqI1bGhlp0Di45A0H8XTtgRAQU99ybFwcJcwWDvIbLNLe0m_pTu2NNEHIMrz1tlCytilSdMKA4e_THUsTdaOC-jNoLeeynBIbWIhyMu806c2-IFlawtsBFVpjh45gxfW2ZaGz7UNyB8C0cXlSNLkwKdL9tRiqpQbx1_X8ZTV3_IIhSQkWFwL4el5_FmcRPeGvBopfdTyuEKKsYP9WD_j7RL0xVMa5O_9v0pkFhObfWSa29fRCdRZd9avfuNWsRgnkHOUx4w7dvkJ03Zwi1iyRYnacJXzjFsFOsMzpzkTlqivNOdBiyVBNtHtyT7jjn8hg0QfqgzgUDB9M3W2WCIopiO2P7wjWXgP8F8wa3ynwn_uCg5fF37X3vh9ye0BTaoT65PG25-H9uWsMB-nHJrm2DNE-TT_nu0fk=w843-h843-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/blixt.1e43ccc8de62f427e69b.jpg",
     "title": "CPU Voltage Spike",
     "action1": "Accidentally Overclock",
     "details1": "+18 data if you have 0 data",
@@ -405,7 +404,7 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczN7tFoCCP00sDLOv3MoqGzjkIY7wwjEGLJlZMUIIwPHAqZlGB49mBhZpKSNOo0KkgROn9sq2qK7FO1939Uu2pUk3NZprRZKBs67V15Haq-2NoVeCNIVYggLWKT3wfsz0MtO1btjfnJU9MgD5v-sOAXmr1Dxb9VEjsArAG1ppYtu0oEhZpZeClFdXzywmnXmRrQCygml0Bq9HEUem939iT_CXYXmqe9WmVScGgiD8LL6IFnZ5Ta0LERCcVehwGaxCXlUAix-7iKe_xfzEaFePLMErkL3djtU9Cbn2bC8p9rAaYfaZVdQy3b8FWhh7xGgFw5U1H5vXdqC9JGQw4IphXQmvdmVdkJdAwGT9caaPh3fOq4MwCzaBW_D--pdKk_Mns6mWq96zXN0IKHbMy4TcCvsyFSJr55uDfJxrytChPhxofGVOcKZkpGeTVfXe2vbS58x-M39RWJRHhKIcsJ5rGKVcQ8hhmO2-XSEPIBGCNxvJaV0gS1qnDdcxD5DY6oar1Ltuck4-YrmDCrmSCHDJMnZgwjwOD3zB3OXZscDYQwXwUqPfWv4lbOrHrbZI9lHfGMda5dkA2UxqDQFHrmyGmXdCC-u1oUSor76DmPwfo_UqG-ddVLpSw23Q8cM_rXKvfK9edLTvYGIhSvrv7ES2D789a70tQRnTKji4XxQUt69G4iXIupwJtI5y_X6fZQBDl1efIEJdDXTb3TyDfaArxhTEM9tECyZeJe3U6Sr9-aGU44U9c1blUKinIoH_JBEEkb-yLixlzx0k66r-1Npcv58dlI_UftVIFKJGIbXZPuO4bDa4Py5hF8cD2q6FD9jqlgpDwPSZvfLEFaRWji0KhzN5o8xdrvJQ0fo2hEm1mUYGEskIwQnfKZU3F6THWCERSQ49PrAPKk_mvWm4aHrz7YlZYw=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/tower.5c61c3eeabffa5daa77b.png",
     "title": "5G Network",
     "action1": "Connect remotely",
     "details1": "+16 data in 2 \nrounds",
@@ -460,7 +459,7 @@ const initialCards = [
     "type": "hc"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczNS2J6tGCe-YN0b94f33YwzU4kkcbHURYKBawxeC8mQlixsKKQ-_LRJTM3vmuD-HTdhhfwwyRLiG7PANbvyZ5NaaVdXA3nj78N-BClS66hObWGIxYqWALgksxw981uUFZhaJsqNnKVWg_qaWusyKrQ7PLmOhHnO2tNq0X75GlY67otI4ANEXezsU02roS-28U0I6rBp_VsB05DH7G28MnNA6Zru1f_iMiAqX2yxcuhj4aDHSzMXkW8d9ZJE-l-Y15NYLqfGeToywVXt07SgfK_u9S56XEE-cwK-8fx1JE8YJJwNdYd5RwOfWdvtt4Q2YWU59swnWRP_DIy-R4mlk3F4gYBn-bN_LFqz-oBUChXR_yvg1KJTBrxd_A1BEJnSO40hgTDFsSEUihEwlQdG3_DowE6sMEeHQacuAp5LMrzuUIluF7h8zwLtaXXU6UGzceuCIdY6INp3uEkHckdToyU-9b_uThoSLTmIpUWKrYXaVNicporx-Y7KwLvDoXyunyP150Nc-7yMnrd-AQesT1RbPEAMGsU7iJwI6VPUWIs10ilU_pMKnhIWPbHU0gDoPHx3u2e4arTXeO6VZnpPwZWhWKOJJ2toPcIJnndXYmcfmW0IXgbDYmF48rljUUyqrBj2sDG428qC5fp3w2szKkJIgX6uPB4UTi4lX7VTVFWF3xjxjiLLz454uR_-cSKuj3KwrNAk1TdJNQWNs9NjoKewCX8IgOazrtixjh_8nm2eA8jZ2RurIsZT5RVAIfR43WZFoUPjKxv4vEU80iZCQ4E-an5vibuW05h1hZUhS5OOkYLKwsqpkwOXsmw2sLLCc7bf6c4jNKTZeBV01KfXb3gGyybYRt_aIfV1OyCHCKVuVk1NSAsinm8OHAb-BzD3o2ecOXHqW3dH7ms0I0plGz6YeCkG=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/drone.d6866ec281a2e31b7d4d.png",
     "title": "Unmanned Aerial Vehicles",
     "action1": "Loop in the human",
     "details1": "Next round, no Base Action with Cost can be played",
@@ -471,7 +470,7 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczOcTlV8og4-WnFIborJNoyi4CjIlOTJv8PHVfCUILJtMK_PkzVJWV31vvBCe_FGQvUCnZMKrSF_Hd47DIIVQKTcsDyYQJZCUyytZc-so2cRE4NAdD0cnB8TxiN0neKUxh8P3Mv9TYJzRpl7UIV7mDFYYnDG81lkwAMogDqyEv1_bnUZZuKvuuZcuoC3I4E1qhJbxfDlr76Ze11nVaQOMjg865-per5drNIoJbEo7cmAkrCNIlZSg97TMnA98Ll09KIos-GAEZ_ixvbxiHOFC17smVq9cI7GwEtQcelnvmXmeY6JG74U4Dgc830okf6rwXtRfVnBbyCzicLb84sepno1yQULSFiQXV2qIGJPHuzTiHrcIGDijaA_GsEMrFP-SWZyRJXcDijDDFX6S-cmuyXko5JI64YVNJuKwpMZtRA9DTy6VFCQRGv-Q6VugdfGYp8zp-sWvanc_gXeoxwu__O3KKtrXLFB3szr1kobDqpX-LXdHjXY55u8ahdXdvQf3AmFkBIkwWCYPFob7OD2t3Sa443PcMZs8N4WIuFs6JshBliaUyFnxx6kyD79qxthGFVL4h-Aut2e2EwceonY8DFUS3pzSWwr56nqC9QisP6WgFDU-jhS15J_HoDpihDkAcMwMGO3wArvVGJKLk4b3lxsmmdq71tTwl1c-f_o2bG2E-bfIMONspc8c9yte8ACD2NDssxQBWCOTJKAzg0hpfwIvpjhT6m7XZl-OwnbnnVkEKecMZ1OV04LekrToIpWWx7-thGeRF9dkHxCB0FOGkaADlVO5Qmpw_iIWE8W7bLo33nVLZfIHd4emll0o0Gj9WSEdL8rTOAqaUykPwxRj4JNxfuaJIRxDe3rUrfG7GiTJDhb_piM91oUq0ATc1WetA6uBnVC0Jc9KKra_s9lxUg2qAY=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/siri.294b839874cae4456ae2.png",
     "title": "Digital Assistant",
     "action1": "Set timer for 2 minutes",
     "details1": "Next time, including this round, that opponent gain data gain same amount  of data",
@@ -482,7 +481,7 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczPW9tsW9dMe5-T4SarD8rgM4oDCuWc7oiuc_ow7SyYXaF8tatJHbo-725wILQTK2T-JihLSbPAtg85GGwL-QafFEZY6_PiKOUZDU-bagk53MhTNQLsGZ2OCd3J7N2dt6tCUGZLMAa3fF5p61ZFBhCwGzmUKrN5eDh9ypjMNf2zANX8-Fjvihnl_vF-BGvoQCYxrgHMudKCHO-kbfOA2boawEJULtzbqbDrR6IYoTIVbHsDRTZbzkBhawP0bZZqwKIBOi_Q90ME9yCslbIEUFPI_Hn-1_zI_Qa-o12lZPRwietQBF_QepYaJv95-52Lgw_1lcIT6LaRd5XNAbv27z9BrfgcOKuAai3gE44kjek-DUo6yMwRf65myRY9bfE_g6s3c-MnMp6z4_j_lafk5Vfrnqir8W9-kRjgTiZEZrkxP_QTc6XjcRUJPeAwamrSI4KAqhMH5iMLpT8NMqB3a2lungviM6OPJbwi8f6gPdFlepq4Au5K9QRgGESOQXPVY_nbRjWbpgScIDghbel1LwjrEhRvvZJubG2B7nQ1pM2yBeHTRlnkuQFZeafShEHhYkzP2e0s6AjiK41susLP_8tNfyHwyU673dTP4UIotBcAm93vATRIyuFvagnGQIuNVrQ-FcCK5j-C8-XNUZtsimj2DbUdJReBnoiHCddO73T-8ygzabmp0n2OnZJ1bwBDg6GW9Igz95odo16VzSqH0FsB4WDqovV87LOzg7rIUdYjPM55KCcvrbzpEccqKgDaCsUwAXztSRgT-7_MPPSQrQ1ATB9lE5p3jXjObTHufMA9cgoA13NE5oDY9X607NUvjWLjU5UvsjR_hLYjeWcVseako9U0R3ONIEX3MALJRR4ssTJ-grqe3HsDRzMavPBfBdgzUtyO5pS30i6WhkmjrpbfzqI4=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/vaccum.501d3a55ab7c826d6a7e.png",
     "title": "Robot vacuum",
     "action1": "Map home",
     "details1": "+8 data and +8 data if you have less data than opponent \n",
@@ -504,7 +503,7 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczOiAXlq0EkRBfOxfoudf78dE4bvui1NztMgHLd3XGXRIWejfkefpZZeUiHUSam0gGD6MEQ2ck-5ijRx7prAtPTWcNyaNMpiru60EmsHE6fvh6GvQ--3wQRiJFCuh3L_TVwnsAoqA9uAGm90b2PItLdk8_d-Ou6W2IWABCPYtgKuxqtBZSESOYQWXfLbCXR7apOW1az7r8UD3muoWfJ_K2dVE0l8OMcyNmCQlO6Uh7RgegudV7OAhmceuMQGtm9k9itG2KBdWSqte253sLkjweHJqkS_8butdvOxvWs4eLfoLtgqXubwm9X08geukeGlbwgIvjRc1N1twhsdQFsq-4R5PGU6D5J22Wkw70FPARpEyG__8f2ux4nUbbBlTRsrXiFrwift2xZv1K4W_EB3HWW6FXw773CDdXAgLZW-AHOIO33mjOBfzgW0NndnEdT3ZkMjcaA13Gvgig3Xcnd6GBOO4vgRlhIKg6CY7SJ84Ar6iWl-rBZSBtZiPBVfNcgi5lfYk2ToK91Yvjjenct7YlAyo098AOJ2skwTgikWwWq_wrQWduuInxbdoF0_b6yEN90YIkvzEUaz4vpvsY_yQOqvrveTmhqjhZ7g484omosK-7Y7R34TgqmoBOIkzV_ZQ5bBWW7DbLy9IU58dWJB98qlRgTk7NxJXTYJmdjqSMKQTrmweIV6N4B3_xTCVV-nB8kWjS080MiQGj-g3aa-0F_edUsKiwa0EN_L_eI5YbsByEayhdubn3KziSk2kZJwUjZhHrhtEGPRmEOZ0UJdh2b9DUYKQOG9b6a1Bh7IITu2J1utClbJRDFptWThKqiR9Il-D4GU7S1c7-V0rMxEATiza0voi5ovH6SDikVVKpOjiAUp68MpWkPwK0_LXDpT4q5mkne4lELw1njswDmWQi-OrBXQ=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/vpn.d72c4efcc9f1c885ce2d.png",
     "title": "Virtual Private Network ",
     "action1": "Tunnel TV",
     "details1": "+4 processing and +6 processing if opponent have 0 processing",
@@ -526,7 +525,7 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczPavVt-GkhdCjq6hRkEScpV9VgRmD1wfok3b-oNqOIzSdn7dxBHGdPELF1LBFVe_H3hQJpnEi2D8zaLx0t7CKRgGxbAX0MQdWhderHknE7EB_8d1DP0g8UCUXm5MgBX2AVxx8hHOerZfZtLmIi8GUScJ5wE2e23rzfQk_ZGL346UX008DlBlc0nKpNnPK7P1Qh-YWBTS0e2ZLcCcZDSaY9y-C1vaFJhjQXY9LpqombdFe11LFjIajBd6HxG6T22xQuYykkUCU8aPaLleoi62oH-AMaAgC9wCgGtnHWr_RD75f868I3lW6zLF2aS2uDcm86seH_VTlYgbIHQKtDhtQKNPvDQHj1CZ0cJGbxXIgDSAc-8-sJkPLuRtvm13UPh6WVn_TokLaBusDoReG9QUB82e2XPFqiYc80WcQsvormlfuTSzChQvcZHUz1UF-3W4AHD2M6Hk9f6YBRZoJadmn_7ycOeMSB_JJFd-H6f0Q6REOlITK3HuWxAFR-vaYD3z2LDYnSu5-RyOzSBRPDo8CrKGupu4Hum_opG0u0T-89LPgQjgEq7eDYru_2j9ufJFGG5VtJvHVhafW_lW1RlGKr-q0wcoEH3kAF4Tf3S8YB064JIhcMyD1GyDuM4XcwSETWwjpFxFhf6TeYBGUtAfN3cnncrA7PrhLCos8titZRfRmM5_mJSSd-PA1GoM4pYKQiT56BzvB8LqTm3Eqilwa_d4S7OXviLUr8L2w3JAauy7vRHPk9dzGiF7K_GqM3ElXLUwrvFt1KWCbTNwHSRypfqwQSVUmJRBBNQ0ErB4uJCvWDeNXwOfc9wDlRHH1zrL22c0_8h7nEz-Jw81MvJuc8yf06VTxvsXjTH9HyH6aAQ0eUOsdoiCNd5H2svOaGSpjGH3NXrL0G9Z5Ecf1JTuAtX0r8V=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/tree.57ad537fdab3bf9b9019.png",
     "title": "Decision Tree",
     "action1": "Plant root node",
     "details1": "Block all delayed actions that trigger this round, blocked cards go to your discard pile",
@@ -537,7 +536,7 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczOYNO5xMgXtShwelG6VhhZU__vOFHIkTcTrw4xg-qyao-Sc0pN1tq3lsMcjrIQhpW9RKHn_7vIIHN7nUf6sJyim20-N_xwDI9iNBUpzFE7mr9ArWvGs5r54E2nOZ1W0jVM5nLQohX7YdF-WzPZ7rxdsBUo_BlWTWsTXlkH3Yb67M28mVnS_sO-2hKXbRfTU5cAiPUG2c96kG1doFj4R27sQgnH5jbcYCmsrjai-LDW65B626RZYQGdZlzFwi06ceG-L1R9k-WURZ2XI1IJB4DiqMBktHftJWmWoMjrRJ-pTZSnCqS-S8uF0QrYjV-b78S6lvk0AaWP0rd-nSxYma5OiKSBr53exNqj0IeSjR9McE1wQi5bSxhZSsvnDkFaeWA9_1G0Gdn1kHnmmM7Xie2D0GMZeHMcRN1UjXp9-Lr6Zm9U6EF60bj1uEdTMHYstUF_xrPHQmKUGE56T2XLoEEI9uw5BFvMUa5xeQ1eC7QYKWvQJ7m0B9GLI5ZR776MxKHXVeL9egaZH5WKYPUoGZvCfCad79kjbTGJYsw88m2yBp78Rob2F1MbS_7uZw4T-1O9UhVmHhngUjMehikSa5vdbOnPHAozX4MTlPX_28h7ZpP5Ct3ju7l-ERWZL7YGHYMOIIkG9z8agGHW5Xwc6wiyv7vhLDZtCiOCgdm37w1Uf1DI29P4hMFEmBowbJ69CWRSt-wvnU2nPnasfvKGyuj7rEh5dj3EyjMXK3YjIU_PN6f9B2PtCoeE1D-8Cj2oiPDzT_sRt-jUdinioJsilsnX9pVsrHZaJ4s6Y2fNk9xkOL0dOZwvGh3YiMDWM9wb8MIo52umehOULJc-3kMzpEuX8rbwMVugumyOu3b4OnrUsd5-BGz2FlliV5w_SFGZmdEaETj7Kk5bqB-B9upsx7kBCdAA=w1024-h1024-s-no-gm?authuser=0",
+    "img": "/chatgpt-apps3/static/media/wave.faa8981834be144fedec.png",
     "title": "Natural Language Processing",
     "action1": "Pre-train generative transformer",
     "details1": "+6 processing and +4 processing if you have more score than opponent\n",
@@ -548,7 +547,7 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://lh3.googleusercontent.com/pw/AP1GczP1tY_ndKRM0LyPKS-sR9DgJpG41WcneUeYiQ6XEuq5TLfenCG4Rgx0-gNKdDGG2oQQNbTsvbGJh5QVB-iEc1-cinXYTf-pn2QPm0lvv-3uNyc2Ab09e3xkHLtC8EyGYJI2Xf36mchuXJQxOQ-Jyr9KxaAyg9knkNxDRVr3aOUgracf3VYj1cDCLvo3h-zzj7fFxvOtzwFWyfjXBPHyVpXe1g_pOZqwIccq9Hexwajc8Us-aur1U2FxJVS6fBSVBVZGfNdw2FWmDpmbpFLoTGk0tC4KtG268QnNGof9LiGWmfe80GCNsktzax3Q_PA4xzzxjvBzg9KtgiIpKbTq24yOyXX1Duf_nwHng0omVxJcI8gaw1NjZi25JoXR9HnKbGJthTO5ZAjv19mimwa8_X1LD1bkYDHTTxVS317fLKGkrh8VtRdC7kkNucg_qvyuMbgFnbhM7Ma2z6SYbQgfmwo_gLtiPhsnF7fMIakzqd5e0aiWgO_2aKFppagdkiWr6AOuarSQjqQPO3l1--bynOohQaxIVwuIUCw8b6bCwU22Fc3zLwVzGVB0o3Nz0t6doFXMmrRUBP-2b-ssuGxZEyA3-2MR-lEkfg92DrHWlyfPAoHWU6fWw_1mk79ccy0a8KIdkIXChLrgn5J1tKRSZ6Q5-Gtbuf8doHTQzvQw37MhOyYjqeo3FQ6-a8cFOan98Qth-S5xgNILCRyjfd0E7ASu4jLSbmouP9Ms5OE1gO1V2KmfpO_DIs1uPxVJ9FXGhTYXU6BUwmPM2cKVQWKev1docAeQGaNqAi0KUlHhO_gFlJgNzU6ClJM3g6Jx8QpgWpQ1ZuqXvDS5jt5hYZwrUPf3FP63BeD9N4dA3EAbTxHJILjZugf0al1GmfNF2jG-aprbwj_e_gWIIxihmckNjDOpYoRY=s230-no?authuser=0",
+    "img": "/chatgpt-apps3/static/media/seer.0f5038bfff94f4cffd5a.png",
     "title": "Recommender System",
     "action1": "Continue watching and don't ask again",
     "details1": "+6 data and +12 data per 10 score",
