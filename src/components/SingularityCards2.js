@@ -104,6 +104,7 @@ const default_number_size = MOBILE_CARDS ? "18px" : "13px";
 const default_img_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "95%" : "98%" : "60%";
 const default_action_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "37%" : "36%" : "66%";
 const save_size = MOBILE_CARDS ? 2 : PRINT_VERSION ? 2 : 2;
+const HIGH_CONTRAST_PERCENTAGE = "108%";
 const BRIGHTNESS_ADJUSTMENT = 1.4;
 
 const SIDE_MARGIN = 8;
@@ -135,22 +136,51 @@ const DuplicateImage = styled(Image)`
 
 const baseActions = [{
   "title": "Data Accumulation",
-  "details": "+3 Data and +3 Data per 10 Data"
+  "details": "+4 Data and +4 Data per 10 Data"
 }, {
   "title": "Processing Optimization",
-  "details": "+4 processing and +4 processing if opponent gained data last round"
+  "details": "+4 processing and +4 processing if only 1 \nplayer takes this actions this round"
 }, {
   "title": "Data Conversion",
   "details": "+2 Score per 10 Data spent",
-  "cost": "All Data min 10"
+  "cost": "All Data"
 }, {
   "title": "Processing Leveraging",
   "details": "+4 Score per 10 Processing spent",
-  "cost": "All Processing min 10"
+  "cost": "All Processing"
 }, {
-  "title": "ROI",
-  "details": "Any Cost action Refunds: 16 data or 8 processing"
-}];
+  "title": "Refund on All Cost Actions",
+  "details": "Refunds up to either 16 data or 8 processing no more than spent"
+},
+{
+  "title": "Mulligan",
+  "details": "Once per game, at the start of any round, discard hand and draw the same amount of cards"
+},
+];
+
+const roundEvents = [
+  {
+    "title": "Start of Round 3",
+    "details": "Players discard up to 3 cards and draw the same amount"
+  },
+  {
+    "title": "Start of Round 4",
+    "details": "Both players reveal their hands"
+  }, {
+    "title": "Start of Round 5",
+    "details": "Both players give 1 card to their opponent"
+  }, {
+    "title": "End of Round 6",
+    "details": "Before Card Draw reveal top 2 Cards The player with highest score pick 1 card ties are settled by Processing then Data",
+  },
+  {
+    "title": "Start of Round 7",
+    "details": "Both players reveal their hands"
+  },
+  {
+    "title": "Start of Round 9",
+    "details": "Declare Swap(Optional): Opponent gains +30 data both players exchange cards no take-backs"
+  },];
 
 
 const initialCards = [
@@ -158,15 +188,15 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/c2691f20-d825-4d17-9c7a-785a0a993622/0_0.png",
     "title": "Data Protection",
     "action1": "Activate Security Protocol",
-    "details1": "+12 data if below 18 data",
+    "details1": "+4 data and +8 data if below 20 data",
     "action2": "Disable Firewall",
     "details2": "+10 score in 1 \nmore round",
     "cost": "40 data or 18 processing",
     "id": "1",
-    "type": "base"
+    "type": "hc"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142888684128059553/ka2ledionysuz_miners_axe_sledge_sledge_hammer_axe_coal_miner_ho_b40227a0-9db6-43ab-bf76-c000c78d23aa.jpg",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczP0HrXEiLu2moDQOXwVEov_qKY3oCOPfqivJWsQ90eO3QaFop_M550mWd7YDy2vYGx3e8RUzvhYsPmyyYUKQklbyBA0pF0Z4LfZK2CvsDG6iB8wTe-sz1rPQziOKftdgv7UR2HSg8ZS_XAnoThlwAude99B4ZGLF0dXcqUQxzHuErezESTpXhMuytZJ-SJrh97pVVdqWFrqJPHINE8Wnl85hFFU4vjPvETKNayL5m5-CQ-LXquOAZvXCua6Z_AQwu-9VCQCa66bzv_fEr7_pwxtPesEgpNzdTdrFJzieepQMh47M1pBTxcrxO2Np2wqwbN4w_Q_gk9l37qeZJHgJgllyKcQdEo2S631O3S8BmBNaa0cQsfRns6QfVc9L9emUk1AyNpIxxoayU1lYIlf91-O7Wqg3VVmsA9alAthymLTqrrZAwFCvLX7C0bCiuco7WM4ul0VuIRpKwuK9mF_JxSEg0R0t7nnFdXQHpGWE6eZCWIvNCv6FrURSJiVZMW5yHxCkdMozPqcugcidGJuLR5f9UYG2680Ers6MSqP-mZ-e9B_j7e64GYlSyNEzo28xqOvRaBPUVhJSukxMFsMq6j3-5tglF1oBOr-dD2oQa7dqqz5-6uFPgJrKwSDLTYlPUC0w1GMChn5UaFFg10Z5Db3UjV5TV2tDGLsCWtJ72DqbDAR9MHcaYt2PdHXNnkqIrfTOC07g2XfZRBwsqxTcZzj-Mn36SVGBRw1XVreR03A9V2gTxbeQx4ee4r1xdj3WTWcmfEYEtPJVCXne6l3tfbYv1g2L-hTfm1Gm7krYdd9VdMEQQLDXCLrx6dcyS1loXJt40iRY4njqV_luGQoPNiCq4OAggqtYMdmfvWOOo00XCiWcUGtdY5ZKNuxuCi6xZZ8T2S1GNtiIQ3ls0Qq50rSQ5s=w915-h915-s-no-gm?authuser=0",
     "title": "Data Mining",
     "action1": "Test Linear Regression",
     "details1": "Loan 20 data pay back up to 26 data in 2 \nrounds\n",
@@ -177,7 +207,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142872458567880836/ka2ledionysuz_rat_in_human_clothes_in_labyrinth_maze_tron__in_t_39c4a69e-2896-42f2-a001-b3f9ed1417d3.jpg",
+    "img": "https://cdn.midjourney.com/8591cbcc-d583-486a-b096-cbb54c34b841/0_0.png",
     "title": "Reinforcement Learning",
     "action1": "Explore Greedily",
     "details1": "Both players lose up to 12 data each\n",
@@ -191,7 +221,7 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/e02d4399-92d4-4780-ab6a-a4e69691ffd7/0_0.png",
     "title": "Supervised Learning",
     "action1": "Calibrate Reward Parameters",
-    "details1": "+16 data if the top card in your discard pile has 'Data' in its name",
+    "details1": "+14 data if your discard pile has a card with 'Data' in its name",
     "action2": "Outsource Labeling",
     "details2": "Get half difference in score if opponent has <br> more score",
     "cost": "32 data or 16 processing",
@@ -202,12 +232,12 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/a67a7f7f-c762-4af6-83f5-0fc64f267eb2/0_0.webp",
     "title": "Quantum Computing",
     "action1": "Get Quantum Entangled",
-    "details1": "+6 processing and after Card Draw, both players reveal their hand",
+    "details1": "",
     "action2": "Enable Quantum Supremacy",
     "details2": "Take any discarded card and immediatly play its cost action, paying that cost without Refund ",
     "cost": "Card cost",
     "id": 5,
-    "type": "base"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/09392dd9-7fd8-4882-8904-f9854f98e0ed/0_0.webp",
@@ -218,7 +248,7 @@ const initialCards = [
     "details2": "Competition: Player with most Score after 2 \nmore rounds get +40 data",
     "cost": "10 Data or 4 processing",
     "id": 6,
-    "type": "base"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/d22dba27-cc34-49ee-bc4a-a29cbc66142f/0_0.png",
@@ -232,7 +262,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1142714394296451122/ka2ledionysuz_robot_boxers_boxing_ring_gloves__in_the_style_of__f4b3ce2e-ee37-4e51-b7d2-448015870e8a.jpg",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczP_G0S_jzvyplZqg-a4K-BBKPxYAOkZ9atbzRdioI6vaHQUJRZIPA1fM4QmT6EIhCh0Qvkhy_Xu2fAE1_hPCzjPX9_UlhhbYsxdnEtWuYgRmN0E9zbpPLF45z_jAp4DF1m8otWzna894U_HRAtuuLqey71qKTQrQH2G7tSgktXT6iiKunCZdRY_guguoUbDphICK-O6SjyFOSXdKK3DNH3eSrpBeQYavcy8GRqBSmsoAuNDGtaoU_R5fj9DdT0qhgGLHB5Y7h_VfjUPzE81o77ZweBdoT_XVfMCCv9CkLo-YbE0rJk4XDJudruv94C75uyEMnsgyN8BftDxMOFMMG5hVxpsp7CWbQ4-YjiP2KBDkLnuCTCLLe5fiJUJllqJS_xMQG1dhX2wR_HOEC62waTF3sN9CJ50oKNVxhZaCgGsVSDR4zTqYQuDP3pGJQSD6J8dUPTvck1X5wv--oAAN1RN8r1WoUpGnRGlP_zvEGNYIa2w51xg-D3hPD3d5TWrsIz2T_YTL2RsJLaqA8FFX8cJFr3EJyHDdYrmfW7RyRTfiJNt7Mm5Cit4TResC8OwK1fvkJOiqHd6BGKvQ2csCogOS2IXxxhuZIjYlPad8SybQMdL-BMX_ItfoqYJ3z9MOWJwzy5uNsXWUQU-88gyokmpb0SDBXXhrKQCovCMK6um5FIV4wxCT2QkMEecxfS2Ll6kjJCDhKwN9iOUcUoJHevlQZ-TsgKlDsdjYzM7-Ar6uVJd0ndlhT7Whq-bQPVuzXXhl5R7ltbRkH076irFphhMuPvJCEMDQ3kfN7JwGoH0LYkGUR-qTlKesZQQF9bRuYtbyAQzPsmZUmufN8ElkZn51Ye7PFbwet_TuujjLgleGYiklqd6jKg49J8kiBCPL0qIr_Kz7H1iKG_jOWqAmvklf-ty=w876-h876-s-no-gm?authuser=0",
     "title": "FontSGenerative Adversarial Network",
     "action1": "Deceive Discriminator",
     "details1": "Both players get +6 data per 10 data",
@@ -240,7 +270,7 @@ const initialCards = [
     "details2": "Competition: The player with the most processing after 2 \nmore rounds gets +8 score",
     "cost": "10 Data or 4 processing",
     "id": 8,
-    "type": "base"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/f58a0612-0df7-428d-ab04-48509b54bc4f/0_0.webp",
@@ -254,10 +284,10 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139938474171048099/ka2ledionysuz_many_puzzle_pieces_neon_lines_shaped_like_jigsaw__12bb6b20-7000-4022-b490-8b3fccc0ff4f.png",
+    "img": "https://cdn.midjourney.com/fa3f2293-32d8-497c-8e6d-6750afb5e420/0_2.png",
     "title": "Recurrent Neural Network",
     "action1": "Recall Long Short-Term Memory",
-    "details1": "+4 Data Next round trigger this action again",
+    "details1": "+4 processing and +6 processing if you have <br> at least 18 processing",
     "action2": "Backpropagate errors",
     "details2": "Reveal 1 \ncard from hand and play the free action of that card 2\ntimes\n",
     "cost": "20 data or 10 processing",
@@ -268,12 +298,12 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/1fb7c52f-7c2d-4447-84c0-dfce4bc36fe4/0_0.webp",
     "title": "Hacker",
     "action1": "security by obscurity",
-    "details1": "Both players change 8 data closer to 24 data",
+    "details1": "Both players change 10 data closer to 30 data",
     "action2": "Hire the hacker",
     "details2": "Steal up to 4 score from opponent",
     "cost": "24 data or 12 processing",
     "id": 11,
-    "type": "base"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/fd140395-3f76-4f12-9a4c-2e272b6c4c64/0_0.webp",
@@ -298,7 +328,7 @@ const initialCards = [
     "type": "base"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139931604823842906/ka2ledionysuz_very_thick_lightning_bolt_ligthning_storm_lightni_e02a8b76-8a7c-4dab-8832-c59267603976_20230812164042249.jpg",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczPeXqxp7RH7WNz0Bf2cGy5Uhq_zDyNYR9iQlxwbwgZzAJ2f8_0kS_D4S-XkJpwxS12Jr86h4nyhmwp74DOk1ew0FrdiV_2mkxkixm1WIba640z9cG0pdi8MMDbBeJle8fufPME5BrLhLdrwsrb-61vkaVZHqbdVOyqJGqNAguBK0EWqzTgzKi8cDsSHBb_C6pnElYshw4IEL8OR4nKznpKk0k9FQXr3UROLyNmFITuIvBQsYMLGIm-fSGEdK4kWMrQGRFTJL6vkF4RT1Yx_9ro-Zg8JNdO4fEM2K_QUPUaLS6xxwGP7M5eiMvEkzw4HZK4WRsKnGRCQASkFnUy2Oc-W-OVujQ2d_FqqXcqTfr9CE-WW7aCb9pAxNSAENnAAZA1YaheiMFmNLmDp2NIB4klN3rMXMSXzJny0PHzGVj0YIJ9sFzLCYw_qRzeIC9Q9_IWveGPjJKqyywVWK-1ttSeSm8XBEfyY-HV-RU05CEy2cZrftt3kUHJdMyFqI1bGhlp0Di45A0H8XTtgRAQU99ybFwcJcwWDvIbLNLe0m_pTu2NNEHIMrz1tlCytilSdMKA4e_THUsTdaOC-jNoLeeynBIbWIhyMu806c2-IFlawtsBFVpjh45gxfW2ZaGz7UNyB8C0cXlSNLkwKdL9tRiqpQbx1_X8ZTV3_IIhSQkWFwL4el5_FmcRPeGvBopfdTyuEKKsYP9WD_j7RL0xVMa5O_9v0pkFhObfWSa29fRCdRZd9avfuNWsRgnkHOUx4w7dvkJ03Zwi1iyRYnacJXzjFsFOsMzpzkTlqivNOdBiyVBNtHtyT7jjn8hg0QfqgzgUDB9M3W2WCIopiO2P7wjWXgP8F8wa3ynwn_uCg5fF37X3vh9ye0BTaoT65PG25-H9uWsMB-nHJrm2DNE-TT_nu0fk=w843-h843-s-no-gm?authuser=0",
     "title": "CPU Voltage Spike",
     "action1": "Accidentally Overclock",
     "details1": "+18 data if you have 0 data",
@@ -323,12 +353,12 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/2094539a-a581-4086-9e5a-3c1ddd89a1ce/0_3.webp",
     "title": "Genetic Algorithms",
     "action1": "Mutate Variables",
-    "details1": "Before Card Draw, reveal top 2 cards in draw pile and rearrange as you wish",
+    "details1": "+4 Data Next round trigger this action again",
     "action2": "Evolve Sequence",
     "details2": "+14 score",
     "cost": "24 processing",
     "id": 20,
-    "type": "base"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/94ec55fb-027b-4184-a96c-c16f0ea6a258/0_3.png",
@@ -356,18 +386,18 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/ce7a068b-e03e-4893-82e7-378a5116ee19/0_1.webp",
     "title": "Cyborg",
     "action1": "Ascend Humanity",
-    "details1": "",
+    "details1": "Starting next round, whenever your opponent gain data you also get +2 data",
     "action2": "Assemble the AI-Team",
-    "details2": "",
-    "cost": "",
+    "details2": "+5 score per 10 processing spent",
+    "cost": "All Processing",
     "id": "30",
-    "type": "v2"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/7a0a97c8-4b58-46be-8449-2f40d64e62cf/0_3.png",
     "title": "Blockchain",
     "action1": "Pump and dump",
-    "details1": "After card draw both players reveal hands and take 1 \ncard from their opponents hand",
+    "details1": "Next round, delay all actions 2 \nrounds ",
     "action2": "Hodl",
     "details2": "Double your processing",
     "cost": "16 data or 8 processing",
@@ -375,7 +405,7 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1139547103497044140/ka2ledionysuz_cell_phone_tower_epic_sci_fi_neon_punk_style_neon_27db55f4-f4ac-497a-b0d8-8e36cb57cf8b.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczN7tFoCCP00sDLOv3MoqGzjkIY7wwjEGLJlZMUIIwPHAqZlGB49mBhZpKSNOo0KkgROn9sq2qK7FO1939Uu2pUk3NZprRZKBs67V15Haq-2NoVeCNIVYggLWKT3wfsz0MtO1btjfnJU9MgD5v-sOAXmr1Dxb9VEjsArAG1ppYtu0oEhZpZeClFdXzywmnXmRrQCygml0Bq9HEUem939iT_CXYXmqe9WmVScGgiD8LL6IFnZ5Ta0LERCcVehwGaxCXlUAix-7iKe_xfzEaFePLMErkL3djtU9Cbn2bC8p9rAaYfaZVdQy3b8FWhh7xGgFw5U1H5vXdqC9JGQw4IphXQmvdmVdkJdAwGT9caaPh3fOq4MwCzaBW_D--pdKk_Mns6mWq96zXN0IKHbMy4TcCvsyFSJr55uDfJxrytChPhxofGVOcKZkpGeTVfXe2vbS58x-M39RWJRHhKIcsJ5rGKVcQ8hhmO2-XSEPIBGCNxvJaV0gS1qnDdcxD5DY6oar1Ltuck4-YrmDCrmSCHDJMnZgwjwOD3zB3OXZscDYQwXwUqPfWv4lbOrHrbZI9lHfGMda5dkA2UxqDQFHrmyGmXdCC-u1oUSor76DmPwfo_UqG-ddVLpSw23Q8cM_rXKvfK9edLTvYGIhSvrv7ES2D789a70tQRnTKji4XxQUt69G4iXIupwJtI5y_X6fZQBDl1efIEJdDXTb3TyDfaArxhTEM9tECyZeJe3U6Sr9-aGU44U9c1blUKinIoH_JBEEkb-yLixlzx0k66r-1Npcv58dlI_UftVIFKJGIbXZPuO4bDa4Py5hF8cD2q6FD9jqlgpDwPSZvfLEFaRWji0KhzN5o8xdrvJQ0fo2hEm1mUYGEskIwQnfKZU3F6THWCERSQ49PrAPKk_mvWm4aHrz7YlZYw=w1024-h1024-s-no-gm?authuser=0",
     "title": "5G Network",
     "action1": "Connect remotely",
     "details1": "+16 data in 2 \nrounds",
@@ -389,12 +419,12 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/22d4754f-4c13-497d-a8fb-dad9d8523cb3/0_2.png",
     "title": "Self Driving Car",
     "action1": "Break for bag",
-    "details1": "",
+    "details1": "Any time your opponent gain processing you also get +1 processing",
     "action2": "Navigate autonomously",
-    "details2": "",
-    "cost": "",
+    "details2": "+3 score per 10 Data spent ",
+    "cost": "All Data",
     "id": "38",
-    "type": "v2"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/553dcd0f-4029-4a32-9b8e-4b57f1c186f3/0_1.png",
@@ -402,35 +432,35 @@ const initialCards = [
     "action1": "Ready Player One",
     "details1": "Copy free action of the bottom card of your discard pile",
     "action2": "Enter Matrix ",
-    "details2": "In 2 \nmore rounds, opponent lose 28 data",
-    "cost": "20 data or 10 processing",
+    "details2": "Next round, no card can affect the opponent",
+    "cost": "14 data or 6 processing",
     "id": "39",
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1207961613672652850/0_0.jpg?ex=65e18ceb&is=65cf17eb&hm=53f5eba9958306e0b454f0c60505789ffc6dbcbf993408804d2df6e18c4c7c62&",
-    "title": "Wearable Tech",
+    "img": "https://cdn.midjourney.com/2ee5ec12-694f-469d-bb7f-0f4e9fccfc57/0_1.webp",
+    "title": "Industrial Automation",
     "action1": "Assemble Selectively and Comply",
-    "details1": "Swap 1 card from your hand with 1 card from your discard pile",
+    "details1": "+6 processing and +4 processing if you have less processing than opponent",
     "action2": "Pick and Place",
-    "details2": "Next round you get double score data processing from all actions affecting you",
-    "cost": "20 data or 10 processing",
+    "details2": "Competition: The player with most cards in their discard pile after last round win +10 score",
+    "cost": "16 data or 8 processing",
     "id": "41",
-    "type": "v2"
+    "type": "hc"
   },
   {
     "img": "https://cdn.midjourney.com/93e53cee-c8c9-4eea-98c3-bd22211979db/0_1.webp",
     "title": "SuperComputer",
     "action1": "Benchmark LINPACK",
-    "details1": "+20 data and in 2 \nrounds opponent also <br> gain +20 data",
+    "details1": "+20 data and in 3 \nrounds opponent also <br> gain +20 data",
     "action2": "Achieve petaflop",
-    "details2": "Competition: The player or players with data closest to 26 data after last round win +8 score",
+    "details2": "Competition: The player or players with data closest to 26 data after last round win +10 score",
     "cost": "10 Data or 4 processing",
     "id": "43",
-    "type": "v2"
+    "type": "hc"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140375094791778325/ka2ledionysuz_military_quad_copter_drone_flying_extremly_fast_b_4ec0b597-e8a9-4917-ab29-e8994fa3461b.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczNS2J6tGCe-YN0b94f33YwzU4kkcbHURYKBawxeC8mQlixsKKQ-_LRJTM3vmuD-HTdhhfwwyRLiG7PANbvyZ5NaaVdXA3nj78N-BClS66hObWGIxYqWALgksxw981uUFZhaJsqNnKVWg_qaWusyKrQ7PLmOhHnO2tNq0X75GlY67otI4ANEXezsU02roS-28U0I6rBp_VsB05DH7G28MnNA6Zru1f_iMiAqX2yxcuhj4aDHSzMXkW8d9ZJE-l-Y15NYLqfGeToywVXt07SgfK_u9S56XEE-cwK-8fx1JE8YJJwNdYd5RwOfWdvtt4Q2YWU59swnWRP_DIy-R4mlk3F4gYBn-bN_LFqz-oBUChXR_yvg1KJTBrxd_A1BEJnSO40hgTDFsSEUihEwlQdG3_DowE6sMEeHQacuAp5LMrzuUIluF7h8zwLtaXXU6UGzceuCIdY6INp3uEkHckdToyU-9b_uThoSLTmIpUWKrYXaVNicporx-Y7KwLvDoXyunyP150Nc-7yMnrd-AQesT1RbPEAMGsU7iJwI6VPUWIs10ilU_pMKnhIWPbHU0gDoPHx3u2e4arTXeO6VZnpPwZWhWKOJJ2toPcIJnndXYmcfmW0IXgbDYmF48rljUUyqrBj2sDG428qC5fp3w2szKkJIgX6uPB4UTi4lX7VTVFWF3xjxjiLLz454uR_-cSKuj3KwrNAk1TdJNQWNs9NjoKewCX8IgOazrtixjh_8nm2eA8jZ2RurIsZT5RVAIfR43WZFoUPjKxv4vEU80iZCQ4E-an5vibuW05h1hZUhS5OOkYLKwsqpkwOXsmw2sLLCc7bf6c4jNKTZeBV01KfXb3gGyybYRt_aIfV1OyCHCKVuVk1NSAsinm8OHAb-BzD3o2ecOXHqW3dH7ms0I0plGz6YeCkG=w1024-h1024-s-no-gm?authuser=0",
     "title": "Unmanned Aerial Vehicles",
     "action1": "Loop in the human",
     "details1": "Next round, no Base Action with Cost can be played",
@@ -441,7 +471,7 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140396421388964001/ka2ledionysuz_friendly_andronygous_robot_butler_apple_droid_kit_69f5e3ec-3b59-4da3-81dd-307bfedc6627.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczOcTlV8og4-WnFIborJNoyi4CjIlOTJv8PHVfCUILJtMK_PkzVJWV31vvBCe_FGQvUCnZMKrSF_Hd47DIIVQKTcsDyYQJZCUyytZc-so2cRE4NAdD0cnB8TxiN0neKUxh8P3Mv9TYJzRpl7UIV7mDFYYnDG81lkwAMogDqyEv1_bnUZZuKvuuZcuoC3I4E1qhJbxfDlr76Ze11nVaQOMjg865-per5drNIoJbEo7cmAkrCNIlZSg97TMnA98Ll09KIos-GAEZ_ixvbxiHOFC17smVq9cI7GwEtQcelnvmXmeY6JG74U4Dgc830okf6rwXtRfVnBbyCzicLb84sepno1yQULSFiQXV2qIGJPHuzTiHrcIGDijaA_GsEMrFP-SWZyRJXcDijDDFX6S-cmuyXko5JI64YVNJuKwpMZtRA9DTy6VFCQRGv-Q6VugdfGYp8zp-sWvanc_gXeoxwu__O3KKtrXLFB3szr1kobDqpX-LXdHjXY55u8ahdXdvQf3AmFkBIkwWCYPFob7OD2t3Sa443PcMZs8N4WIuFs6JshBliaUyFnxx6kyD79qxthGFVL4h-Aut2e2EwceonY8DFUS3pzSWwr56nqC9QisP6WgFDU-jhS15J_HoDpihDkAcMwMGO3wArvVGJKLk4b3lxsmmdq71tTwl1c-f_o2bG2E-bfIMONspc8c9yte8ACD2NDssxQBWCOTJKAzg0hpfwIvpjhT6m7XZl-OwnbnnVkEKecMZ1OV04LekrToIpWWx7-thGeRF9dkHxCB0FOGkaADlVO5Qmpw_iIWE8W7bLo33nVLZfIHd4emll0o0Gj9WSEdL8rTOAqaUykPwxRj4JNxfuaJIRxDe3rUrfG7GiTJDhb_piM91oUq0ATc1WetA6uBnVC0Jc9KKra_s9lxUg2qAY=w1024-h1024-s-no-gm?authuser=0",
     "title": "Digital Assistant",
     "action1": "Set timer for 2 minutes",
     "details1": "Next time, including this round, that opponent gain data gain same amount  of data",
@@ -452,13 +482,13 @@ const initialCards = [
     "type": "v2"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1140287671328059463/ka2ledionysuz_roomba_tank_very_high_tech_advanced_sci_fi_cleani_f4617fe2-a90d-4b22-b83b-d896103ac3e6.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczPW9tsW9dMe5-T4SarD8rgM4oDCuWc7oiuc_ow7SyYXaF8tatJHbo-725wILQTK2T-JihLSbPAtg85GGwL-QafFEZY6_PiKOUZDU-bagk53MhTNQLsGZ2OCd3J7N2dt6tCUGZLMAa3fF5p61ZFBhCwGzmUKrN5eDh9ypjMNf2zANX8-Fjvihnl_vF-BGvoQCYxrgHMudKCHO-kbfOA2boawEJULtzbqbDrR6IYoTIVbHsDRTZbzkBhawP0bZZqwKIBOi_Q90ME9yCslbIEUFPI_Hn-1_zI_Qa-o12lZPRwietQBF_QepYaJv95-52Lgw_1lcIT6LaRd5XNAbv27z9BrfgcOKuAai3gE44kjek-DUo6yMwRf65myRY9bfE_g6s3c-MnMp6z4_j_lafk5Vfrnqir8W9-kRjgTiZEZrkxP_QTc6XjcRUJPeAwamrSI4KAqhMH5iMLpT8NMqB3a2lungviM6OPJbwi8f6gPdFlepq4Au5K9QRgGESOQXPVY_nbRjWbpgScIDghbel1LwjrEhRvvZJubG2B7nQ1pM2yBeHTRlnkuQFZeafShEHhYkzP2e0s6AjiK41susLP_8tNfyHwyU673dTP4UIotBcAm93vATRIyuFvagnGQIuNVrQ-FcCK5j-C8-XNUZtsimj2DbUdJReBnoiHCddO73T-8ygzabmp0n2OnZJ1bwBDg6GW9Igz95odo16VzSqH0FsB4WDqovV87LOzg7rIUdYjPM55KCcvrbzpEccqKgDaCsUwAXztSRgT-7_MPPSQrQ1ATB9lE5p3jXjObTHufMA9cgoA13NE5oDY9X607NUvjWLjU5UvsjR_hLYjeWcVseako9U0R3ONIEX3MALJRR4ssTJ-grqe3HsDRzMavPBfBdgzUtyO5pS30i6WhkmjrpbfzqI4=w1024-h1024-s-no-gm?authuser=0",
     "title": "Robot vacuum",
     "action1": "Map home",
-    "details1": "",
+    "details1": "+8 data and +8 data if you have less data than opponent \n",
     "action2": "Clean floors",
-    "details2": "",
-    "cost": "",
+    "details2": "Move top cards from opponents discard pile to yours, as many as you want and can afford",
+    "cost": "8 Data or 4 processing per card",
     "id": "49",
     "type": "v3"
   },
@@ -466,18 +496,18 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/d286efee-1e5d-49be-a0d4-96a09fed0a37/0_0.png",
     "title": "Non Player Character",
     "action1": "Follow Path",
-    "details1": "+16 data if you have less data than opponent \n",
+    "details1": "+2 processing per card in your discard pile",
     "action2": "Adjust difficulty",
-    "details2": "Before Card Draw, collect cards on hands and divide equally as you choose",
-    "cost": "16 data or 8 processing",
+    "details2": "Next round you get double score data processing from all actions affecting you",
+    "cost": "20 data or 10 processing",
     "id": "50",
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147100135713685514/ka2ledionysuz_neon_punk_style_high_speed_train_tunnel_tron_bf0aed32-07b0-4af6-8463-cb50cb94d486.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczOiAXlq0EkRBfOxfoudf78dE4bvui1NztMgHLd3XGXRIWejfkefpZZeUiHUSam0gGD6MEQ2ck-5ijRx7prAtPTWcNyaNMpiru60EmsHE6fvh6GvQ--3wQRiJFCuh3L_TVwnsAoqA9uAGm90b2PItLdk8_d-Ou6W2IWABCPYtgKuxqtBZSESOYQWXfLbCXR7apOW1az7r8UD3muoWfJ_K2dVE0l8OMcyNmCQlO6Uh7RgegudV7OAhmceuMQGtm9k9itG2KBdWSqte253sLkjweHJqkS_8butdvOxvWs4eLfoLtgqXubwm9X08geukeGlbwgIvjRc1N1twhsdQFsq-4R5PGU6D5J22Wkw70FPARpEyG__8f2ux4nUbbBlTRsrXiFrwift2xZv1K4W_EB3HWW6FXw773CDdXAgLZW-AHOIO33mjOBfzgW0NndnEdT3ZkMjcaA13Gvgig3Xcnd6GBOO4vgRlhIKg6CY7SJ84Ar6iWl-rBZSBtZiPBVfNcgi5lfYk2ToK91Yvjjenct7YlAyo098AOJ2skwTgikWwWq_wrQWduuInxbdoF0_b6yEN90YIkvzEUaz4vpvsY_yQOqvrveTmhqjhZ7g484omosK-7Y7R34TgqmoBOIkzV_ZQ5bBWW7DbLy9IU58dWJB98qlRgTk7NxJXTYJmdjqSMKQTrmweIV6N4B3_xTCVV-nB8kWjS080MiQGj-g3aa-0F_edUsKiwa0EN_L_eI5YbsByEayhdubn3KziSk2kZJwUjZhHrhtEGPRmEOZ0UJdh2b9DUYKQOG9b6a1Bh7IITu2J1utClbJRDFptWThKqiR9Il-D4GU7S1c7-V0rMxEATiza0voi5ovH6SDikVVKpOjiAUp68MpWkPwK0_LXDpT4q5mkne4lELw1njswDmWQi-OrBXQ=w1024-h1024-s-no-gm?authuser=0",
     "title": "Virtual Private Network ",
     "action1": "Tunnel TV",
-    "details1": "Next round, no card can affect the opponent",
+    "details1": "+4 processing and +6 processing if opponent have 0 processing",
     "action2": "Trick tyrant",
     "details2": "In 2 \nrounds, pick one of +50 data <br> or +25 processing or +10 score",
     "cost": "36 data or 18 processing",
@@ -490,16 +520,16 @@ const initialCards = [
     "action1": "Block incoming traffic ",
     "details1": "+1 score and +3 score if you have less score than opponent",
     "action2": "Disable \"temporarily\"",
-    "details2": "Competition: The player with \"Data Protection\" in their discard pile at game end get +8 score",
-    "cost": "20 data or 8 processing",
+    "details2": "Competition: The player with \"Data Protection\" in their discard pile at game end get +10 score",
+    "cost": "16 data or 8 processing",
     "id": "53",
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147175809128349736/ka2ledionysuz_Glowing_neon_lamps_high_tech_sci_fi_background_oa_fb8918ad-6a93-4476-9c47-3396e35d0763.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczPavVt-GkhdCjq6hRkEScpV9VgRmD1wfok3b-oNqOIzSdn7dxBHGdPELF1LBFVe_H3hQJpnEi2D8zaLx0t7CKRgGxbAX0MQdWhderHknE7EB_8d1DP0g8UCUXm5MgBX2AVxx8hHOerZfZtLmIi8GUScJ5wE2e23rzfQk_ZGL346UX008DlBlc0nKpNnPK7P1Qh-YWBTS0e2ZLcCcZDSaY9y-C1vaFJhjQXY9LpqombdFe11LFjIajBd6HxG6T22xQuYykkUCU8aPaLleoi62oH-AMaAgC9wCgGtnHWr_RD75f868I3lW6zLF2aS2uDcm86seH_VTlYgbIHQKtDhtQKNPvDQHj1CZ0cJGbxXIgDSAc-8-sJkPLuRtvm13UPh6WVn_TokLaBusDoReG9QUB82e2XPFqiYc80WcQsvormlfuTSzChQvcZHUz1UF-3W4AHD2M6Hk9f6YBRZoJadmn_7ycOeMSB_JJFd-H6f0Q6REOlITK3HuWxAFR-vaYD3z2LDYnSu5-RyOzSBRPDo8CrKGupu4Hum_opG0u0T-89LPgQjgEq7eDYru_2j9ufJFGG5VtJvHVhafW_lW1RlGKr-q0wcoEH3kAF4Tf3S8YB064JIhcMyD1GyDuM4XcwSETWwjpFxFhf6TeYBGUtAfN3cnncrA7PrhLCos8titZRfRmM5_mJSSd-PA1GoM4pYKQiT56BzvB8LqTm3Eqilwa_d4S7OXviLUr8L2w3JAauy7vRHPk9dzGiF7K_GqM3ElXLUwrvFt1KWCbTNwHSRypfqwQSVUmJRBBNQ0ErB4uJCvWDeNXwOfc9wDlRHH1zrL22c0_8h7nEz-Jw81MvJuc8yf06VTxvsXjTH9HyH6aAQ0eUOsdoiCNd5H2svOaGSpjGH3NXrL0G9Z5Ecf1JTuAtX0r8V=w1024-h1024-s-no-gm?authuser=0",
     "title": "Decision Tree",
     "action1": "Plant root node",
-    "details1": "Take 1 \nrandom card from opponent's hand and then give 1 card of your choice",
+    "details1": "Block all delayed actions that trigger this round, blocked cards go to your discard pile",
     "action2": "Prune leaf",
     "details2": "+2 Data per 1 Processing or +1 processing per 2 data spent",
     "cost": "All Data or All Processing",
@@ -507,24 +537,24 @@ const initialCards = [
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147233621837623447/ka2ledionysuz_sound_waves_visual_sound_waves_coming_from_sci_fi_1013556e-c83b-42a7-8744-75427947ca80.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczOYNO5xMgXtShwelG6VhhZU__vOFHIkTcTrw4xg-qyao-Sc0pN1tq3lsMcjrIQhpW9RKHn_7vIIHN7nUf6sJyim20-N_xwDI9iNBUpzFE7mr9ArWvGs5r54E2nOZ1W0jVM5nLQohX7YdF-WzPZ7rxdsBUo_BlWTWsTXlkH3Yb67M28mVnS_sO-2hKXbRfTU5cAiPUG2c96kG1doFj4R27sQgnH5jbcYCmsrjai-LDW65B626RZYQGdZlzFwi06ceG-L1R9k-WURZ2XI1IJB4DiqMBktHftJWmWoMjrRJ-pTZSnCqS-S8uF0QrYjV-b78S6lvk0AaWP0rd-nSxYma5OiKSBr53exNqj0IeSjR9McE1wQi5bSxhZSsvnDkFaeWA9_1G0Gdn1kHnmmM7Xie2D0GMZeHMcRN1UjXp9-Lr6Zm9U6EF60bj1uEdTMHYstUF_xrPHQmKUGE56T2XLoEEI9uw5BFvMUa5xeQ1eC7QYKWvQJ7m0B9GLI5ZR776MxKHXVeL9egaZH5WKYPUoGZvCfCad79kjbTGJYsw88m2yBp78Rob2F1MbS_7uZw4T-1O9UhVmHhngUjMehikSa5vdbOnPHAozX4MTlPX_28h7ZpP5Ct3ju7l-ERWZL7YGHYMOIIkG9z8agGHW5Xwc6wiyv7vhLDZtCiOCgdm37w1Uf1DI29P4hMFEmBowbJ69CWRSt-wvnU2nPnasfvKGyuj7rEh5dj3EyjMXK3YjIU_PN6f9B2PtCoeE1D-8Cj2oiPDzT_sRt-jUdinioJsilsnX9pVsrHZaJ4s6Y2fNk9xkOL0dOZwvGh3YiMDWM9wb8MIo52umehOULJc-3kMzpEuX8rbwMVugumyOu3b4OnrUsd5-BGz2FlliV5w_SFGZmdEaETj7Kk5bqB-B9upsx7kBCdAA=w1024-h1024-s-no-gm?authuser=0",
     "title": "Natural Language Processing",
     "action1": "Pre-train generative transformer",
     "details1": "+6 processing and +4 processing if you have more score than opponent\n",
     "action2": "Tokenize world",
-    "details2": "Move top 3 cards from opponents discard pile to yours and rearrange your entire discard pile",
-    "cost": "22 data or 10 processing",
+    "details2": "Move top 4 cards from opponents discard pile to yours ",
+    "cost": "18 data or 8 processing",
     "id": "55",
     "type": "v3"
   },
   {
-    "img": "https://cdn.discordapp.com/attachments/1139234832178745466/1147610006393462884/ka2ledionysuz_adorable_robot_neon_punk_style_background_sci_fi__1b69ad00-cf16-49ae-a2b2-07d4d7467f62.png",
+    "img": "https://lh3.googleusercontent.com/pw/AP1GczP1tY_ndKRM0LyPKS-sR9DgJpG41WcneUeYiQ6XEuq5TLfenCG4Rgx0-gNKdDGG2oQQNbTsvbGJh5QVB-iEc1-cinXYTf-pn2QPm0lvv-3uNyc2Ab09e3xkHLtC8EyGYJI2Xf36mchuXJQxOQ-Jyr9KxaAyg9knkNxDRVr3aOUgracf3VYj1cDCLvo3h-zzj7fFxvOtzwFWyfjXBPHyVpXe1g_pOZqwIccq9Hexwajc8Us-aur1U2FxJVS6fBSVBVZGfNdw2FWmDpmbpFLoTGk0tC4KtG268QnNGof9LiGWmfe80GCNsktzax3Q_PA4xzzxjvBzg9KtgiIpKbTq24yOyXX1Duf_nwHng0omVxJcI8gaw1NjZi25JoXR9HnKbGJthTO5ZAjv19mimwa8_X1LD1bkYDHTTxVS317fLKGkrh8VtRdC7kkNucg_qvyuMbgFnbhM7Ma2z6SYbQgfmwo_gLtiPhsnF7fMIakzqd5e0aiWgO_2aKFppagdkiWr6AOuarSQjqQPO3l1--bynOohQaxIVwuIUCw8b6bCwU22Fc3zLwVzGVB0o3Nz0t6doFXMmrRUBP-2b-ssuGxZEyA3-2MR-lEkfg92DrHWlyfPAoHWU6fWw_1mk79ccy0a8KIdkIXChLrgn5J1tKRSZ6Q5-Gtbuf8doHTQzvQw37MhOyYjqeo3FQ6-a8cFOan98Qth-S5xgNILCRyjfd0E7ASu4jLSbmouP9Ms5OE1gO1V2KmfpO_DIs1uPxVJ9FXGhTYXU6BUwmPM2cKVQWKev1docAeQGaNqAi0KUlHhO_gFlJgNzU6ClJM3g6Jx8QpgWpQ1ZuqXvDS5jt5hYZwrUPf3FP63BeD9N4dA3EAbTxHJILjZugf0al1GmfNF2jG-aprbwj_e_gWIIxihmckNjDOpYoRY=s230-no?authuser=0",
     "title": "Recommender System",
     "action1": "Continue watching and don't ask again",
     "details1": "+6 data and +12 data per 10 score",
     "action2": "Filter presidents ",
-    "details2": "Merge discard piles, all cards go in the same pile and it counts as both yours and your opponents",
-    "cost": "16 data or 8 processing",
+    "details2": "Swap Data with opponent",
+    "cost": "All Processing min 30",
     "id": "58",
     "type": "v3"
   },
@@ -532,10 +562,10 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/450d6cf6-4d08-4c12-b762-d7fc493ac25d/0_0.png",
     "title": "Robot dog - Sparky",
     "action1": "Fetch Algorithm",
-    "details1": "",
+    "details1": "+4 data per card in your discard pile",
     "action2": "Bite Encryption",
-    "details2": "",
-    "cost": "",
+    "details2": "Reveal a card from your hand and play its cost action",
+    "cost": "Card Cost",
     "id": "76",
     "type": "animals"
   }
@@ -684,6 +714,7 @@ const SingularityCards = () => {
   const cardRefs = cards.map(() => React.createRef());
   const [cardRef, saveAsImage] = useSave(card.title);
   const [baseActionsRef, saveBaseActions] = useSave("BaseActions");
+  const [RoundEventRef, saveRoundEvents] = useSave("RoundEvents");
   const [trackerRef1, saveTracker1] = useSave("Tracker1");
   const [trackerRef11, saveTracker11] = useSave("Tracker11");
   const [trackerRef2, saveTracker2] = useSave("Tracker2");
@@ -806,6 +837,7 @@ const SingularityCards = () => {
         {/* Row 3 */}
         <Grid container item xs={12} spacing={1}>
           <button onClick={saveBaseActions}>Save Base Rules</button>
+          <button onClick={saveRoundEvents}>Save Round Events</button>
           {['1', '2', '3', '11', '22', '33'].map((tracker, index) => (
             <Grid item xs={4} sm={2} key={index}>
               <button onClick={() => window[`saveTracker${tracker}`]}>Save Tracker{tracker}</button>
@@ -849,6 +881,7 @@ const SingularityCards = () => {
 
 
       <BaseRulesCard ref={baseActionsRef}></BaseRulesCard>
+      <RoundEventCard ref={RoundEventRef}></RoundEventCard>
       {cards.map((card, index) => (
         checkedTypes[card.type] ? (
           <div key={index}>
@@ -1127,7 +1160,7 @@ const Card = React.forwardRef(({ imgUrl, cardTitle, action1, details1, action2, 
             <Border>
               <ImageContainer>
                 <DuplicateImage src={imgUrl} />
-                <Image id={`img-${id}`} src={imgUrl} /> {/* Original Image */}
+                <Image style={{ filter: (type == "hc") ? "contrast(" + HIGH_CONTRAST_PERCENTAGE + ")" : null }} id={`img-${id}`} src={imgUrl} /> {/* Original Image */}
                 <TitleWrapper>
                   {isStyledTitle ?
                     (<StyledTitle>{title}
@@ -1191,7 +1224,47 @@ const BaseRulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <CardActions key={id + "444"} thin={true} title={baseActions[3].title} details={baseActions[3].details} cost={baseActions[3].cost}></CardActions>
         <br></br>
         <CardActions key={id + "555"} title={baseActions[4].title} details={baseActions[4].details} ></CardActions>
+        {/* <CardActions key={id + "5555"} title={baseActions[5].title} details={baseActions[5].details} ></CardActions> */}
         <br></br>
+      </FadeBackground>
+
+    </CardContainer>
+  );
+});
+
+const RoundEventCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
+  let isStyledTitle = false;
+  let title = "Base Actions";
+  const hideTitleIcon = true;
+  const hideTypeImage = false;
+  const baseImgUrl = "https://cdn.midjourney.com/6eae8834-ddee-419d-b39d-f5e461a52407/0_0.webp"
+  const iconImage = type == "base" ? base5 : type == "space" ? space2 : type == "animals" ? animals : type == "v2" ? expansion_droid2 : expansion_mix3;
+  const colorcorrection =
+    type == "base" ? "hue-rotate(165deg) saturate(4.9) brightness(2)" :
+      type == "space" ? "hue-rotate(165deg) saturate(3.5) brightness(1)" :
+        type == "animals" ? "hue-rotate(165deg) saturate(3.9) brightness(2)"
+          : "hue-rotate(165deg) saturate(4.5) brightness(2.5)";
+  return (
+    <CardContainer id={`card-${id}`} ref={ref}>
+      <FadeBackground>
+
+        <Border>
+          <ImageContainerRules>
+            <DuplicateImageRules src={baseImgUrl} />
+            <ImageRules id={`img-${id}`} src={baseImgUrl} /> {/* Original Image */}
+            <TitleWrapper>
+              <TitleRules>Round Events</TitleRules>
+            </TitleWrapper>
+          </ImageContainerRules>
+        </Border>
+        <br></br>
+        <br></br>
+        <CardActions key={id + "111"} title={roundEvents[0].title} details={roundEvents[0].details} ></CardActions>
+        <CardActions key={id + "222"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions>
+        <CardActions key={id + "333"} title={roundEvents[2].title} details={roundEvents[2].details}></CardActions>
+        <CardActions key={id + "444"} title={roundEvents[3].title} details={roundEvents[3].details} ></CardActions>
+        <CardActions key={id + "555"} title={roundEvents[4].title} details={roundEvents[4].details} ></CardActions>
+        <CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions>
       </FadeBackground>
 
     </CardContainer>
@@ -1254,7 +1327,7 @@ const FadeBackground = styled.div`
   margin-left:${PRINT_VERSION ? "-" + print_margin * 1 + "px" : "-" + default_padding};
   height: 100%;
   margin-top:${PRINT_VERSION ? "-" + print_margin + "px" : "-" + default_padding};
-  background:  rgba(0,0,0,0.7);
+  background:  rgba(0,0,0,0.5);
     
 `;
 const InsideMargin = styled.div`
