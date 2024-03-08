@@ -1277,11 +1277,11 @@ const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle', 
 const iconStyleCard = { width: "12.3px", height: "18px", border: "1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
 const iconStyleCards = { width: "12.3px", height: "18px", border: "1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -4px -9px" };
 const iconStyleSpace = { width: "26px", height: "26px", verticalAlign: 'middle', margin: "-5px -9px -2px -5px", transform: "rotate(45deg)" };
-const ScoreIcon = () => <img src={scoreIcon} alt="score" style={{ width: "22px", height: "22px", verticalAlign: 'middle', margin: "-3px -3px -2px -2px",  filter: "brightness(125%) hue-rotate(9deg)"} } />
-const DataIcon = () => <img src={dataIcon} alt="data" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-9deg)"}} />
+const ScoreIcon = () => <img src={scoreIcon} alt="score" style={{  backgroundImage: "radial-gradient(circle at center, rgba(255,255,0,0.4) 0%, transparent 50%)", width: "22px", height: "22px", verticalAlign: 'middle', margin: "-3px -3px -2px -2px",  filter: "brightness(125%) hue-rotate(9deg)"} } />
+const DataIcon = () => <img src={dataIcon} alt="data" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-9deg)",backgroundImage: "radial-gradient(circle at center, rgba(255,105,180,0.8) 0%, transparent 50%)"}} />
 const CardIcon = () => <img src={back_v3} alt="card" style={iconStyleCard} />
 const CardsIcon = () => <><img src={back_v3} alt="card" style={iconStyleCard} /><img src={back_v3} alt="card" style={iconStyleCards} /></>
-const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-15deg)"}} />
+const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-15deg)",backgroundImage: "radial-gradient(circle at center, rgba(0,255,0,0.7) 0%, transparent 50%)"}} />
 const SpaceIcon = () => <img src={space2} alt="space" style={iconStyleSpace} />
 
 
