@@ -63,11 +63,11 @@ import expansion2 from '../images/singularitySprint/expansion2.png';
 import expansion_droid2 from '../images/singularitySprint/droid3.png';
 import expansion_mix3 from '../images/singularitySprint/mix3.png';
 import space2 from '../images/singularitySprint/space1.png';
-import scoreIcon from '../images/singularitySprint/score.png';
+import scoreIcon from '../images/singularitySprint/v3/score.png';
 import scoreIcon2 from '../images/singularitySprint/score2.png';
-import dataIcon from '../images/singularitySprint/data.png';
+import dataIcon from '../images/singularitySprint/v3/data.png';
 import dataIcon2 from '../images/singularitySprint/data2.png';
-import processingIcon from '../images/singularitySprint/processing.png';
+import processingIcon from '../images/singularitySprint/v3/processing.png';
 import processingIcon2 from '../images/singularitySprint/processing_3.png';
 import background2 from '../images/singularitySprint/sci-fi-background.svg';
 import background from '../images/singularitySprint/background2.svg';
@@ -178,7 +178,7 @@ const roundEvents = [
   },
   {
     "title": "Start of Round 9",
-    "details": "Declare Swap(Optional): Opponent gains +30 data both players exchange cards no take-backs"
+    "details": "Declare Swap(Optional): Opponent gains +6 score both players exchange cards no take-backs"
   },];
 
 
@@ -211,7 +211,7 @@ const initialCards = [
     "action1": "Explore Greedily",
     "details1": "Both players lose up to 12 data each\n",
     "action2": "Predict Q Values",
-    "details2": "+2 score and +2 score per 10 \ntotal data and processing spent",
+    "details2": "+3 score and +2 score per 10 \ntotal data and processing spent",
     "cost": "All data and All processing",
     "id": "3",
     "type": "base"
@@ -266,7 +266,7 @@ const initialCards = [
     "action1": "Deceive Discriminator",
     "details1": "Both players get +6 data per 10 data",
     "action2": "Begin Zero-Sum Game",
-    "details2": "Competition: The player with the most processing after 2 \nmore rounds gets +8 score",
+    "details2": "Competition: The player with the most processing after 2 \nmore rounds gets +10 score",
     "cost": "10 Data or 4 processing",
     "id": 8,
     "type": "hc"
@@ -431,7 +431,7 @@ const initialCards = [
     "action1": "Ready Player One",
     "details1": "Copy free action of the bottom card of your discard pile",
     "action2": "Enter Matrix ",
-    "details2": "Next round, no card can affect the opponent",
+    "details2": "Next round, no players card can affect their opponent",
     "cost": "14 data or 6 processing",
     "id": "39",
     "type": "v2"
@@ -440,7 +440,7 @@ const initialCards = [
     "img": "https://cdn.midjourney.com/2ee5ec12-694f-469d-bb7f-0f4e9fccfc57/0_1.webp",
     "title": "Industrial Automation",
     "action1": "Assemble Selectively and Comply",
-    "details1": "+6 processing and +4 processing if you have less processing than opponent",
+    "details1": "+6 processing and +14 processing if you have <br>  over 30 processing",
     "action2": "Pick and Place",
     "details2": "Competition: The player with most cards in their discard pile after last round win +10 score",
     "cost": "16 data or 8 processing",
@@ -453,8 +453,8 @@ const initialCards = [
     "action1": "Benchmark LINPACK",
     "details1": "+20 data and in 2 \nrounds opponent also <br> gain +20 data",
     "action2": "Achieve petaflop",
-    "details2": "Competition: The player or players with data closest to 26 data after last round win +10 score",
-    "cost": "10 Data or 4 processing",
+    "details2": "30 score",
+    "cost": "100 data or 50 processing",
     "id": "43",
     "type": "hc"
   },
@@ -506,7 +506,7 @@ const initialCards = [
     "img": "/chatgpt-apps3/static/media/vpn.d72c4efcc9f1c885ce2d.png",
     "title": "Virtual Private Network ",
     "action1": "Tunnel TV",
-    "details1": "+4 processing and +6 processing if opponent have 0 processing",
+    "details1": "+4 processing and +8 processing if opponent have 0 processing",
     "action2": "Trick tyrant",
     "details2": "In 2 \nrounds, pick one of +50 data <br> or +25 processing or +10 score",
     "cost": "36 data or 18 processing",
@@ -1276,12 +1276,12 @@ const iconSize = "20px";
 const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
 const iconStyleCard = { width: "12.3px", height: "18px", border: "1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
 const iconStyleCards = { width: "12.3px", height: "18px", border: "1px solid #005555", verticalAlign: 'middle', margin: "-2px -2px -4px -9px" };
-const iconStyleSpace = { width: "26px", height: "26px", verticalAlign: 'middle', margin: "-4px -9px -2px -5px", transform: "rotate(45deg)" };
-const ScoreIcon = () => <img src={scoreIcon} alt="score" style={iconStyle} />
-const DataIcon = () => <img src={dataIcon} alt="data" style={iconStyle} />
+const iconStyleSpace = { width: "26px", height: "26px", verticalAlign: 'middle', margin: "-5px -9px -2px -5px", transform: "rotate(45deg)" };
+const ScoreIcon = () => <img src={scoreIcon} alt="score" style={{ width: "22px", height: "22px", verticalAlign: 'middle', margin: "-3px -3px -2px -2px",  filter: "brightness(125%) hue-rotate(9deg)"} } />
+const DataIcon = () => <img src={dataIcon} alt="data" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-9deg)"}} />
 const CardIcon = () => <img src={back_v3} alt="card" style={iconStyleCard} />
 const CardsIcon = () => <><img src={back_v3} alt="card" style={iconStyleCard} /><img src={back_v3} alt="card" style={iconStyleCards} /></>
-const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={iconStyle} />
+const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-15deg)"}} />
 const SpaceIcon = () => <img src={space2} alt="space" style={iconStyleSpace} />
 
 
