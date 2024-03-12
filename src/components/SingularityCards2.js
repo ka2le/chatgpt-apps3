@@ -183,35 +183,71 @@ const roundEvents = [
     "title": "Start of Round 10",
     "details": "Both players draw 1 card from their discard pile",
   },];
-  
-  const rules = [
-    {
-      "title": "Winning",
-      "details": "After 10 rounds, the player with the highest score wins"
-    },
-    {
-      "title": "Setup",
-      "details": "Players start with 10 data 0 processing and 0 score <br>  Shuffle cards draw 3 cards each"
 
-    },
+const rules = [
+  {
+    "title": "Winning",
+    "details": "After 10 rounds, the player with the highest score wins"
+  },
+  {
+    "title": "Setup",
+    "details": "Players start with 10 data 0 processing and 0 score <br>  Shuffle cards draw 3 cards each"
+
+  },
+
+  {
+    "title": "How To Play",
+    "details": `Both players play 10 \nsimultaneous rounds. For details see "Round Order" <br> 
+    To play a Cost action you must be able to pay, "All" costs always cost all even if they have "per 10" in the actions. <br>  After each Cost a refund is given based on the resource spent. <br> 
     
-    {
-      "title": "Round order",
-      "details": `1 . Round Events trigger <br> 
-      2 . Both players place one card face down. <br> 
-      3 . Declare action and reveal cards simultaneously <br>   
-      4 . Resolve in order  ACTIONS > COST > REFUND > DELAYED ACTIONS <br> 
-      5 . Draw 1 new card  `
-    },
-  
-    {
-      "title": "Start of Round 9",
-      "details": "Declare Swap(Optional): Opponent gains +6 score both players exchange cards no take-backs"
-    },
-    {
-      "title": "Start of Round 10",
-      "details": "Both players draw 1 card from their discard pile",
-    },];
+    `
+  },
+
+  ];
+
+const roundRules = [
+  {
+    "title": "1",
+    "details": "Round Events Trigger"
+  },
+  {
+    "title": "2",
+    "details": `Players place one card face down <br>  Declare chosen "Free", "Cost" or "Base" action and reveal cards simultaneously`
+
+  },
+  {
+    "title": "3",
+    "details": "Resolve played Cards Actions based on state before actions"
+
+  },
+  {
+    "title": "4",
+    "details": "Place discaded cards in separate rows, one for each player, in order played. Discaded cards for base actions goes to opponents discard pile"
+
+  },
+  {
+    "title": "5",
+    "details": "Resolve any Costs payments and then their Refunds"
+  },
+  {
+    "title": "6",
+    "details": "Resolve any Delayed Actions"
+  },
+  {
+    "title": "7",
+    "details": "Draw 1 new card"
+  }
+
+      // {
+      //   "title": "Round order",
+      //   "details": `1 . Round Events trigger <br> 
+      //   2 . Both players place one card face down. <br> 
+      //   3 . Declare action and reveal cards simultaneously <br>   
+      //   4 . Resolve in order  ACTIONS > COST > REFUND > DELAYED ACTIONS <br> 
+      //   5 . Draw 1 new card  `
+      // },
+    
+     ];
 
 const initialCards = [
   {
@@ -909,6 +945,7 @@ const SingularityCards = () => {
       <BaseRulesCard ref={baseActionsRef}></BaseRulesCard>
       <RoundEventCard ref={RoundEventRef}></RoundEventCard>
       <RulesCard ref={RoundEventRef}></RulesCard>
+      <RoundRulesCard ref={RoundEventRef}></RoundRulesCard>
       <RoundNumberCard ref={RoundNumberCardRef}></RoundNumberCard>
       {cards.map((card, index) => (
         checkedTypes[card.type] ? (
@@ -1293,7 +1330,7 @@ const RoundEventCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <br></br>
         <CardActions key={id + "444"} title={roundEvents[3].title} details={roundEvents[3].details} ></CardActions>
         <CardActions key={id + "555"} title={roundEvents[4].title} details={roundEvents[4].details} ></CardActions>
-        { <CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions> }
+        {<CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions>}
       </FadeBackground>
 
     </CardContainer>
@@ -1321,8 +1358,40 @@ const RulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <CardActions key={id + "111"} title={rules[0].title} details={rules[0].details} ></CardActions>
         <CardActions key={id + "222"} title={rules[1].title} details={rules[1].details}></CardActions>
         <br></br>
-        <CardActions key={id + "333"} title={rules[2].title} details={rules[2].details}></CardActions>
-        
+        <CardActions key={id + "333"} title={rules[2]?.title} details={rules[2]?.details}></CardActions>
+
+        {/* <CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions> */}
+      </FadeBackground>
+
+    </CardContainer>
+  );
+});
+
+const RoundRulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
+  const baseImgUrl = "https://cdn.midjourney.com/6eae8834-ddee-419d-b39d-f5e461a52407/0_0.webp"
+  return (
+    <CardContainer id={`card-${id}`} ref={ref}>
+      <FadeBackground>
+
+        <Border>
+          <ImageContainerRules>
+            <DuplicateImageRules src={baseImgUrl} />
+            <ImageRules id={`img-${id}`} src={baseImgUrl} /> {/* Original Image */}
+            <TitleWrapper>
+              <TitleRules>Round Order</TitleRules>
+            </TitleWrapper>
+          </ImageContainerRules>
+        </Border>
+        <br></br>
+        <br></br>
+        <CardActions key={id + "111"} title={roundRules[0]?.title} details={roundRules[0].details} ></CardActions>
+        <CardActions key={id + "222"} title={roundRules[1]?.title} details={roundRules[1].details}></CardActions>
+        <CardActions key={id + "333"} title={roundRules[2]?.title} details={roundRules[2]?.details}></CardActions>
+        <CardActions key={id + "333"} title={roundRules[3]?.title} details={roundRules[3]?.details}></CardActions>
+        <CardActions key={id + "333"} title={roundRules[4]?.title} details={roundRules[4]?.details}></CardActions>
+        <CardActions key={id + "333"} title={roundRules[5]?.title} details={roundRules[5]?.details}></CardActions>
+        <CardActions key={id + "333"} title={roundRules[6]?.title} details={roundRules[6]?.details}></CardActions>
+
         {/* <CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions> */}
       </FadeBackground>
 
@@ -1433,7 +1502,7 @@ margin: 0px;
 position: absolute;
   `;
 
-  const RoundNumber = styled(Text)`
+const RoundNumber = styled(Text)`
   position: absolute;
   top: 10px;
   left: 50%;
