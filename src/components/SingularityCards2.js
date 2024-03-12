@@ -102,9 +102,10 @@ const default_title_size = MOBILE_CARDS ? "15px" : "9px";
 const default_number_size = MOBILE_CARDS ? "18px" : "13px";
 const default_img_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "95%" : "98%" : "60%";
 const default_action_size = !MOBILE_CARDS ? BRIDGE_VERSION ? "37%" : "36%" : "66%";
-const save_size = MOBILE_CARDS ? 2 : PRINT_VERSION ? 2 : 2;
+const base_save_size = 5;
+const save_size = MOBILE_CARDS ? base_save_size : PRINT_VERSION ? base_save_size : base_save_size;
 const HIGH_CONTRAST_PERCENTAGE = "108%";
-const BRIGHTNESS_ADJUSTMENT = 1.4;
+const BRIGHTNESS_ADJUSTMENT = 1.3;
 
 const SIDE_MARGIN = 8;
 const DEFAULT_LINE_HEIGHT = "14px";
@@ -172,15 +173,47 @@ const roundEvents = [
   },
   {
     "title": "Start of Round 8",
-    "details": "Both players may swap 1 card from their hand with 1 card from their discard pile",
+    "details": "No more Card Draws from now on"
   },
   {
     "title": "Start of Round 9",
     "details": "Declare Swap(Optional): Opponent gains +6 score both players exchange cards no take-backs"
+  },
+  {
+    "title": "Start of Round 10",
+    "details": "Both players draw 1 card from their discard pile",
   },];
+  
+  const rules = [
+    {
+      "title": "Winning",
+      "details": "After 10 rounds, the player with the highest score wins"
+    },
+    {
+      "title": "Setup",
+      "details": "Players start with 10 data 0 processing and 0 score <br>  Shuffle cards draw 3 cards each"
 
+    },
+    
+    {
+      "title": "Round order",
+      "details": `1 . Round Events trigger <br> 
+      2 . Both players place one card face down. <br> 
+      3 . Declare action and reveal cards simultaneously <br>   
+      4 . Resolve in order  ACTIONS > COST > REFUND > DELAYED ACTIONS <br> 
+      5 . Draw 1 new card  `
+    },
+  
+    {
+      "title": "Start of Round 9",
+      "details": "Declare Swap(Optional): Opponent gains +6 score both players exchange cards no take-backs"
+    },
+    {
+      "title": "Start of Round 10",
+      "details": "Both players draw 1 card from their discard pile",
+    },];
 
-const initialCards =[
+const initialCards = [
   {
     "img": "https://cdn.midjourney.com/c2691f20-d825-4d17-9c7a-785a0a993622/0_0.png",
     "title": "Data Protection",
@@ -207,7 +240,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/8591cbcc-d583-486a-b096-cbb54c34b841/0_0.png",
     "title": "Reinforcement Learning",
     "action1": "Explore Greedily",
-    "details1": "Both players lose up to 14 data each\n",
+    "details1": "Both players lose up to 16 data each\n",
     "action2": "Predict Q Values",
     "details2": "+3 score and +2 score per 10 \ntotal data and processing spent",
     "cost": "All data and All processing",
@@ -305,9 +338,9 @@ const initialCards =[
   {
     "img": "https://cdn.midjourney.com/fd140395-3f76-4f12-9a4c-2e272b6c4c64/0_0.webp",
     "title": "Data Scientist",
-    "action1": "Produce Graphs",
-    "details1": "",
-    "action2": "Paus Ethically",
+    "action1": "Paus Ethically",
+    "details1": "Take all data gained by opponent this round ",
+    "action2": "Produce Graphs",
     "details2": "From now, get an additional +3 processing each time an action gives you processing excluding this card",
     "cost": "22 data or 8 processing",
     "id": 12,
@@ -317,7 +350,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/8d6d4227-7f21-4296-b0a6-30af2190686e/0_0.webp",
     "title": "Data Center",
     "action1": "Establish redundancy",
-    "details1": "In 2 \nrounds, no players card can affect their opponent",
+    "details1": "Next round, no players card can affect their opponent",
     "action2": "Provide Storage",
     "details2": "From now, get an additional +6 data each time an action gives you data excluding this card",
     "cost": "22 data or 10 processing",
@@ -463,7 +496,7 @@ const initialCards =[
     "details1": "Next round, no Base Action with Cost can be played",
     "action2": "Strike Signature",
     "details2": "Both players loose half their data",
-    "cost": "16 processing",
+    "cost": "12 processing",
     "id": "46",
     "type": "v2"
   },
@@ -506,8 +539,8 @@ const initialCards =[
     "action1": "Tunnel TV",
     "details1": "+4 processing and +8 processing if opponent have 0 processing",
     "action2": "Trick tyrant",
-    "details2": "In 2 \nrounds, pick one of +60 data <br> or +28 processing or +14 score",
-    "cost": "36 data or 18 processing",
+    "details2": "In 2 \nrounds, pick one of +60 data <br> or +28 processing or +12 score",
+    "cost": "32 data or 16 processing",
     "id": "51",
     "type": "v3"
   },
@@ -567,7 +600,6 @@ const initialCards =[
     "type": "animals"
   }
 ]
-
 const mergeArrayObjects = (ids, fullArray, detailsArray) => {
   return ids.map((id, index) => {
     console.warn(id, index)
@@ -589,11 +621,6 @@ const mergeArrayObjects = (ids, fullArray, detailsArray) => {
 
   }).filter(item => item !== null); // This will filter out any null values if a match wasn't found
 };
-
-
-
-
-
 
 
 const TextAreaWithDynamicHeight = ({ title, keyProp, value, onChange, onBlur }) => {
@@ -712,6 +739,7 @@ const SingularityCards = () => {
   const [cardRef, saveAsImage] = useSave(card.title);
   const [baseActionsRef, saveBaseActions] = useSave("BaseActions");
   const [RoundEventRef, saveRoundEvents] = useSave("RoundEvents");
+  const [RoundNumberCardRef, saveRoundNumberCard] = useSave("RoundNumberCard");
   const [trackerRef1, saveTracker1] = useSave("Tracker1");
   const [trackerRef11, saveTracker11] = useSave("Tracker11");
   const [trackerRef2, saveTracker2] = useSave("Tracker2");
@@ -835,6 +863,7 @@ const SingularityCards = () => {
         <Grid container item xs={12} spacing={1}>
           <button onClick={saveBaseActions}>Save Base Rules</button>
           <button onClick={saveRoundEvents}>Save Round Events</button>
+          <button onClick={saveRoundNumberCard}>Save Round Number Card</button>
           {['1', '2', '3', '11', '22', '33'].map((tracker, index) => (
             <Grid item xs={4} sm={2} key={index}>
               <button onClick={() => window[`saveTracker${tracker}`]}>Save Tracker{tracker}</button>
@@ -879,6 +908,8 @@ const SingularityCards = () => {
 
       <BaseRulesCard ref={baseActionsRef}></BaseRulesCard>
       <RoundEventCard ref={RoundEventRef}></RoundEventCard>
+      <RulesCard ref={RoundEventRef}></RulesCard>
+      <RoundNumberCard ref={RoundNumberCardRef}></RoundNumberCard>
       {cards.map((card, index) => (
         checkedTypes[card.type] ? (
           <div key={index}>
@@ -981,7 +1012,6 @@ const SingularityCards = () => {
   );
 };
 export default SingularityCards;
-
 
 function CardActions({ title, details, cost = null, thin = false }) {
   const detailsComponents = textToComponents(details);
@@ -1257,12 +1287,75 @@ const RoundEventCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <br></br>
         <br></br>
         <CardActions key={id + "111"} title={roundEvents[0].title} details={roundEvents[0].details} ></CardActions>
+        <br></br>
         <CardActions key={id + "222"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions>
         <CardActions key={id + "333"} title={roundEvents[2].title} details={roundEvents[2].details}></CardActions>
+        <br></br>
         <CardActions key={id + "444"} title={roundEvents[3].title} details={roundEvents[3].details} ></CardActions>
         <CardActions key={id + "555"} title={roundEvents[4].title} details={roundEvents[4].details} ></CardActions>
+        { <CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions> }
+      </FadeBackground>
+
+    </CardContainer>
+  );
+});
+
+
+const RulesCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
+  const baseImgUrl = "https://cdn.midjourney.com/6eae8834-ddee-419d-b39d-f5e461a52407/0_0.webp"
+  return (
+    <CardContainer id={`card-${id}`} ref={ref}>
+      <FadeBackground>
+
+        <Border>
+          <ImageContainerRules>
+            <DuplicateImageRules src={baseImgUrl} />
+            <ImageRules id={`img-${id}`} src={baseImgUrl} /> {/* Original Image */}
+            <TitleWrapper>
+              <TitleRules>Rules</TitleRules>
+            </TitleWrapper>
+          </ImageContainerRules>
+        </Border>
+        <br></br>
+        <br></br>
+        <CardActions key={id + "111"} title={rules[0].title} details={rules[0].details} ></CardActions>
+        <CardActions key={id + "222"} title={rules[1].title} details={rules[1].details}></CardActions>
+        <br></br>
+        <CardActions key={id + "333"} title={rules[2].title} details={rules[2].details}></CardActions>
+        
         {/* <CardActions key={id + "555"} title={roundEvents[5].title} details={roundEvents[5].details} ></CardActions> */}
       </FadeBackground>
+
+    </CardContainer>
+  );
+});
+
+
+const RoundNumberCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
+  const baseImgUrl = "https://cdn.midjourney.com/904d2a5d-b514-4de1-8ce4-c6d5266758f6/0_0.webp"
+  return (
+    <CardContainer id={`card-${id}`} ref={ref}>
+
+      <Border>
+        <ImageContainerRules>
+          <DuplicateRoundNumberImage src={baseImgUrl} />
+          <RoundNumberImage id={`img-${id}`} src={baseImgUrl} />
+          <RoundNumber>1</RoundNumber>
+        </ImageContainerRules>
+      </Border>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <CardActions key={id + "111"} title={""} details={roundEvents[0].details} ></CardActions>
 
     </CardContainer>
   );
@@ -1272,67 +1365,16 @@ const RoundEventCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
 
 const iconSize = "20px";
 const iconStyle = { width: iconSize, height: iconSize, verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
-const iconStyleCard = { filter: "brightness(140%)" , width: "11.3px", height: "17px", border: "1px solid rgb(6 198 198)", verticalAlign: 'middle', margin: "-2px -2px -2px 0px" };
+const iconStyleCard = { filter: "brightness(140%)", width: "11.3px", height: "17px", border: "1px solid rgb(6 198 198)", verticalAlign: 'middle', margin: "-2px -2px -2px 1px" };
 const iconStyleCards = { filter: "brightness(140%)", width: "11.3px", height: "17px", border: "1px solid rgb(6 198 198)", verticalAlign: 'middle', margin: "-2px -2px -4px -9px" };
 const iconStyleSpace = { width: "26px", height: "26px", verticalAlign: 'middle', margin: "-5px -9px -2px -5px", transform: "rotate(45deg)" };
-const ScoreIcon = () => <img src={scoreIcon} alt="score" style={{ transform: "rotate(0deg)", backgroundImage: "radial-gradient(circle at center, rgba(255,255,0,0.4) 0%, transparent 50%)", width: "22px", height: "22px", verticalAlign: 'middle', margin: "-3px -3px -2px -2px",  filter: "brightness(125%) hue-rotate(9deg)"} } />
-const DataIcon = () => <img src={dataIcon} alt="data" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-9deg)",backgroundImage: "radial-gradient(circle at center, rgba(255,105,180,0.8) 0%, transparent 50%)"}} />
+const ScoreIcon = () => <img src={scoreIcon} alt="score" style={{ transform: "rotate(0deg)", backgroundImage: "radial-gradient(circle at center, rgba(255,255,0,0.4) 0%, transparent 50%)", width: "22px", height: "22px", verticalAlign: 'middle', margin: "-3px -3px -2px -2px", filter: "brightness(125%) hue-rotate(9deg)" }} />
+const DataIcon = () => <img src={dataIcon} alt="data" style={{ ...iconStyle, filter: "brightness(160%) hue-rotate(-9deg)", backgroundImage: "radial-gradient(circle at center, rgba(255,105,180,0.8) 0%, transparent 50%)" }} />
 const CardIcon = () => <img src={back_v3} alt="card" style={iconStyleCard} />
 const CardsIcon = () => <><img src={back_v3} alt="card" style={iconStyleCard} /><img src={back_v3} alt="card" style={iconStyleCards} /></>
-const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={{...iconStyle,  filter: "brightness(160%) hue-rotate(-15deg)",backgroundImage: "radial-gradient(circle at center, rgba(0,255,0,0.7) 0%, transparent 50%)"}} />
+const ProcessingIcon = () => <img src={processingIcon} alt="processing" style={{ ...iconStyle, filter: "brightness(160%) hue-rotate(-15deg)", backgroundImage: "radial-gradient(circle at center, rgba(0,255,0,0.7) 0%, transparent 50%)" }} />
 const SpaceIcon = () => <img src={space2} alt="space" style={iconStyleSpace} />
 
-
-const ImageContainerRules = styled.div`
-
-  width: 100%;
-	  	
-  `;
-
-const ImageRules = styled(Image)`
-
-  width: 100%;
-  height: 100%;	
-  object-fit: cover;
-  filter: brightness(25%);
-  margin: -20px;
-  `;
-
-const DuplicateImageRules = styled.img`
-height: calc(100% );
-filter: brightness(25%);
-width: calc(100% );
-left: 0;
-top: 0;
-margin: 0px;
-position: absolute;
-  `;
-
-const CardContainer = styled.div`
-  width: ${BRIDGE_VERSION ? bridge_width : poker_width};
-  height:  ${BRIDGE_VERSION ? bridge_height : poker_height};
-  padding: ${PRINT_VERSION ? print_margin * 1 + "px" : default_padding};
-  position: relative;
-  background-color: rgb(0, 0, 40);
-  background-image: url('${background}');
-`;
-
-
-const FadeBackground = styled.div`
-  width: 100%;
-  padding: ${PRINT_VERSION ? print_margin * 1 + "px" : default_padding};
-  margin-left:${PRINT_VERSION ? "-" + print_margin * 1 + "px" : "-" + default_padding};
-  height: 100%;
-  margin-top:${PRINT_VERSION ? "-" + print_margin + "px" : "-" + default_padding};
-  background:  rgba(0,0,0,0.5);
-    
-`;
-const InsideMargin = styled.div`
-width: ${BRIDGE_VERSION ? bridge_width : poker_width};
-height:  ${BRIDGE_VERSION ? bridge_height : poker_height};
-  position: ${PRINT_VERSION ? "absolute" : "relative"};
-    
-`;
 
 const Text = styled.p`
   color:${BIRGHTER_FONT_COLOR};
@@ -1366,6 +1408,76 @@ const Text = styled.p`
     src: url(${BoldFont}) format('woff2');
   }
 `;
+const ImageContainerRules = styled.div`
+
+  width: 100%;
+	  	
+  `;
+
+const ImageRules = styled(Image)`
+
+  width: 100%;
+  height: 100%;	
+  object-fit: cover;
+  filter: brightness(25%);
+  margin: -20px;
+  `;
+
+const DuplicateImageRules = styled.img`
+height: calc(100% );
+filter: brightness(25%);
+width: calc(100% );
+left: 0;
+top: 0;
+margin: 0px;
+position: absolute;
+  `;
+
+  const RoundNumber = styled(Text)`
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-family: "Digital Dream";
+  color: #9ff;
+  text-shadow: 0 0 5px rgba(153,255,255,0.8);
+  `;
+
+const RoundNumberImage = styled(ImageRules)`
+  filter: brightness(100%);
+  width: calc(100% + 36px);
+  `;
+const DuplicateRoundNumberImage = styled(DuplicateImageRules)`
+  filter: brightness(100%);
+  `;
+
+const CardContainer = styled.div`
+  width: ${BRIDGE_VERSION ? bridge_width : poker_width};
+  height:  ${BRIDGE_VERSION ? bridge_height : poker_height};
+  padding: ${PRINT_VERSION ? print_margin * 1 + "px" : default_padding};
+  position: relative;
+  background-color: rgb(0, 0, 40);
+  background-image: url('${background}');
+`;
+
+
+const FadeBackground = styled.div`
+  width: 100%;
+  padding: ${PRINT_VERSION ? print_margin * 1 + "px" : default_padding};
+  margin-left:${PRINT_VERSION ? "-" + print_margin * 1 + "px" : "-" + default_padding};
+  height: 100%;
+  margin-top:${PRINT_VERSION ? "-" + print_margin + "px" : "-" + default_padding};
+  background:  rgba(0,0,0,0.5);
+    
+`;
+const InsideMargin = styled.div`
+width: ${BRIDGE_VERSION ? bridge_width : poker_width};
+height:  ${BRIDGE_VERSION ? bridge_height : poker_height};
+  position: ${PRINT_VERSION ? "absolute" : "relative"};
+    
+`;
+
 
 const TrackerContainer = styled(CardContainer)`
 background-color: ${props => props.color};
