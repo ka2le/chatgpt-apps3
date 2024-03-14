@@ -177,7 +177,7 @@ const roundEvents = [
   },
   {
     "title": "Start of Round 9",
-    "details": "Declare Swap(Optional): Opponent gains +6 score both players exchange cards no take-backs"
+    "details": "Declare Swap(Optional): Opponent gains <br> +10 score both players exchange cards no take-backs"
   },
   {
     "title": "Start of Round 10",
@@ -353,7 +353,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/fa3f2293-32d8-497c-8e6d-6750afb5e420/0_2.png",
     "title": "Recurrent Neural Network",
     "action1": "Recall Long Short-Term Memory",
-    "details1": "+6 processing and +4 processing per 10 processing",
+    "details1": "+6 processing and +3 processing per 10 processing",
     "action2": "Backpropagate errors",
     "details2": "Reveal 1 \ncard from hand and play the free action of that card 2\ntimes\n",
     "cost": "20 data or 10 processing",
@@ -496,7 +496,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/553dcd0f-4029-4a32-9b8e-4b57f1c186f3/0_1.png",
     "title": "Virtual Reality",
     "action1": "Ready Player One",
-    "details1": "+4 processing per 10 processing of both players",
+    "details1": "+3 processing per 10 processing of both players",
     "action2": "Enter Matrix ",
     "details2": "Shuffle all discarded cards and divide equally among discard piles, odd card goes to you",
     "cost": "20 data or 10 processing",
@@ -507,7 +507,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/2ee5ec12-694f-469d-bb7f-0f4e9fccfc57/0_1.webp",
     "title": "Industrial Automation",
     "action1": "Assemble Selectively and Comply",
-    "details1": "+6 processing and +12 processing if you have <br>  over 26 processing",
+    "details1": "+6 processing and +8 processing if you have <br>  over 26 processing",
     "action2": "Pick and Place",
     "details2": "Competition: +12 score to player with most cards in their discard pile after last round",
     "cost": "16 data or 8 processing",
@@ -573,7 +573,7 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/vpn.d72c4efcc9f1c885ce2d.png",
     "title": "Virtual Private Network ",
     "action1": "Tunnel TV",
-    "details1": "+4 processing and +8 processing if opponent have 0 processing",
+    "details1": "+6 processing and +6 processing if opponent have 0 processing",
     "action2": "Trick tyrant",
     "details2": "In 2 \nrounds, pick one of +60 data <br> or +30 processing or +12 score",
     "cost": "32 data or 16 processing",
@@ -636,6 +636,8 @@ const initialCards =[
     "type": "animals"
   }
 ]
+
+
 const mergeArrayObjects = (ids, fullArray, detailsArray) => {
   return ids.map((id, index) => {
     console.warn(id, index)
