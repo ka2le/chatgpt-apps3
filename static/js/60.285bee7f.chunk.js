@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkchatgpt_apps=self.webpackChunkchatgpt_apps||[]).push([[60],{38060:function(p,t,a){p.exports=a.p+"static/media/5.3fa07f7736533bf9e217.png"}}]);
