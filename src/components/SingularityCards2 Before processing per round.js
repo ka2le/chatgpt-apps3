@@ -136,14 +136,14 @@ const DuplicateImage = styled(Image)`
 
 const baseActions = [{
   "title": "Data Accumulation",
-  "details": "+10 Data per 20 \ntotal data and score",
+  "details": "+10 Data per 20 \ntotal data or score pick highest"
 },
 {
   "title": "Create Synthetic Data",
   "details": "+1 Data per Score"
 }, {
   "title": "Processing Optimization",
-  "details": "+10 processing per current Round number"
+  "details": "+10 processing if you did not gain data last round"
 },
 
 {
@@ -152,7 +152,7 @@ const baseActions = [{
   "cost": "All Data  min 20"
 }, {
   "title": "Processing Leveraging",
-  "details": "+20 Data per 10 Processing spent",
+  "details": "+10 Score per 10 Processing spent",
   "cost": "All Processing min 10"
 }, {
   "title": "Cost actions give Score",
@@ -172,7 +172,7 @@ const roundEvents = [
 
   {
     "title": "Start of Round 5",
-    "details": "Both players get +30 processing"
+    "details": "Both players give 1 card to their opponent"
   },
   {
     "title": "Start of Round 6",
@@ -272,10 +272,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/c2691f20-d825-4d17-9c7a-785a0a993622/0_0.png",
     "title": "Data Protection",
     "action1": "Activate Security Protocol",
-    "details1": "For the next 2 \nrounds, no players card can affect their opponent",
+    "details1": "For the next 3 \nrounds, no players card can affect their opponent",
     "action2": "Disable Firewall",
-    "details2": "+30 score in 2 \nmore round",
-    "cost": "50 data",
+    "details2": "+30 score in 1 \nmore round",
+    "cost": "50 data or 20 processing",
     "id": "1",
     "type": "hc"
   },
@@ -283,10 +283,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/miner.420d71acefb95e6f2e83.jpg",
     "title": "Data Mining",
     "action1": "Test Linear Regression",
-    "details1": "Loan 30 data pay back up to 30 data in 3 \nrounds\n",
+    "details1": "Loan 20 data pay back up to 20 data in 2 \nrounds\n",
     "action2": "Learn Deeply",
     "details2": "Move top 5 cards from opponents discard pile to yours ",
-    "cost": "20 data or 30 processing",
+    "cost": "20 data or 10 processing",
     "id": "2",
     "type": "base"
   },
@@ -296,8 +296,8 @@ const initialCards =[
     "action1": "Explore Greedily",
     "details1": "Both players lose up to 20 data each\n",
     "action2": "Predict Q Values",
-    "details2": "+10 score per card in your discard pile",
-    "cost": "100 processing",
+    "details2": "+10 score and +10 score per 20 \ntotal data and processing spent",
+    "cost": "All data and All processing",
     "id": "3",
     "type": "base"
   },
@@ -305,9 +305,9 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/e02d4399-92d4-4780-ab6a-a4e69691ffd7/0_0.png",
     "title": "Supervised Learning",
     "action1": "Calibrate Reward Parameters",
-    "details1": "+20 data per card in your discard pile with \"Data\" in its name",
+    "details1": "+20 data if your discard pile has a card with 'Data' in its name",
     "action2": "Outsource Labeling",
-    "details2": "Competition: Player with most Score after 3 \nmore rounds get +30 score",
+    "details2": "Competition: Player with most Score after 2 \nmore rounds get +20 score",
     "cost": "10 Data or 10 processing",
     "id": 4,
     "type": "base"
@@ -327,10 +327,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/09392dd9-7fd8-4882-8904-f9854f98e0ed/0_0.webp",
     "title": "Swarm Intelligence",
     "action1": "Apply swarm solutions",
-    "details1": "+20 processing per card difference between discard piles",
+    "details1": "+20 processing and +10 processing to your opponent",
     "action2": "Release the Swarm",
-    "details2": "For each of your Delayed cards you may Delay or Advance them 1 , 2 or 3 rounds",
-    "cost": "20 data or 10 processing",
+    "details2": "Your next cost action played is free, as if all costs were paid ",
+    "cost": "30 data or 20 processing",
     "id": 6,
     "type": "hc"
   },
@@ -338,7 +338,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/d22dba27-cc34-49ee-bc4a-a29cbc66142f/0_0.png",
     "title": "Tensor Processing Unit",
     "action1": "Select optimizer algorithm",
-    "details1": "For each of you Delayed cards you may Delay or Advance them 1 round",
+    "details1": "Next round, also copy the free action of the card you play",
     "action2": "Multiply the Matrix",
     "details2": "Steal up to as much data from opponent as processing spent",
     "cost": "All processing",
@@ -349,10 +349,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/gan.c7a1131628c7e0ddca44.jpg",
     "title": "FontSGenerative Adversarial Network",
     "action1": "Deceive Discriminator",
-    "details1": "Steal 10 data from opponent",
+    "details1": "",
     "action2": "Begin Zero-Sum Game",
-    "details2": "Competition: The player with the most processing after 3 \nmore rounds gets +30 score",
-    "cost": "10 Data or 20 processing",
+    "details2": "",
+    "cost": "",
     "id": 8,
     "type": "hc"
   },
@@ -360,10 +360,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/f58a0612-0df7-428d-ab04-48509b54bc4f/0_0.webp",
     "title": "Computer Vision",
     "action1": "Detect objects",
-    "details1": "Next round you get double processing from all actions affecting you",
+    "details1": "+10 processing per 20 processing",
     "action2": "Tune model",
     "details2": "Competition: The player with highest reached data starting now get +30 score at end of game",
-    "cost": "20 Data  or 30 processing",
+    "cost": "20 Data or 10 processing",
     "id": "9",
     "type": "base"
   },
@@ -384,8 +384,8 @@ const initialCards =[
     "action1": "security by obscurity",
     "details1": "Take all data gained by opponent this round ",
     "action2": "Hire the hacker",
-    "details2": "Steal up to 20 score from opponent",
-    "cost": "40 data or 50 processing",
+    "details2": "Steal up to 10 score from opponent",
+    "cost": "28 data or 10 processing",
     "id": 11,
     "type": "hc"
   },
@@ -394,9 +394,9 @@ const initialCards =[
     "title": "Data Scientist",
     "action1": "Paus Ethically",
     "details1": "In 2 \nrounds, no score can be gained for either player",
-    "action2": "Apply for Grant",
-    "details2": "Your next cost action played is free, as if all costs were paid ",
-    "cost": "30 data or 30 processing",
+    "action2": "Produce Graphs",
+    "details2": "Competition: The player with the most processing after 2 \nmore rounds gets +20 score",
+    "cost": "10 Data or 10 processing",
     "id": 12,
     "type": "base"
   },
@@ -404,7 +404,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/8d6d4227-7f21-4296-b0a6-30af2190686e/0_0.webp",
     "title": "Data Center",
     "action1": "Establish redundancy",
-    "details1": "Play any base action but put this card in your discard pile",
+    "details1": "Both players change 10 data closer to 30 data",
     "action2": "Provide Storage",
     "details2": "+20 score per 30 Data spent",
     "cost": "All data",
@@ -415,10 +415,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/blixt.1e43ccc8de62f427e69b.jpg",
     "title": "CPU Voltage Spike",
     "action1": "Accidentally Overclock",
-    "details1": "Both players change 20 data closer to 40 data",
+    "details1": "",
     "action2": "Overload game",
-    "details2": "Both players put their hand back in the draw pile, reshuffle before drawing",
-    "cost": "20 data or 20 processing",
+    "details2": "",
+    "cost": "",
     "id": 17,
     "type": "base"
   },
@@ -437,10 +437,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/2094539a-a581-4086-9e5a-3c1ddd89a1ce/0_3.webp",
     "title": "Genetic Algorithms",
     "action1": "Mutate Variables",
-    "details1": "+10 score but next round you have to play a basic action",
+    "details1": "+10 Data In 4 \nrounds trigger this action again",
     "action2": "Evolve Sequence",
-    "details2": "+10 score per 20 processing spent",
-    "cost": "All processing",
+    "details2": "+40 score",
+    "cost": "30 processing",
     "id": 20,
     "type": "hc"
   },
@@ -448,10 +448,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/94ec55fb-027b-4184-a96c-c16f0ea6a258/0_3.png",
     "title": "Cloud Computing",
     "action1": "Provide Service as a service",
-    "details1": "",
+    "details1": "Next round, also copy the free action of the card you play",
     "action2": "Host Everyone",
-    "details2": "",
-    "cost": "",
+    "details2": "+30 score per 20 processing spent",
+    "cost": "All processing",
     "id": "26",
     "type": "v2"
   },
@@ -459,10 +459,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/1089bf1f-e0ee-4f00-b9c4-73301f0d99d3/0_2.webp",
     "title": "Data Encryption",
     "action1": "Reverse the Hash",
-    "details1": "Trigger all delayed Cards this round",
+    "details1": "In 5 \nrounds, get +20 processing",
     "action2": "Imitate the game",
     "details2": "Next round, both players also get the result of their opponents action ",
-    "cost": "30 data or 30 processing",
+    "cost": "30 data or 10 processing",
     "id": "27",
     "type": "v2"
   },
@@ -470,10 +470,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/ce7a068b-e03e-4893-82e7-378a5116ee19/0_1.webp",
     "title": "Cyborg",
     "action1": "Ascend Humanity",
-    "details1": "+10 processing per 10 processing you have more than opponent",
+    "details1": "Set your data to 30",
     "action2": "Assemble the AI-Team",
-    "details2": "All delayed cards in opponents discard move to yours and their targets flipped",
-    "cost": "40 data or 40 processing",
+    "details2": "+30 score per 20 processing spent",
+    "cost": "All Processing",
     "id": "30",
     "type": "hc"
   },
@@ -481,10 +481,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/7a0a97c8-4b58-46be-8449-2f40d64e62cf/0_3.png",
     "title": "Blockchain",
     "action1": "Pump and dump",
-    "details1": "Delay all delayed Cards another 2 \nrounds ",
+    "details1": "Delay all delayed actions another 2 \nrounds ",
     "action2": "Hodl",
     "details2": "No player can spend data or processing during the next 2 \nrounds",
-    "cost": "30 data",
+    "cost": "30 data or 10 processing",
     "id": "31",
     "type": "v2"
   },
@@ -494,8 +494,8 @@ const initialCards =[
     "action1": "Connect remotely",
     "details1": "Next round all Data gain is doubled for both players",
     "action2": "Roll over data",
-    "details2": "+30 score per 40 Data spent ",
-    "cost": "All Data",
+    "details2": "After last round, get +10 score per 20 data and +10 score per 10 processing",
+    "cost": "10 data or 10 processing",
     "id": "34",
     "type": "v2"
   },
@@ -503,10 +503,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/22d4754f-4c13-497d-a8fb-dad9d8523cb3/0_2.png",
     "title": "Self Driving Car",
     "action1": "Break for bag",
-    "details1": "No processing can be gained this round",
+    "details1": "",
     "action2": "Navigate autonomously",
-    "details2": "For each of your Delayed cards you may Delay or Advance them 1 , 2 or 3 rounds",
-    "cost": "20 data or 10 processing",
+    "details2": "+30 score per 40 Data spent ",
+    "cost": "All Data",
     "id": "38",
     "type": "hc"
   },
@@ -514,9 +514,9 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/553dcd0f-4029-4a32-9b8e-4b57f1c186f3/0_1.png",
     "title": "Virtual Reality",
     "action1": "Ready Player One",
-    "details1": "+20 processing In 3 \nrounds trigger this action again",
+    "details1": "+10 data per 10 score",
     "action2": "Enter Matrix ",
-    "details2": "Swap 1 card in hand with 1 card in any discard pile, blocking delayed actions on that card",
+    "details2": "Swap 1 card in hand with 1 card in any discard pile",
     "cost": "10 data or 10 processing",
     "id": "39",
     "type": "v2"
@@ -525,10 +525,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/2ee5ec12-694f-469d-bb7f-0f4e9fccfc57/0_1.webp",
     "title": "Industrial Automation",
     "action1": "Assemble Selectively and Comply",
-    "details1": "+20 data if you have less data than opponent \n",
+    "details1": "+10 processing and +10 processing if you have <br>  over 30 processing",
     "action2": "Pick and Place",
     "details2": "Competition: +30 score to player with most cards in their discard pile after last round",
-    "cost": "20 data",
+    "cost": "20 data or 10 processing",
     "id": "41",
     "type": "hc"
   },
@@ -536,10 +536,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/93e53cee-c8c9-4eea-98c3-bd22211979db/0_1.webp",
     "title": "SuperComputer",
     "action1": "Benchmark LINPACK",
-    "details1": "Set your data to 30",
+    "details1": "",
     "action2": "Achieve petaflop",
     "details2": "60 score",
-    "cost": "90 data",
+    "cost": "90 data or 40 processing",
     "id": "43",
     "type": "hc"
   },
@@ -547,10 +547,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/drone.d6866ec281a2e31b7d4d.png",
     "title": "Unmanned Aerial Vehicles",
     "action1": "Loop in the human",
-    "details1": "Next round, also copy the free action of the card you play",
+    "details1": "",
     "action2": "Strike Signature",
     "details2": "Both players loose half their data",
-    "cost": "",
+    "cost": "10 processing",
     "id": "46",
     "type": "v2"
   },
@@ -558,10 +558,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/siri.294b839874cae4456ae2.png",
     "title": "Digital Assistant",
     "action1": "Set timer",
-    "details1": "+30 processing per card in your discard pile with \"Data\" in its name",
+    "details1": "+10 processing In 1 , 2 or 3 \nrounds, declare which",
     "action2": "Record secretly",
     "details2": "Set your totalt data to the same amount that your opponent have",
-    "cost": "40 data or 40 processing",
+    "cost": "30 data or 20 processing",
     "id": "47",
     "type": "v2"
   },
@@ -569,10 +569,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/vaccum.501d3a55ab7c826d6a7e.png",
     "title": "Robot vacuum",
     "action1": "Map home",
-    "details1": "For each of you Delayed cards you may Delay or Advance them 1 round",
+    "details1": "+10 data and +10 data if you have less data than opponent \n",
     "action2": "Clean floors",
     "details2": "Reveal 1 card change all data and processing to the other on both actions and cost, for rest of game",
-    "cost": "20 data",
+    "cost": "20 data or 10 processing",
     "id": "49",
     "type": "v3"
   },
@@ -580,10 +580,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/d286efee-1e5d-49be-a0d4-96a09fed0a37/0_0.png",
     "title": "Non Player Character",
     "action1": "Follow Path",
-    "details1": "+30 data if you have more cards in your discard pile ",
+    "details1": "+20 processing if you have more cards in your discard pile ",
     "action2": "Adjust difficulty",
     "details2": "Next round you get double data and processing from all actions affecting you",
-    "cost": "30 data or 30 processing",
+    "cost": "30 data or 10 processing",
     "id": "50",
     "type": "v3"
   },
@@ -591,10 +591,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/vpn.d72c4efcc9f1c885ce2d.png",
     "title": "Virtual Private Network ",
     "action1": "Tunnel TV",
-    "details1": "+30 processing",
+    "details1": "+20 processing if opponent have 0 processing",
     "action2": "Trick tyrant",
-    "details2": "In 3 \nrounds, pick one of +80 data <br> or +30 score",
-    "cost": "50 data",
+    "details2": "In 2 \nrounds, pick one of +80 data <br> or +40 processing or +30 score",
+    "cost": "50 data or 20 processing",
     "id": "51",
     "type": "v3"
   },
@@ -605,7 +605,7 @@ const initialCards =[
     "details1": "+10 score if you have more score than opponent",
     "action2": "Disable \"temporarily\"",
     "details2": "Competition: Any player with \"Data Protection\" in their discard pile at game end get +30 score",
-    "cost": "20 data",
+    "cost": "20 data or 10 processing",
     "id": "53",
     "type": "v3"
   },
@@ -613,10 +613,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/tree.57ad537fdab3bf9b9019.png",
     "title": "Decision Tree",
     "action1": "Plant root node",
-    "details1": "Decide now: delay your next rounds action by 1 or 2 rounds",
+    "details1": "Block all delayed actions that trigger this round, blocked cards go to your discard pile",
     "action2": "Prune leaf",
-    "details2": "Reveal 1 \ncard from hand and play the free action of that card 2\ntimes\n",
-    "cost": "20 data",
+    "details2": "+20 Data per 10 Processing or +10 processing per 20 data spent",
+    "cost": "All Data or All Processing",
     "id": "54",
     "type": "v3"
   },
@@ -624,10 +624,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/wave.faa8981834be144fedec.png",
     "title": "Natural Language Processing",
     "action1": "Pre-train generative transformer",
-    "details1": "Block all delayed cards that trigger this round, blocked cards go to your discard pile",
+    "details1": "+10 processing per 40 score ",
     "action2": "Tokenize world",
-    "details2": "+30 processing per 20 data spent",
-    "cost": "All data",
+    "details2": "Reveal 1 \ncard from hand and play the free action of that card 2\ntimes\n",
+    "cost": "20 data or 10 processing",
     "id": "55",
     "type": "v3"
   },
@@ -635,10 +635,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/seer.0f5038bfff94f4cffd5a.png",
     "title": "Recommender System",
     "action1": "Continue watching and don't ask again",
-    "details1": "+30 data and in 3 \nrounds opponent also <br> gain +30 data",
+    "details1": "+20 data and in 2 \nrounds opponent also <br> gain +20 data",
     "action2": "Filter presidents ",
     "details2": "Swap Data with opponent",
-    "cost": "60 processing",
+    "cost": "30 processing",
     "id": "58",
     "type": "v3"
   },
@@ -1350,7 +1350,6 @@ const RoundEventCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <CardActions key={id + "111"} title={roundEvents[0].title} details={roundEvents[0].details} ></CardActions>
         {/* <CardActions key={id + "222"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions> */}
         <br></br>
-        <CardActions key={id + "332"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions>
         <CardActions key={id + "333"} title={roundEvents[2].title} details={roundEvents[2].details}></CardActions>
         <CardActions key={id + "444"} title={roundEvents[3].title} details={roundEvents[3].details} ></CardActions>
          <CardActions key={id + "555"} title={roundEvents[4].title} details={roundEvents[4].details} ></CardActions>
