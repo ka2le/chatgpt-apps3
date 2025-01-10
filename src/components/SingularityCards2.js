@@ -143,7 +143,7 @@ const baseActions = [{
   "details": "+1 Data per Score"
 }, {
   "title": "Processing Optimization",
-  "details": "+10 processing per current Round number"
+  "details": "+10 processing per current Round number "
 },
 
 {
@@ -152,7 +152,7 @@ const baseActions = [{
   "cost": "All Data  min 20"
 }, {
   "title": "Processing Leveraging",
-  "details": "+20 Data per 10 Processing spent",
+  "details": "+10 Data per 10 Processing spent",
   "cost": "All Processing min 10"
 }, {
   "title": "Cost actions give Score",
