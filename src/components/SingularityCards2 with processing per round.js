@@ -152,8 +152,8 @@ const baseActions = [{
   "cost": "All Data  min 20"
 }, {
   "title": "Processing Leveraging",
-  "details": "+10 score per card in your discard pile and per 20 processing spent, you must pay for all cards in your discard pile",
-  "cost": "20 processing per card"
+  "details": "+10 Data per 10 Processing spent",
+  "cost": "All Processing min 10"
 }, {
   "title": "Cost actions give Score",
   "details": "Any Cost action also gives +4 Score"
@@ -272,7 +272,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/c2691f20-d825-4d17-9c7a-785a0a993622/0_0.png",
     "title": "Data Protection",
     "action1": "Activate Security Protocol",
-    "details1": "Play any base action but put this card in your discard pile",
+    "details1": "For the next 2 \nrounds, no players card can affect their opponent",
     "action2": "Disable Firewall",
     "details2": "+30 score in 2 \nmore round",
     "cost": "50 data",
@@ -283,10 +283,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/miner.420d71acefb95e6f2e83.jpg",
     "title": "Data Mining",
     "action1": "Test Linear Regression",
-    "details1": "Loan 30 data pay back up to 30 data in 2 rounds\n",
+    "details1": "Loan 30 data pay back up to 30 data in 3 \nrounds\n",
     "action2": "Learn Deeply",
     "details2": "Move top 5 cards from opponents discard pile to yours ",
-    "cost": "30 processing",
+    "cost": "20 data or 30 processing",
     "id": "2",
     "type": "base"
   },
@@ -296,8 +296,8 @@ const initialCards =[
     "action1": "Explore Greedily",
     "details1": "Both players lose up to 20 data each\n",
     "action2": "Predict Q Values",
-    "details2": "Competition: Player with most Score after 3 \nmore rounds get +30 score",
-    "cost": "10 Data or 10 processing",
+    "details2": "+10 score per card in your discard pile",
+    "cost": "100 processing",
     "id": "3",
     "type": "base"
   },
@@ -305,10 +305,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/e02d4399-92d4-4780-ab6a-a4e69691ffd7/0_0.png",
     "title": "Supervised Learning",
     "action1": "Calibrate Reward Parameters",
-    "details1": "+10 Data per 20 \\ntotal data and score",
+    "details1": "+20 data per card in your discard pile with \"Data\" in its name",
     "action2": "Outsource Labeling",
-    "details2": "+10 score per card in your discard pile and per 20 processing spent, you must pay for all cards in your discard pile",
-    "cost": "20 processing per card",
+    "details2": "Competition: Player with most Score after 3 \nmore rounds get +30 score",
+    "cost": "10 Data or 10 processing",
     "id": 4,
     "type": "base"
   },
@@ -327,10 +327,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/09392dd9-7fd8-4882-8904-f9854f98e0ed/0_0.webp",
     "title": "Swarm Intelligence",
     "action1": "Apply swarm solutions",
-    "details1": "+10 processing per current Round number",
+    "details1": "+20 processing per card difference between discard piles",
     "action2": "Release the Swarm",
-    "details2": "+10 Score per 20 Data spent",
-    "cost": "All Data  min 20",
+    "details2": "For each of your Delayed cards you may Delay or Advance them 1 , 2 or 3 rounds",
+    "cost": "20 data or 10 processing",
     "id": 6,
     "type": "hc"
   },
@@ -338,7 +338,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/d22dba27-cc34-49ee-bc4a-a29cbc66142f/0_0.png",
     "title": "Tensor Processing Unit",
     "action1": "Select optimizer algorithm",
-    "details1": "Both players get +10 data per 20 data total of both players ",
+    "details1": "For each of you Delayed cards you may Delay or Advance them 1 round",
     "action2": "Multiply the Matrix",
     "details2": "Steal up to as much data from opponent as processing spent",
     "cost": "All processing",
@@ -373,8 +373,8 @@ const initialCards =[
     "action1": "Recall Long Short-Term Memory",
     "details1": "Copy any free action in your discard pile",
     "action2": "Backpropagate errors",
-    "details2": "+10 Score per 20 Data spent",
-    "cost": "",
+    "details2": "Reveal a card from your hand and play its cost action",
+    "cost": "Card Cost",
     "id": "10",
     "type": "base"
   },
@@ -404,10 +404,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/8d6d4227-7f21-4296-b0a6-30af2190686e/0_0.webp",
     "title": "Data Center",
     "action1": "Establish redundancy",
-    "details1": "For the next 2 \nrounds, no players card can affect their opponent",
+    "details1": "Play any base action but put this card in your discard pile",
     "action2": "Provide Storage",
-    "details2": "+10 score per card in your discard pile and per 20 processing spent, you must pay for all cards in your discard pile",
-    "cost": "20 processing per card",
+    "details2": "+20 score per 30 Data spent",
+    "cost": "All data",
     "id": 15,
     "type": "base"
   },
@@ -417,7 +417,7 @@ const initialCards =[
     "action1": "Accidentally Overclock",
     "details1": "Both players change 20 data closer to 40 data",
     "action2": "Overload game",
-    "details2": "Both players put their hand back in the draw pile, reshuffle and draw the amount of cards they had",
+    "details2": "Both players put their hand back in the draw pile, reshuffle before drawing",
     "cost": "20 data or 20 processing",
     "id": 17,
     "type": "base"
@@ -426,10 +426,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/7da199d0-a7e6-4710-a110-187fab80a489/0_1.webp",
     "title": "Neural Network",
     "action1": "Select optimizer algorithm",
-    "details1": "+30 data per total 60 data of both players",
+    "details1": "+10 data per total 20 data of both players",
     "action2": "Add deep layers",
-    "details2": "Reveal a card from your hand and play its cost action",
-    "cost": "Card Cost",
+    "details2": "+20 score per 30 Data spent",
+    "cost": "All data",
     "id": 18,
     "type": "base"
   },
@@ -437,7 +437,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/2094539a-a581-4086-9e5a-3c1ddd89a1ce/0_3.webp",
     "title": "Genetic Algorithms",
     "action1": "Mutate Variables",
-    "details1": "Pick +40 data or +40 processing opponent get the other",
+    "details1": "+10 score but next round you have to play a basic action",
     "action2": "Evolve Sequence",
     "details2": "+10 score per 20 processing spent",
     "cost": "All processing",
@@ -473,7 +473,7 @@ const initialCards =[
     "details1": "+10 processing per 10 processing you have more than opponent",
     "action2": "Assemble the AI-Team",
     "details2": "All delayed cards in opponents discard move to yours and their targets flipped",
-    "cost": "30 data or 30 processing",
+    "cost": "40 data or 40 processing",
     "id": "30",
     "type": "hc"
   },
@@ -505,8 +505,8 @@ const initialCards =[
     "action1": "Break for bag",
     "details1": "No processing can be gained this round",
     "action2": "Navigate autonomously",
-    "details2": "+10 data per 10 processing spent",
-    "cost": "All processing",
+    "details2": "For each of your Delayed cards you may Delay or Advance them 1 , 2 or 3 rounds",
+    "cost": "20 data or 10 processing",
     "id": "38",
     "type": "hc"
   },
@@ -528,7 +528,7 @@ const initialCards =[
     "details1": "+20 data if you have less data than opponent \n",
     "action2": "Pick and Place",
     "details2": "Competition: +30 score to player with most cards in their discard pile after last round",
-    "cost": "20 data or 20 processing",
+    "cost": "20 data",
     "id": "41",
     "type": "hc"
   },
@@ -538,8 +538,8 @@ const initialCards =[
     "action1": "Benchmark LINPACK",
     "details1": "Set your data to 30",
     "action2": "Achieve petaflop",
-    "details2": "+10 score per 10 of your lowest data or processing",
-    "cost": "All data and All Processing",
+    "details2": "60 score",
+    "cost": "90 data",
     "id": "43",
     "type": "hc"
   },
@@ -550,7 +550,7 @@ const initialCards =[
     "details1": "Next round, also copy the free action of the card you play",
     "action2": "Strike Signature",
     "details2": "Both players loose half their data",
-    "cost": "40 processing",
+    "cost": "",
     "id": "46",
     "type": "v2"
   },
@@ -561,7 +561,7 @@ const initialCards =[
     "details1": "+30 processing per card in your discard pile with \"Data\" in its name",
     "action2": "Record secretly",
     "details2": "Set your totalt data to the same amount that your opponent have",
-    "cost": "70 processing",
+    "cost": "40 data or 40 processing",
     "id": "47",
     "type": "v2"
   },
@@ -569,10 +569,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/vaccum.501d3a55ab7c826d6a7e.png",
     "title": "Robot vacuum",
     "action1": "Map home",
-    "details1": "+10 processing per card in your discard pile",
+    "details1": "For each of you Delayed cards you may Delay or Advance them 1 round",
     "action2": "Clean floors",
     "details2": "Reveal 1 card change all data and processing to the other on both actions and cost, for rest of game",
-    "cost": "20 data or 20 processing",
+    "cost": "20 data",
     "id": "49",
     "type": "v3"
   },
@@ -580,7 +580,7 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/d286efee-1e5d-49be-a0d4-96a09fed0a37/0_0.png",
     "title": "Non Player Character",
     "action1": "Follow Path",
-    "details1": "For the rest of the game, you discard card to your pile to take base actions",
+    "details1": "+30 data if you have more cards in your discard pile ",
     "action2": "Adjust difficulty",
     "details2": "Next round you get double data and processing from all actions affecting you",
     "cost": "30 data or 30 processing",
@@ -593,8 +593,8 @@ const initialCards =[
     "action1": "Tunnel TV",
     "details1": "+30 processing",
     "action2": "Trick tyrant",
-    "details2": "In 3 \nrounds, pick one of +70 data or +70 processing  or +30 score",
-    "cost": "50 data or 50 processing",
+    "details2": "In 3 \nrounds, pick one of +80 data <br> or +30 score",
+    "cost": "50 data",
     "id": "51",
     "type": "v3"
   },
@@ -602,10 +602,10 @@ const initialCards =[
     "img": "https://cdn.midjourney.com/0b858164-a9eb-4590-9daf-d2a945f56404/0_1.png",
     "title": "Firewall",
     "action1": "Block incoming traffic ",
-    "details1": "+10 data per card in your opponents discard pile",
+    "details1": "+10 score if you have more score than opponent",
     "action2": "Disable \"temporarily\"",
     "details2": "Competition: Any player with \"Data Protection\" in their discard pile at game end get +30 score",
-    "cost": "20 data or 20 processing",
+    "cost": "20 data",
     "id": "53",
     "type": "v3"
   },
@@ -613,10 +613,10 @@ const initialCards =[
     "img": "/chatgpt-apps3/static/media/tree.57ad537fdab3bf9b9019.png",
     "title": "Decision Tree",
     "action1": "Plant root node",
-    "details1": "+20 processing per card difference between discard piles",
+    "details1": "Decide now: delay your next rounds action by 1 or 2 rounds",
     "action2": "Prune leaf",
     "details2": "Reveal 1 \ncard from hand and play the free action of that card 2\ntimes\n",
-    "cost": "20 data or 20 processing",
+    "cost": "20 data",
     "id": "54",
     "type": "v3"
   },
@@ -638,7 +638,7 @@ const initialCards =[
     "details1": "+30 data and in 3 \nrounds opponent also <br> gain +30 data",
     "action2": "Filter presidents ",
     "details2": "Swap Data with opponent",
-    "cost": "100 processing",
+    "cost": "60 processing",
     "id": "58",
     "type": "v3"
   },
@@ -654,6 +654,7 @@ const initialCards =[
     "type": "animals"
   }
 ]
+
 const mergeArrayObjects = (ids, fullArray, detailsArray) => {
   return ids.map((id, index) => {
     console.warn(id, index)
