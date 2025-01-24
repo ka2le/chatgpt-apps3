@@ -166,20 +166,24 @@ const baseActions = [{
 
 const roundEvents = [
   {
+    "title": "Start of Round 1",
+    "details": 'Draw 1 card then +20 data or +20 processing' 
+  },
+  {
     "title": "Start of Round 2, 3 and 4",
     "details": "Players may discard 1 card to opponents <br> discard pile and draw 1 new card"
   },
 
   {
-    "title": "Start of Round 5",
-    "details": "Both players get +30 processing"
-  },
-  {
     "title": "Start of Round 6",
-    "details": "Both players reveal their hands"
+    "details": "Player with highest score get +50 score"
   },
   {
     "title": "Start of Round 7",
+    "details": "Both players reveal their hands"
+  },
+  {
+    "title": "Start of Round 8",
     "details": "Both players may discard 1 card to the opponent's pile to take 1 card from their own discard pile",
     
   },
@@ -1347,9 +1351,8 @@ const RoundEventCard = React.forwardRef(({ id = -1, type = "base" }, ref) => {
         <br></br>
         <br></br>
         <CardActions key={id + "111"} title={roundEvents[0].title} details={roundEvents[0].details} ></CardActions>
-        {/* <CardActions key={id + "222"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions> */}
+        { <CardActions key={id + "222"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions> }
         <br></br>
-        <CardActions key={id + "332"} title={roundEvents[1].title} details={roundEvents[1].details}></CardActions>
         <CardActions key={id + "333"} title={roundEvents[2].title} details={roundEvents[2].details}></CardActions>
         <CardActions key={id + "444"} title={roundEvents[3].title} details={roundEvents[3].details} ></CardActions>
          <CardActions key={id + "555"} title={roundEvents[4].title} details={roundEvents[4].details} ></CardActions>
