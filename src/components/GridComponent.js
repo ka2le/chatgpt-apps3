@@ -19,6 +19,7 @@ import ScoreboardIcon from '@mui/icons-material/Scoreboard';
 import StarsIcon from '@mui/icons-material/Stars';
 import PetsIcon from '@mui/icons-material/Pets';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import FortIcon from '@mui/icons-material/Fort';
 
 function GridComponent() {
     const gridItems = [];
@@ -44,7 +45,8 @@ function GridComponent() {
     gridItems.push({ icon: ScoreboardIcon, link: '/score-keeper', title: 'Score Keeper' });
     gridItems.push({ icon: StarsIcon, link: '/singularity-sprint', title: 'Singularity Sprint' });
     gridItems.push({ icon: PetsIcon, link: '/critters', title: 'Critters' });
-    gridItems.push({ icon: AutoAwesomeIcon, link: '/stars-book', title: 'Sagan Om Stjärnorna' });
+    gridItems.push({ icon: AutoAwesomeIcon, link: '/stars-book', title: 'Sagan Om Stjärnorna' }); 
+    gridItems.push({ icon: FortIcon, link: '/monster-poker-cards', title: 'Monster Poker' }); 
     while (gridItems.length < 22) {
         gridItems.push({ icon: FavoriteIcon, link: '#', title:"Empty" });
     }
