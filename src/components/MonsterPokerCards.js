@@ -102,8 +102,8 @@ const styles = {
         container: {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, var(--card-width))",
-            gap: "20px",
-            padding: "20px",
+            gap: "5px",
+            padding: "0px",
             justifyContent: "center",
             width: "100%",
             boxSizing: "border-box",
@@ -285,11 +285,17 @@ const Card = ({ card }) => {
 };
 
 // Updated Gallery Component
+
 const Gallery = ({ cards }) => {
     const [zoom, setZoom] = useState(0.5);
     
-    // Calculate card width based on zoom level
+    // Calculate card dimensions based on zoom level
     const cardWidth = CARD_WIDTH * zoom;
+    const cardHeight = CARD_HEIGHT * zoom;
+    
+    // Calculate gap size proportionally to the zoom level
+    // Using 5px as the base gap size at zoom level 1
+    const gapSize = Math.max(2, Math.round(5 * zoom));
     
     return (
         <div style={styles.gallery.wrapper}>
@@ -309,6 +315,9 @@ const Gallery = ({ cards }) => {
                 style={{
                     ...styles.gallery.container,
                     ["--card-width"]: `${cardWidth}px`,
+                    gap: `${gapSize}px`,
+                    // Add grid-auto-rows to control row height
+                    gridAutoRows: `${cardHeight}px`,
                 }}
             >
                 {cards.map((card) => (
@@ -328,7 +337,6 @@ const Gallery = ({ cards }) => {
         </div>
     );
 };
-
 // New CardEdit Component
 const CardEdit = ({ card, onUpdate, onDelete }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -369,10 +377,10 @@ const CardEdit = ({ card, onUpdate, onDelete }) => {
             >
                 <span>{card.cardName || 'New Card'}</span>
                 <div>
-                    <button onClick={(e) => {
+                    {/* <button onClick={(e) => {
                         e.stopPropagation();
                         onDelete(card);
-                    }}>Delete</button>
+                    }}>Delete</button> */}
                     <button onClick={(e) => {
                         e.stopPropagation();
                         setIsExpanded(!isExpanded);
