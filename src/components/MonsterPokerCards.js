@@ -2,6 +2,73 @@ import React, { useState, useEffect } from "react";
 import adiosFont from '../fonts/adios-amigos-regular.ttf';
 
 ////////////////////////////////////////////////////////////////////////
+// MonsterPokerCards container
+////////////////////////////////////////////////////////////////////////
+const MonsterPokerCards = () => {
+    const [mappings, setMappings] = useState([
+        { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
+        { name: "rabbit", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png", },
+        { name: "dragon", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png", },
+        
+    ]);
+    const [cards, setCards] = useState([
+        {
+            cardName: "robot_stat_boost_base",
+            copies: 5,
+            cardType: "stat",
+            stats: [0], // indexes into the mappings array
+            images: ["https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"],
+        },
+        {
+            cardName: "dragon_stat_boost",
+            copies: 3,
+            cardType: "stat",
+            stats: [0,0,1],
+            images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
+        },
+        {
+            cardName: "dragon_action",
+            copies: 3,
+            cardType: "action",
+            effect: { dmg: 3, dmgType: 1 },
+            cd: 3,
+            images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
+        },
+    ]);
+
+    const [settings, setSettings] = useState({
+        fontSize: 80,          // drives icon & text size
+        marginSize: 35,        // sets the inner margin offset
+        contentPadding: 10,    // sets padding inside the content container
+        dmgIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        multiplierIcon: "*",
+        cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
+        defaultImage: "https://via.placeholder.com/635x888",
+    });
+
+    return (
+        <div
+            style={{
+                width: "100vw",
+                height: "100vh",
+                background: "#fff",
+                display: "flex",
+                flexDirection: "column",
+            }}
+        >
+            {/* Example: mock toolbar & editor (your own components) */}
+            <Toolbar mappings={mappings} cards={cards} settings={settings} />
+            <div style={{ flex: 1, display: "flex" }}>
+                <SettingsEditor settings={settings} setSettings={setSettings} />
+                <Gallery mappings={mappings} cards={cards} settings={settings} />
+            </div>
+            <Footer cards={cards} />
+        </div>
+    );
+};
+
+
+////////////////////////////////////////////////////////////////////////
 // IconOrImage - Reusable component
 ////////////////////////////////////////////////////////////////////////
 const IconOrImage = ({ value, fontSize }) => {
@@ -233,70 +300,6 @@ const Gallery = ({ mappings, cards, settings }) => {
                 ))}
             </div>
         </main>
-    );
-};
-
-////////////////////////////////////////////////////////////////////////
-// Example usage - MonsterPokerCards container
-////////////////////////////////////////////////////////////////////////
-const MonsterPokerCards = () => {
-    const [mappings, setMappings] = useState([
-        { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
-        { name: "dragon", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png", },
-    ]);
-    const [cards, setCards] = useState([
-        {
-            cardName: "robot_stat_boost_base",
-            copies: 5,
-            cardType: "stat",
-            stats: [0], // indexes into the mappings array
-            images: ["https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"],
-        },
-        {
-            cardName: "dragon_stat_boost",
-            copies: 3,
-            cardType: "stat",
-            stats: [1],
-            images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
-        },
-        {
-            cardName: "dragon_action",
-            copies: 3,
-            cardType: "action",
-            effect: { dmg: 3, dmgType: 1 },
-            cd: 3,
-            images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
-        },
-    ]);
-
-    const [settings, setSettings] = useState({
-        fontSize: 80,          // drives icon & text size
-        marginSize: 35,        // sets the inner margin offset
-        contentPadding: 10,    // sets padding inside the content container
-        dmgIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
-        multiplierIcon: "*",
-        cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
-        defaultImage: "https://via.placeholder.com/635x888",
-    });
-
-    return (
-        <div
-            style={{
-                width: "100vw",
-                height: "100vh",
-                background: "#fff",
-                display: "flex",
-                flexDirection: "column",
-            }}
-        >
-            {/* Example: mock toolbar & editor (your own components) */}
-            <Toolbar mappings={mappings} cards={cards} settings={settings} />
-            <div style={{ flex: 1, display: "flex" }}>
-                <SettingsEditor settings={settings} setSettings={setSettings} />
-                <Gallery mappings={mappings} cards={cards} settings={settings} />
-            </div>
-            <Footer cards={cards} />
-        </div>
     );
 };
 
