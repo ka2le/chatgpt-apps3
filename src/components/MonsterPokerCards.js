@@ -1,83 +1,207 @@
 import React, { useState, useEffect } from "react";
-import adiosFont from '../fonts/adios-amigos-regular.ttf';
 
-////////////////////////////////////////////////////////////////////////
-// MonsterPokerCards container
-////////////////////////////////////////////////////////////////////////
-const MonsterPokerCards = () => {
-    const [mappings, setMappings] = useState([
-        { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
-        { name: "rabbit", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png", },
-        { name: "dragon", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png", },
-        
-    ]);
-    const [cards, setCards] = useState([
-        {
-            cardName: "robot_stat_boost_base",
-            copies: 5,
-            cardType: "stat",
-            stats: [0], // indexes into the mappings array
-            images: ["https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"],
-        },
-        {
-            cardName: "dragon_stat_boost",
-            copies: 3,
-            cardType: "stat",
-            stats: [0,0,1],
-            images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
-        },
-        {
-            cardName: "dragon_action",
-            copies: 3,
-            cardType: "action",
-            effect: { dmg: 3, dmgType: 1 },
-            cd: 3,
-            images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
-        },
-    ]);
+// Constants and Default Settings
+const FONT_SIZE = 80;
+const MARGIN_SIZE = 35;
+const CONTENT_PADDING = 10;
+const CARD_WIDTH = 635;
+const CARD_HEIGHT = 888;
 
-    const [settings, setSettings] = useState({
-        fontSize: 80,          // drives icon & text size
-        marginSize: 35,        // sets the inner margin offset
-        contentPadding: 10,    // sets padding inside the content container
-        dmgIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
-        multiplierIcon: "*",
-        cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
-        defaultImage: "https://via.placeholder.com/635x888",
-    });
+const STAT_ICONS = [
+    { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
+    { name: "rabbit", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png" },
+    { name: "dragon", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png" },
+];
 
-    return (
-        <div
-            style={{
-                width: "100vw",
-                height: "100vh",
-                background: "#fff",
-                display: "flex",
-                flexDirection: "column",
-            }}
-        >
-            {/* Example: mock toolbar & editor (your own components) */}
-            <Toolbar mappings={mappings} cards={cards} settings={settings} />
-            <div style={{ flex: 1, display: "flex" }}>
-                <SettingsEditor settings={settings} setSettings={setSettings} />
-                <Gallery mappings={mappings} cards={cards} settings={settings} />
-            </div>
-            <Footer cards={cards} />
-        </div>
-    );
+const DISPLAY_SETTINGS = {
+    dmgIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+    multiplierIcon: "*",
+    cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
+    defaultImage: "https://via.placeholder.com/635x888",
 };
 
+const DEFAULT_CARDS = [
+    {
+        cardName: "robot_stat_boost_base",
+        copies: 5,
+        cardType: "stat",
+        stats: [0],
+        images: ["https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"],
+    },
+    {
+        cardName: "dragon_stat_boost",
+        copies: 3,
+        cardType: "stat",
+        stats: [2],
+        images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
+    },
+    {
+        cardName: "dragon_action",
+        copies: 3,
+        cardType: "action",
+        effect: { dmg: 3, dmgType: 2 },
+        cd: 3,
+        images: ["https://cdn.midjourney.com/680ffc3f-19f0-4c33-a8ef-9a9af8620f51/0_0.png"],
+    },
+];
 
-////////////////////////////////////////////////////////////////////////
-// IconOrImage - Reusable component
-////////////////////////////////////////////////////////////////////////
-const IconOrImage = ({ value, fontSize }) => {
-    // If it starts with http or https, treat it as an image
-    if (value == "*") {
-        return (
-            <span style={{ fontSize, fontFamily: "AdiosAmigosRegular" }}>*</span>
-        );
+
+// Styles
+const styles = {
+    container: {
+        width: "100vw",
+        height: "100vh",
+        background: "#fff",
+        display: "flex",
+        flexDirection: "column",
+    },
+    main: {
+        flex: 1,
+        display: "flex",
+    },
+    card: {
+        outer: {
+            width: `${CARD_WIDTH}px`,
+            height: `${CARD_HEIGHT}px`,
+            backgroundSize: "cover",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+        },
+        innerMargin: {
+            width: `calc(100% - ${MARGIN_SIZE}px)`,
+            height: `calc(100% - ${MARGIN_SIZE}px)`,
+            background: "rgba(255, 255, 255, 0.0)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+        },
+        contentContainer: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: CONTENT_PADDING,
+            height: "100%",
+            width: "100%",
+            boxSizing: "border-box",
+        },
+        effect: {
+            fontSize: `${FONT_SIZE}px`,
+            textAlign: "center",
+            fontWeight: "bold",
+        },
+        verticalLock: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: "10px",
+        }
+    },
+    gallery: {
+        container: {
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, var(--card-width))",
+            gap: "20px",
+            padding: "20px",
+            justifyContent: "center",
+            width: "100%",
+            boxSizing: "border-box",
+        },
+        zoomControl: {
+            marginBottom: "20px",
+            textAlign: "center",
+            padding: "10px",
+        },
+        wrapper: {
+            overflow: "auto",
+            flex: 1,
+        }
+    },
+    editor: {
+        container: {
+            width: "400px",
+            padding: "20px",
+            borderRight: "1px solid #ddd",
+            background: "#f9f9f9",
+            overflow: "auto",
+        },
+        controls: {
+            marginBottom: "20px",
+            display: "flex",
+            gap: "10px",
+            justifyContent: "space-between",
+            alignItems: "center",
+        },
+        cardEdit: {
+            container: {
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                margin: "10px 0",
+                background: "white",
+            },
+            header: {
+                padding: "10px",
+                background: "#f0f0f0",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                cursor: "pointer",
+            },
+            content: {
+                padding: "15px",
+            },
+            field: {
+                marginBottom: "15px",
+            },
+            label: {
+                display: "block",
+                marginBottom: "5px",
+                fontWeight: "bold",
+            },
+            input: {
+                width: "100%",
+                padding: "8px",
+                boxSizing: "border-box",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+            },
+            textarea: {
+                width: "100%",
+                padding: "8px",
+                boxSizing: "border-box",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                minHeight: "100px",
+            }
+        }
+    },
+    toolbar: {
+        container: {
+            padding: "10px",
+            background: "#f4f4f4",
+            borderBottom: "1px solid #ddd",
+            display: "flex",
+            justifyContent: "space-between"
+        }
+    },
+ 
+    footer: {
+        container: {
+            padding: "10px",
+            background: "#f4f4f4",
+            borderTop: "1px solid #ddd",
+            textAlign: "center"
+        }
     }
+};
+
+// Utility Components
+const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
+    if (value === "*") {
+        return <span style={{ fontSize, fontFamily: "AdiosAmigosRegular" }}>*</span>;
+    }
+    
     if (typeof value === "string" && /^https?:\/\//.test(value)) {
         return (
             <img
@@ -90,161 +214,68 @@ const IconOrImage = ({ value, fontSize }) => {
                     display: "inline-block",
                 }}
                 onError={(e) => {
-                    // minimal fallback -> show an 'X'
-                    e.currentTarget.outerHTML = `<span style="font-size: ${fontSize}">X</span>`;
+                    e.currentTarget.outerHTML = `<span style="font-size: ${fontSize}px">X</span>`;
                 }}
             />
         );
     }
 
-    // Otherwise treat as text/emoji
-    if (typeof value === "string") {
-        return (
-            <span style={{ fontSize }}>{value}</span>
-        );
-    }
-
-    // If something else is passed or fails, show 'X'
-    return <span style={{ fontSize }}>X</span>;
+    return <span style={{ fontSize }}>{value}</span>;
 };
 
-////////////////////////////////////////////////////////////////////////
 // Card Component
-////////////////////////////////////////////////////////////////////////
-const Card = ({ card, mappings, settings }) => {
-    // Pull styles from settings for easy reuse
-    const {
-        fontSize = 80,
-        marginSize = 30,
-        contentPadding = 10,
-        dmgIcon = "🔥",
-        multiplierIcon = "*",
-        defaultImage = "https://via.placeholder.com/635x888"
-    } = settings;
-
-    const fontSizePx = `${fontSize}px`;
-    const marginSizePx = `${marginSize}px`;
-
-    // Pre-calc card base sizes
-    const cardWidth = 635;
-    const cardHeight = 888;
-
-    // Centralized styles
-    const cardStyles = {
-        outer: {
-            width: `${cardWidth}px`,
-            height: `${cardHeight}px`,
-            backgroundSize: "cover",
-            backgroundImage: `url(${card.images?.[0] || defaultImage})`,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "relative",
-        },
-        innerMargin: {
-            // Subtract the margin from both sides
-            width: `calc(100% - ${marginSizePx})`,
-            height: `calc(100% - ${marginSizePx})`,
-            background: "rgba(255, 255, 255, 0.0)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            // No direct padding – let contentContainer handle that
-        },
-        contentContainer: {
-            // The actual "inner" area we want to position
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: contentPadding,
-            height: "100%",
-            width: "100%",
-            boxSizing: "border-box",
-        },
-        effect: {
-            fontSize: fontSizePx,
-            textAlign: "center",
-            fontWeight: "bold",
-        },
-        verticalLock: {
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "10px",
-        },
-    };
-
-    // Reusable function to get the mapped icon/text
+const Card = ({ card }) => {
     const getStatIconOrText = (index) => {
-        const mapping = mappings[index];
+        const mapping = STAT_ICONS[index];
         if (!mapping) return null;
-        return <IconOrImage value={mapping.icon} fontSize={fontSizePx} />;
+        return <IconOrImage value={mapping.icon} />;
     };
 
-    // Render an action's effect line (e.g. dmg, custom icons, etc.)
     const renderEffect = () => {
         if (!card.effect) return null;
-        const { dmg = 0, dmgType, customIcon } = card.effect;
+        const { dmg = 0, dmgType } = card.effect;
 
         const dmgIcons = [...Array(dmg)].map((_, i) => (
-            <IconOrImage key={`dmg-${i}`} value={dmgIcon} fontSize={fontSizePx} />
+            <IconOrImage key={`dmg-${i}`} value={DISPLAY_SETTINGS.dmgIcon} />
         ));
 
-        // For dmgType, we show the multiplier icon then the mapped stat icon
         const dmgTypeIcons = dmgType != null && (
             <>
-                <IconOrImage value={multiplierIcon} fontSize={fontSizePx} />
+                <IconOrImage value={DISPLAY_SETTINGS.multiplierIcon} />
                 {getStatIconOrText(dmgType)}
             </>
         );
 
-        // For customIcon, show it if present
-        const customIconElement = customIcon && (
-            <IconOrImage value={customIcon} fontSize={fontSizePx} />
-        );
-
         return (
-            <div style={cardStyles.effect}>
+            <div style={styles.card.effect}>
                 {dmgIcons}
                 {dmgTypeIcons}
-                {customIconElement}
             </div>
         );
     };
 
     return (
-        <div style={cardStyles.outer}>
-            <div style={cardStyles.innerMargin}>
-                <div style={cardStyles.contentContainer}>
-                    {/* If it's an action card, show damage/effect row */}
+        <div style={{ ...styles.card.outer, backgroundImage: `url(${card.images?.[0] || DISPLAY_SETTINGS.defaultImage})` }}>
+            <div style={styles.card.innerMargin}>
+                <div style={styles.card.contentContainer}>
                     {card.cardType === "action" && renderEffect()}
-
-                    {/* If it's a stat card, show each stat icon */}
                     {card.cardType === "stat" && (
-                        <div style={cardStyles.verticalLock}>
+                        <div style={styles.card.verticalLock}>
                             {card.stats.map((stat, index) => (
                                 <div key={`stat-${index}`}>
-                                    {getStatIconOrText(index)}
+                                    {getStatIconOrText(stat)}
                                 </div>
                             ))}
                         </div>
                     )}
-
-                    {/* If it's an action card, show cooldown */}
-                    {card.cardType === "action" && (
-                        <div style={cardStyles.verticalLock}>
-                            {typeof card.cd === 'number'
-                                ? // Map each 'cd' count to an icon
-                                [...Array(card.cd)].map((_, i) => (
-                                    <IconOrImage
-                                        key={`cd-${i}`}
-                                        value={settings.cdIcon}
-                                        fontSize={fontSizePx}
-                                    />
-                                ))
-                                : // If cd is undefined or not a number, show nothing
-                                null
-                            }
+                    {card.cardType === "action" && card.cd && (
+                        <div style={styles.card.verticalLock}>
+                            {[...Array(card.cd)].map((_, i) => (
+                                <IconOrImage
+                                    key={`cd-${i}`}
+                                    value={DISPLAY_SETTINGS.cdIcon}
+                                />
+                            ))}
                         </div>
                     )}
                 </div>
@@ -253,93 +284,245 @@ const Card = ({ card, mappings, settings }) => {
     );
 };
 
-////////////////////////////////////////////////////////////////////////
-// Gallery - just updated references, same approach
-////////////////////////////////////////////////////////////////////////
-const Gallery = ({ mappings, cards, settings }) => {
+// Updated Gallery Component
+const Gallery = ({ cards }) => {
     const [zoom, setZoom] = useState(0.5);
-
-    const galleryStyles = {
-        container: {
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "20px",
-            justifyContent: "center",
-            padding: "10px",
-            color: "#fff",
-        },
-        zoomControl: {
-            marginBottom: "10px",
-            textAlign: "center",
-        },
-        cardWrapper: (z) => ({
-            transform: `scale(${z})`,
-            transformOrigin: "top left",
-            display: "inline-block",
-        }),
-    };
-
+    
+    // Calculate card width based on zoom level
+    const cardWidth = CARD_WIDTH * zoom;
+    
     return (
-        <main style={{ padding: "10px" }}>
-            <div style={galleryStyles.zoomControl}>
+        <div style={styles.gallery.wrapper}>
+            <div style={styles.gallery.zoomControl}>
                 <label>Zoom: </label>
                 <input
                     type="range"
-                    min="0.5"
-                    max="2"
+                    min="0.2"
+                    max="1"
                     step="0.1"
                     value={zoom}
                     onChange={(e) => setZoom(parseFloat(e.target.value))}
                 />
+                <span>{Math.round(zoom * 100)}%</span>
             </div>
-            <div style={galleryStyles.container}>
+            <div 
+                style={{
+                    ...styles.gallery.container,
+                    ["--card-width"]: `${cardWidth}px`,
+                }}
+            >
                 {cards.map((card) => (
-                    <div key={card.cardName} style={galleryStyles.cardWrapper(zoom)}>
-                        <Card card={card} mappings={mappings} settings={settings} />
+                    <div 
+                        key={card.cardName} 
+                        style={{ 
+                            transform: `scale(${zoom})`,
+                            transformOrigin: "top left",
+                            width: `${CARD_WIDTH}px`,
+                            height: `${CARD_HEIGHT}px`,
+                        }}
+                    >
+                        <Card card={card} />
                     </div>
                 ))}
             </div>
-        </main>
+        </div>
     );
 };
 
+// New CardEdit Component
+const CardEdit = ({ card, onUpdate, onDelete }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
 
+    const handleChange = (field, value) => {
+        let parsedValue = value;
+        
+        // Parse arrays
+        if (field === 'stats') {
+            parsedValue = value.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+        }
+        // Parse effect object
+        else if (field === 'effect') {
+            try {
+                parsedValue = JSON.parse(value);
+            } catch (e) {
+                console.error('Invalid JSON for effect');
+                return;
+            }
+        }
+        // Parse images array
+        else if (field === 'images') {
+            parsedValue = value.split(',').map(url => url.trim());
+        }
+        // Parse numbers
+        else if (field === 'copies' || field === 'cd') {
+            parsedValue = parseInt(value);
+        }
 
+        onUpdate({ ...card, [field]: parsedValue });
+    };
+
+    return (
+        <div style={styles.editor.cardEdit.container}>
+            <div 
+                style={styles.editor.cardEdit.header}
+                onClick={() => setIsExpanded(!isExpanded)}
+            >
+                <span>{card.cardName || 'New Card'}</span>
+                <div>
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        onDelete(card);
+                    }}>Delete</button>
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        setIsExpanded(!isExpanded);
+                    }}>{isExpanded ? 'Collapse' : 'Expand'}</button>
+                </div>
+            </div>
+            
+            {isExpanded && (
+                <div style={styles.editor.cardEdit.content}>
+                    <div style={styles.editor.cardEdit.field}>
+                        <label style={styles.editor.cardEdit.label}>Card Name</label>
+                        <input
+                            style={styles.editor.cardEdit.input}
+                            value={card.cardName || ''}
+                            onChange={(e) => handleChange('cardName', e.target.value)}
+                        />
+                    </div>
+
+                    <div style={styles.editor.cardEdit.field}>
+                        <label style={styles.editor.cardEdit.label}>Card Type</label>
+                        <select
+                            style={styles.editor.cardEdit.input}
+                            value={card.cardType || 'stat'}
+                            onChange={(e) => handleChange('cardType', e.target.value)}
+                        >
+                            <option value="stat">Stat</option>
+                            <option value="action">Action</option>
+                        </select>
+                    </div>
+
+                    <div style={styles.editor.cardEdit.field}>
+                        <label style={styles.editor.cardEdit.label}>Copies</label>
+                        <input
+                            style={styles.editor.cardEdit.input}
+                            type="number"
+                            value={card.copies || 0}
+                            onChange={(e) => handleChange('copies', e.target.value)}
+                        />
+                    </div>
+
+                    <div style={styles.editor.cardEdit.field}>
+                        <label style={styles.editor.cardEdit.label}>Stats (comma-separated indices)</label>
+                        <input
+                            style={styles.editor.cardEdit.input}
+                            value={card.stats?.join(', ') || ''}
+                            onChange={(e) => handleChange('stats', e.target.value)}
+                        />
+                    </div>
+
+                    <div style={styles.editor.cardEdit.field}>
+                        <label style={styles.editor.cardEdit.label}>Images (comma-separated URLs)</label>
+                        <input
+                            style={styles.editor.cardEdit.input}
+                            value={card.images?.join(', ') || ''}
+                            onChange={(e) => handleChange('images', e.target.value)}
+                        />
+                    </div>
+
+                    {card.cardType === 'action' && (
+                        <>
+                            <div style={styles.editor.cardEdit.field}>
+                                <label style={styles.editor.cardEdit.label}>Effect (JSON)</label>
+                                <textarea
+                                    style={styles.editor.cardEdit.textarea}
+                                    value={JSON.stringify(card.effect || {}, null, 2)}
+                                    onChange={(e) => handleChange('effect', e.target.value)}
+                                />
+                            </div>
+
+                            <div style={styles.editor.cardEdit.field}>
+                                <label style={styles.editor.cardEdit.label}>Cooldown</label>
+                                <input
+                                    style={styles.editor.cardEdit.input}
+                                    type="number"
+                                    value={card.cd || 0}
+                                    onChange={(e) => handleChange('cd', e.target.value)}
+                                />
+                            </div>
+                        </>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
+// Updated Editor Component
+const Editor = ({ cards, setCards }) => {
+    const [allExpanded, setAllExpanded] = useState(false);
+
+    const handleUpdateCard = (updatedCard) => {
+        setCards(cards.map(card => 
+            card.cardName === updatedCard.cardName ? updatedCard : card
+        ));
+    };
+
+    const handleDeleteCard = (cardToDelete) => {
+        setCards(cards.filter(card => card.cardName !== cardToDelete.cardName));
+    };
+
+    const handleAddCard = () => {
+        const newCard = {
+            cardName: `new_card_${Date.now()}`,
+            copies: 1,
+            cardType: "stat",
+            stats: [0],
+            images: [],
+        };
+        setCards([...cards, newCard]);
+    };
+
+    return (
+        <aside style={styles.editor.container}>
+            <div style={styles.editor.controls}>
+                <h2>Card Editor</h2>
+                <div>
+                    <button onClick={() => setAllExpanded(!allExpanded)}>
+                        {allExpanded ? 'Collapse All' : 'Expand All'}
+                    </button>
+                    <button onClick={handleAddCard}>Add Card</button>
+                </div>
+            </div>
+            
+            {cards.map((card) => (
+                <CardEdit
+                    key={card.cardName}
+                    card={card}
+                    onUpdate={handleUpdateCard}
+                    onDelete={handleDeleteCard}
+                />
+            ))}
+        </aside>
+    );
+};
 // Toolbar Component
-const Toolbar = ({ mappings, cards, settings }) => {
+const Toolbar = ({ cards }) => {
     const copyToClipboard = (data) => {
         navigator.clipboard.writeText(JSON.stringify(data, null, 2));
         alert("Data copied to clipboard!");
     };
 
     return (
-        <header style={{ padding: "10px", background: "#f4f4f4", borderBottom: "1px solid #ddd", display: "flex", justifyContent: "space-between" }}>
+        <header style={styles.toolbar.container}>
             <h1>Monster Poker Cards</h1>
             <div>
-                <button onClick={() => copyToClipboard(mappings)}>Copy Mappings</button>
+                <button onClick={() => copyToClipboard(STAT_ICONS)}>Copy Icons</button>
                 <button onClick={() => copyToClipboard(cards)}>Copy Cards</button>
-                <button onClick={() => copyToClipboard(settings)}>Copy Settings</button>
+                <button onClick={() => copyToClipboard(DISPLAY_SETTINGS)}>Copy Settings</button>
             </div>
         </header>
-    );
-};
-
-// Settings Editor Component
-const SettingsEditor = ({ settings, setSettings }) => {
-    useEffect(() => {
-        const savedSettings = JSON.parse(localStorage.getItem("settings")) || {};
-        setSettings(savedSettings);
-    }, [setSettings]);
-
-    useEffect(() => {
-        localStorage.setItem("settings", JSON.stringify(settings));
-    }, [settings]);
-
-    return (
-        <aside style={{ padding: "10px", borderRight: "1px solid #ddd", background: "#f9f9f9" }}>
-            <h2>Settings</h2>
-            <p>Adjust global settings here.</p>
-        </aside>
     );
 };
 
@@ -349,14 +532,38 @@ const Footer = ({ cards }) => {
     const uniqueCards = cards.length;
 
     return (
-        <footer style={{ padding: "10px", background: "#f4f4f4", borderTop: "1px solid #ddd", textAlign: "center" }}>
+        <footer style={styles.footer.container}>
             <p>Total Cards: {totalCards}</p>
             <p>Unique Cards: {uniqueCards}</p>
         </footer>
     );
 };
 
+// Main Component
+const MonsterPokerCards = () => {
+    const [cards, setCards] = useState(DEFAULT_CARDS);
 
+    useEffect(() => {
+        const savedCards = localStorage.getItem("cards");
+        if (savedCards) {
+            setCards(JSON.parse(savedCards));
+        }
+    }, []);
 
+    useEffect(() => {
+        localStorage.setItem("cards", JSON.stringify(cards));
+    }, [cards]);
+
+    return (
+        <div style={styles.container}>
+            <Toolbar cards={cards} />
+            <div style={styles.main}>
+                <Editor cards={cards} setCards={setCards} />
+                <Gallery cards={cards} />
+            </div>
+            <Footer cards={cards} />
+        </div>
+    );
+};
 
 export default MonsterPokerCards;
