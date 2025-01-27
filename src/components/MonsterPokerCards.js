@@ -195,7 +195,8 @@ const DEFAULT_CARDS = [
         "https://cdn.midjourney.com/36577eb0-fedd-4f63-ad88-24e5e3689486/0_0.png",
         "https://cdn.midjourney.com/8a8fa84e-4239-4520-a12e-c516ff47272a/0_0.png",
         "https://cdn.midjourney.com/ef1a2d8f-b2b9-4e80-9dff-390439a77d73/0_0.png",
-        "https://cdn.midjourney.com/95b0be8b-9659-4627-a795-ece134ff468c/0_0.png"
+        "https://cdn.midjourney.com/95b0be8b-9659-4627-a795-ece134ff468c/0_0.png",
+        "https://cdn.midjourney.com/7fc92b87-255a-43f7-9f6a-ea8366aad15e/0_0.png"
       ],
       "cardType": "action",
       "stats": [],
@@ -213,7 +214,8 @@ const DEFAULT_CARDS = [
         "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
         "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
         "https://cdn.midjourney.com/a602b362-8454-43de-aac3-70d51cccb548/0_0.png",
-        "https://cdn.midjourney.com/d2dd60ef-3fc1-4f18-a3c7-bb5d25020b50/0_0.png"
+        "https://cdn.midjourney.com/d2dd60ef-3fc1-4f18-a3c7-bb5d25020b50/0_0.png",
+        "https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"
       ],
       "cardType": "stat",
       "stats": [
@@ -222,7 +224,7 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "dragon1",
-      "copies": 6,
+      "copies": 7,
       "images": [
         "https://cdn.midjourney.com/7cad2b17-1b09-43be-b4f6-8f1ca883d109/0_0.png",
         "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png",
@@ -238,7 +240,7 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "critter1",
-      "copies": 6,
+      "copies": 7,
       "images": [
         "https://cdn.midjourney.com/97d565dc-a15d-4fef-bd18-327048b9f248/0_0.png",
         "https://cdn.midjourney.com/853d3da1-e05b-477a-873c-454b4ce72c34/0_0.png",
@@ -254,9 +256,9 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "Dragons Breath",
-      "copies": 6,
+      "copies": 7,
       "images": [
-        "https://cdn.midjourney.com/7428b967-9ad6-494f-bbf2-fb06542137da/0_0.png",
+        "https://cdn.midjourney.com/8989a9f5-da33-4bdd-bc2b-ef7a681ea095/0_0.png",
         "https://cdn.midjourney.com/8d7b2bc0-ad87-4493-9825-bd659602d026/0_0.png",
         "https://cdn.midjourney.com/9e0945dd-5fa1-4cb0-8a2f-cce1d576118b/0_0.png",
         "https://cdn.midjourney.com/1b337ee8-f342-4170-b9b3-d4e00c50abaf/0_0.png",
@@ -274,7 +276,7 @@ const DEFAULT_CARDS = [
       "cardName": "Dragon Ulti",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/91dde8fc-5e5a-4ff5-967a-6fdba1b1af8a/0_0.png",
+        "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png",
         "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
       ],
       "cardType": "action",
@@ -286,13 +288,14 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "Swarm",
-      "copies": 6,
+      "copies": 7,
       "images": [
-        "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png",
+        "https://cdn.midjourney.com/c0659bcb-3883-46b7-af31-ce9bb45afe4d/0_0.png",
         "https://cdn.midjourney.com/60e654ff-5892-4a8c-bde0-e7d2ac14f64b/0_0.png",
         "https://cdn.midjourney.com/8891ed87-7ce3-4b32-abc0-6d8fee705dee/0_0.png",
         "https://cdn.midjourney.com/06b73696-0097-4ae8-baef-3cbcc7d67789/0_0.png",
-        "https://cdn.midjourney.com/36bb09f1-e5af-4f2e-a28b-653cb4751b16/0_0.png"
+        "https://cdn.midjourney.com/36bb09f1-e5af-4f2e-a28b-653cb4751b16/0_0.png",
+        "https://cdn.midjourney.com/140e918b-31f8-4e9f-b19b-6eadd7a8efa0/0_0.png"
       ],
       "cardType": "action",
       "effect": {
@@ -314,19 +317,7 @@ const DEFAULT_CARDS = [
       },
       "cd": 2
     },
-    {
-      "cardName": "Robotic Dragon Swarm",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/91dde8fc-5e5a-4ff5-967a-6fdba1b1af8a/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "dmg": 1,
-        "dmgType": 2
-      },
-      "cd": 1
-    },
+    
     {
       "cardName": "joker",
       "copies": 1,
@@ -383,7 +374,7 @@ const DEFAULT_CARDS = [
       "cardName": "Devour",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
+        "https://cdn.midjourney.com/7428b967-9ad6-494f-bbf2-fb06542137da/0_0.png"
       ],
       "cardType": "action",
       "effect": {
@@ -396,7 +387,8 @@ const DEFAULT_CARDS = [
       "cardName": "Shield3",
       "copies": 2,
       "images": [
-        "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png"
+        "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+        "https://cdn.midjourney.com/93f0f656-2b2e-40e2-afa8-66ebfab40f4f/0_0.png"
       ],
       "cardType": "action",
       "effect": {
@@ -417,7 +409,6 @@ const DEFAULT_CARDS = [
       "cd": 1
     }
   ]
-
 
 // Styles
 const styles = {
@@ -996,7 +987,9 @@ const MonsterPokerCards = () => {
     }, []);
 
 
-
+    
+    const totalCopies = cards.reduce((sum, card) => sum + card.copies, 0);
+    console.error(totalCopies,cards,cards?.length);
     // Apply styles with media queries
     const mainStyle = {
         ...styles.main,
