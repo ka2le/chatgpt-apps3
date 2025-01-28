@@ -14,7 +14,7 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Box from '@mui/material/Box';
 
 // Constants and Default Settings
-const FONT_SIZE = 70;
+const FONT_SIZE = 85;
 const MARGIN_SIZE = 55;
 const CONTENT_PADDING = 30;
 const CARD_WIDTH = 635;
@@ -54,6 +54,7 @@ const DEFAULT_CARDS = [
         "*",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
         "*",
+        "<br>",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
         "*",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png"
@@ -231,7 +232,8 @@ const DEFAULT_CARDS = [
         "https://cdn.midjourney.com/d4646dbf-1b18-437f-9c38-4d7bd2c6aa77/0_0.png",
         "https://cdn.midjourney.com/a6189387-9033-440d-94b7-4633aa6f9b05/0_0.png",
         "https://cdn.midjourney.com/8b0c23f3-ce49-42d7-b71c-7dc4ecebe156/0_0.png",
-        "https://cdn.midjourney.com/1b337ee8-f342-4170-b9b3-d4e00c50abaf/0_0.png"
+        "https://cdn.midjourney.com/1b337ee8-f342-4170-b9b3-d4e00c50abaf/0_0.png",
+        "https://cdn.midjourney.com/7428b967-9ad6-494f-bbf2-fb06542137da/0_0.png"
       ],
       "cardType": "stat",
       "stats": [
@@ -278,7 +280,7 @@ const DEFAULT_CARDS = [
       "cardName": "Dragon Ulti",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png",
+        "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
         "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
       ],
       "cardType": "action",
@@ -389,7 +391,7 @@ const DEFAULT_CARDS = [
       "cardName": "Devour",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/7428b967-9ad6-494f-bbf2-fb06542137da/0_0.png"
+        "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
       ],
       "cardType": "action",
       "effect": {
@@ -659,6 +661,9 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
+    if (value === "<br>") {
+        return <br />;
+    }
 
     if (typeof value === "string" && /^https?:\/\//.test(value)) {
         return (
@@ -729,12 +734,18 @@ const Card = ({ card }) => {
     const renderEffect = () => {
         if (!card.effect) return null;
         const { dmg = 0, dmgType, shield = 0 } = card.effect;
-
-        // Render damage icons
-        const dmgIcons = [...Array(dmg)].map((_, i) => (
-            <IconOrImage key={`dmg-${i}`} value={DISPLAY_SETTINGS.dmgIcon} />
-        ));
-
+    
+        // Render damage icons with a line break after the 3rd icon if dmg > 5
+        const dmgIcons = [...Array(dmg)].map((_, i) => {
+            const isLineBreak = dmg > 5 && i === 3; // Add line break after the 3rd icon if dmg > 5
+            return (
+                <React.Fragment key={`dmg-${i}`}>
+                    <IconOrImage value={DISPLAY_SETTINGS.dmgIcon} />
+                    {isLineBreak && <br />}
+                </React.Fragment>
+            );
+        });
+    
         // Render damage type icons
         const dmgTypeIcons = dmgType != null && (
             <>
@@ -742,17 +753,17 @@ const Card = ({ card }) => {
                 {getStatIconOrText(dmgType)}
             </>
         );
-
+    
         // Render shield icons
         const shieldIcons = [...Array(shield)].map((_, i) => (
             <IconOrImage key={`shield-${i}`} value={DISPLAY_SETTINGS.shieldIcon} />
         ));
-
+    
         // Render custom effects
         const customEffectIcons = (card.customEffect || []).map((effect, i) => (
             <IconOrImage key={`custom-effect-${i}`} value={effect} />
         ));
-
+    
         return (
             <div style={styles.card.effect}>
                 {dmgIcons}
@@ -762,6 +773,7 @@ const Card = ({ card }) => {
             </div>
         );
     };
+    
 
     return (
         <div style={{ ...styles.card.outer, backgroundImage: `url(${card.images?.[0] || DISPLAY_SETTINGS.defaultImage})` }}>
