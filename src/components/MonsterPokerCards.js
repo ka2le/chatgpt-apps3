@@ -13,10 +13,10 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Box from '@mui/material/Box';
 
-const ONLINE = true;
+const ONLINE = false;
 
 // Constants and Default Settings
-const FONT_SIZE =  ONLINE ? 90 : 85;
+const FONT_SIZE =  ONLINE ? 90 : 95;
 const MARGIN_SIZE = ONLINE ? 20 : 55;
 const CONTENT_PADDING = ONLINE ? 10 : 30;
 const CARD_WIDTH = 635;
@@ -54,14 +54,16 @@ const DEFAULT_CARDS = [
       "stats": [],
       "effect": {},
       "customEffect": [
-        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
-        "*",
+        
         "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
         "*",
          "<br>",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
         "*",
-        "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png"
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png",
+        "*",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        
       ],
       "cd": 1
     },
@@ -343,7 +345,8 @@ const DEFAULT_CARDS = [
       "effect": {
         "dmg": 1,
         "dmgType": 0
-      }
+      },
+      "cd":1
     },
     
     {
@@ -470,9 +473,12 @@ const styles = {
         },
         effect: {
             fontSize: `${FONT_SIZE}px`,
-            textAlign: "center",
-
+            textAlign: "left", // Change from "center" to "left"
             fontWeight: "bold",
+            display: "flex", // For flexible positioning
+            alignItems: "center",
+            gap: "0px",
+            
         },
         verticalLock: {
             display: "flex",
@@ -601,7 +607,7 @@ const styles = {
 
 // Utility Components
 // New constant for text adjustment
-const regularTextAdjustment = "-15px";
+const regularTextAdjustment = "-10px";
 
 // Utility Components
 const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
@@ -640,8 +646,9 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                     ...shadowStyle,
                     fontFamily: "AdiosAmigosRegular",
                     fontSize: "55px",
+                    left:"calc(50% - 10px)",
                     filter: 'blur(2px) brightness(0)',
-                    top: "-13px", // Adjust text position
+                    top: "20px", // Adjust text position
 
                 }}>
                     *
@@ -652,7 +659,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                     fontSize: "55px",
                     color: 'white',
                     filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
-                    top: "-25px", // Adjust text position
+                    top: "0px", // Adjust text position
                 }}>
                     *
                 </span>
@@ -686,7 +693,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                     style={{
                         ...imageStyle,
                         position: 'relative',
-                        filter: 'brightness(1) drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
+                        filter: 'brightness(1) drop-shadow(0px 2px 4px rgba(0,0,0,1))',
                     }}
                     onError={(e) => {
                         e.currentTarget.outerHTML = `<span style="font-size: ${fontSize}px">X</span>`;
@@ -701,8 +708,10 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             <span style={{
                 ...shadowStyle,
                 fontSize,
+                left: "10px",
+                
                 filter: 'blur(2px) brightness(0)',
-                top: regularTextAdjustment, // Adjust shadow position for text
+                top: "-15px",
             }}>
                 {value}
             </span>
@@ -733,24 +742,20 @@ const Card = ({ card }) => {
         if (!card.effect) return null;
         const { dmg = 0, dmgType, shield = 0 } = card.effect;
     
-        // Render damage icons with a line break after the 3rd icon if dmg > 5
-        const dmgIcons = [...Array(dmg)].map((_, i) => {
-            const isLineBreak = dmg > 5 && i === 3; // Add line break after the 3rd icon if dmg > 5
-            return (
-                <React.Fragment key={`dmg-${i}`}>
-                    <IconOrImage value={DISPLAY_SETTINGS.dmgIcon} />
-                    {isLineBreak && <br />}
-                </React.Fragment>
-            );
-        });
-    
-        // Render damage type icons
+        // Render damage type with stat icon first
         const dmgTypeIcons = dmgType != null && (
             <>
-                <IconOrImage value={DISPLAY_SETTINGS.multiplierIcon} />
-                {getStatIconOrText(dmgType)}
+                {getStatIconOrText(dmgType)} {/* Stat icon first */}
+                <IconOrImage value={DISPLAY_SETTINGS.multiplierIcon} /> {/* Multiplier icon */}
             </>
         );
+    
+        // Render damage icons
+        const dmgIcons = [...Array(dmg)].map((_, i) => (
+            <React.Fragment key={`dmg-${i}`}>
+                <IconOrImage value={DISPLAY_SETTINGS.dmgIcon} />
+            </React.Fragment>
+        ));
     
         // Render shield icons
         const shieldIcons = [...Array(shield)].map((_, i) => (
@@ -764,13 +769,14 @@ const Card = ({ card }) => {
     
         return (
             <div style={styles.card.effect}>
-                {dmgIcons}
                 {dmgTypeIcons}
+                {dmgIcons}
                 {shieldIcons}
                 {customEffectIcons}
             </div>
         );
     };
+    
     
 
     return (
@@ -790,10 +796,10 @@ const Card = ({ card }) => {
                     {card.cardType === "action" && card.cd !== undefined && (
                         <div style={styles.card.verticalLock}>
                             {card.cd === -1 ? (
-                                <IconOrImage value={DISPLAY_SETTINGS.startIcon} />
+                                <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE+10} />
                             ) : (
                                 [...Array(card.cd)].map((_, i) => (
-                                    <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} />
+                                    <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon}  fontSize={FONT_SIZE+30} />
                                 ))
                             )}
                         </div>
