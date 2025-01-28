@@ -13,12 +13,15 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Box from '@mui/material/Box';
 
+const ONLINE = false;
+
 // Constants and Default Settings
-const FONT_SIZE = 85;
-const MARGIN_SIZE = 55;
-const CONTENT_PADDING = 30;
+const FONT_SIZE =  ONLINE ? 90 : 85;
+const MARGIN_SIZE = ONLINE ? 20 : 55;
+const CONTENT_PADDING = ONLINE ? 10 : 30;
 const CARD_WIDTH = 635;
 const CARD_HEIGHT = 888;
+const SAVE_SCALE = ONLINE ? 0.4 : 1;
 
 const STAT_ICONS = [
     { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
@@ -44,7 +47,7 @@ const DEFAULT_CARDS = [
       "cardName": "one_off_each",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/bbd8ae14-3bd3-4c1e-9b2a-e040064b8d85/0_0.png"
+        "https://cdn.midjourney.com/b2b1124c-3085-45bd-a454-d4dbaabad1bf/0_0.png"
       ],
       "cardType": "action",
       "stats": [],
@@ -54,7 +57,7 @@ const DEFAULT_CARDS = [
         "*",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
         "*",
-        "<br>",
+         "<br>",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
         "*",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png"
@@ -151,6 +154,124 @@ const DEFAULT_CARDS = [
       "cd": 1
     },
     {
+        "cardName": "Murder rabbit",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "dmg": 4,
+          "dmgType": 1
+        },
+        "cd": 2
+      },
+     
+      {
+        "cardName": "joker",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/007b3fdb-da8a-4283-83d4-7baedb96b390/0_0.png"
+        ],
+        "cardType": "stat",
+        "stats": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cardName": "robot_dragon",
+        "copies": 2,
+        "images": [
+          "https://cdn.midjourney.com/7b6f6976-1fdc-40b1-9008-bea313ba61df/0_0.png",
+          "https://cdn.midjourney.com/2f6c7377-acb9-48ab-beaf-26684c3f8e08/0_0.png"
+        ],
+        "cardType": "stat",
+        "stats": [
+          0,
+          2
+        ]
+      },
+      {
+        "cardName": "robot_critter",
+        "copies": 2,
+        "images": [
+          "https://cdn.midjourney.com/632efef5-4d03-40ac-a69c-52bb789a72b3/0_0.png",
+          "https://cdn.midjourney.com/261245f8-c25c-40c5-a8bc-2b2f6f9f186e/0_0.png"
+        ],
+        "cardType": "stat",
+        "stats": [
+          0,
+          1
+        ]
+      },
+      {
+        "cardName": "dragon_rabbit",
+        "copies": 2,
+        "images": [
+          "https://cdn.midjourney.com/d5297d39-ddb0-4e18-a2f9-93ff4cacf522/0_0.png",
+          "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png"
+        ],
+        "cardType": "stat",
+        "stats": [
+          1,
+          2
+        ]
+      },
+      {
+        "cardName": "Dragon Ulti",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
+          "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "dmg": 6,
+          "dmgType": 2
+        },
+        "cd": 3
+      },
+      {
+        "cardName": "Devour",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "dmg": 4,
+          "dmgType": 2
+        },
+        "cd": 4
+      },
+      {
+        "cardName": "Shield3",
+        "copies": 2,
+        "images": [
+          "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+          "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "shield": 6
+        },
+        "cd": 3
+      },
+      {
+        "cardName": "Shield1",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "shield": 2
+        },
+        "cd": 1
+      },
+    {
       "cardName": "dragon2",
       "copies": 1,
       "images": [
@@ -188,6 +309,23 @@ const DEFAULT_CARDS = [
       ]
     },
     {
+        "cardName": "robot1",
+        "copies": 7,
+        "images": [
+          "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
+          "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
+          "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
+          "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
+          "https://cdn.midjourney.com/a602b362-8454-43de-aac3-70d51cccb548/0_0.png",
+          "https://cdn.midjourney.com/d2dd60ef-3fc1-4f18-a3c7-bb5d25020b50/0_0.png",
+          "https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"
+        ],
+        "cardType": "stat",
+        "stats": [
+          0
+        ]
+      },
+    {
       "cardName": "robot_attack",
       "copies": 7,
       "images": [
@@ -206,23 +344,7 @@ const DEFAULT_CARDS = [
         "dmgType": 0
       }
     },
-    {
-      "cardName": "robot1",
-      "copies": 7,
-      "images": [
-        "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
-        "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
-        "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
-        "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
-        "https://cdn.midjourney.com/a602b362-8454-43de-aac3-70d51cccb548/0_0.png",
-        "https://cdn.midjourney.com/d2dd60ef-3fc1-4f18-a3c7-bb5d25020b50/0_0.png",
-        "https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"
-      ],
-      "cardType": "stat",
-      "stats": [
-        0
-      ]
-    },
+    
     {
       "cardName": "dragon1",
       "copies": 7,
@@ -241,6 +363,25 @@ const DEFAULT_CARDS = [
       ]
     },
     {
+        "cardName": "Dragons Breath",
+        "copies": 7,
+        "images": [
+          "https://cdn.midjourney.com/8989a9f5-da33-4bdd-bc2b-ef7a681ea095/0_0.png",
+          "https://cdn.midjourney.com/8d7b2bc0-ad87-4493-9825-bd659602d026/0_0.png",
+          "https://cdn.midjourney.com/9e0945dd-5fa1-4cb0-8a2f-cce1d576118b/0_0.png",
+          "https://cdn.midjourney.com/c35d8958-bb38-481b-8dab-977661ae916a/0_0.png",
+          "https://cdn.midjourney.com/421982d3-be47-4b1b-b968-e92206303b35/0_0.png",
+          "https://cdn.midjourney.com/de6abac3-eaf0-4da7-ad7b-71ef82c04ca9/0_0.png",
+          "https://cdn.midjourney.com/0b85e656-d611-4403-ab22-d7268a593c39/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "dmg": 3,
+          "dmgType": 2
+        },
+        "cd": 3
+      },
+    {
       "cardName": "critter1",
       "copies": 7,
       "images": [
@@ -257,44 +398,13 @@ const DEFAULT_CARDS = [
         1
       ]
     },
-    {
-      "cardName": "Dragons Breath",
-      "copies": 7,
-      "images": [
-        "https://cdn.midjourney.com/8989a9f5-da33-4bdd-bc2b-ef7a681ea095/0_0.png",
-        "https://cdn.midjourney.com/8d7b2bc0-ad87-4493-9825-bd659602d026/0_0.png",
-        "https://cdn.midjourney.com/9e0945dd-5fa1-4cb0-8a2f-cce1d576118b/0_0.png",
-        "https://cdn.midjourney.com/c35d8958-bb38-481b-8dab-977661ae916a/0_0.png",
-        "https://cdn.midjourney.com/421982d3-be47-4b1b-b968-e92206303b35/0_0.png",
-        "https://cdn.midjourney.com/de6abac3-eaf0-4da7-ad7b-71ef82c04ca9/0_0.png",
-        "https://cdn.midjourney.com/0b85e656-d611-4403-ab22-d7268a593c39/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "dmg": 3,
-        "dmgType": 2
-      },
-      "cd": 3
-    },
-    {
-      "cardName": "Dragon Ulti",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
-        "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "dmg": 6,
-        "dmgType": 2
-      },
-      "cd": 3
-    },
+  
+    
     {
       "cardName": "Swarm",
       "copies": 7,
       "images": [
-        "https://cdn.midjourney.com/c0659bcb-3883-46b7-af31-ce9bb45afe4d/0_0.png",
+        "https://cdn.midjourney.com/8cb5923f-3c09-4600-ae07-a7194fa19483/0_0.png",
         "https://cdn.midjourney.com/60e654ff-5892-4a8c-bde0-e7d2ac14f64b/0_0.png",
         "https://cdn.midjourney.com/8891ed87-7ce3-4b32-abc0-6d8fee705dee/0_0.png",
         "https://cdn.midjourney.com/2be48f0b-ec75-4f71-96ba-af841c62f337/0_0.png",
@@ -309,122 +419,7 @@ const DEFAULT_CARDS = [
       },
       "cd": 2
     },
-    {
-      "cardName": "Murder rabbit",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "dmg": 4,
-        "dmgType": 1
-      },
-      "cd": 2
-    },
-    {
-      "cardName": "Robotic Dragon Swarm",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/91dde8fc-5e5a-4ff5-967a-6fdba1b1af8a/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "dmg": 1,
-        "dmgType": 2
-      },
-      "cd": 1
-    },
-    {
-      "cardName": "joker",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/007b3fdb-da8a-4283-83d4-7baedb96b390/0_0.png"
-      ],
-      "cardType": "stat",
-      "stats": [
-        0,
-        1,
-        2
-      ]
-    },
-    {
-      "cardName": "robot_dragon",
-      "copies": 2,
-      "images": [
-        "https://cdn.midjourney.com/7b6f6976-1fdc-40b1-9008-bea313ba61df/0_0.png",
-        "https://cdn.midjourney.com/2f6c7377-acb9-48ab-beaf-26684c3f8e08/0_0.png"
-      ],
-      "cardType": "stat",
-      "stats": [
-        0,
-        2
-      ]
-    },
-    {
-      "cardName": "robot_critter",
-      "copies": 2,
-      "images": [
-        "https://cdn.midjourney.com/632efef5-4d03-40ac-a69c-52bb789a72b3/0_0.png",
-        "https://cdn.midjourney.com/261245f8-c25c-40c5-a8bc-2b2f6f9f186e/0_0.png"
-      ],
-      "cardType": "stat",
-      "stats": [
-        0,
-        1
-      ]
-    },
-    {
-      "cardName": "dragon_rabbit",
-      "copies": 2,
-      "images": [
-        "https://cdn.midjourney.com/d5297d39-ddb0-4e18-a2f9-93ff4cacf522/0_0.png",
-        "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png"
-      ],
-      "cardType": "stat",
-      "stats": [
-        1,
-        2
-      ]
-    },
-    {
-      "cardName": "Devour",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "dmg": 4,
-        "dmgType": 2
-      },
-      "cd": 4
-    },
-    {
-      "cardName": "Shield3",
-      "copies": 2,
-      "images": [
-        "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-        "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "shield": 6
-      },
-      "cd": 3
-    },
-    {
-      "cardName": "Shield1",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "shield": 2
-      },
-      "cd": 1
-    }
+    
   ]
 // Styles
 const styles = {
@@ -1103,7 +1098,7 @@ export default MonsterPokerCards;
 
 // Utility to save a single card as an image
 const saveCard = (cardElement, title) => {
-    const scale = 2; // Adjust for higher resolution
+    const scale = SAVE_SCALE; // Adjust for higher resolution
     return domtoimage
         .toBlob(cardElement, {
             width: cardElement.clientWidth * scale,
@@ -1123,14 +1118,18 @@ const saveCard = (cardElement, title) => {
 
 // Utility to save all cards as images
 const saveAllCards = async (cards) => {
+    let expandedIndex = 0; // Tracks the current expanded card index
     for (let i = 0; i < cards.length; i++) {
-        const cardElement = document.getElementById(`card-${cards[i].cardName}-${i}`);
-        if (cardElement) {
-            await saveCard(cardElement, cards[i].cardName); // Save the current card
-        } else {
-            console.warn(`Card element with ID card-${cards[i].cardName}-${i} not found.`);
+        const card = cards[i];
+        for (let copyIndex = 0; copyIndex < card.copies; copyIndex++) {
+            const cardElement = document.getElementById(`card-${card.cardName}-${expandedIndex}`);
+            if (cardElement) {
+                await saveCard(cardElement, `${card.cardName}-copy-${copyIndex + 1}`);
+            } else {
+                console.warn(`Card element with ID card-${card.cardName}-${expandedIndex} not found.`);
+            }
+            expandedIndex++; // Increment the expanded index
+            await new Promise((resolve) => setTimeout(resolve, 50)); // Small delay
         }
-        // Wait for 1ms between saves to avoid conflicts
-        await new Promise((resolve) => setTimeout(resolve, 1));
     }
 };
