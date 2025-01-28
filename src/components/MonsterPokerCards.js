@@ -14,9 +14,9 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Box from '@mui/material/Box';
 
 // Constants and Default Settings
-const FONT_SIZE = 80;
-const MARGIN_SIZE = 35;
-const CONTENT_PADDING = 10;
+const FONT_SIZE = 70;
+const MARGIN_SIZE = 55;
+const CONTENT_PADDING = 30;
 const CARD_WIDTH = 635;
 const CARD_HEIGHT = 888;
 
@@ -41,35 +41,6 @@ const DISPLAY_SETTINGS = {
 
 const DEFAULT_CARDS = [
     {
-        "cardName": "draw_2_extra",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/7bcc8fdb-056e-485f-87d5-110aba1c6208/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png"
-        ],
-        "cd": -1
-      },
-    {
-        "cardName": "copy_card_in_hand",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/6dc58787-784e-4e6a-801f-4464d12124a2/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png"
-        ],
-        "cd": -1
-      },
-    {
       "cardName": "one_off_each",
       "copies": 1,
       "images": [
@@ -90,6 +61,35 @@ const DEFAULT_CARDS = [
       "cd": 1
     },
     {
+      "cardName": "draw_2_extra",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/7bcc8fdb-056e-485f-87d5-110aba1c6208/0_0.png"
+      ],
+      "cardType": "action",
+      "stats": [],
+      "effect": {},
+      "customEffect": [
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png"
+      ],
+      "cd": -1
+    },
+    {
+      "cardName": "copy_card_in_hand",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/6dc58787-784e-4e6a-801f-4464d12124a2/0_0.png"
+      ],
+      "cardType": "action",
+      "stats": [],
+      "effect": {},
+      "customEffect": [
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png"
+      ],
+      "cd": -1
+    },
+    {
       "cardName": "recycle_card",
       "copies": 1,
       "images": [
@@ -103,8 +103,6 @@ const DEFAULT_CARDS = [
       ],
       "cd": -1
     },
-   
-   
     {
       "cardName": "shield_is_dmg",
       "copies": 1,
@@ -192,13 +190,13 @@ const DEFAULT_CARDS = [
       "cardName": "robot_attack",
       "copies": 7,
       "images": [
-        "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
+        "https://cdn.midjourney.com/5413367d-1f71-4247-b4e7-7b808a88805f/0_0.png",
         "https://cdn.midjourney.com/a152fbf5-1254-4044-970c-e1537435c2c7/0_0.png",
         "https://cdn.midjourney.com/36577eb0-fedd-4f63-ad88-24e5e3689486/0_0.png",
         "https://cdn.midjourney.com/8a8fa84e-4239-4520-a12e-c516ff47272a/0_0.png",
         "https://cdn.midjourney.com/ef1a2d8f-b2b9-4e80-9dff-390439a77d73/0_0.png",
-        "https://cdn.midjourney.com/95b0be8b-9659-4627-a795-ece134ff468c/0_0.png",
-        "https://cdn.midjourney.com/7fc92b87-255a-43f7-9f6a-ea8366aad15e/0_0.png"
+        "https://cdn.midjourney.com/d0ab3f46-1a6d-4292-8fdd-bcf7863fb886/0_0.png",
+        "https://cdn.midjourney.com/4b27a7b9-bde7-4a0f-8d24-8496fc8730ed/0_0.png"
       ],
       "cardType": "action",
       "stats": [],
@@ -211,7 +209,7 @@ const DEFAULT_CARDS = [
       "cardName": "robot1",
       "copies": 7,
       "images": [
-        "https://cdn.midjourney.com/5413367d-1f71-4247-b4e7-7b808a88805f/0_0.png",
+        "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
         "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
         "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
         "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
@@ -426,7 +424,6 @@ const DEFAULT_CARDS = [
       "cd": 1
     }
   ]
-
 // Styles
 const styles = {
     container: {
