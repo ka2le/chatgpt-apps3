@@ -13,7 +13,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Box from '@mui/material/Box';
 
-const ONLINE = false;
+const ONLINE = true;
 
 // Constants and Default Settings
 const FONT_SIZE =  ONLINE ? 90 : 85;
@@ -35,7 +35,7 @@ const DISPLAY_SETTINGS = {
     cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
     arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_right.png",
    // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
-    startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/d20.png",
+    startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
     cardAddIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
     copyCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png",
     reuseCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/reuse_card.png",
@@ -639,18 +639,20 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                 <span style={{
                     ...shadowStyle,
                     fontFamily: "AdiosAmigosRegular",
-                    fontSize,
+                    fontSize: "55px",
                     filter: 'blur(2px) brightness(0)',
+                    top: "-13px", // Adjust text position
+
                 }}>
                     *
                 </span>
                 <span style={{
                     position: 'relative',
                     fontFamily: "AdiosAmigosRegular",
-                    fontSize,
+                    fontSize: "55px",
                     color: 'white',
                     filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
-                    top: regularTextAdjustment, // Adjust text position
+                    top: "-25px", // Adjust text position
                 }}>
                     *
                 </span>
