@@ -11,17 +11,19 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 
 const ONLINE = false;
 
 // Constants and Default Settings
-const FONT_SIZE =  ONLINE ? 90 : 95;
+const FONT_SIZE = ONLINE ? 130 : 100;
 const MARGIN_SIZE = ONLINE ? 20 : 55;
 const CONTENT_PADDING = ONLINE ? 10 : 30;
 const CARD_WIDTH = 635;
 const CARD_HEIGHT = 888;
-const SAVE_SCALE = ONLINE ? 0.4 : 1;
+const SAVE_SCALE = ONLINE ? 0.4 : 1.5;
+const INNER_SIZE_PERCENT = ONLINE ? 100 : 95;
 
 const STAT_ICONS = [
     { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
@@ -34,7 +36,7 @@ const DISPLAY_SETTINGS = {
     multiplierIcon: "*",
     cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
     arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_right.png",
-   // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
+    // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
     startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
     cardAddIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
     copyCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png",
@@ -44,6 +46,20 @@ const DISPLAY_SETTINGS = {
 };
 
 const DEFAULT_CARDS = [
+   
+    {
+      "cardName": "Murder rabbit",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png"
+      ],
+      "cardType": "action",
+      "effect": {
+        "dmg": 4,
+        "dmgType": 1
+      },
+      "cd": 2
+    },
     {
       "cardName": "one_off_each",
       "copies": 1,
@@ -54,19 +70,35 @@ const DEFAULT_CARDS = [
       "stats": [],
       "effect": {},
       "customEffect": [
-        
         "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
         "*",
-         "<br>",
+        "<br>",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
         "*",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png",
         "*",
-        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
-        
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
       ],
       "cd": 1
     },
+    {
+        "cardName": "bite",
+        "copies": 2,
+        "images": [
+          
+          "https://cdn.midjourney.com/3026f2c0-9128-4552-9bb0-bb9c9b07cab8/0_0.png",
+          "https://cdn.midjourney.com/93074b5b-d1b2-405a-a3a1-11ae13557ae1/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
+        ],
+        "cd": 2
+      },
     {
       "cardName": "draw_2_extra",
       "copies": 1,
@@ -96,6 +128,7 @@ const DEFAULT_CARDS = [
       ],
       "cd": -1
     },
+   
     {
       "cardName": "recycle_card",
       "copies": 1,
@@ -157,123 +190,121 @@ const DEFAULT_CARDS = [
       "cd": 1
     },
     {
-        "cardName": "Murder rabbit",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "dmg": 4,
-          "dmgType": 1
-        },
-        "cd": 2
+      "cardName": "joker",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/007b3fdb-da8a-4283-83d4-7baedb96b390/0_0.png"
+      ],
+      "cardType": "stat",
+      "stats": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "cardName": "backside",
+      "copies": 2,
+      "images": [
+        "https://cdn.midjourney.com/210b3cd1-dec8-453e-8d1a-d967cea6e283/0_0.png",
+        "https://cdn.midjourney.com/d2fb4b75-21b6-409b-91db-b0c810bed5b8/0_0.png"
+      ],
+      "cardType": "action",
+      "stats": [],
+      "effect": {},
+      "customEffect": []
+    },
+    {
+      "cardName": "robot_dragon",
+      "copies": 2,
+      "images": [
+        "https://cdn.midjourney.com/7b6f6976-1fdc-40b1-9008-bea313ba61df/0_0.png",
+        "https://cdn.midjourney.com/2f6c7377-acb9-48ab-beaf-26684c3f8e08/0_0.png"
+      ],
+      "cardType": "stat",
+      "stats": [
+        0,
+        2
+      ]
+    },
+    {
+      "cardName": "robot_critter",
+      "copies": 2,
+      "images": [
+        "https://cdn.midjourney.com/632efef5-4d03-40ac-a69c-52bb789a72b3/0_0.png",
+        "https://cdn.midjourney.com/261245f8-c25c-40c5-a8bc-2b2f6f9f186e/0_0.png"
+      ],
+      "cardType": "stat",
+      "stats": [
+        0,
+        1
+      ]
+    },
+    {
+      "cardName": "dragon_rabbit",
+      "copies": 2,
+      "images": [
+        "https://cdn.midjourney.com/d5297d39-ddb0-4e18-a2f9-93ff4cacf522/0_0.png",
+        "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png"
+      ],
+      "cardType": "stat",
+      "stats": [
+        1,
+        2
+      ]
+    },
+    {
+      "cardName": "Dragon Ulti",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
+        "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
+      ],
+      "cardType": "action",
+      "effect": {
+        "dmg": 6,
+        "dmgType": 2
       },
-     
-      {
-        "cardName": "joker",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/007b3fdb-da8a-4283-83d4-7baedb96b390/0_0.png"
-        ],
-        "cardType": "stat",
-        "stats": [
-          0,
-          1,
-          2
-        ]
+      "cd": 3
+    },
+    {
+      "cardName": "Devour",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
+      ],
+      "cardType": "action",
+      "effect": {
+        "dmg": 4,
+        "dmgType": 2
       },
-      {
-        "cardName": "robot_dragon",
-        "copies": 2,
-        "images": [
-          "https://cdn.midjourney.com/7b6f6976-1fdc-40b1-9008-bea313ba61df/0_0.png",
-          "https://cdn.midjourney.com/2f6c7377-acb9-48ab-beaf-26684c3f8e08/0_0.png"
-        ],
-        "cardType": "stat",
-        "stats": [
-          0,
-          2
-        ]
+      "cd": 4
+    },
+    {
+      "cardName": "Shield3",
+      "copies": 2,
+      "images": [
+        "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+        "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+      ],
+      "cardType": "action",
+      "effect": {
+        "shield": 6
       },
-      {
-        "cardName": "robot_critter",
-        "copies": 2,
-        "images": [
-          "https://cdn.midjourney.com/632efef5-4d03-40ac-a69c-52bb789a72b3/0_0.png",
-          "https://cdn.midjourney.com/261245f8-c25c-40c5-a8bc-2b2f6f9f186e/0_0.png"
-        ],
-        "cardType": "stat",
-        "stats": [
-          0,
-          1
-        ]
+      "cd": 3
+    },
+    {
+      "cardName": "Shield1",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
+      ],
+      "cardType": "action",
+      "effect": {
+        "shield": 2
       },
-      {
-        "cardName": "dragon_rabbit",
-        "copies": 2,
-        "images": [
-          "https://cdn.midjourney.com/d5297d39-ddb0-4e18-a2f9-93ff4cacf522/0_0.png",
-          "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png"
-        ],
-        "cardType": "stat",
-        "stats": [
-          1,
-          2
-        ]
-      },
-      {
-        "cardName": "Dragon Ulti",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
-          "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "dmg": 6,
-          "dmgType": 2
-        },
-        "cd": 3
-      },
-      {
-        "cardName": "Devour",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "dmg": 4,
-          "dmgType": 2
-        },
-        "cd": 4
-      },
-      {
-        "cardName": "Shield3",
-        "copies": 2,
-        "images": [
-          "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-          "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "shield": 6
-        },
-        "cd": 3
-      },
-      {
-        "cardName": "Shield1",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "shield": 2
-        },
-        "cd": 1
-      },
+      "cd": 1
+    },
     {
       "cardName": "dragon2",
       "copies": 1,
@@ -312,22 +343,22 @@ const DEFAULT_CARDS = [
       ]
     },
     {
-        "cardName": "robot1",
-        "copies": 7,
-        "images": [
-          "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
-          "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
-          "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
-          "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
-          "https://cdn.midjourney.com/a602b362-8454-43de-aac3-70d51cccb548/0_0.png",
-          "https://cdn.midjourney.com/d2dd60ef-3fc1-4f18-a3c7-bb5d25020b50/0_0.png",
-          "https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"
-        ],
-        "cardType": "stat",
-        "stats": [
-          0
-        ]
-      },
+      "cardName": "robot1",
+      "copies": 7,
+      "images": [
+        "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
+        "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
+        "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
+        "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
+        "https://cdn.midjourney.com/a602b362-8454-43de-aac3-70d51cccb548/0_0.png",
+        "https://cdn.midjourney.com/79e5ec74-fd4d-4eb7-995d-c38a78a57cf9/0_0.png",
+        "https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"
+      ],
+      "cardType": "stat",
+      "stats": [
+        0
+      ]
+    },
     {
       "cardName": "robot_attack",
       "copies": 7,
@@ -335,7 +366,7 @@ const DEFAULT_CARDS = [
         "https://cdn.midjourney.com/5413367d-1f71-4247-b4e7-7b808a88805f/0_0.png",
         "https://cdn.midjourney.com/a152fbf5-1254-4044-970c-e1537435c2c7/0_0.png",
         "https://cdn.midjourney.com/36577eb0-fedd-4f63-ad88-24e5e3689486/0_0.png",
-        "https://cdn.midjourney.com/8a8fa84e-4239-4520-a12e-c516ff47272a/0_0.png",
+        "https://cdn.midjourney.com/8a1748d0-d30f-43d6-9f73-c6c3c491edd2/0_0.png",
         "https://cdn.midjourney.com/ef1a2d8f-b2b9-4e80-9dff-390439a77d73/0_0.png",
         "https://cdn.midjourney.com/d0ab3f46-1a6d-4292-8fdd-bcf7863fb886/0_0.png",
         "https://cdn.midjourney.com/4b27a7b9-bde7-4a0f-8d24-8496fc8730ed/0_0.png"
@@ -346,9 +377,8 @@ const DEFAULT_CARDS = [
         "dmg": 1,
         "dmgType": 0
       },
-      "cd":1
+      "cd": 1
     },
-    
     {
       "cardName": "dragon1",
       "copies": 7,
@@ -367,24 +397,24 @@ const DEFAULT_CARDS = [
       ]
     },
     {
-        "cardName": "Dragons Breath",
-        "copies": 7,
-        "images": [
-          "https://cdn.midjourney.com/8989a9f5-da33-4bdd-bc2b-ef7a681ea095/0_0.png",
-          "https://cdn.midjourney.com/8d7b2bc0-ad87-4493-9825-bd659602d026/0_0.png",
-          "https://cdn.midjourney.com/9e0945dd-5fa1-4cb0-8a2f-cce1d576118b/0_0.png",
-          "https://cdn.midjourney.com/c35d8958-bb38-481b-8dab-977661ae916a/0_0.png",
-          "https://cdn.midjourney.com/421982d3-be47-4b1b-b968-e92206303b35/0_0.png",
-          "https://cdn.midjourney.com/de6abac3-eaf0-4da7-ad7b-71ef82c04ca9/0_0.png",
-          "https://cdn.midjourney.com/0b85e656-d611-4403-ab22-d7268a593c39/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "dmg": 3,
-          "dmgType": 2
-        },
-        "cd": 3
+      "cardName": "Dragons Breath",
+      "copies": 7,
+      "images": [
+        "https://cdn.midjourney.com/8989a9f5-da33-4bdd-bc2b-ef7a681ea095/0_0.png",
+        "https://cdn.midjourney.com/8d7b2bc0-ad87-4493-9825-bd659602d026/0_0.png",
+        "https://cdn.midjourney.com/9e0945dd-5fa1-4cb0-8a2f-cce1d576118b/0_0.png",
+        "https://cdn.midjourney.com/0bcd874b-c4d2-4e46-877a-8c3b5096fa88/0_0.png",
+        "https://cdn.midjourney.com/421982d3-be47-4b1b-b968-e92206303b35/0_0.png",
+        "https://cdn.midjourney.com/de6abac3-eaf0-4da7-ad7b-71ef82c04ca9/0_0.png",
+        "https://cdn.midjourney.com/2d51cedb-b24f-436b-947e-cba3b41e34c4/0_0.png"
+      ],
+      "cardType": "action",
+      "effect": {
+        "dmg": 3,
+        "dmgType": 2
       },
+      "cd": 3
+    },
     {
       "cardName": "critter1",
       "copies": 7,
@@ -402,14 +432,12 @@ const DEFAULT_CARDS = [
         1
       ]
     },
-  
-    
     {
       "cardName": "Swarm",
       "copies": 7,
       "images": [
         "https://cdn.midjourney.com/8cb5923f-3c09-4600-ae07-a7194fa19483/0_0.png",
-        "https://cdn.midjourney.com/60e654ff-5892-4a8c-bde0-e7d2ac14f64b/0_0.png",
+        "https://cdn.midjourney.com/fad8a664-447d-4857-b63b-145ebb8c0557/0_0.png",
         "https://cdn.midjourney.com/8891ed87-7ce3-4b32-abc0-6d8fee705dee/0_0.png",
         "https://cdn.midjourney.com/2be48f0b-ec75-4f71-96ba-af841c62f337/0_0.png",
         "https://cdn.midjourney.com/83e3cdc6-a447-4684-a707-53f1ddf91a91/0_0.png",
@@ -422,8 +450,7 @@ const DEFAULT_CARDS = [
         "dmgType": 1
       },
       "cd": 2
-    },
-    
+    }
   ]
 // Styles
 const styles = {
@@ -478,7 +505,7 @@ const styles = {
             display: "flex", // For flexible positioning
             alignItems: "center",
             gap: "0px",
-            
+
         },
         verticalLock: {
             display: "flex",
@@ -632,23 +659,29 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
     const shadowStyle = {
         position: 'absolute',
         top: regularTextAdjustment, // Adjust shadow position for text
-        left: '1px',
+        left: '2px',
         width: '100%',
         height: '100%',
-        filter: 'invert(1) opacity(0.6)',
-        transform: 'scale(1.1)',
+        filter: 'invert(1) opacity(0.9)',
+        transform: ONLINE?'scale(1.12)' :'scale(1.08)',
     };
 
     if (value === "*") {
         return (
-            <div style={iconStyle}>
+            <div style={{
+                ...iconStyle,
+                marginLeft: "-10px",
+                marginRight: "-40px",
+            }}>
                 <span style={{
                     ...shadowStyle,
                     fontFamily: "AdiosAmigosRegular",
-                    fontSize: "55px",
-                    left:"calc(50% - 10px)",
+                    fontSize: "50px",
+                    width: "50px",
+                    height: "50px",
+                    left: "calc(50% - 20px)",
                     filter: 'blur(2px) brightness(0)',
-                    top: "20px", // Adjust text position
+                    top:  ONLINE ? "40px" : "25px", // Adjust text position
 
                 }}>
                     *
@@ -656,8 +689,10 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                 <span style={{
                     position: 'relative',
                     fontFamily: "AdiosAmigosRegular",
-                    fontSize: "55px",
+                    fontSize: "50px",
                     color: 'white',
+                    width: "50px",
+                    height: "50px",
                     filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
                     top: "0px", // Adjust text position
                 }}>
@@ -709,7 +744,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                 ...shadowStyle,
                 fontSize,
                 left: "10px",
-                
+
                 filter: 'blur(2px) brightness(0)',
                 top: "-15px",
             }}>
@@ -729,6 +764,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
 };
 
 // Card Component
+
 const Card = ({ card }) => {
     const getStatIconOrText = (index) => {
         const mapping = STAT_ICONS[index];
@@ -736,37 +772,31 @@ const Card = ({ card }) => {
         return <IconOrImage value={mapping.icon} />;
     };
 
-
-    // Updated renderEffect function in the Card component
     const renderEffect = () => {
         if (!card.effect) return null;
         const { dmg = 0, dmgType, shield = 0 } = card.effect;
-    
-        // Render damage type with stat icon first
+
         const dmgTypeIcons = dmgType != null && (
             <>
-                {getStatIconOrText(dmgType)} {/* Stat icon first */}
-                <IconOrImage value={DISPLAY_SETTINGS.multiplierIcon} /> {/* Multiplier icon */}
+                {getStatIconOrText(dmgType)}
+                <IconOrImage value={DISPLAY_SETTINGS.multiplierIcon} />
             </>
         );
-    
-        // Render damage icons
+
         const dmgIcons = [...Array(dmg)].map((_, i) => (
             <React.Fragment key={`dmg-${i}`}>
                 <IconOrImage value={DISPLAY_SETTINGS.dmgIcon} />
             </React.Fragment>
         ));
-    
-        // Render shield icons
+
         const shieldIcons = [...Array(shield)].map((_, i) => (
             <IconOrImage key={`shield-${i}`} value={DISPLAY_SETTINGS.shieldIcon} />
         ));
-    
-        // Render custom effects
+
         const customEffectIcons = (card.customEffect || []).map((effect, i) => (
             <IconOrImage key={`custom-effect-${i}`} value={effect} />
         ));
-    
+
         return (
             <div style={styles.card.effect}>
                 {dmgTypeIcons}
@@ -776,11 +806,43 @@ const Card = ({ card }) => {
             </div>
         );
     };
-    
-    
 
     return (
-        <div style={{ ...styles.card.outer, backgroundImage: `url(${card.images?.[0] || DISPLAY_SETTINGS.defaultImage})` }}>
+        <div style={{
+            ...styles.card.outer,
+            position: 'relative',
+        }}>
+            <img
+                src={card.images?.[0] || DISPLAY_SETTINGS.defaultImage}
+                alt="card-background"
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    filter: 'blur(8px)',
+                    zIndex: -1,
+                }}
+            />
+            <div style={{
+                ...styles.card.innerMargin,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'absolute',
+                width: `${INNER_SIZE_PERCENT}%`,
+                height: `${INNER_SIZE_PERCENT}%`,
+            }}>
+                <img
+                    src={card.images?.[0] || DISPLAY_SETTINGS.defaultImage}
+                    alt="card"
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                    }}
+                />
+            </div>
             <div style={styles.card.innerMargin}>
                 <div style={styles.card.contentContainer}>
                     {card.cardType === "action" && renderEffect()}
@@ -794,12 +856,12 @@ const Card = ({ card }) => {
                         </div>
                     )}
                     {card.cardType === "action" && card.cd !== undefined && (
-                        <div style={styles.card.verticalLock}>
+                        <div style={{...styles.card.verticalLock, marginLeft:"-10px"}}>
                             {card.cd === -1 ? (
-                                <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE+10} />
+                                <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
                             ) : (
                                 [...Array(card.cd)].map((_, i) => (
-                                    <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon}  fontSize={FONT_SIZE+30} />
+                                    <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + 30} />
                                 ))
                             )}
                         </div>
@@ -810,6 +872,8 @@ const Card = ({ card }) => {
     );
 };
 
+
+
 // Updated Gallery Component
 
 
@@ -818,188 +882,213 @@ const Card = ({ card }) => {
 // Card Dialog Component
 const CardImageDialog = ({ isOpen, onClose, card, copyIndex, onSave }) => {
     const [imageUrl, setImageUrl] = useState('');
-  
+
     useEffect(() => {
-      if (isOpen && card) {
-        setImageUrl(card.images[copyIndex] || '');
-      }
-    }, [isOpen, card, copyIndex]);
-  
-    const handleSave = () => {
-      const newImages = [...(card.images || [])];
-      
-      if (!imageUrl && copyIndex === newImages.length - 1) {
-        newImages.pop();
-      } else {
-        while (newImages.length <= copyIndex) {
-          newImages.push('');
+        if (isOpen && card) {
+            setImageUrl(card.images[copyIndex] || '');
         }
-        newImages[copyIndex] = imageUrl;
-      }
-  
-      onSave(newImages);
-      onClose();
+    }, [isOpen, card, copyIndex]);
+
+    const handleSave = () => {
+        const newImages = [...(card.images || [])];
+
+        if (!imageUrl && copyIndex === newImages.length - 1) {
+            newImages.pop();
+        } else {
+            while (newImages.length <= copyIndex) {
+                newImages.push('');
+            }
+            newImages[copyIndex] = imageUrl;
+        }
+
+        onSave(newImages);
+        onClose();
     };
-  
+
     const handleCopy = async () => {
-      try {
-        await navigator.clipboard.writeText(imageUrl);
-      } catch (err) {
-        console.error('Failed to copy:', err);
-      }
+        try {
+            await navigator.clipboard.writeText(imageUrl);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
     };
-  
+
     const handlePaste = async () => {
-      try {
-        const text = await navigator.clipboard.readText();
-        setImageUrl(text);
-      } catch (err) {
-        console.error('Failed to paste:', err);
-      }
+        try {
+            const text = await navigator.clipboard.readText();
+            setImageUrl(text);
+        } catch (err) {
+            console.error('Failed to paste:', err);
+        }
     };
-  
+
+    const handleSaveCard = () => {
+        // Get the index of this card within the full expanded list
+        const expandedIndex = getExpandedCardIndex(card, copyIndex);
+    
+        const cardElement = document.getElementById(`card-${card.cardName}-${expandedIndex}`);
+        if (cardElement) {
+            saveCard(cardElement, `${card.cardName}-copy-${copyIndex + 1}`);
+        } else {
+            console.warn(`Card element with ID card-${card.cardName}-${expandedIndex} not found.`);
+        }
+    };
+    
+    // Helper function to get the correct expanded index
+    const getExpandedCardIndex = (selectedCard, copyIndex) => {
+        let expandedIndex = 0;
+    
+        for (const card of DEFAULT_CARDS) {
+            if (card === selectedCard) {
+                return expandedIndex + copyIndex; // Found the right card, add the copyIndex
+            }
+            expandedIndex += card.copies; // Move the index forward by the number of copies
+        }
+    
+        return -1; // Fallback (should not happen)
+    };
+    
+
     return (
-      <Dialog 
-        open={isOpen} 
-        onClose={onClose}
-        maxWidth="sm"
-        fullWidth
-      >
-        <DialogTitle>Edit Card Image</DialogTitle>
-        <DialogContent>
-          <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
-            {card?.cardName} - Copy {copyIndex + 1}
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-            <TextField
-              fullWidth
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              placeholder="Enter image URL"
-              variant="outlined"
-              size="medium"
-            />
-            <IconButton onClick={handleCopy} title="Copy URL">
-              <ContentCopyIcon />
-            </IconButton>
-            <IconButton onClick={handlePaste} title="Paste URL">
-              <ContentPasteIcon />
-            </IconButton>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSave} color="primary" variant="contained">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
+            <DialogTitle>Edit Card Image</DialogTitle>
+            <DialogContent>
+                <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                    {card?.cardName} - Copy {copyIndex + 1}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                    <TextField
+                        fullWidth
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                        placeholder="Enter image URL"
+                        variant="outlined"
+                        size="medium"
+                    />
+                    <IconButton onClick={handleCopy} title="Copy URL">
+                        <ContentCopyIcon />
+                    </IconButton>
+                    <IconButton onClick={handlePaste} title="Paste URL">
+                        <ContentPasteIcon />
+                    </IconButton>
+                    <IconButton onClick={handleSaveCard} title="Save Card">
+                        <SaveIcon />
+                    </IconButton>
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={onClose} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleSave} color="primary" variant="contained">
+                    Save
+                </Button>
+            </DialogActions>
+        </Dialog>
     );
-  };
-  
-  // Updated Gallery Component with correct copy index handling
-  const Gallery = ({ cards, setCards }) => {
+};
+
+// Updated Gallery Component with correct copy index handling
+const Gallery = ({ cards, setCards }) => {
     const [zoom, setZoom] = useState(0.5);
     const [selectedCard, setSelectedCard] = useState(null);
     const [selectedCopyIndex, setSelectedCopyIndex] = useState(null);
-  
+
     const cardWidth = CARD_WIDTH * zoom;
     const cardHeight = CARD_HEIGHT * zoom;
     const gapSize = Math.max(2, Math.round(5 * zoom));
-  
+
     // Calculate the starting index for each card in the expanded view
     const getCardStartIndex = (cardIndex) => {
-      return cards.slice(0, cardIndex).reduce((sum, card) => sum + card.copies, 0);
+        return cards.slice(0, cardIndex).reduce((sum, card) => sum + card.copies, 0);
     };
-  
+
     // Get the specific copy number for a card based on its position in the expanded view
     const getCopyIndex = (expandedIndex, cardIndex) => {
-      const startIndex = getCardStartIndex(cardIndex);
-      return expandedIndex - startIndex;
+        const startIndex = getCardStartIndex(cardIndex);
+        return expandedIndex - startIndex;
     };
-  
+
     const handleCardClick = (expandedIndex, card) => {
-      // Find the original card index
-      const cardIndex = cards.findIndex(c => c.cardName === card.cardName);
-      const copyIndex = getCopyIndex(expandedIndex, cardIndex);
-      
-      setSelectedCard(cards[cardIndex]);
-      setSelectedCopyIndex(copyIndex);
+        // Find the original card index
+        const cardIndex = cards.findIndex(c => c.cardName === card.cardName);
+        const copyIndex = getCopyIndex(expandedIndex, cardIndex);
+
+        setSelectedCard(cards[cardIndex]);
+        setSelectedCopyIndex(copyIndex);
     };
-  
+
     const handleDialogClose = () => {
-      setSelectedCard(null);
-      setSelectedCopyIndex(null);
+        setSelectedCard(null);
+        setSelectedCopyIndex(null);
     };
-  
+
     const handleSaveImage = (newImages) => {
-      const updatedCards = cards.map(card => 
-        card === selectedCard ? { ...card, images: newImages } : card
-      );
-      setCards(updatedCards);
+        const updatedCards = cards.map(card =>
+            card === selectedCard ? { ...card, images: newImages } : card
+        );
+        setCards(updatedCards);
     };
-  
+
     // Expand cards based on copies and loop through the images
     const expandedCards = cards.flatMap((card, cardIndex) => {
-      const images = card.images.length > 0 ? card.images : [DISPLAY_SETTINGS.defaultImage];
-      return Array.from({ length: card.copies }, (_, index) => ({
-        ...card,
-        displayImage: images[index % images.length], // Loop through images
-      }));
+        const images = card.images.length > 0 ? card.images : [DISPLAY_SETTINGS.defaultImage];
+        return Array.from({ length: card.copies }, (_, index) => ({
+            ...card,
+            displayImage: images[index % images.length], // Loop through images
+        }));
     });
-  
+
     return (
-      <div style={styles.gallery.wrapper}>
-        <div style={styles.gallery.zoomControl}>
-          <label>Zoom: </label>
-          <input
-            type="range"
-            min="0.2"
-            max="1"
-            step="0.1"
-            value={zoom}
-            onChange={(e) => setZoom(parseFloat(e.target.value))}
-          />
-          <span>{Math.round(zoom * 100)}%</span>
-        </div>
-        <div
-          style={{
-            ...styles.gallery.container,
-            ["--card-width"]: `${cardWidth}px`,
-            gap: `${gapSize}px`,
-            gridAutoRows: `${cardHeight}px`,
-          }}
-        >
-          {expandedCards.map((card, expandedIndex) => (
-            <div
-              key={`${card.cardName}-${expandedIndex}`}
-              id={`card-${card.cardName}-${expandedIndex}`}
-              style={{
-                transform: `scale(${zoom})`,
-                transformOrigin: 'top left',
-                width: `${CARD_WIDTH}px`,
-                height: `${CARD_HEIGHT}px`,
-                cursor: 'pointer',
-              }}
-              onClick={() => handleCardClick(expandedIndex, card)}
-            >
-              <Card card={{ ...card, images: [card.displayImage] }} />
+        <div style={styles.gallery.wrapper}>
+            <div style={styles.gallery.zoomControl}>
+                <label>Zoom: </label>
+                <input
+                    type="range"
+                    min="0.2"
+                    max="1"
+                    step="0.1"
+                    value={zoom}
+                    onChange={(e) => setZoom(parseFloat(e.target.value))}
+                />
+                <span>{Math.round(zoom * 100)}%</span>
             </div>
-          ))}
+            <div
+                style={{
+                    ...styles.gallery.container,
+                    ["--card-width"]: `${cardWidth}px`,
+                    gap: `${gapSize}px`,
+                    gridAutoRows: `${cardHeight}px`,
+                }}
+            >
+                {expandedCards.map((card, expandedIndex) => (
+                    <div
+                        key={`${card.cardName}-${expandedIndex}`}
+                        id={`card-${card.cardName}-${expandedIndex}`}
+                        style={{
+                            transform: `scale(${zoom})`,
+                            transformOrigin: 'top left',
+                            width: `${CARD_WIDTH}px`,
+                            height: `${CARD_HEIGHT}px`,
+                            cursor: 'pointer',
+                        }}
+                        onClick={() => handleCardClick(expandedIndex, card)}
+                    >
+                        <Card card={{ ...card, images: [card.displayImage] }} />
+                    </div>
+                ))}
+            </div>
+
+            <CardImageDialog
+                isOpen={selectedCard !== null}
+                onClose={handleDialogClose}
+                card={selectedCard}
+                copyIndex={selectedCopyIndex}
+                onSave={handleSaveImage}
+            />
         </div>
-  
-        <CardImageDialog
-          isOpen={selectedCard !== null}
-          onClose={handleDialogClose}
-          card={selectedCard}
-          copyIndex={selectedCopyIndex}
-          onSave={handleSaveImage}
-        />
-      </div>
     );
-  };
+};
 
 
 // Main Component
@@ -1017,9 +1106,9 @@ const MonsterPokerCards = () => {
     }, []);
 
 
-    
+
     const totalCopies = cards.reduce((sum, card) => sum + card.copies, 0);
-    console.error(totalCopies,cards,cards?.length);
+    console.error(totalCopies, cards, cards?.length);
     // Apply styles with media queries
     const mainStyle = {
         ...styles.main,
