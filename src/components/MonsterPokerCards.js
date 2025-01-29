@@ -671,7 +671,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             <div style={{
                 ...iconStyle,
                 marginLeft: "-10px",
-                marginRight: "-40px",
+                marginRight: "-30px",
             }}>
                 <span style={{
                     ...shadowStyle,
