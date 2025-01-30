@@ -38,6 +38,7 @@ const DISPLAY_SETTINGS = {
     arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_right.png",
     // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
     startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
+    fastIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
     cardAddIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
     copyCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png",
     reuseCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/reuse_card.png",
@@ -46,7 +47,22 @@ const DISPLAY_SETTINGS = {
 };
 
 const DEFAULT_CARDS = [
-   
+    {
+        "cardName": "extra_turn",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/0a82e853-f51e-49b2-b54d-32c30661901c/0_0.png"
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+          
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png"
+        ],
+        "cd": -1
+      },
     {
       "cardName": "Murder rabbit",
       "copies": 1,
@@ -634,7 +650,7 @@ const styles = {
 
 // Utility Components
 // New constant for text adjustment
-const regularTextAdjustment = "-10px";
+const regularTextAdjustment = "10px";
 
 // Utility Components
 const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
@@ -658,7 +674,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
     // Style for the shadow/outline effect
     const shadowStyle = {
         position: 'absolute',
-        top: regularTextAdjustment, // Adjust shadow position for text
+        top: "10px", // Adjust shadow position for text
         left: '2px',
         width: '100%',
         height: '100%',
@@ -746,7 +762,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                 left: "10px",
 
                 filter: 'blur(2px) brightness(0)',
-                top: "-15px",
+                //top: "-15px",
             }}>
                 {value}
             </span>
