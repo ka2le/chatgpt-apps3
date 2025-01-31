@@ -48,21 +48,20 @@ const DISPLAY_SETTINGS = {
 
 const DEFAULT_CARDS = [
     {
-        "cardName": "extra_turn",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/0a82e853-f51e-49b2-b54d-32c30661901c/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-          
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png"
-        ],
-        "cd": -1
-      },
+      "cardName": "extra_turn",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/0a82e853-f51e-49b2-b54d-32c30661901c/0_0.png"
+      ],
+      "cardType": "action",
+      "stats": [],
+      "effect": {},
+      "customEffect": [
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png"
+      ],
+      "cd": -1
+    },
     {
       "cardName": "Murder rabbit",
       "copies": 1,
@@ -98,23 +97,22 @@ const DEFAULT_CARDS = [
       "cd": 1
     },
     {
-        "cardName": "bite",
-        "copies": 2,
-        "images": [
-          
-          "https://cdn.midjourney.com/3026f2c0-9128-4552-9bb0-bb9c9b07cab8/0_0.png",
-          "https://cdn.midjourney.com/93074b5b-d1b2-405a-a3a1-11ae13557ae1/0_0.png",
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
-          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
-        ],
-        "cd": 2
-      },
+      "cardName": "bite",
+      "copies": 2,
+      "images": [
+        "https://cdn.midjourney.com/3026f2c0-9128-4552-9bb0-bb9c9b07cab8/0_0.png",
+        "https://cdn.midjourney.com/93074b5b-d1b2-405a-a3a1-11ae13557ae1/0_0.png"
+      ],
+      "cardType": "action",
+      "stats": [],
+      "effect": {},
+      "customEffect": [
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
+      ],
+      "cd": 2
+    },
     {
       "cardName": "draw_2_extra",
       "copies": 1,
@@ -144,7 +142,6 @@ const DEFAULT_CARDS = [
       ],
       "cd": -1
     },
-   
     {
       "cardName": "recycle_card",
       "copies": 1,
@@ -258,9 +255,8 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "dragon_rabbit",
-      "copies": 2,
+      "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/d5297d39-ddb0-4e18-a2f9-93ff4cacf522/0_0.png",
         "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png"
       ],
       "cardType": "stat",
@@ -268,6 +264,26 @@ const DEFAULT_CARDS = [
         1,
         2
       ]
+    },
+    {
+      "cardName": "dragon_rabbit_damage",
+      "copies": 1,
+      "images": [
+        "https://cdn.midjourney.com/0559553f-0283-4122-935f-2e372da50e70/0_0.png"
+      ],
+      "cardType": "action",
+      "stats": [],
+      "effect": {},
+      "customEffect": [
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
+        "+",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png",
+        "*",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
+      ],
+      "cd": 3
     },
     {
       "cardName": "Dragon Ulti",
@@ -291,7 +307,7 @@ const DEFAULT_CARDS = [
       ],
       "cardType": "action",
       "effect": {
-        "dmg": 4,
+        "dmg": 6,
         "dmgType": 2
       },
       "cd": 4
@@ -301,7 +317,7 @@ const DEFAULT_CARDS = [
       "copies": 2,
       "images": [
         "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-        "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
       ],
       "cardType": "action",
       "effect": {
@@ -313,13 +329,13 @@ const DEFAULT_CARDS = [
       "cardName": "Shield1",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
+        "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
       ],
       "cardType": "action",
       "effect": {
-        "shield": 2
+        "shield": 4
       },
-      "cd": 1
+      "cd": 2
     },
     {
       "cardName": "dragon2",
@@ -679,7 +695,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         width: '100%',
         height: '100%',
         filter: 'invert(1) opacity(0.9)',
-        transform: ONLINE?'scale(1.12)' :'scale(1.08)',
+        transform: ONLINE ? 'scale(1.12)' : 'scale(1.08)',
     };
 
     if (value === "*") {
@@ -697,7 +713,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                     height: "50px",
                     left: "calc(50% - 20px)",
                     filter: 'blur(2px) brightness(0)',
-                    top:  ONLINE ? "40px" : "25px", // Adjust text position
+                    top: ONLINE ? "40px" : "25px", // Adjust text position
 
                 }}>
                     *
@@ -872,7 +888,7 @@ const Card = ({ card }) => {
                         </div>
                     )}
                     {card.cardType === "action" && card.cd !== undefined && (
-                        <div style={{...styles.card.verticalLock, marginLeft:"-10px"}}>
+                        <div style={{ ...styles.card.verticalLock, marginLeft: "-10px" }}>
                             {card.cd === -1 ? (
                                 <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
                             ) : (
@@ -941,7 +957,7 @@ const CardImageDialog = ({ isOpen, onClose, card, copyIndex, onSave }) => {
     const handleSaveCard = () => {
         // Get the index of this card within the full expanded list
         const expandedIndex = getExpandedCardIndex(card, copyIndex);
-    
+
         const cardElement = document.getElementById(`card-${card.cardName}-${expandedIndex}`);
         if (cardElement) {
             saveCard(cardElement, `${card.cardName}-copy-${copyIndex + 1}`);
@@ -949,21 +965,21 @@ const CardImageDialog = ({ isOpen, onClose, card, copyIndex, onSave }) => {
             console.warn(`Card element with ID card-${card.cardName}-${expandedIndex} not found.`);
         }
     };
-    
+
     // Helper function to get the correct expanded index
     const getExpandedCardIndex = (selectedCard, copyIndex) => {
         let expandedIndex = 0;
-    
+
         for (const card of DEFAULT_CARDS) {
             if (card === selectedCard) {
                 return expandedIndex + copyIndex; // Found the right card, add the copyIndex
             }
             expandedIndex += card.copies; // Move the index forward by the number of copies
         }
-    
+
         return -1; // Fallback (should not happen)
     };
-    
+
 
     return (
         <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
