@@ -35,6 +35,7 @@ const DISPLAY_SETTINGS = {
     dmgIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
     multiplierIcon: "*",
     cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
+    cdMaybeIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass_question.png",
     arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_right.png",
     // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
     startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
@@ -62,6 +63,27 @@ const DEFAULT_CARDS = [
       ],
       "cd": -1
     },
+    {
+        "cardName": "Shield_select_turn",
+        "copies": 4,
+        "images": [
+          "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+          "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png",
+          "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
+          "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+        },
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "*",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
+        ],
+        "cd": -2
+      },
+     
+  
     {
       "cardName": "Murder rabbit",
       "copies": 1,
@@ -333,43 +355,7 @@ const DEFAULT_CARDS = [
       },
       "cd": 4
     },
-    {
-      "cardName": "Shield3",
-      "copies": 2,
-      "images": [
-        "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-        "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "shield": 6
-      },
-      "cd": 3
-    },
-    {
-        "cardName": "Shield2",
-        "copies": 1,
-        "images": [
-          "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-          "shield": 4
-        },
-        "cd": 2
-      },
-    {
-      "cardName": "Shield1",
-      "copies": 1,
-      "images": [
-        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
-      ],
-      "cardType": "action",
-      "effect": {
-        "shield": 2
-      },
-      "cd": 1
-    },
+   
     {
       "cardName": "dragon2",
       "copies": 1,
@@ -925,11 +911,24 @@ const Card = ({ card }) => {
                         <div style={{ ...styles.card.verticalLock, marginLeft: "-10px" }}>
                             {card.cd === -1 ? (
                                 <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
-                            ) : (
+
+                            ) : 
+                           ( card.cd === -2 ?
+                            (<>
+                            
+                            
+                            <IconOrImage key={`cd-${2}`}  value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
+                            <IconOrImage key={`cd-${3}`}  value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
+                            <IconOrImage key={`cd-${3}`}  value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
+                            <IconOrImage key={`cd-${1}`} value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
+                            </>
+                            )
+                                :
+                            (
                                 [...Array(card.cd)].map((_, i) => (
                                     <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + 30} />
                                 ))
-                            )}
+                            ))}
                         </div>
                     )}
                 </div>
@@ -1297,3 +1296,59 @@ const saveAllCards = async (cards) => {
         }
     }
 };
+
+
+// {
+//     "cardName": "Shield3",
+//     "copies": 2,
+//     "images": [
+//       "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+//       "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png"
+//     ],
+//     "cardType": "action",
+//     "effect": {
+//       "shield": 6
+//     },
+//     "cd": 3
+//   },
+//   {
+//       "cardName": "Shield2",
+//       "copies": 1,
+//       "images": [
+//         "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+//       ],
+//       "cardType": "action",
+//       "effect": {
+//         "shield": 4
+//       },
+//       "cd": 2
+//     },
+//   {
+//     "cardName": "Shield1",
+//     "copies": 1,
+//     "images": [
+//       "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
+//     ],
+//     "cardType": "action",
+//     "effect": {
+//       "shield": 2
+//     },
+//     "cd": 1
+//   },
+
+// {
+//     "cardName": "tester",
+//     "copies": 1,
+//     "images": [
+//       "https://cdn.midjourney.com/0a82e853-f51e-49b2-b54d-32c30661901c/0_0.png"
+//     ],
+//     "cardType": "action",
+//     "stats": [],
+//     "effect": {},
+//     "customEffect": [
+//         "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+//         "*",
+//         "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
+//     ],
+//     "cd": -2
+//   },
