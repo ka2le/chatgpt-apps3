@@ -64,7 +64,7 @@ const DEFAULT_CARDS = [
       "cd": -1
     },
     {
-        "cardName": "Shield_select_turn",
+        "cardName": "Shield2",
         "copies": 4,
         "images": [
           "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
@@ -77,10 +77,10 @@ const DEFAULT_CARDS = [
         },
         "customEffect": [
             "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
-            "*",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            
         ],
-        "cd": -2
+        "cd": 1
       },
      
   
@@ -1352,3 +1352,27 @@ const saveAllCards = async (cards) => {
 //     ],
 //     "cd": -2
 //   },
+
+
+// {
+//     "cardName": "Shield_select_turn",
+//     "copies": 4,
+//     "images": [
+//       "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+//       "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png",
+//       "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
+//       "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+//     ],
+//     "cardType": "action",
+//     "effect": {
+//     },
+//     "customEffect": [
+//         "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass_question.png",
+//         "*",
+//         "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+//         "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+        
+//     ],
+//     "cd": -2
+//   },
+ 
