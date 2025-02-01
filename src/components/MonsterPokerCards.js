@@ -14,7 +14,7 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 
-const ONLINE = false;
+const ONLINE = true;
 
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 130 : 100;
@@ -96,6 +96,26 @@ const DEFAULT_CARDS = [
       ],
       "cd": 1
     },
+    {
+        "cardName": "any_off_each",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/31fa9c34-7edb-42e7-a9f4-3de673bd9844/0_0.png"
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
+          "+",
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
+          "+",
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png",
+          "*",
+          "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
+        ],
+        "cd": 2
+      },
     {
       "cardName": "bite",
       "copies": 2,
@@ -255,9 +275,10 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "dragon_rabbit",
-      "copies": 1,
+      "copies": 2,
       "images": [
-        "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png"
+        "https://cdn.midjourney.com/b78b6a36-5f3b-434b-9e64-174987189c81/0_0.png",
+        "https://cdn.midjourney.com/0559553f-0283-4122-935f-2e372da50e70/0_0.png"
       ],
       "cardType": "stat",
       "stats": [
@@ -267,7 +288,7 @@ const DEFAULT_CARDS = [
     },
     {
       "cardName": "dragon_rabbit_damage",
-      "copies": 1,
+      "copies": 0,
       "images": [
         "https://cdn.midjourney.com/0559553f-0283-4122-935f-2e372da50e70/0_0.png"
       ],
@@ -317,7 +338,7 @@ const DEFAULT_CARDS = [
       "copies": 2,
       "images": [
         "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
+        "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png"
       ],
       "cardType": "action",
       "effect": {
@@ -326,16 +347,28 @@ const DEFAULT_CARDS = [
       "cd": 3
     },
     {
+        "cardName": "Shield2",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+          "shield": 4
+        },
+        "cd": 2
+      },
+    {
       "cardName": "Shield1",
       "copies": 1,
       "images": [
-        "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+        "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png"
       ],
       "cardType": "action",
       "effect": {
-        "shield": 4
+        "shield": 2
       },
-      "cd": 2
+      "cd": 1
     },
     {
       "cardName": "dragon2",
@@ -698,37 +731,38 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         transform: ONLINE ? 'scale(1.12)' : 'scale(1.08)',
     };
 
-    if (value === "*") {
+    if (value === "*" || value === "+") {
+        const newSize = value === "*" ? "50px" : "60px";
         return (
             <div style={{
                 ...iconStyle,
-                marginLeft: "-10px",
-                marginRight: "-30px",
+                marginLeft:  value == "*" ?  "-10px" : "0px",
+                marginRight: value == "*" ?  "-30px" : "-20px",
             }}>
                 <span style={{
                     ...shadowStyle,
                     fontFamily: "AdiosAmigosRegular",
-                    fontSize: "50px",
-                    width: "50px",
-                    height: "50px",
+                    fontSize: newSize,
+                    width: newSize,
+                    height: newSize,
                     left: "calc(50% - 20px)",
                     filter: 'blur(2px) brightness(0)',
                     top: ONLINE ? "40px" : "25px", // Adjust text position
 
                 }}>
-                    *
+                    {value}
                 </span>
                 <span style={{
                     position: 'relative',
                     fontFamily: "AdiosAmigosRegular",
-                    fontSize: "50px",
+                    fontSize: newSize,
                     color: 'white',
-                    width: "50px",
-                    height: "50px",
+                    width: newSize,
+                    height: newSize,
                     filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
                     top: "0px", // Adjust text position
                 }}>
-                    *
+                    {value}
                 </span>
             </div>
         );
