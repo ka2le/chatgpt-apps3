@@ -355,7 +355,20 @@ const DEFAULT_CARDS = [
       },
       "cd": 4
     },
-   
+    {
+        "cardName": "robot_ulti",
+        "copies": 1,
+        "images": [
+          "https://cdn.midjourney.com/36577eb0-fedd-4f63-ad88-24e5e3689486/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {
+          "dmg": 2,
+          "dmgType": 0
+        },
+        "cd": 1
+      },
     {
       "cardName": "dragon2",
       "copies": 1,
@@ -398,7 +411,7 @@ const DEFAULT_CARDS = [
       "copies": 7,
       "images": [
         "https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",
-        "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
+        "https://cdn.midjourney.com/0784c063-7ae5-4964-a34c-7ca6f7104299/0_0.png",
         "https://cdn.midjourney.com/2f5e90ad-d7d3-46be-9f06-14afccc44046/0_0.png",
         "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
         "https://cdn.midjourney.com/a602b362-8454-43de-aac3-70d51cccb548/0_0.png",
@@ -415,8 +428,8 @@ const DEFAULT_CARDS = [
       "copies": 7,
       "images": [
         "https://cdn.midjourney.com/5413367d-1f71-4247-b4e7-7b808a88805f/0_0.png",
+        "https://cdn.midjourney.com/65e34e07-6ce4-4f65-9c9d-c3289b1ce3ec/0_0.png",
         "https://cdn.midjourney.com/a152fbf5-1254-4044-970c-e1537435c2c7/0_0.png",
-        "https://cdn.midjourney.com/36577eb0-fedd-4f63-ad88-24e5e3689486/0_0.png",
         "https://cdn.midjourney.com/8a1748d0-d30f-43d6-9f73-c6c3c491edd2/0_0.png",
         "https://cdn.midjourney.com/ef1a2d8f-b2b9-4e80-9dff-390439a77d73/0_0.png",
         "https://cdn.midjourney.com/d0ab3f46-1a6d-4292-8fdd-bcf7863fb886/0_0.png",
