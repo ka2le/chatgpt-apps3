@@ -13,8 +13,9 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
+import { DisplaySettings } from "@mui/icons-material";
 
-const ONLINE = true;
+const ONLINE = false;
 
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 130 : 100;
@@ -29,6 +30,7 @@ const STAT_ICONS = [
     { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
     { name: "rabbit", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png" },
     { name: "dragon", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png" },
+    { name: "monster", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/monster.png" },
 ];
 
 const DISPLAY_SETTINGS = {
@@ -36,7 +38,7 @@ const DISPLAY_SETTINGS = {
     multiplierIcon: "*",
     cdIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass.png",
     cdMaybeIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass_question.png",
-    arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_right.png",
+    arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
     // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
     startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
     fastIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
@@ -205,7 +207,7 @@ const DEFAULT_CARDS = [
       "effect": {},
       "customEffect": [
         "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
-        "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_right.png",
+        "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
         "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
       ],
       "cd": 1
@@ -501,7 +503,7 @@ const DEFAULT_CARDS = [
         "https://cdn.midjourney.com/8891ed87-7ce3-4b32-abc0-6d8fee705dee/0_0.png",
         "https://cdn.midjourney.com/2be48f0b-ec75-4f71-96ba-af841c62f337/0_0.png",
         "https://cdn.midjourney.com/18e6a0a5-1134-4351-b020-7a0b57162756/0_3.png",
-        "https://cdn.midjourney.com/140e918b-31f8-4e9f-b19b-6eadd7a8efa0/0_0.png",
+        "https://cdn.midjourney.com/ace6742e-f77e-42cd-b31a-811ebef29bc9/0_0.png",
         "https://cdn.midjourney.com/35c85bc8-8e8b-439f-8c69-a3c7575b33cf/0_0.png"
       ],
       "cardType": "action",
@@ -726,13 +728,13 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         transform: ONLINE ? 'scale(1.12)' : 'scale(1.08)',
     };
 
-    if (value === "*" || value === "+") {
+    if (value === "*" || value === "+" || value === ">") {
         const newSize = value === "*" ? "50px" : "60px";
         return (
             <div style={{
                 ...iconStyle,
-                marginLeft:  value == "*" ?  "-10px" : "0px",
-                marginRight: value == "*" ?  "-30px" : "-20px",
+                marginLeft: value == "*" ? "-10px" : "0px",
+                marginRight: value == "*" ? "-30px" : "-20px",
             }}>
                 <span style={{
                     ...shadowStyle,
@@ -921,23 +923,23 @@ const Card = ({ card }) => {
                             {card.cd === -1 ? (
                                 <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
 
-                            ) : 
-                           ( card.cd === -2 ?
-                            (<>
-                            
-                            
-                            <IconOrImage key={`cd-${2}`}  value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                            <IconOrImage key={`cd-${3}`}  value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                            <IconOrImage key={`cd-${3}`}  value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                            <IconOrImage key={`cd-${1}`} value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
-                            </>
-                            )
-                                :
-                            (
-                                [...Array(card.cd)].map((_, i) => (
-                                    <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + 30} />
-                                ))
-                            ))}
+                            ) :
+                                (card.cd === -2 ?
+                                    (<>
+
+
+                                        <IconOrImage key={`cd-${2}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
+                                        <IconOrImage key={`cd-${3}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
+                                        <IconOrImage key={`cd-${3}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
+                                        <IconOrImage key={`cd-${1}`} value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
+                                    </>
+                                    )
+                                    :
+                                    (
+                                        [...Array(card.cd)].map((_, i) => (
+                                            <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + 30} />
+                                        ))
+                                    ))}
                         </div>
                     )}
                 </div>
@@ -1062,6 +1064,9 @@ const CardImageDialog = ({ isOpen, onClose, card, copyIndex, onSave }) => {
     );
 };
 
+
+
+
 // Updated Gallery Component with correct copy index handling
 const Gallery = ({ cards, setCards }) => {
     const [zoom, setZoom] = useState(0.5);
@@ -1135,6 +1140,18 @@ const Gallery = ({ cards, setCards }) => {
                     gridAutoRows: `${cardHeight}px`,
                 }}
             >
+                {/* Add IconExplanationCard at the end of the gallery */}
+                <div
+                    key="icon-explanation"
+                    style={{
+                        transform: `scale(${zoom})`,
+                        transformOrigin: 'top left',
+                        width: `${CARD_WIDTH}px`,
+                        height: `${CARD_HEIGHT}px`,
+                    }}
+                >
+                    <IconExplanationCard  />
+                </div>
                 {expandedCards.map((card, expandedIndex) => (
                     <div
                         key={`${card.cardName}-${expandedIndex}`}
@@ -1151,6 +1168,7 @@ const Gallery = ({ cards, setCards }) => {
                         <Card card={{ ...card, images: [card.displayImage] }} />
                     </div>
                 ))}
+
             </div>
 
             <CardImageDialog
@@ -1380,8 +1398,236 @@ const saveAllCards = async (cards) => {
 //         "*",
 //         "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
 //         "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
-        
+
 //     ],
 //     "cd": -2
 //   },
- 
+
+
+
+
+const ICON_EXPLANATIONS = [
+    {
+        icons: [STAT_ICONS[0].icon, STAT_ICONS[1].icon, STAT_ICONS[2].icon],
+        explanation: [
+            "The three stats. Robots, Critters, and Dragons. Stat Cards give these. Action Cards use them to deal damage."
+        ]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.cdIcon],
+        explanation: [
+            "Action speed: 1 means every round from round 1. 2 means every other round from round 2 and so on"
+        ]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.dmgIcon], 
+        explanation: ["Damage dealt to opponent"]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.shieldIcon],
+        explanation: [
+            "Block 1 ", 
+            DISPLAY_SETTINGS.dmgIcon, 
+            " per ", 
+            DISPLAY_SETTINGS.shieldIcon
+        ]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.startIcon],
+        explanation: ["Card played before battle start and card reveal. Multiple cards can be played in any order"]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.fastIcon, DISPLAY_SETTINGS.cdIcon],
+        explanation: ["Take first turn before battle, then on round 1 take second turn, staying 1 turn ahead"]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.reuseCardIcon],
+        explanation: ["Draw 1 discarded card from any player's discard pile"]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.copyCardIcon],
+        explanation: ["Copy 1 card in your hand"]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.cardAddIcon, DISPLAY_SETTINGS.cardAddIcon],
+        explanation: ["Draw 2 cards from draw pile"]
+    },
+    {
+        icons: [DISPLAY_SETTINGS.shieldIcon, DISPLAY_SETTINGS.arrowIcon, DISPLAY_SETTINGS.dmgIcon],
+        explanation: [
+            "For each ", 
+            DISPLAY_SETTINGS.shieldIcon, 
+            " also deal 1 ", 
+            DISPLAY_SETTINGS.dmgIcon
+        ]
+    },
+    {
+        icons: ["2x", DISPLAY_SETTINGS.dmgIcon],
+        explanation: ["Deal double damage"]
+    }
+];
+const IconExplanationCard = () => {
+    const ICON_SIZE_LARGE = 55; // Larger for main icons
+    const MIN_WIDTH_LARGE_ICON = ICON_SIZE_LARGE * 2; // Prevent icons from shrinking
+    const SMALLER_LARGE_ICON_SIZE = "45px";
+    const ICON_SIZE_SMALL = 30;  // Smaller for explanation icons
+    const FONT_SIZE_LARGE = 34;
+    const FONT_SIZE_SMALL = 25;
+    const TEXT_SHADOW = "2px 2px 4px black";
+    const OVERLAY_COLOR = "rgba(0, 0, 0, 0.8)";
+    const PADDING_OUTLINE = 40;
+
+    const styles = {
+        card: {
+            position: "relative",
+            width: `${CARD_WIDTH}px`,
+            height: `${CARD_HEIGHT}px`,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: PADDING_OUTLINE+"px",
+            overflow: "hidden",
+            fontWeight:"100",
+            color:"RGB(238, 237, 229)",
+            fontFamily: "Garamond",
+        },
+        background: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: `url('https://cdn.midjourney.com/fdca1154-29a1-4f64-b37c-35efbac47990/0_1.png') no-repeat center center`,
+            backgroundSize: "cover",
+        },
+        overlay: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: OVERLAY_COLOR,
+        },
+        content: {
+            position: "relative",
+            zIndex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "left",
+        },
+        row: {
+            display: "flex",
+            alignItems: "center", // Ensures everything in a row is aligned properly
+            gap: "5px",
+            width: "calc(100% - "+PADDING_OUTLINE+"px)",
+            marginBottom: "20px",
+            lineHeight: "0.9",
+        },
+        iconContainer: {
+            display: "flex",
+            flexWrap: "nowrap", // Keep all large icons in a single row
+            gap: "5px",
+            minWidth: ` ${MIN_WIDTH_LARGE_ICON}px `, // Prevent icons from shrinking
+            flexShrink: 0, // Prevent icons from shrinking
+            alignItems: "center",
+        },
+        textLarge: {
+            fontSize: `${FONT_SIZE_LARGE}px`,
+            
+            textShadow: TEXT_SHADOW,
+            fontWeight: "bold",
+            display: "inline", // Helps align with images
+            alignItems: "center",
+            position: "relative",
+            top: "-5px", // Adjust this value to move text slightly higher
+        },
+        textSmall: {
+            fontSize: `${FONT_SIZE_SMALL}px`,
+            textShadow: TEXT_SHADOW,
+            fontWeight: "bold",
+            display: "inline",
+            alignItems: "center",
+            position: "relative",
+        },
+        iconImageLarge: {
+            width: `${ICON_SIZE_LARGE}px`,
+            height: `${ICON_SIZE_LARGE}px`,
+            objectFit: "contain",
+            display: "inline-block",
+            verticalAlign: "middle",
+           
+        },
+        iconImageSmall: {
+            width: `${ICON_SIZE_SMALL}px`,
+            height: `${ICON_SIZE_SMALL}px`,
+            objectFit: "contain",
+            display: "inline-block",
+            marginTop: "-3px", // Adjust this value to move image slightly lower
+            marginBottom: "-3px",
+            verticalAlign: "middle",
+        }
+    };
+
+    const renderTextOrImage = (value, isLarge) => {
+        if (typeof value === "string" && /^https?:\/\//.test(value)) {
+            return (
+                <img
+                    src={value}
+                    alt="icon"
+                    style={isLarge ? styles.iconImageLarge : styles.iconImageSmall}
+                    onError={(e) => e.target.src = DISPLAY_SETTINGS.defaultImage}
+                />
+            );
+        }
+        return <span style={isLarge ? styles.textLarge : styles.textSmall}>{value}</span>;
+    };
+    const renderTextOrImage2 = (value, isLarge, newSize = SMALLER_LARGE_ICON_SIZE) => {
+        // Clone the styles to local scope to prevent global mutation
+        const imgStyle = { ...styles.iconImageLarge, width: newSize, height: newSize,margin:"0px -5px" };
+        const textStyle = { ...isLarge ? styles.textLarge : styles.textSmall, fontSize: newSize };
+    
+        if (typeof value === "string" && /^https?:\/\//.test(value)) {
+            return (
+                <img
+                    src={value}
+                    alt="icon"
+                    style={imgStyle}
+                    onError={(e) => e.target.src = DISPLAY_SETTINGS.defaultImage}
+                />
+            );
+        }
+        return <span style={textStyle}>{value}</span>;
+    };
+    
+
+    return (
+        <div style={styles.card}>
+            <div style={styles.background} />
+            <div style={styles.overlay} />
+            <div style={styles.content}>
+                {ICON_EXPLANATIONS.map((entry, index) => (
+                    <div style={styles.row} key={index}>
+                        {/* Render larger main icons + text */}
+                        {entry.icons?.length > 1 ? (
+                            <div style={styles.iconContainer}>
+                                
+                                {entry.icons.map((item, i) => renderTextOrImage2(item, true))}
+                            </div>
+                        ) :
+
+                        ( <div style={styles.iconContainer}>
+                            {entry.icons.map((item, i) => renderTextOrImage(item, true))}
+                        </div>)
+                        }
+                       
+                        {/* Render explanation text with mixed small icons */}
+                        <div>
+                            {entry.explanation.map((item, i) => renderTextOrImage(item, false))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
