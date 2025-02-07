@@ -53,7 +53,7 @@ const DISPLAY_SETTINGS = {
 const DEFAULT_CARDS = [
     {
         "cardName": "monster_test",
-        "copies": 21,
+        "copies": 25,
         "images": [
             "https://cdn.midjourney.com/4b0905bf-3033-4882-a3ba-476e91dfb0b8/0_0.png",
             "https://cdn.midjourney.com/f965723e-8787-44d8-8989-8fbb968a0ea4/0_0.png",
@@ -76,6 +76,11 @@ const DEFAULT_CARDS = [
             "https://cdn.midjourney.com/d13983d8-6975-4861-85ea-cb51deae5c55/0_0.png",
             "https://cdn.midjourney.com/0a24056d-2bad-4821-a06e-bdfb02825384/0_0.png",
             "https://cdn.midjourney.com/109fd2ac-24c4-424b-b0e0-91f978ebf30a/0_0.png",
+            "https://cdn.midjourney.com/795d3abb-ea88-4f4a-8feb-470191f7f2b9/0_0.png",  
+            "https://cdn.midjourney.com/c93d5335-1b63-4150-8c9a-3d0b57603f74/0_0.png",
+            "https://cdn.midjourney.com/c1cc4066-8ba5-46f7-904f-45fc21582c5a/0_0.png",
+            "https://cdn.midjourney.com/61795f45-a536-4176-ab48-9f8e713cef85/0_0.png",
+
 
         ],
         "cardType": "action",
@@ -487,7 +492,7 @@ const DEFAULT_CARDS = [
             "https://cdn.midjourney.com/d4646dbf-1b18-437f-9c38-4d7bd2c6aa77/0_0.png",
             "https://cdn.midjourney.com/dd78eddd-ee76-4256-b3d2-4a0db070ae2d/0_0.png",
             "https://cdn.midjourney.com/bf9c1a6b-9d01-4819-af43-3f330965a12d/0_0.png",
-            "https://cdn.midjourney.com/1b337ee8-f342-4170-b9b3-d4e00c50abaf/0_0.png",
+            "https://cdn.midjourney.com/19857464-af32-4f3d-b87a-9a287e90fefe/0_0.png",
             "https://cdn.midjourney.com/7428b967-9ad6-494f-bbf2-fb06542137da/0_0.png"
         ],
         "cardType": "stat",
