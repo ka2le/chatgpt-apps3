@@ -18,7 +18,8 @@ import { DisplaySettings } from "@mui/icons-material";
 const ONLINE = false;
 
 // Constants and Default Settings
-const FONT_SIZE = ONLINE ? 130 : 100;
+const FONT_SIZE = ONLINE ? 130 : 90;
+const MULTIPLIER_ICON_SIZE = ONLINE ? 50 : 35;
 const MARGIN_SIZE = ONLINE ? 20 : 55;
 const CONTENT_PADDING = ONLINE ? 10 : 30;
 const CARD_WIDTH = 635;
@@ -52,10 +53,30 @@ const DISPLAY_SETTINGS = {
 const DEFAULT_CARDS = [
     {
         "cardName": "monster_test",
-        "copies": 2,
+        "copies": 21,
         "images": [
             "https://cdn.midjourney.com/4b0905bf-3033-4882-a3ba-476e91dfb0b8/0_0.png",
-            "https://cdn.midjourney.com/f965723e-8787-44d8-8989-8fbb968a0ea4/0_0.png"
+            "https://cdn.midjourney.com/f965723e-8787-44d8-8989-8fbb968a0ea4/0_0.png",
+            "https://cdn.midjourney.com/683a3cba-9a15-4207-9e42-c75850b847cc/0_0.png",
+            "https://cdn.midjourney.com/d8913ad5-7cc7-49fc-906b-9c329bcc4bb9/0_0.png",
+            "https://cdn.midjourney.com/de58c5aa-2fa9-4695-af17-7091204d0b63/0_0.png",
+            "https://cdn.midjourney.com/6a9622c7-fa63-48ac-88e7-3b89d2d926a5/0_0.png",  
+            "https://cdn.midjourney.com/f2f40a23-d352-40f8-b712-24e1e6b7223a/0_0.png",
+            "https://cdn.midjourney.com/8c4f738b-a2f8-4741-949c-f944120a9dd7/0_0.png",
+            "https://cdn.midjourney.com/6a169f35-1379-42a9-ac1a-d85530bc620c/0_0.png",
+            "https://cdn.midjourney.com/05bf2359-92cd-43c6-a4e6-8f6d74d11cbe/0_0.png",
+            "https://cdn.midjourney.com/9519d277-16cb-41d7-8ec8-356ee6228295/0_0.png",
+            "https://cdn.midjourney.com/16d11a34-1f9c-45a3-9a8a-9c4c0599e7d3/0_0.png",
+            "https://cdn.midjourney.com/f163e3a5-ff3d-47c9-92e6-e218f1313909/0_0.png",
+            "https://cdn.midjourney.com/368f5e41-b923-4904-8bfc-8fc4d914b6a9/0_0.png",
+            "https://cdn.midjourney.com/6d684b63-120a-4323-9906-35c98629475c/0_0.png",
+            "https://cdn.midjourney.com/749b8b3a-0523-442c-90c0-8c08c106afb7/0_0.png",
+            "https://cdn.midjourney.com/01d0aeeb-2277-4a7d-9e78-f6f970fc7c7b/0_0.png",
+            "https://cdn.midjourney.com/71e26fcd-beda-489e-b64e-c8a897af684e/0_0.png",
+            "https://cdn.midjourney.com/d13983d8-6975-4861-85ea-cb51deae5c55/0_0.png",
+            "https://cdn.midjourney.com/0a24056d-2bad-4821-a06e-bdfb02825384/0_0.png",
+            "https://cdn.midjourney.com/109fd2ac-24c4-424b-b0e0-91f978ebf30a/0_0.png",
+
         ],
         "cardType": "action",
         "stats": [],
@@ -745,7 +766,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
     };
 
     if (value === "*" || value === "+" || value === ">") {
-        const newSize = value === "*" ? "50px" : "60px";
+        const newSize = value === "*" ? MULTIPLIER_ICON_SIZE+"px" : "60px";
         return (
             <div style={{
                 ...iconStyle,
