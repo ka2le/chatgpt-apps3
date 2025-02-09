@@ -41,57 +41,40 @@ const DISPLAY_SETTINGS = {
     cdMaybeIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/hourglass_question.png",
     arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
     // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
-    startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
+    //startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
+    startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_lift.png",
+    starIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
     fastIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
     cardAddIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
     copyCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png",
     reuseCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/reuse_card.png",
     shieldIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
     defaultImage: "https://via.placeholder.com/635x888",
+    noCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_target.png",
 };
 
 const DEFAULT_CARDS = [
     {
-        "cardName": "monster_test",
-        "copies": 25,
+        "cardName": "no_stats_to_2",
+        "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/4b0905bf-3033-4882-a3ba-476e91dfb0b8/0_0.png",
-            "https://cdn.midjourney.com/f965723e-8787-44d8-8989-8fbb968a0ea4/0_0.png",
-            "https://cdn.midjourney.com/683a3cba-9a15-4207-9e42-c75850b847cc/0_0.png",
-            "https://cdn.midjourney.com/d8913ad5-7cc7-49fc-906b-9c329bcc4bb9/0_0.png",
-            "https://cdn.midjourney.com/de58c5aa-2fa9-4695-af17-7091204d0b63/0_0.png",
-            "https://cdn.midjourney.com/6a9622c7-fa63-48ac-88e7-3b89d2d926a5/0_0.png",  
-            "https://cdn.midjourney.com/f2f40a23-d352-40f8-b712-24e1e6b7223a/0_0.png",
-            "https://cdn.midjourney.com/8c4f738b-a2f8-4741-949c-f944120a9dd7/0_0.png",
-            "https://cdn.midjourney.com/6a169f35-1379-42a9-ac1a-d85530bc620c/0_0.png",
-            "https://cdn.midjourney.com/05bf2359-92cd-43c6-a4e6-8f6d74d11cbe/0_0.png",
-            "https://cdn.midjourney.com/9519d277-16cb-41d7-8ec8-356ee6228295/0_0.png",
-            "https://cdn.midjourney.com/16d11a34-1f9c-45a3-9a8a-9c4c0599e7d3/0_0.png",
-            "https://cdn.midjourney.com/f163e3a5-ff3d-47c9-92e6-e218f1313909/0_0.png",
-            "https://cdn.midjourney.com/368f5e41-b923-4904-8bfc-8fc4d914b6a9/0_0.png",
-            "https://cdn.midjourney.com/6d684b63-120a-4323-9906-35c98629475c/0_0.png",
-            "https://cdn.midjourney.com/749b8b3a-0523-442c-90c0-8c08c106afb7/0_0.png",
-            "https://cdn.midjourney.com/01d0aeeb-2277-4a7d-9e78-f6f970fc7c7b/0_0.png",
-            "https://cdn.midjourney.com/71e26fcd-beda-489e-b64e-c8a897af684e/0_0.png",
-            "https://cdn.midjourney.com/d13983d8-6975-4861-85ea-cb51deae5c55/0_0.png",
-            "https://cdn.midjourney.com/0a24056d-2bad-4821-a06e-bdfb02825384/0_0.png",
-            "https://cdn.midjourney.com/109fd2ac-24c4-424b-b0e0-91f978ebf30a/0_0.png",
-            "https://cdn.midjourney.com/795d3abb-ea88-4f4a-8feb-470191f7f2b9/0_0.png",  
-            "https://cdn.midjourney.com/c93d5335-1b63-4150-8c9a-3d0b57603f74/0_0.png",
-            "https://cdn.midjourney.com/c1cc4066-8ba5-46f7-904f-45fc21582c5a/0_0.png",
-            "https://cdn.midjourney.com/61795f45-a536-4176-ab48-9f8e713cef85/0_0.png",
-
-
+            "https://cdn.midjourney.com/98e1b5b8-4db0-4bc7-b345-ccaa8d52e2af/0_0.png"
         ],
         "cardType": "action",
         "stats": [],
-        "effect": {
-            "dmg": 2,
-            "dmgType": 3
-        },
-
-        "cd": 2
+        "effect": {},
+        "customEffect": [
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_target.png",
+            "0",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png"
+        ],
+        "cd": 1
     },
+    
+
+    
     {
         "cardName": "extra_turn",
         "copies": 1,
@@ -554,7 +537,92 @@ const DEFAULT_CARDS = [
             "dmgType": 1
         },
         "cd": 2
-    }
+    },
+    {
+        "cardName": "monster_dragon",
+        "copies": 1,
+        "images": [
+          
+            "https://cdn.midjourney.com/c4f59636-b45e-4347-b5f5-d6b58a895717/0_0.png",
+
+
+        ],
+        "cardType": "stat",
+        "stats": [2,3],
+      
+
+    },
+    {
+        "cardName": "monster2",
+        "copies": 3,
+        "images": [
+          
+            "https://cdn.midjourney.com/2700d206-2c42-49f9-b35b-d09aaff2fc47/0_1.png",
+            "https://cdn.midjourney.com/7faf5453-6a64-4efa-91d9-9a0d5971b4b7/0_0.png",
+            "https://cdn.midjourney.com/058a91ce-92ad-49b9-9b21-161976e6ecea/0_0.png",
+
+
+        ],
+        "cardType": "stat",
+        "stats": [3,3],
+      
+
+    },
+    {
+        "cardName": "monster3",
+        "copies": 1,
+        "images": [
+          
+            "https://cdn.midjourney.com/2cb5ccaf-2c08-4878-a7bb-ef553cc56527/0_0.png",
+
+
+        ],
+        "cardType": "stat",
+        "stats": [3,3,3],
+      
+
+    },
+    {
+        "cardName": "monster_test",
+        "copies": 25,
+        "images": [
+            "https://cdn.midjourney.com/4b0905bf-3033-4882-a3ba-476e91dfb0b8/0_0.png",
+            "https://cdn.midjourney.com/f965723e-8787-44d8-8989-8fbb968a0ea4/0_0.png",
+            "https://cdn.midjourney.com/683a3cba-9a15-4207-9e42-c75850b847cc/0_0.png",
+            "https://cdn.midjourney.com/d8913ad5-7cc7-49fc-906b-9c329bcc4bb9/0_0.png",
+            "https://cdn.midjourney.com/de58c5aa-2fa9-4695-af17-7091204d0b63/0_0.png",
+            "https://cdn.midjourney.com/6a9622c7-fa63-48ac-88e7-3b89d2d926a5/0_0.png",  
+            "https://cdn.midjourney.com/f2f40a23-d352-40f8-b712-24e1e6b7223a/0_0.png",
+            "https://cdn.midjourney.com/8c4f738b-a2f8-4741-949c-f944120a9dd7/0_0.png",
+            "https://cdn.midjourney.com/6a169f35-1379-42a9-ac1a-d85530bc620c/0_0.png",
+            "https://cdn.midjourney.com/05bf2359-92cd-43c6-a4e6-8f6d74d11cbe/0_0.png",
+            "https://cdn.midjourney.com/9519d277-16cb-41d7-8ec8-356ee6228295/0_0.png",
+            "https://cdn.midjourney.com/16d11a34-1f9c-45a3-9a8a-9c4c0599e7d3/0_0.png",
+            "https://cdn.midjourney.com/f163e3a5-ff3d-47c9-92e6-e218f1313909/0_0.png",
+            "https://cdn.midjourney.com/368f5e41-b923-4904-8bfc-8fc4d914b6a9/0_0.png",
+            "https://cdn.midjourney.com/6d684b63-120a-4323-9906-35c98629475c/0_0.png",
+            "https://cdn.midjourney.com/749b8b3a-0523-442c-90c0-8c08c106afb7/0_0.png",
+            "https://cdn.midjourney.com/01d0aeeb-2277-4a7d-9e78-f6f970fc7c7b/0_0.png",
+            "https://cdn.midjourney.com/71e26fcd-beda-489e-b64e-c8a897af684e/0_0.png",
+            "https://cdn.midjourney.com/d13983d8-6975-4861-85ea-cb51deae5c55/0_0.png",
+            "https://cdn.midjourney.com/0a24056d-2bad-4821-a06e-bdfb02825384/0_0.png",
+            "https://cdn.midjourney.com/109fd2ac-24c4-424b-b0e0-91f978ebf30a/0_0.png",
+            "https://cdn.midjourney.com/795d3abb-ea88-4f4a-8feb-470191f7f2b9/0_0.png",  
+            "https://cdn.midjourney.com/c93d5335-1b63-4150-8c9a-3d0b57603f74/0_0.png",
+            "https://cdn.midjourney.com/c1cc4066-8ba5-46f7-904f-45fc21582c5a/0_0.png",
+            "https://cdn.midjourney.com/61795f45-a536-4176-ab48-9f8e713cef85/0_0.png",
+
+
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {
+            "dmg": 2,
+            "dmgType": 3
+        },
+
+        "cd": 2
+    },
 ]
 // Styles
 const styles = {
@@ -842,13 +910,13 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
-
+    const leftAdjutment = (value == "0" || value == "2" ) ? "30px" : "10px";
     return (
         <div style={iconStyle}>
             <span style={{
                 ...shadowStyle,
                 fontSize,
-                left: "10px",
+                left: leftAdjutment,
 
                 filter: 'blur(2px) brightness(0)',
                 //top: "-15px",
