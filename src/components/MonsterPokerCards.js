@@ -17,7 +17,7 @@ import { DisplaySettings } from "@mui/icons-material";
 
 const ONLINE = false;
 
-const NO_EXTRA_CARDS = true;
+const NO_EXTRA_CARDS = false;
 
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 120 : 85;
@@ -1253,8 +1253,26 @@ const Gallery = ({ cards, setCards }) => {
                 }}
             >
 
-                {/* Add IconExplanationCard at the end of the gallery */}
-                <div
+             
+
+                {expandedCards.map((card, expandedIndex) => (
+                    <div
+                        key={`${card.cardName}-${expandedIndex}`}
+                        id={`card-${card.cardName}-${expandedIndex}`}
+                        style={{
+                            transform: `scale(${zoom})`,
+                            transformOrigin: 'top left',
+                            width: `${CARD_WIDTH}px`,
+                            height: `${CARD_HEIGHT}px`,
+                            cursor: 'pointer',
+                        }}
+                        onClick={() => handleCardClick(expandedIndex, card)}
+                    >
+                        <Card card={{ ...card, images: [card.displayImage] }} />
+                    </div>
+                ))}
+                   {/* Add IconExplanationCard at the end of the gallery */}
+                   <div
                     key="icon-explanation_base"
                     style={{
                         transform: `scale(${zoom})`,
@@ -1278,23 +1296,6 @@ const Gallery = ({ cards, setCards }) => {
                 >
                     <IconExplanationCard {...{ICON_EXPLANATIONS:ICON_EXPLANATIONS_SPECIAL}} />
                 </div>
-
-                {expandedCards.map((card, expandedIndex) => (
-                    <div
-                        key={`${card.cardName}-${expandedIndex}`}
-                        id={`card-${card.cardName}-${expandedIndex}`}
-                        style={{
-                            transform: `scale(${zoom})`,
-                            transformOrigin: 'top left',
-                            width: `${CARD_WIDTH}px`,
-                            height: `${CARD_HEIGHT}px`,
-                            cursor: 'pointer',
-                        }}
-                        onClick={() => handleCardClick(expandedIndex, card)}
-                    >
-                        <Card card={{ ...card, images: [card.displayImage] }} />
-                    </div>
-                ))}
 
             </div>
 
