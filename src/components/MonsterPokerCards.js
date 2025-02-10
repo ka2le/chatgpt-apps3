@@ -22,6 +22,7 @@ const NO_EXTRA_CARDS = true;
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 120 : 85;
 const MULTIPLIER_ICON_SIZE = ONLINE ? 50 : 35;
+const CD_ICON_ENLRAGEMENT = 20;
 const MARGIN_SIZE = ONLINE ? 20 : 55;
 const CONTENT_PADDING = ONLINE ? 10 : 30;
 const CARD_WIDTH = 635;
@@ -1048,7 +1049,7 @@ const Card = ({ card }) => {
                                     :
                                     (
                                         [...Array(card.cd)].map((_, i) => (
-                                            <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + 30} />
+                                            <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + CD_ICON_ENLRAGEMENT} />
                                         ))
                                     ))}
                         </div>
