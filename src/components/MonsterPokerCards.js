@@ -1253,6 +1253,32 @@ const Gallery = ({ cards, setCards }) => {
                 }}
             >
 
+                {/* Add IconExplanationCard at the end of the gallery */}
+                <div
+                    key="icon-explanation_base"
+                    style={{
+                        transform: `scale(${zoom})`,
+                        transformOrigin: 'top left',
+                        width: `${CARD_WIDTH}px`,
+                        height: `${CARD_HEIGHT}px`,
+                    }}
+                >
+                    <IconExplanationCard {...{ICON_EXPLANATIONS:ICON_EXPLANATIONS_BASE}} />
+                </div>
+
+                {/* Add IconExplanationCard at the end of the gallery */}
+                <div
+                    key="icon-explanation_special"
+                    style={{
+                        transform: `scale(${zoom})`,
+                        transformOrigin: 'top left',
+                        width: `${CARD_WIDTH}px`,
+                        height: `${CARD_HEIGHT}px`,
+                    }}
+                >
+                    <IconExplanationCard {...{ICON_EXPLANATIONS:ICON_EXPLANATIONS_SPECIAL}} />
+                </div>
+
                 {expandedCards.map((card, expandedIndex) => (
                     <div
                         key={`${card.cardName}-${expandedIndex}`}
@@ -1269,18 +1295,6 @@ const Gallery = ({ cards, setCards }) => {
                         <Card card={{ ...card, images: [card.displayImage] }} />
                     </div>
                 ))}
-                {/* Add IconExplanationCard at the end of the gallery */}
-                <div
-                    key="icon-explanation"
-                    style={{
-                        transform: `scale(${zoom})`,
-                        transformOrigin: 'top left',
-                        width: `${CARD_WIDTH}px`,
-                        height: `${CARD_HEIGHT}px`,
-                    }}
-                >
-                    <IconExplanationCard />
-                </div>
 
             </div>
 
@@ -1519,7 +1533,21 @@ const saveAllCards = async (cards) => {
 
 
 
-const ICON_EXPLANATIONS = [
+const ICON_EXPLANATIONS_BASE = [
+    {
+        icons: [],
+        explanation: [
+            "Each game consist of two phases. Building a hand and simulating a battle. Each player start with 5 card, they can discard any amount and draw until they have 5 cards again. After dicarding and drawing twice the battle starts"
+        ]
+    },
+    {
+        icons: [],
+        explanation: ["After drawing cards the players reveal their cards and round 1 start. Based on stat cards and action cards, the player both deal their damage each turn."]
+    },
+    {
+        icons: [],
+        explanation: ["Winning! The first player to deal 21 damage wins, if both players reach 21 damage in the same round, the player with the most damage wins"]
+    },
     {
         icons: [STAT_ICONS[0].icon, STAT_ICONS[1].icon, STAT_ICONS[2].icon],
         explanation: [
@@ -1536,6 +1564,28 @@ const ICON_EXPLANATIONS = [
         icons: [DISPLAY_SETTINGS.dmgIcon],
         explanation: ["Damage dealt to opponent"]
     },
+    {
+        icons: [],
+        explanation: [
+            "A player have 2 cards with 1 ",
+            STAT_ICONS[1].icon,
+        " each for a total of 2 Critter stats. They also have 1 cards with ",   
+        STAT_ICONS[1].icon,
+        DISPLAY_SETTINGS.multiplierIcon,
+        DISPLAY_SETTINGS.dmgIcon,
+        DISPLAY_SETTINGS.dmgIcon,
+        "and a speed of ",
+        DISPLAY_SETTINGS.cdIcon,
+        DISPLAY_SETTINGS.cdIcon,
+        "They will deal 4 damage on round 2,4,6 and so on because 2 stats times 2 damage, 2*2=4-."
+    ]
+    },
+
+
+
+];
+const ICON_EXPLANATIONS_SPECIAL = [
+
     {
         icons: [DISPLAY_SETTINGS.shieldIcon],
         explanation: [
@@ -1577,15 +1627,22 @@ const ICON_EXPLANATIONS = [
     {
         icons: ["2x", DISPLAY_SETTINGS.dmgIcon],
         explanation: ["Deal double damage"]
-    }
+    },
+    {
+        icons: ["0",DISPLAY_SETTINGS.arrowIcon,DISPLAY_SETTINGS.starIcon,DISPLAY_SETTINGS.starIcon],
+        explanation: ["If you have 0 stats, and only then, get 2 to all stats"]
+    },
 ];
-const IconExplanationCard = () => {
+
+const ICON_EXPLANATIONS_ALL = ICON_EXPLANATIONS_BASE.concat(ICON_EXPLANATIONS_SPECIAL);
+
+const IconExplanationCard = ({ ICON_EXPLANATIONS = ICON_EXPLANATIONS_ALL }) => {
     const ICON_SIZE_LARGE = 55; // Larger for main icons
-    const MIN_WIDTH_LARGE_ICON = ICON_SIZE_LARGE * 2; // Prevent icons from shrinking
+    const MIN_WIDTH_LARGE_ICON = ICON_SIZE_LARGE * 2.7; // Prevent icons from shrinking
     const SMALLER_LARGE_ICON_SIZE = "45px";
     const ICON_SIZE_SMALL = 30;  // Smaller for explanation icons
     const FONT_SIZE_LARGE = 34;
-    const FONT_SIZE_SMALL = 25;
+    const FONT_SIZE_SMALL = 28;
     const TEXT_SHADOW = "2px 2px 4px black";
     const OVERLAY_COLOR = "rgba(0, 0, 0, 0.8)";
     const PADDING_OUTLINE = 40;
@@ -1722,16 +1779,14 @@ const IconExplanationCard = () => {
                 {ICON_EXPLANATIONS.map((entry, index) => (
                     <div style={styles.row} key={index}>
                         {/* Render larger main icons + text */}
-                        {entry.icons?.length > 1 ? (
+                        {entry.icons?.length > 0 ? (
                             <div style={styles.iconContainer}>
 
                                 {entry.icons.map((item, i) => renderTextOrImage2(item, true))}
                             </div>
                         ) :
 
-                            (<div style={styles.iconContainer}>
-                                {entry.icons.map((item, i) => renderTextOrImage(item, true))}
-                            </div>)
+                           <></>
                         }
 
                         {/* Render explanation text with mixed small icons */}
