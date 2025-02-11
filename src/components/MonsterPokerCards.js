@@ -96,7 +96,7 @@ const DEFAULT_CARDS1 = [
             //"https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
             "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png",
             "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
-            "https://cdn.midjourney.com/e2dd6213-0b79-4492-b7d4-d10c4c02507f/0_0.png"
+            "https://cdn.midjourney.com/50b2849d-0a6f-42f0-b581-7a6070c6b179/0_0.png"
         ],
         "cardType": "action",
         "effect": {},
@@ -164,8 +164,8 @@ const DEFAULT_CARDS1 = [
         "cardName": "bite",
         "copies": 2,
         "images": [
-            "https://cdn.midjourney.com/3026f2c0-9128-4552-9bb0-bb9c9b07cab8/0_0.png",
-            "https://cdn.midjourney.com/93074b5b-d1b2-405a-a3a1-11ae13557ae1/0_0.png"
+            "https://cdn.midjourney.com/bd44326e-0b71-4fe8-827d-ef99ea675fb7/0_0.png",
+            "https://cdn.midjourney.com/e8f58207-584b-4ffa-bca7-8dd3858c9271/0_0.png"
         ],
         "cardType": "action",
         "stats": [],
@@ -308,7 +308,7 @@ const DEFAULT_CARDS1 = [
         "copies": 1,
         "images": [
             //"https://cdn.midjourney.com/73d1aa8f-63b8-4e19-b0e4-70098ad78fcf/0_0.png",
-            "https://cdn.midjourney.com/0559553f-0283-4122-935f-2e372da50e70/0_0.png"
+            "https://cdn.midjourney.com/b93f699b-a0b0-4e04-9dea-d75026286924/0_0.png"
         ],
         "cardType": "stat",
         "stats": [
@@ -393,7 +393,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "rabbit2",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/1f599177-c395-4e33-9f55-2cc83103fd09/0_0.png"
+            "https://cdn.midjourney.com/a87f3c12-4ef4-4f14-852b-1e886c2eedb3/0_0.png"
         ],
         "cardType": "stat",
         "stats": [
@@ -423,7 +423,7 @@ const DEFAULT_CARDS1 = [
             "https://cdn.midjourney.com/f4e841f1-5185-4990-9f81-4b2fb4a35f4e/0_0.png",
             "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
             "https://cdn.midjourney.com/0f6b62df-2da4-4c0e-88cf-4c22fe5ba643/0_0.png",
-            "https://cdn.midjourney.com/79e5ec74-fd4d-4eb7-995d-c38a78a57cf9/0_0.png",
+            "https://cdn.midjourney.com/effe1b79-f800-464a-9846-21c4be535d9b/0_0.png",
             "https://cdn.midjourney.com/6d8979f0-5a43-4613-9b57-04caef84ca98/0_0.png"
         ],
         "cardType": "stat",
@@ -441,7 +441,7 @@ const DEFAULT_CARDS1 = [
             "https://cdn.midjourney.com/8a1748d0-d30f-43d6-9f73-c6c3c491edd2/0_0.png",
             "https://cdn.midjourney.com/ef1a2d8f-b2b9-4e80-9dff-390439a77d73/0_0.png",
             "https://cdn.midjourney.com/d0ab3f46-1a6d-4292-8fdd-bcf7863fb886/0_0.png",
-            "https://cdn.midjourney.com/4b27a7b9-bde7-4a0f-8d24-8496fc8730ed/0_0.png",
+            "https://cdn.midjourney.com/2f1865c9-4a26-49a4-84a6-578ec5c7d011/0_0.png",
             "https://cdn.midjourney.com/0ec87e14-9306-4bdb-abaf-bd560731cc43/0_0.png"
         ],
         "cardType": "action",
@@ -458,9 +458,9 @@ const DEFAULT_CARDS1 = [
         "images": [
             "https://cdn.midjourney.com/7cad2b17-1b09-43be-b4f6-8f1ca883d109/0_0.png",
             "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png",
-            "https://cdn.midjourney.com/d4646dbf-1b18-437f-9c38-4d7bd2c6aa77/0_0.png",
-            "https://cdn.midjourney.com/dd78eddd-ee76-4256-b3d2-4a0db070ae2d/0_0.png",
-            "https://cdn.midjourney.com/d2f50394-fc97-4798-b804-f5b821b78664/0_0.png",
+            "https://cdn.midjourney.com/d1b236ca-0ad5-4fbc-9917-d06818ede597/0_0.png",
+            "https://cdn.midjourney.com/a1b1aa22-bcbe-45a9-9c5f-cf78d32c8a4f/0_0.png",
+            "https://cdn.midjourney.com/5b66642d-859a-4c30-8476-e58449aeffce/0_0.png",
             "https://cdn.midjourney.com/19857464-af32-4f3d-b87a-9a287e90fefe/0_0.png"
         ],
         "cardType": "stat",
@@ -494,12 +494,12 @@ const DEFAULT_CARDS1 = [
         "images": [
             "https://cdn.midjourney.com/97d565dc-a15d-4fef-bd18-327048b9f248/0_0.png",
             "https://cdn.midjourney.com/3f6180de-f6a2-4001-bca5-a3b7230a6276/0_0.png",
-            "https://cdn.midjourney.com/f08172ee-b115-4c6b-b05f-b92ae4f45e25/0_0.png",
+            "https://cdn.midjourney.com/daa83228-5295-4c1d-bc58-c330c9a9c025/0_0.png",
             "https://cdn.midjourney.com/2dd9dd8e-43a7-4521-b1c2-357667510a5a/0_0.png",
             "https://cdn.midjourney.com/82159fe2-cf80-4da1-adf8-96a2905b5f3d/0_0.png",
             "https://cdn.midjourney.com/69a33373-caed-4ef4-b207-e1233851459a/0_0.png",
-            "https://cdn.midjourney.com/affa9cf2-a9eb-4995-b8ec-8fdc22e71535/0_0.png",
-            "https://cdn.midjourney.com/35c85bc8-8e8b-439f-8c69-a3c7575b33cf/0_0.png"
+            "https://cdn.midjourney.com/39ed468e-94a3-45b6-ada0-285d7d0e11ba/0_0.png",
+            "https://cdn.midjourney.com/af704f54-9547-4b2d-8374-29702ce3e3eb/0_0.png"
         ],
         "cardType": "stat",
         "stats": [
@@ -511,8 +511,8 @@ const DEFAULT_CARDS1 = [
         "copies": 6,
         "images": [
             "https://cdn.midjourney.com/8cb5923f-3c09-4600-ae07-a7194fa19483/0_0.png",
-            "https://cdn.midjourney.com/fad8a664-447d-4857-b63b-145ebb8c0557/0_0.png",
-            "https://cdn.midjourney.com/8891ed87-7ce3-4b32-abc0-6d8fee705dee/0_0.png",
+            "https://cdn.midjourney.com/3d3b5799-b82c-47a3-a055-c01281b796db/0_0.png",
+            "https://cdn.midjourney.com/f507df3e-9ff8-4f5a-9e5a-15d642933060/0_0.png",
             "https://cdn.midjourney.com/2be48f0b-ec75-4f71-96ba-af841c62f337/0_0.png",
             "https://cdn.midjourney.com/18e6a0a5-1134-4351-b020-7a0b57162756/0_3.png",
             "https://cdn.midjourney.com/ace6742e-f77e-42cd-b31a-811ebef29bc9/0_0.png"
@@ -616,10 +616,10 @@ const EXTRA_CARDS = [
         "cardType": "action",
         "stats": [],
         "effect": {
-            "dmg": 2,
+            "dmg": 4,
             "dmgType": 3
         },
-        "cd": 2
+        "cd": 4
     }
 ]
 
