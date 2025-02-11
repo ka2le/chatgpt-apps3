@@ -940,7 +940,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
 
 // Card Component
 
-const Card = ({ card }) => {
+const Card = ({ card, index }) => {
     const getStatIconOrText = (index) => {
         const mapping = STAT_ICONS[index];
         if (!mapping) return null;
@@ -1030,35 +1030,27 @@ const Card = ({ card }) => {
                             ))}
                         </div>
                     )}
-                    {card.cardType === "action" && card.cd !== undefined && (
-                        <div style={{ ...styles.card.verticalLock, marginLeft: "-10px" }}>
-                            {card.cd === -1 ? (
-                                <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
-
-                            ) :
-                                (card.cd === -2 ?
-                                    (<>
-
-
-                                        <IconOrImage key={`cd-${2}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                                        <IconOrImage key={`cd-${3}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                                        <IconOrImage key={`cd-${3}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                                        <IconOrImage key={`cd-${1}`} value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
-                                    </>
-                                    )
-                                    :
-                                    (
-                                        [...Array(card.cd)].map((_, i) => (
-                                            <IconOrImage key={`cd-${i}`} value={DISPLAY_SETTINGS.cdIcon} fontSize={FONT_SIZE + CD_ICON_ENLRAGEMENT} />
-                                        ))
-                                    ))}
-                        </div>
-                    )}
                 </div>
             </div>
+
+            {/* Card Number Display (Bottom-Right) */}
+            {/* <div style={{
+                position: 'absolute',
+                bottom: '17px',
+                right: '5px',
+                color: 'white',
+                textShadow: "4px 2px 2px black",
+                fontSize: '17px',
+                fontWeight: 'bold',
+                padding: '3px 6px',
+                borderRadius: '4px',
+            }}>
+                {index + 1}
+            </div> */}
         </div>
     );
 };
+
 
 
 
@@ -1253,7 +1245,7 @@ const Gallery = ({ cards, setCards }) => {
                 }}
             >
 
-             
+
 
                 {expandedCards.map((card, expandedIndex) => (
                     <div
@@ -1268,11 +1260,12 @@ const Gallery = ({ cards, setCards }) => {
                         }}
                         onClick={() => handleCardClick(expandedIndex, card)}
                     >
-                        <Card card={{ ...card, images: [card.displayImage] }} />
+                        <Card card={{ ...card, images: [card.displayImage] }} index={expandedIndex} />
                     </div>
                 ))}
-                   {/* Add IconExplanationCard at the end of the gallery */}
-                   <div
+
+                {/* Add IconExplanationCard at the end of the gallery */}
+                <div
                     key="icon-explanation_base"
                     style={{
                         transform: `scale(${zoom})`,
@@ -1281,7 +1274,7 @@ const Gallery = ({ cards, setCards }) => {
                         height: `${CARD_HEIGHT}px`,
                     }}
                 >
-                    <IconExplanationCard {...{ICON_EXPLANATIONS:ICON_EXPLANATIONS_BASE}} />
+                    <IconExplanationCard {...{ ICON_EXPLANATIONS: ICON_EXPLANATIONS_BASE }} />
                 </div>
 
                 {/* Add IconExplanationCard at the end of the gallery */}
@@ -1294,7 +1287,7 @@ const Gallery = ({ cards, setCards }) => {
                         height: `${CARD_HEIGHT}px`,
                     }}
                 >
-                    <IconExplanationCard {...{ICON_EXPLANATIONS:ICON_EXPLANATIONS_SPECIAL}} />
+                    <IconExplanationCard {...{ ICON_EXPLANATIONS: ICON_EXPLANATIONS_SPECIAL }} />
                 </div>
 
             </div>
@@ -1570,16 +1563,16 @@ const ICON_EXPLANATIONS_BASE = [
         explanation: [
             "A player have 2 cards with 1 ",
             STAT_ICONS[1].icon,
-        " each for a total of 2 Critter stats. They also have 1 cards with ",   
-        STAT_ICONS[1].icon,
-        DISPLAY_SETTINGS.multiplierIcon,
-        DISPLAY_SETTINGS.dmgIcon,
-        DISPLAY_SETTINGS.dmgIcon,
-        "and a speed of ",
-        DISPLAY_SETTINGS.cdIcon,
-        DISPLAY_SETTINGS.cdIcon,
-        "They will deal 4 damage on round 2,4,6 and so on because 2 stats times 2 damage, 2*2=4-."
-    ]
+            " each for a total of 2 Critter stats. They also have 1 cards with ",
+            STAT_ICONS[1].icon,
+            DISPLAY_SETTINGS.multiplierIcon,
+            DISPLAY_SETTINGS.dmgIcon,
+            DISPLAY_SETTINGS.dmgIcon,
+            "and a speed of ",
+            DISPLAY_SETTINGS.cdIcon,
+            DISPLAY_SETTINGS.cdIcon,
+            "They will deal 4 damage on round 2,4,6 and so on because 2 stats times 2 damage, 2*2=4-."
+        ]
     },
 
 
@@ -1630,7 +1623,7 @@ const ICON_EXPLANATIONS_SPECIAL = [
         explanation: ["Deal double damage"]
     },
     {
-        icons: ["0",DISPLAY_SETTINGS.arrowIcon,DISPLAY_SETTINGS.starIcon,DISPLAY_SETTINGS.starIcon],
+        icons: ["0", DISPLAY_SETTINGS.arrowIcon, DISPLAY_SETTINGS.starIcon, DISPLAY_SETTINGS.starIcon],
         explanation: ["If you have 0 stats, and only then, get 2 to all stats"]
     },
 ];
@@ -1787,7 +1780,7 @@ const IconExplanationCard = ({ ICON_EXPLANATIONS = ICON_EXPLANATIONS_ALL }) => {
                             </div>
                         ) :
 
-                           <></>
+                            <></>
                         }
 
                         {/* Render explanation text with mixed small icons */}
