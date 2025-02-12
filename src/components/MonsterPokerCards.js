@@ -941,6 +941,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
 // Card Component
 
 const Card = ({ card, index }) => {
+const Card = ({ card, index }) => {
     const getStatIconOrText = (index) => {
         const mapping = STAT_ICONS[index];
         if (!mapping) return null;
