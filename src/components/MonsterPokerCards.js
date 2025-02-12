@@ -15,7 +15,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
-const ONLINE = false;
+const ONLINE = true;
 
 const NO_EXTRA_CARDS = false;
 
@@ -940,7 +940,6 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
 
 // Card Component
 
-const Card = ({ card, index }) => {
 const Card = ({ card, index }) => {
     const getStatIconOrText = (index) => {
         const mapping = STAT_ICONS[index];
