@@ -15,7 +15,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
-const ONLINE = true;
+const ONLINE = false;
 
 const NO_EXTRA_CARDS = false;
 
@@ -94,7 +94,7 @@ const DEFAULT_CARDS1 = [
         "copies": 3,
         "images": [
             //"https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-            "https://cdn.midjourney.com/f1903368-97e8-4371-8a4d-e1ed7ac6a6c3/0_0.png",
+            "https://cdn.midjourney.com/100679fa-50af-4fad-9a8b-8ad4623f9e65/0_0.png",
             "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
             "https://cdn.midjourney.com/50b2849d-0a6f-42f0-b581-7a6070c6b179/0_0.png"
         ],
@@ -496,7 +496,7 @@ const DEFAULT_CARDS1 = [
             "https://cdn.midjourney.com/3f6180de-f6a2-4001-bca5-a3b7230a6276/0_0.png",
             "https://cdn.midjourney.com/daa83228-5295-4c1d-bc58-c330c9a9c025/0_0.png",
             "https://cdn.midjourney.com/2dd9dd8e-43a7-4521-b1c2-357667510a5a/0_0.png",
-            "https://cdn.midjourney.com/82159fe2-cf80-4da1-adf8-96a2905b5f3d/0_0.png",
+            "https://cdn.midjourney.com/b1bee978-52b7-40ec-9294-95e4f1f67f39/0_0.png",
             "https://cdn.midjourney.com/69a33373-caed-4ef4-b207-e1233851459a/0_0.png",
             "https://cdn.midjourney.com/39ed468e-94a3-45b6-ada0-285d7d0e11ba/0_0.png",
             "https://cdn.midjourney.com/af704f54-9547-4b2d-8374-29702ce3e3eb/0_0.png"
