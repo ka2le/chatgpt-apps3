@@ -224,7 +224,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "shield_is_dmg",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/aa533a09-6415-4a28-9981-5aee847fcfab/0_0.png"
+            "https://cdn.midjourney.com/cbdf1866-c272-43e7-b926-e8baa6337461/0_0.png",
         ],
         "cardType": "action",
         "stats": [],
@@ -843,6 +843,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
 
     if (value === "*" || value === "+" || value === ">") {
         const newSize = value === "*" ? MULTIPLIER_ICON_SIZE + "px" : "60px";
+        const topAdjustment = value === "*" ? "20px" : "15px";
         return (
             <div style={{
                 ...iconStyle,
@@ -857,7 +858,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                     height: newSize,
                     left: "calc(50% - 20px)",
                     filter: 'blur(2px) brightness(0)',
-                    top: ONLINE ? "40px" : "25px", // Adjust text position
+                    top: ONLINE ? "40px" : topAdjustment, // Adjust text position
 
                 }}>
                     {value}
