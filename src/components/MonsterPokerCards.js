@@ -240,7 +240,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "double_dmg",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/a8f69b4e-679c-4834-b616-39fdee5e5201/0_0.png"
+            "https://cdn.midjourney.com/ed1dd946-8847-493f-9590-a863e7d345bb/0_0.png"
         ],
         "cardType": "action",
         "stats": [],
