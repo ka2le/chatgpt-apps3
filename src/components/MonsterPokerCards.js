@@ -27,7 +27,7 @@ const MARGIN_SIZE = ONLINE ? 20 : 55;
 const CONTENT_PADDING = ONLINE ? 10 : 30;
 const CARD_WIDTH = 635;
 const CARD_HEIGHT = 888;
-const SAVE_SCALE = ONLINE ? 0.4 : 1.5;
+const SAVE_SCALE = ONLINE ? 0.4 : 4;
 const INNER_SIZE_PERCENT = ONLINE ? 100 : 95;
 
 const STAT_ICONS = [
@@ -256,7 +256,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "joker",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/007b3fdb-da8a-4283-83d4-7baedb96b390/0_0.png"
+            "https://cdn.midjourney.com/d2a12c61-595d-4ddd-a7f8-766bc41848ba/0_0.png"
         ],
         "cardType": "stat",
         "stats": [
@@ -308,7 +308,7 @@ const DEFAULT_CARDS1 = [
         "copies": 1,
         "images": [
             //"https://cdn.midjourney.com/73d1aa8f-63b8-4e19-b0e4-70098ad78fcf/0_0.png",
-            "https://cdn.midjourney.com/b93f699b-a0b0-4e04-9dea-d75026286924/0_0.png"
+            "https://cdn.midjourney.com/159c2eb9-4fc6-45ca-b02a-4a3b4f81766c/0_0.png"
         ],
         "cardType": "stat",
         "stats": [
@@ -405,7 +405,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "robot2",
         "copies": 2,
         "images": [
-            "https://cdn.midjourney.com/487a8f0b-684d-4dcc-8af6-1e5618174be1/0_0.png",
+            "https://cdn.midjourney.com/12d9b18b-fa7d-4777-b58d-7e14fe0c5b74/0_0.png",
             "https://cdn.midjourney.com/67d516be-005c-477a-9897-a52504e7f94b/0_0.png"
         ],
         "cardType": "stat",
@@ -832,12 +832,13 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
     // Style for the shadow/outline effect
     const shadowStyle = {
         position: 'absolute',
-        top: "10px", // Adjust shadow position for text
-        left: '2px',
+        top: "12px", // Adjust shadow position for text
+        left: '4px',
+
         width: '100%',
         height: '100%',
         filter: 'invert(1) opacity(0.9)',
-        transform: ONLINE ? 'scale(1.12)' : 'scale(1.08)',
+        transform: ONLINE ? 'scale(1.12)' : 'scale(1.0)',
     };
 
     if (value === "*" || value === "+" || value === ">") {
