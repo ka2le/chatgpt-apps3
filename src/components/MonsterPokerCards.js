@@ -15,9 +15,10 @@ import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
-const ONLINE = false;
+const PRINT = false
+const ONLINE = !PRINT;
 
-const NO_EXTRA_CARDS = false;
+const NO_EXTRA_CARDS = true;
 
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 120 : 85;
@@ -70,10 +71,34 @@ const DEFAULT_CARDS1 = [
             "0",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png"
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
         ],
         "cd": 1
     },
+    {
+        "cardName": "draw_all_new_1",
+        "copies": 1,
+        "images": [
+           // "https://cdn.midjourney.com/33a35721-2c77-46b5-8773-00fc44b89f68/0_0.png",
+           // "https://cdn.midjourney.com/0443e82b-62c3-4332-a365-05a124946525/0_1.png",
+            "https://cdn.midjourney.com/42b797a2-1802-4598-bdf6-84e186613322/0_0.png",
+            //"https://cdn.midjourney.com/258f05ea-fbbd-43f8-9031-7b8204e1ca99/0_0.png",
+           // "https://cdn.midjourney.com/55e3b4b8-70fb-4527-bd77-0a2cfdfde70d/0_2.png",
+            
+
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_under.png",
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_take.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_rotate.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png"
+        ],
+        "cd": -1
+    },
+    
     {
         "cardName": "extra_turn",
         "copies": 1,
@@ -456,7 +481,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "dragon1",
         "copies": 6,
         "images": [
-            "https://cdn.midjourney.com/7cad2b17-1b09-43be-b4f6-8f1ca883d109/0_0.png",
+            "https://cdn.midjourney.com/e53502ec-0a1e-4e34-b2e9-21e3f2bf5f16/0_0.png",
             "https://cdn.midjourney.com/164bb496-ef9f-4b75-8994-65997ec5d065/0_0.png",
             "https://cdn.midjourney.com/d1b236ca-0ad5-4fbc-9917-d06818ede597/0_0.png",
             "https://cdn.midjourney.com/a1b1aa22-bcbe-45a9-9c5f-cf78d32c8a4f/0_0.png",
@@ -475,7 +500,7 @@ const DEFAULT_CARDS1 = [
             "https://cdn.midjourney.com/8989a9f5-da33-4bdd-bc2b-ef7a681ea095/0_0.png",
             "https://cdn.midjourney.com/8d7b2bc0-ad87-4493-9825-bd659602d026/0_0.png",
             "https://cdn.midjourney.com/9e0945dd-5fa1-4cb0-8a2f-cce1d576118b/0_0.png",
-            "https://cdn.midjourney.com/8b0c23f3-ce49-42d7-b71c-7dc4ecebe156/0_0.png",
+            "https://cdn.midjourney.com/dfc0db36-5761-4335-bb64-c4c10215177a/0_0.png",
             "https://cdn.midjourney.com/421982d3-be47-4b1b-b968-e92206303b35/0_0.png",
             "https://cdn.midjourney.com/de6abac3-eaf0-4da7-ad7b-71ef82c04ca9/0_0.png",
             "https://cdn.midjourney.com/2d51cedb-b24f-436b-947e-cba3b41e34c4/0_0.png",
@@ -644,6 +669,7 @@ const styles = {
         },
         overflow: "hidden", // Prevent double scrollbars
     },
+    
     card: {
         outer: {
             width: `${CARD_WIDTH}px`,
@@ -834,18 +860,24 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         position: 'absolute',
         top: "12px", // Adjust shadow position for text
         left: '4px',
-
         width: '100%',
         height: '100%',
         filter: 'invert(1) opacity(0.9)',
         transform: ONLINE ? 'scale(1.12)' : 'scale(1.0)',
     };
 
+    // Extract image name from URL
+    const extractImageName = (url) => {
+        const parts = url.split('/');
+        const fileName = parts[parts.length - 1].split('.')[0];
+        return fileName;
+    };
+
     if (value === "*" || value === "+" || value === ">") {
         const newSize = value === "*" ? MULTIPLIER_ICON_SIZE + "px" : "60px";
         const topAdjustment = value === "*" ? "20px" : "15px";
         return (
-            <div style={{
+            <div className={`iconName_${value}`} style={{
                 ...iconStyle,
                 marginLeft: value == "*" ? "-10px" : "0px",
                 marginRight: value == "*" ? "-30px" : "-20px",
@@ -859,7 +891,6 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                     left: "calc(50% - 20px)",
                     filter: 'blur(2px) brightness(0)',
                     top: ONLINE ? "40px" : topAdjustment, // Adjust text position
-
                 }}>
                     {value}
                 </span>
@@ -883,15 +914,23 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
     }
 
     if (typeof value === "string" && /^https?:\/\//.test(value)) {
+        const imageName = extractImageName(value);
+        let extraMargin = 0;
+        let extraMarginShadow = 0;
+        if(imageName == "cards_take")   {
+            extraMargin = "15px";
+            extraMarginShadow = "7px";
+        }
         return (
-            <div style={iconStyle}>
+            <div className={`iconName_${imageName}`} style={iconStyle}>
                 {/* Shadow/outline layer */}
                 <img
                     src={value}
-                    alt="icon-shadow"
+                    alt={imageName}
                     style={{
                         ...imageStyle,
                         ...shadowStyle,
+                        marginLeft: extraMarginShadow,
                         top: "1px", // Reset shadow adjustment for images
                     }}
                     onError={(e) => {
@@ -901,9 +940,10 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
                 {/* Main icon layer */}
                 <img
                     src={value}
-                    alt="icon"
+                    alt={imageName}
                     style={{
                         ...imageStyle,
+                        marginLeft: extraMargin,
                         position: 'relative',
                         filter: 'brightness(1) drop-shadow(0px 2px 4px rgba(0,0,0,1))',
                     }}
@@ -914,16 +954,14 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
-    const leftAdjutment = (value == "0" || value == "2") ? "30px" : "10px";
+    const leftAdjustment = (value == "0" || value == "2") ? "30px" : "10px";
     return (
-        <div style={iconStyle}>
+        <div className={`iconName_${value}`} style={iconStyle}>
             <span style={{
                 ...shadowStyle,
                 fontSize,
-                left: leftAdjutment,
-
+                left: leftAdjustment,
                 filter: 'blur(2px) brightness(0)',
-                //top: "-15px",
             }}>
                 {value}
             </span>
@@ -939,6 +977,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         </div>
     );
 };
+
 
 // Card Component
 
