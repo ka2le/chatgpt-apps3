@@ -15,7 +15,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
-const PRINT = false
+
+const PRINT = true
 const ONLINE = !PRINT;
 
 const NO_EXTRA_CARDS = true;
@@ -32,7 +33,7 @@ const SAVE_SCALE = ONLINE ? 0.4 : 4;
 const INNER_SIZE_PERCENT = ONLINE ? 100 : 95;
 
 const STAT_ICONS = [
-    { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png" },
+    { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot_sharp.png" },
     { name: "rabbit", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png" },
     { name: "dragon", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png" },
     { name: "monster", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/monster2.png" },
@@ -154,7 +155,7 @@ const DEFAULT_CARDS1 = [
         "stats": [],
         "effect": {},
         "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/robot_sharp.png",
             "*",
             "<br>",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
@@ -175,7 +176,7 @@ const DEFAULT_CARDS1 = [
         "stats": [],
         "effect": {},
         "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/robot.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/robot_sharp.png",
             "+",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/rabbit.png",
             "+",
@@ -838,6 +839,7 @@ const regularTextAdjustment = "10px";
 
 // Utility Components
 const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
+    const backgroundEffect ="";// "radial-gradient(rgba(0,0,0,0.2), rgba(0, 0, 0, 0) 70%)";
     const iconStyle = {
         position: 'relative',
         display: 'inline-flex',
@@ -845,6 +847,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         alignItems: 'center',
         width: fontSize,
         height: fontSize,
+        background: backgroundEffect,
     };
 
     const imageStyle = {
@@ -852,7 +855,8 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         height: '100%',
         objectFit: 'contain',
         position: 'relative',
-        filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
+        background: backgroundEffect,
+        filter: 'drop-shadow(0px 1px 2px rgba(0,0,0,0.5))',
     };
 
     // Style for the shadow/outline effect
@@ -862,7 +866,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         left: '4px',
         width: '100%',
         height: '100%',
-        filter: 'invert(1) opacity(0.9)',
+        filter: 'invert(1) opacity(1)',
         transform: ONLINE ? 'scale(1.12)' : 'scale(1.0)',
     };
 
