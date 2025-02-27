@@ -133,19 +133,7 @@ const DEFAULT_CARDS1 = [
         ],
         "cd": 1
     },
-    {
-        "cardName": "Murder rabbit",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png"
-        ],
-        "cardType": "action",
-        "effect": {
-            "dmg": 4,
-            "dmgType": 1
-        },
-        "cd": 2
-    },
+   
     {
         "cardName": "one_off_each",
         "copies": 1,
@@ -393,6 +381,19 @@ const DEFAULT_CARDS1 = [
         "cd": 4
     },
     {
+        "cardName": "Murder rabbit",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/c5692cc1-a3e0-43d6-ab00-123c97cd9e53/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {
+            "dmg": 2,
+            "dmgType": 1
+        },
+        "cd": 1
+    },
+    {
         "cardName": "robot_ulti",
         "copies": 1,
         "images": [
@@ -401,10 +402,10 @@ const DEFAULT_CARDS1 = [
         "cardType": "action",
         "stats": [],
         "effect": {
-            "dmg": 2,
+            "dmg": 4,
             "dmgType": 0
         },
-        "cd": 1
+        "cd": 2
     },
     {
         "cardName": "dragon2",
