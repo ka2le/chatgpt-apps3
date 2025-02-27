@@ -60,21 +60,18 @@ const DISPLAY_SETTINGS = {
 
 const DEFAULT_CARDS1 = [
     {
-        "cardName": "no_stats_to_2",
+        "cardName": "recycle_card",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/98e1b5b8-4db0-4bc7-b345-ccaa8d52e2af/0_0.png"
+            "https://cdn.midjourney.com/fefd7e39-251e-45e3-b30f-fb2cbd476ba7/0_0.png"
         ],
         "cardType": "action",
         "stats": [],
         "effect": {},
         "customEffect": [
-            "0",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/reuse_card.png"
         ],
-        "cd": 1
+        "cd": -1
     },
     {
         "cardName": "draw_all_new_1",
@@ -99,13 +96,61 @@ const DEFAULT_CARDS1 = [
         ],
         "cd": -1
     },
+    {
+        "cardName": "joker",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/d2a12c61-595d-4ddd-a7f8-766bc41848ba/0_0.png"
+        ],
+        "cardType": "stat",
+        "stats": [
+            
+            1,
+            0,
+            2
+        ]
+    },
+  
+    {
+        "cardName": "draw_2_extra",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/7bcc8fdb-056e-485f-87d5-110aba1c6208/0_0.png",
+            //"https://cdn.midjourney.com/603eb471-4008-4627-806c-4785d5b57116/0_2.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png"
+        ],
+        "cd": -1
+    },
+    {
+        "cardName": "copy_card_in_hand",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/6dc58787-784e-4e6a-801f-4464d12124a2/0_0.png"
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png"
+        ],
+        "cd": -1
+    },
+    
     
     {
         "cardName": "extra_turn",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/0a82e853-f51e-49b2-b54d-32c30661901c/0_0.png",
-            "https://cdn.midjourney.com/dec471f7-cce7-40e0-95b3-797091b9971b/0_3.png",
+            "https://cdn.midjourney.com/61662bbc-0ebd-4aab-a010-d66816a1311c/0_0.png",
+            //"https://cdn.midjourney.com/0a82e853-f51e-49b2-b54d-32c30661901c/0_0.png",
+            //"https://cdn.midjourney.com/61662bbc-0ebd-4aab-a010-d66816a1311c/0_3.png",
+            //"https://cdn.midjourney.com/dec471f7-cce7-40e0-95b3-797091b9971b/0_3.png",
         ],
         "cardType": "action",
         "stats": [],
@@ -117,23 +162,37 @@ const DEFAULT_CARDS1 = [
         "cd": -1
     },
     {
-        "cardName": "Shield2",
-        "copies": 3,
+        "cardName": "no_stats_to_2",
+        "copies": 1,
         "images": [
-            //"https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
-            "https://cdn.midjourney.com/100679fa-50af-4fad-9a8b-8ad4623f9e65/0_0.png",
-            "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
-            "https://cdn.midjourney.com/50b2849d-0a6f-42f0-b581-7a6070c6b179/0_0.png"
+            "https://cdn.midjourney.com/98e1b5b8-4db0-4bc7-b345-ccaa8d52e2af/0_0.png"
         ],
         "cardType": "action",
+        "stats": [],
         "effect": {},
         "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png"
+            "0",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
         ],
         "cd": 1
     },
-   
+    {
+        "cardName": "double_dmg",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/ed1dd946-8847-493f-9590-a863e7d345bb/0_0.png"
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "2x",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
+        ],
+        "cd": 2
+    },
     {
         "cardName": "one_off_each",
         "copies": 1,
@@ -155,6 +214,41 @@ const DEFAULT_CARDS1 = [
         ],
         "cd": 1
     },
+    {
+        "cardName": "shield_is_dmg",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/cbdf1866-c272-43e7-b926-e8baa6337461/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
+        ],
+        "cd": 1
+    },
+    {
+        "cardName": "Shield2",
+        "copies": 3,
+        "images": [
+            //"https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+            "https://cdn.midjourney.com/100679fa-50af-4fad-9a8b-8ad4623f9e65/0_0.png",
+            "https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
+            "https://cdn.midjourney.com/50b2849d-0a6f-42f0-b581-7a6070c6b179/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png"
+        ],
+        "cd": 1
+    },
+   
+   
     {
         "cardName": "any_off_each",
         "copies": 1,
@@ -192,95 +286,11 @@ const DEFAULT_CARDS1 = [
         ],
         "cd": 2
     },
-    {
-        "cardName": "draw_2_extra",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/7bcc8fdb-056e-485f-87d5-110aba1c6208/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png"
-        ],
-        "cd": -1
-    },
-    {
-        "cardName": "copy_card_in_hand",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/6dc58787-784e-4e6a-801f-4464d12124a2/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/cards_fan_outline.png"
-        ],
-        "cd": -1
-    },
-    {
-        "cardName": "recycle_card",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/fefd7e39-251e-45e3-b30f-fb2cbd476ba7/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/reuse_card.png"
-        ],
-        "cd": -1
-    },
-    {
-        "cardName": "shield_is_dmg",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/cbdf1866-c272-43e7-b926-e8baa6337461/0_0.png",
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
-        ],
-        "cd": 1
-    },
-    {
-        "cardName": "double_dmg",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/ed1dd946-8847-493f-9590-a863e7d345bb/0_0.png"
-        ],
-        "cardType": "action",
-        "stats": [],
-        "effect": {},
-        "customEffect": [
-            "2x",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
-        ],
-        "cd": 2
-    },
+  
+   
+    
 
-    {
-        "cardName": "joker",
-        "copies": 1,
-        "images": [
-            "https://cdn.midjourney.com/d2a12c61-595d-4ddd-a7f8-766bc41848ba/0_0.png"
-        ],
-        "cardType": "stat",
-        "stats": [
-            
-            1,
-            0,
-            2
-        ]
-    },
+   
     {
         "cardName": "backside",
         "copies": 1,
