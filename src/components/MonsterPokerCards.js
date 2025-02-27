@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
 
-const PRINT = true
+const PRINT = false
 const ONLINE = !PRINT;
 
 const NO_EXTRA_CARDS = true;
