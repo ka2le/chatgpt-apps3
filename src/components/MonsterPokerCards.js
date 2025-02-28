@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
 
-const PRINT = false
+const PRINT = true
 const ONLINE = !PRINT;
 
 const NO_EXTRA_CARDS = true;
@@ -384,10 +384,17 @@ const DEFAULT_CARDS1 = [
             "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
         ],
         "cardType": "action",
-        "effect": {
-            "dmg": 6,
-            "dmgType": 2
-        },
+        // "effect": {
+        //     "dmg": 8,
+        //     "dmgType": 2
+        // },
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png",
+            "*",
+            "8",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
+        ],
         "cd": 4
     },
     {
@@ -679,6 +686,7 @@ const DEFAULT_CARDS = [...DEFAULT_CARDS1, ...(NO_EXTRA_CARDS ? [] : EXTRA_CARDS)
 
 // Styles
 const styles = {
+   
     container: {
         width: "100vw",
         height: "100vh",
@@ -860,7 +868,7 @@ const styles = {
 
 // Utility Components
 // New constant for text adjustment
-const regularTextAdjustment = "10px";
+const regularTextAdjustment = "13px";
 
 // Utility Components
 const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
@@ -902,7 +910,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         return fileName;
     };
 
-    if (value === "*" || value === "+" || value === ">") {
+    if (value === "*" || value === "+" || value === ">" ) {
         const newSize = value === "*" ? MULTIPLIER_ICON_SIZE + "px" : "60px";
         const topAdjustment = value === "*" ? "20px" : "15px";
         return (
@@ -983,7 +991,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
-    const leftAdjustment = (value == "0" || value == "2") ? "30px" : "10px";
+    const leftAdjustment = (value == "0" || value == "2" ||  value == "8") ? "25px" : "10px";
     return (
         <div className={`iconName_${value}`} style={iconStyle}>
             <span style={{
