@@ -385,14 +385,14 @@ const DEFAULT_CARDS1 = [
         ],
         "cardType": "action",
         // "effect": {
-        //     "dmg": 8,
+        //     "dmg": 7,
         //     "dmgType": 2
         // },
         "effect": {},
         "customEffect": [
             "https://ka2le.github.io/chatgpt-apps3/images/mp/dragon.png",
             "*",
-            "8",
+            "7",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
         ],
         "cd": 4
@@ -991,7 +991,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
-    const leftAdjustment = (value == "0" || value == "2" ||  value == "8") ? "25px" : "10px";
+    const leftAdjustment = (value == "0" || value == "2" ||  value == "8" ||  value == "7") ? "25px" : "10px";
     return (
         <div className={`iconName_${value}`} style={iconStyle}>
             <span style={{
