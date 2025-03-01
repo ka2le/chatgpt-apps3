@@ -367,7 +367,7 @@ const DEFAULT_CARDS1 = [
         "cardName": "Dragon Ulti",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
+            "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png",
             "https://cdn.midjourney.com/8260e31b-2fdc-4a51-80f2-33f0802abcd1/0_0.png"
         ],
         "cardType": "action",
@@ -381,7 +381,8 @@ const DEFAULT_CARDS1 = [
         "cardName": "Devour",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/fb1b75c0-6c43-4113-ac31-609460817987/0_0.png"
+            "https://cdn.midjourney.com/c7a44b73-5293-44f6-8b2b-c394b99b223e/0_0.png",
+            
         ],
         "cardType": "action",
         // "effect": {
