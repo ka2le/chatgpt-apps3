@@ -509,8 +509,9 @@ const DEFAULT_CARDS1 = [
         "copies": 8,
         "images": [
             //"https://cdn.midjourney.com/7714408d-861c-449a-b26d-57059940c9c5/0_0.png",Pirate
-            "https://cdn.midjourney.com/72580de6-343e-425e-a28c-00efaceabc7b/0_1.png",
+            //"https://cdn.midjourney.com/72580de6-343e-425e-a28c-00efaceabc7b/0_1.png", butler
             //"https://cdn.midjourney.com/0784c063-7ae5-4964-a34c-7ca6f7104299/0_0.png",monkey
+            "https://cdn.midjourney.com/e86980b7-f91f-4779-9ab7-bde332e4cbe6/0_3.png",
             "https://cdn.midjourney.com/637926a6-2461-49dc-ac73-25cf4084b9fe/0_0.png",
             "https://cdn.midjourney.com/f4e841f1-5185-4990-9f81-4b2fb4a35f4e/0_0.png",
             "https://cdn.midjourney.com/86e89b45-c8fe-4bb1-a43c-79e185a984c4/0_0.png",
