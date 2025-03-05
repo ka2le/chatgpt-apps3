@@ -16,10 +16,11 @@ import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
 
-const PRINT = true
+const PRINT = false
 const ONLINE = !PRINT;
 
-const NO_EXTRA_CARDS = true;
+const NO_EXTRA_CARDS = false;
+const ONLY_EXTRA_CARDS = true;
 
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 120 : 85;
@@ -56,6 +57,7 @@ const DISPLAY_SETTINGS = {
     shieldIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
     defaultImage: "https://via.placeholder.com/635x888",
     noCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_target.png",
+    heartIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/suit_hearts.png",
 };
 
 const DEFAULT_CARDS1 = [
@@ -602,6 +604,35 @@ const EXTRA_CARDS = [
         ]
     },
     {
+        "cardName": "monster_heal",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/05bf2359-92cd-43c6-a4e6-8f6d74d11cbe/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[3].icon,
+            "*",
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+
+        ],
+        "cd": 4
+    },
+    {
+        "cardName": "monster_stat",
+        "copies": 1,
+        "images": [
+           
+            "https://cdn.midjourney.com/4b0905bf-3033-4882-a3ba-476e91dfb0b8/0_0.png",
+        ],
+        "cardType": "stat",
+        "stats": [3],
+       
+    },
+    {
         "cardName": "double_shield",
         "copies": 1,
         "images": [
@@ -680,10 +711,11 @@ const EXTRA_CARDS = [
             "dmgType": 3
         },
         "cd": 4
-    }
+    },
+   
 ]
 
-const DEFAULT_CARDS = [...DEFAULT_CARDS1, ...(NO_EXTRA_CARDS ? [] : EXTRA_CARDS)];
+const DEFAULT_CARDS = ONLY_EXTRA_CARDS ? EXTRA_CARDS : [...DEFAULT_CARDS1, ...(NO_EXTRA_CARDS ? [] : EXTRA_CARDS)];
 
 
 // Styles
