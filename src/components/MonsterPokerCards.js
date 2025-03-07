@@ -16,11 +16,12 @@ import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
 
-const PRINT = false
+const PRINT = true
 const ONLINE = !PRINT;
 
 const NO_EXTRA_CARDS = false;
-const ONLY_EXTRA_CARDS = true;
+const SHOW_BASE_CARDS = false;
+const ONLY_EXTRA_CARDS = false;
 
 // Constants and Default Settings
 const FONT_SIZE = ONLINE ? 120 : 85;
@@ -48,7 +49,7 @@ const DISPLAY_SETTINGS = {
     arrowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
     // startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/timer_100.png",
     //startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/play.png",
-    startIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_lift.png",
+    startIcon: "0",//"https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_lift.png",
     starIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/star.png",
     fastIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/fastforward.png",
     cardAddIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/card_add.png",
@@ -58,6 +59,7 @@ const DISPLAY_SETTINGS = {
     defaultImage: "https://via.placeholder.com/635x888",
     noCardIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_target.png",
     heartIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/suit_hearts.png",
+    diceICon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/dice_3D.png",
 };
 
 const DEFAULT_CARDS1 = [
@@ -227,7 +229,8 @@ const DEFAULT_CARDS1 = [
         "effect": {},
         "customEffect": [
             "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/arrow2.png",
+            "*" ,
             "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png"
         ],
         "cd": 1
@@ -467,6 +470,12 @@ const DEFAULT_CARDS1 = [
             0
         ]
     },
+   
+   
+
+]
+
+const BASE_CARDS = [
     {
         "cardName": "critter1",
         "copies": 7,
@@ -585,10 +594,8 @@ const DEFAULT_CARDS1 = [
         },
         "cd": 3
     },
-   
 
 ]
-
 
 const EXTRA_CARDS = [
     {
@@ -603,8 +610,45 @@ const EXTRA_CARDS = [
             3
         ]
     },
+    //https://cdn.midjourney.com/e97bde00-2f9b-4128-b0e1-ce6dd33c0e81/0_0.png
     {
-        "cardName": "monster_heal",
+        "cardName": "hp_boost",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/e97bde00-2f9b-4128-b0e1-ce6dd33c0e81/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+
+        ],
+        "cd": -1
+    },
+    {
+        "cardName": "big_late_neutral_dmg",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/33a35721-2c77-46b5-8773-00fc44b89f68/0_0.png"
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "21",
+            DISPLAY_SETTINGS.dmgIcon,
+
+        ],
+        "cd": -8
+    },
+    {
+        "cardName": "monster_hp_boost",
         "copies": 1,
         "images": [
             "https://cdn.midjourney.com/05bf2359-92cd-43c6-a4e6-8f6d74d11cbe/0_0.png",
@@ -617,10 +661,147 @@ const EXTRA_CARDS = [
             "*",
             DISPLAY_SETTINGS.heartIcon,
             DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
 
         ],
-        "cd": 4
+        "cd": -1
     },
+    // {
+    //     "cardName": "crit",
+    //     "copies": 1,
+    //     "images": [
+    //         //"https://cdn.midjourney.com/1f507dbc-2a46-4285-a1ba-d0a68b183141/0_0.png",bleed
+    //         "https://cdn.midjourney.com/dffec66b-d118-4a7a-bf63-ffc9aa5f54db/0_0.png",
+    //     ],
+    //     "cardType": "action",
+    //     "stats": [],
+    //     "effect": {},
+    //     "customEffect": [
+    //         DISPLAY_SETTINGS.diceICon,
+    //         "2x",
+    //         DISPLAY_SETTINGS.dmgIcon,
+
+    //     ],
+    //     "cd": -1
+    // },
+     {
+        "cardName": "cd_modifier",
+        "copies": 1,
+        "images": [
+            //"https://cdn.midjourney.com/1f507dbc-2a46-4285-a1ba-d0a68b183141/0_0.png",bleed
+            "https://cdn.midjourney.com/6d95c38c-75be-48a7-a196-2cb66d9fb807/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card.png",
+            "-",
+            DISPLAY_SETTINGS.cdIcon,
+            
+        ],
+        "cd": -1
+    },
+    {
+        "cardName": "shelter",
+        "copies": 1,
+        "images": [
+            //"https://cdn.midjourney.com/1f507dbc-2a46-4285-a1ba-d0a68b183141/0_0.png",bleed
+            "https://cdn.midjourney.com/6aa0e29c-c0d9-482d-9180-07c3e06a2d66/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            DISPLAY_SETTINGS.dmgIcon,
+            DISPLAY_SETTINGS.arrowIcon,
+            "0"
+            
+        ],
+        "cd": -6
+    },
+    {
+        "cardName": "discard_to_dmg",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/501fcd90-35ed-4e02-9b0d-7b8d8917a4b8/0_3.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_return.png",
+            " ",
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_subtract.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_subtract.png",
+            "*",
+            DISPLAY_SETTINGS.dmgIcon,
+            DISPLAY_SETTINGS.dmgIcon,
+            DISPLAY_SETTINGS.dmgIcon,
+            
+        ],
+        "cd": -1
+    },
+     {
+        "cardName": "opponent_discards",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/59921c51-aa0a-4cff-b61f-f514e801e80c/0_2.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/pawn.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_subtract.png",
+            
+        ],
+        "cd": -1
+    },
+    {
+        "cardName": "discard_to_hp",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/d36bc28c-3a37-408c-8bae-fda77593860c/0_2.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_return.png",
+            " ",
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_subtract.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_subtract.png",
+            "*",
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+            DISPLAY_SETTINGS.heartIcon,
+            
+        ],
+        "cd": -1
+    },
+    {
+        "cardName": "Shield6",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/1617f771-5d18-4091-bbbe-97f2652171f9/0_0.png",
+            //"https://cdn.midjourney.com/100679fa-50af-4fad-9a8b-8ad4623f9e65/0_0.png",
+            //"https://cdn.midjourney.com/07af1083-7432-4477-b298-3c0089e8afba/0_0.png",
+            //"https://cdn.midjourney.com/50b2849d-0a6f-42f0-b581-7a6070c6b179/0_0.png"
+        ],
+        "cardType": "action",
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/shield.png",
+        ],
+        "cd": 3
+    },
+   
     {
         "cardName": "monster_stat",
         "copies": 1,
@@ -675,8 +856,22 @@ const EXTRA_CARDS = [
         ]
     },
     {
+        "cardName": "monster_quick_attack",
+        "copies": 1, //25,
+        "images": [
+           "https://cdn.midjourney.com/01d0aeeb-2277-4a7d-9e78-f6f970fc7c7b/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {
+            "dmg": 2,
+            "dmgType": 3
+        },
+        "cd": 2
+    },
+    {
         "cardName": "monster_test",
-        "copies": 25,
+        "copies": 8, //25,
         "images": [
             "https://cdn.midjourney.com/4b0905bf-3033-4882-a3ba-476e91dfb0b8/0_0.png",
             "https://cdn.midjourney.com/f965723e-8787-44d8-8989-8fbb968a0ea4/0_0.png",
@@ -715,7 +910,9 @@ const EXTRA_CARDS = [
    
 ]
 
-const DEFAULT_CARDS = ONLY_EXTRA_CARDS ? EXTRA_CARDS : [...DEFAULT_CARDS1, ...(NO_EXTRA_CARDS ? [] : EXTRA_CARDS)];
+
+const DEFAULT_CARDS2 = [...DEFAULT_CARDS1, ...(SHOW_BASE_CARDS ? BASE_CARDS : [])];
+const DEFAULT_CARDS = ONLY_EXTRA_CARDS ? EXTRA_CARDS : [...(NO_EXTRA_CARDS ? [] : EXTRA_CARDS), ...DEFAULT_CARDS2, ];
 
 
 // Styles
@@ -780,6 +977,7 @@ const styles = {
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "10px",
+            fontWeight: "bold",
         }
     },
     gallery: {
@@ -912,6 +1110,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',
+        //fontWeight: 'bold',
         width: fontSize,
         height: fontSize,
         background: backgroundEffect,
@@ -1025,7 +1224,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
-    const leftAdjustment = (value == "0" || value == "2" ||  value == "8" ||  value == "7") ? "25px" : "10px";
+    const leftAdjustment = (value == "0" || value == "2" ||  value == "8" ||  value == "7" || value == "-" || value > 3) ? "25px" : "10px";
     return (
         <div className={`iconName_${value}`} style={iconStyle}>
             <span style={{
@@ -1148,14 +1347,11 @@ const Card = ({ card, index }) => {
                                 <IconOrImage value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
 
                             ) :
-                                (card.cd === -2 ?
+                                (card.cd < -1 ?
                                     (<>
 
 
-                                        <IconOrImage key={`cd-${2}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                                        <IconOrImage key={`cd-${3}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                                        <IconOrImage key={`cd-${3}`} value={DISPLAY_SETTINGS.cdMaybeIcon} fontSize={FONT_SIZE + 30} />
-                                        <IconOrImage key={`cd-${1}`} value={DISPLAY_SETTINGS.startIcon} fontSize={FONT_SIZE + 10} />
+                                        <IconOrImage value={card.cd*-1} fontSize={FONT_SIZE + 10} />
                                     </>
                                     )
                                     :
