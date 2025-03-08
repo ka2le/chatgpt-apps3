@@ -62,6 +62,7 @@ const DISPLAY_SETTINGS = {
     diceICon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/dice_3D.png",
     cardTakeIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_take.png",
     cardRemoveIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_subtract.png",
+    snowIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/snow.png",
 };
 
 const DEFAULT_CARDS1 = [
@@ -668,6 +669,22 @@ const EXTRA_CARDS = [
         ],
         "cd": 0
     },
+    {
+        "cardName": "monster_draw_cards",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/c93d5335-1b63-4150-8c9a-3d0b57603f74/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[3].icon,
+            "*",
+            DISPLAY_SETTINGS.cardAddIcon,
+        ],
+        "cd": 0
+    },
     //
     {
         "cardName": "draw_more_during_draw",
@@ -684,6 +701,60 @@ const EXTRA_CARDS = [
             DISPLAY_SETTINGS.cardRemoveIcon,
             DISPLAY_SETTINGS.cardRemoveIcon,
 
+        ],
+        "cd": "-100"
+    },
+    
+    {
+        "cardName": "ice_breath",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/00194643-129c-4c5e-8717-09b1b91ab541/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[2].icon,
+            DISPLAY_SETTINGS.dmgIcon,
+            DISPLAY_SETTINGS.arrowIcon,
+            DISPLAY_SETTINGS.snowIcon,
+            DISPLAY_SETTINGS.dmgIcon
+        ],
+        "cd": 0
+    },
+    {
+        "cardName": "critter_ignore_shield",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/a917ac32-6613-4fc3-afa2-627688eec7aa/0_3.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[1].icon,
+           "*",
+              "https://ka2le.github.io/chatgpt-apps3/images/mp/shield_break.png",
+              "https://ka2le.github.io/chatgpt-apps3/images/mp/shield_break.png",
+        ],
+        "cd": 1
+    },
+    {
+        "cardName": "look_ahead",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/b6eebb19-c5ad-4ac0-9bc6-4821e86a1789/0_0.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
         ],
         "cd": "-100"
     },
@@ -770,7 +841,8 @@ const EXTRA_CARDS = [
         "cardName": "critter_to_monster_stat",
         "copies": 1,
         "images": [
-            "https://cdn.midjourney.com/6f504b39-b9e8-4558-8830-ad5f8e234bb5/0_2.png",
+            "https://cdn.midjourney.com/3c699271-4ede-4bf7-b75c-24338b302a24/0_3.png",
+            
         ],
         "cardType": "action",
         "stats": [],
@@ -778,6 +850,60 @@ const EXTRA_CARDS = [
         "customEffect": [
             STAT_ICONS[1].icon,
             DISPLAY_SETTINGS.arrowIcon,
+            STAT_ICONS[3].icon,
+
+
+        ],
+        "cd": 0
+    },
+    {
+        "cardName": "monster_and_dragon_stat",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/1ee639df-4fd5-421b-8dac-12a8ec8b42a3/0_3.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[2].icon,
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_reverse2.png",
+            STAT_ICONS[3].icon,
+
+
+        ],
+        "cd": 0
+    },
+    {
+        "cardName": "monster_and_critter_stat",
+        "copies": 1,
+        "images": [
+           "https://cdn.midjourney.com/6f504b39-b9e8-4558-8830-ad5f8e234bb5/0_2.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[1].icon,
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_reverse2.png",
+            STAT_ICONS[3].icon,
+
+
+        ],
+        "cd": 0
+    },
+    {
+        "cardName": "monster_and_robot_stat",
+        "copies": 1,
+        "images": [
+            "https://cdn.midjourney.com/0c0dd76a-1e81-4360-88b2-09e6e15d6f61/0_3.png",
+        ],
+        "cardType": "action",
+        "stats": [],
+        "effect": {},
+        "customEffect": [
+            STAT_ICONS[0].icon,
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_reverse2.png",
             STAT_ICONS[3].icon,
 
 
@@ -1383,7 +1509,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
             </div>
         );
     }
-    const leftAdjustment = (value == "0" || value == "2" || value == "8" || value == "7" || value == "-" || value > 3) ? "25px" : "10px";
+    const leftAdjustment = (value == "0" || value == "2" || value == "8" || value == "7" || value == "=" || value == "-" || value > 3) ? "25px" : "10px";
     return (
         <div className={`iconName_${value}`} style={iconStyle}>
             <span style={{
