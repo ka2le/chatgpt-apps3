@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
 
-const PRINT = true
+const PRINT = false
 const ONLINE = !PRINT;
 
 const NO_EXTRA_CARDS = false;
@@ -695,7 +695,7 @@ const EXTRA_CARDS = [
         "stats": [],
         "effect": {},
         "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card.png",
+            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/card_diagonal.png",
             "-",
             DISPLAY_SETTINGS.cdIcon,
             
