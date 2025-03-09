@@ -750,7 +750,8 @@ const EXTRA_CARDS = [
         "stats": [],
         "effect": {},
         "customEffect": [
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
+            DISPLAY_SETTINGS.cardAddIcon,
+            " ",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
             "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/cards_seek_top.png",
@@ -857,7 +858,7 @@ const EXTRA_CARDS = [
         "cd": 0
     },
     {
-        "cardName": "monster_and_dragon_stat",
+        "cardName": "monster_or_dragon_stat",
         "copies": 1,
         "images": [
             "https://cdn.midjourney.com/1ee639df-4fd5-421b-8dac-12a8ec8b42a3/0_3.png",
@@ -867,15 +868,18 @@ const EXTRA_CARDS = [
         "effect": {},
         "customEffect": [
             STAT_ICONS[2].icon,
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_reverse2.png",
+            DISPLAY_SETTINGS.arrowIcon,
             STAT_ICONS[3].icon,
-
+            "/",
+            STAT_ICONS[3].icon,
+            DISPLAY_SETTINGS.arrowIcon,
+            STAT_ICONS[2].icon,
 
         ],
         "cd": 0
     },
     {
-        "cardName": "monster_and_critter_stat",
+        "cardName": "monster_or_critter_stat",
         "copies": 1,
         "images": [
            "https://cdn.midjourney.com/6f504b39-b9e8-4558-8830-ad5f8e234bb5/0_2.png",
@@ -885,15 +889,18 @@ const EXTRA_CARDS = [
         "effect": {},
         "customEffect": [
             STAT_ICONS[1].icon,
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_reverse2.png",
+            DISPLAY_SETTINGS.arrowIcon,
             STAT_ICONS[3].icon,
-
+            "/",
+            STAT_ICONS[3].icon,
+            DISPLAY_SETTINGS.arrowIcon,
+            STAT_ICONS[1].icon,
 
         ],
         "cd": 0
     },
     {
-        "cardName": "monster_and_robot_stat",
+        "cardName": "monster_or_robot_stat",
         "copies": 1,
         "images": [
             "https://cdn.midjourney.com/0c0dd76a-1e81-4360-88b2-09e6e15d6f61/0_3.png",
@@ -903,8 +910,15 @@ const EXTRA_CARDS = [
         "effect": {},
         "customEffect": [
             STAT_ICONS[0].icon,
-            "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/arrow_reverse2.png",
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_reverse2.png",
+            DISPLAY_SETTINGS.arrowIcon,
             STAT_ICONS[3].icon,
+        // "∥",
+        "/",
+            STAT_ICONS[3].icon,
+            //"https://ka2le.github.io/chatgpt-apps3/images/mp/arrow_reverse2.png",
+            DISPLAY_SETTINGS.arrowIcon,
+            STAT_ICONS[0].icon,
 
 
         ],
