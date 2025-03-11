@@ -1266,13 +1266,13 @@ const Card = ({ card, index }) => {
 
     const getVariantIcon = (index) => {
         if (!card?.variants || card?.variants?.length === 0) {
-            return <IconOrImage value={VARIANT_ICONS[index % VARIANT_ICONS.length]?.icon} />;
+            return <IconOrImage value={VARIANT_ICONS[index % VARIANT_ICONS.length]?.icon} fontSize={FONT_SIZE - 30} />;
         }
 
         const variantValue = card.variants[index % card.variants.length];
         if (variantValue === -1) return null;
         
-        return <IconOrImage value={VARIANT_ICONS[variantValue % VARIANT_ICONS.length]?.icon} />;
+        return <IconOrImage value={VARIANT_ICONS[variantValue % VARIANT_ICONS.length]?.icon} fontSize={FONT_SIZE - 30} />;
     };
 
 
