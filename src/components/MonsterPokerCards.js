@@ -16,8 +16,11 @@ import Box from '@mui/material/Box';
 import { DisplaySettings } from "@mui/icons-material";
 
 
-const PRINT = true
+const PRINT = false
 const ONLINE = !PRINT;
+
+const DISABLE_VARIANTS = false;
+
 
 const NO_EXTRA_CARDS = false;
 const SHOW_BASE_CARDS = true;
@@ -35,6 +38,7 @@ const CARD_WIDTH = 635;
 const CARD_HEIGHT = 888;
 const SAVE_SCALE = ONLINE ? 0.4 : 4;
 const INNER_SIZE_PERCENT = ONLINE ? 100 : 95;
+
 
 const STAT_ICONS = [
     { name: "robot", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/robot_sharp.png" },
@@ -1353,13 +1357,14 @@ const Card = ({ card, index }) => {
                             ))}
                         </div>
                     )}
-                      <div style={{
+                    {(DISABLE_VARIANTS ? null :    <div style={{
                         position: 'absolute',
                         bottom: CONTENT_PADDING+"px",
                         right: CONTENT_PADDING+"px",
                     }}>
                         {getVariantIcon(index)}
-                    </div> 
+                    </div> )}
+                   
                     {card.cardType === "action" && card.cd !== undefined && (
                         <div style={{ ...styles.card.verticalLock, marginLeft: "-10px" }}>
                             {card.cd == "-100" ? (
