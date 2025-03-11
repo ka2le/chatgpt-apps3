@@ -49,9 +49,9 @@ const STAT_ICONS = [
 
 const VARIANT_ICONS = [
     { name: "venom", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/skull.png" },
-    { name: "transform", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/d10.png" },
-    { name: "fire", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/fire.png" },
-    { name: "defence", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/structure_tower.png" },
+    { name: "transform", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/puzzle.png" },
+    { name: "fire", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/snow.png" },
+    { name: "defence", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/structure_watchtower.png" },
 
 ]
 
@@ -616,7 +616,9 @@ const EXTRA_CARDS = [
             DISPLAY_SETTINGS.heartIcon,
 
         ],
-        "cd": 0
+        
+        "cd": 0,
+        variants:[3],
     },
     {
         "cardName": "big_late_neutral_dmg",
