@@ -43,6 +43,14 @@ const STAT_ICONS = [
     { name: "monster", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/monster2.png" },
 ];
 
+const VARIANT_ICONS = [
+    { name: "venom", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/skull.png" },
+    { name: "transform", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/d10.png" },
+    { name: "fire", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/fire.png" },
+    { name: "defence", icon: "https://ka2le.github.io/chatgpt-apps3/images/mp/extra_icons/structure_tower.png" },
+
+]
+
 const DISPLAY_SETTINGS = {
     dmgIcon: "https://ka2le.github.io/chatgpt-apps3/images/mp/suit_hearts_broken.png",
     multiplierIcon: "*",
@@ -1087,6 +1095,13 @@ const regularTextAdjustment = "13px";
 // Utility Components
 const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
     const backgroundEffect = "";// "radial-gradient(rgba(0,0,0,0.2), rgba(0, 0, 0, 0) 70%)";
+    let iconColorRotate = 0; //yellow
+    
+    //iconColorRotate = 60; //green
+    //iconColorRotate = 120;//blue
+    //iconColorRotate = 200; //purple
+    //iconColorRotate = 240; //pink
+    //iconColorRotate = 300; //red
     const iconStyle = {
         position: 'relative',
         display: 'inline-flex',
@@ -1096,6 +1111,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         width: fontSize,
         height: fontSize,
         background: backgroundEffect,
+        //filter: "contrast(95%) invert(0%) sepia(10%) saturate(1000%) hue-rotate("+iconColorRotate+"deg)",
     };
 
     const imageStyle = {
@@ -1103,6 +1119,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         height: '100%',
         objectFit: 'contain',
         position: 'relative',
+
         background: backgroundEffect,
         filter: 'drop-shadow(0px 1px 2px rgba(0,0,0,0.5))',
     };
@@ -1113,6 +1130,7 @@ const IconOrImage = ({ value, fontSize = FONT_SIZE }) => {
         top: "12px", // Adjust shadow position for text
         left: '4px',
         width: '100%',
+        
         height: '100%',
         filter: 'invert(1) opacity(1)',
         transform: ONLINE ? 'scale(1.12)' : 'scale(1.0)',
@@ -1240,6 +1258,18 @@ const Card = ({ card, index }) => {
         return <IconOrImage value={mapping.icon} />;
     };
 
+    const getVariantIcon = (index) => {
+        if (!card?.variants || card?.variants?.length === 0) {
+            return <IconOrImage value={VARIANT_ICONS[index % VARIANT_ICONS.length]?.icon} />;
+        }
+
+        const variantValue = card.variants[index % card.variants.length];
+        if (variantValue === -1) return null;
+        
+        return <IconOrImage value={VARIANT_ICONS[variantValue % VARIANT_ICONS.length]?.icon} />;
+    };
+
+
     const renderEffect = () => {
         if (!card.effect) return null;
         const { dmg = 0, dmgType, shield = 0 } = card.effect;
@@ -1323,6 +1353,13 @@ const Card = ({ card, index }) => {
                             ))}
                         </div>
                     )}
+                      <div style={{
+                        position: 'absolute',
+                        bottom: CONTENT_PADDING+"px",
+                        right: CONTENT_PADDING+"px",
+                    }}>
+                        {getVariantIcon(index)}
+                    </div> 
                     {card.cardType === "action" && card.cd !== undefined && (
                         <div style={{ ...styles.card.verticalLock, marginLeft: "-10px" }}>
                             {card.cd == "-100" ? (
@@ -1366,125 +1403,6 @@ const Card = ({ card, index }) => {
         </div>
     );
 };
-
-
-
-
-// Updated Gallery Component
-
-
-// Updated Gallery Component with click handling
-
-// Card Dialog Component
-const CardImageDialog = ({ isOpen, onClose, card, copyIndex, onSave }) => {
-    const [imageUrl, setImageUrl] = useState('');
-
-    useEffect(() => {
-        if (isOpen && card) {
-            setImageUrl(card.images[copyIndex] || '');
-        }
-    }, [isOpen, card, copyIndex]);
-
-    const handleSave = () => {
-        const newImages = [...(card.images || [])];
-
-        if (!imageUrl && copyIndex === newImages.length - 1) {
-            newImages.pop();
-        } else {
-            while (newImages.length <= copyIndex) {
-                newImages.push('');
-            }
-            newImages[copyIndex] = imageUrl;
-        }
-
-        onSave(newImages);
-        onClose();
-    };
-
-    const handleCopy = async () => {
-        try {
-            await navigator.clipboard.writeText(imageUrl);
-        } catch (err) {
-            console.error('Failed to copy:', err);
-        }
-    };
-
-    const handlePaste = async () => {
-        try {
-            const text = await navigator.clipboard.readText();
-            setImageUrl(text);
-        } catch (err) {
-            console.error('Failed to paste:', err);
-        }
-    };
-
-    const handleSaveCard = () => {
-        // Get the index of this card within the full expanded list
-        const expandedIndex = getExpandedCardIndex(card, copyIndex);
-
-        const cardElement = document.getElementById(`card-${card.cardName}-${expandedIndex}`);
-        if (cardElement) {
-            saveCard(cardElement, `${card.cardName}-copy-${copyIndex + 1}`);
-        } else {
-            console.warn(`Card element with ID card-${card.cardName}-${expandedIndex} not found.`);
-        }
-    };
-
-    // Helper function to get the correct expanded index
-    const getExpandedCardIndex = (selectedCard, copyIndex) => {
-        let expandedIndex = 0;
-
-        for (const card of DEFAULT_CARDS) {
-            if (card === selectedCard) {
-                return expandedIndex + copyIndex; // Found the right card, add the copyIndex
-            }
-            expandedIndex += card.copies; // Move the index forward by the number of copies
-        }
-
-        return -1; // Fallback (should not happen)
-    };
-
-
-    return (
-        <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
-            <DialogTitle>Edit Card Image</DialogTitle>
-            <DialogContent>
-                <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
-                    {card?.cardName} - Copy {copyIndex + 1}
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                    <TextField
-                        fullWidth
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
-                        placeholder="Enter image URL"
-                        variant="outlined"
-                        size="medium"
-                    />
-                    <IconButton onClick={handleCopy} title="Copy URL">
-                        <ContentCopyIcon />
-                    </IconButton>
-                    <IconButton onClick={handlePaste} title="Paste URL">
-                        <ContentPasteIcon />
-                    </IconButton>
-                    <IconButton onClick={handleSaveCard} title="Save Card">
-                        <SaveIcon />
-                    </IconButton>
-                </Box>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={handleSave} color="primary" variant="contained">
-                    Save
-                </Button>
-            </DialogActions>
-        </Dialog>
-    );
-};
-
-
 
 
 // Updated Gallery Component with correct copy index handling
@@ -1620,6 +1538,125 @@ const Gallery = ({ cards, setCards }) => {
         </div>
     );
 };
+
+
+
+// Updated Gallery Component
+
+
+// Updated Gallery Component with click handling
+
+// Card Dialog Component
+const CardImageDialog = ({ isOpen, onClose, card, copyIndex, onSave }) => {
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        if (isOpen && card) {
+            setImageUrl(card.images[copyIndex] || '');
+        }
+    }, [isOpen, card, copyIndex]);
+
+    const handleSave = () => {
+        const newImages = [...(card.images || [])];
+
+        if (!imageUrl && copyIndex === newImages.length - 1) {
+            newImages.pop();
+        } else {
+            while (newImages.length <= copyIndex) {
+                newImages.push('');
+            }
+            newImages[copyIndex] = imageUrl;
+        }
+
+        onSave(newImages);
+        onClose();
+    };
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(imageUrl);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
+
+    const handlePaste = async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            setImageUrl(text);
+        } catch (err) {
+            console.error('Failed to paste:', err);
+        }
+    };
+
+    const handleSaveCard = () => {
+        // Get the index of this card within the full expanded list
+        const expandedIndex = getExpandedCardIndex(card, copyIndex);
+
+        const cardElement = document.getElementById(`card-${card.cardName}-${expandedIndex}`);
+        if (cardElement) {
+            saveCard(cardElement, `${card.cardName}-copy-${copyIndex + 1}`);
+        } else {
+            console.warn(`Card element with ID card-${card.cardName}-${expandedIndex} not found.`);
+        }
+    };
+
+    // Helper function to get the correct expanded index
+    const getExpandedCardIndex = (selectedCard, copyIndex) => {
+        let expandedIndex = 0;
+
+        for (const card of DEFAULT_CARDS) {
+            if (card === selectedCard) {
+                return expandedIndex + copyIndex; // Found the right card, add the copyIndex
+            }
+            expandedIndex += card.copies; // Move the index forward by the number of copies
+        }
+
+        return -1; // Fallback (should not happen)
+    };
+
+
+    return (
+        <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
+            <DialogTitle>Edit Card Image</DialogTitle>
+            <DialogContent>
+                <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                    {card?.cardName} - Copy {copyIndex + 1}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                    <TextField
+                        fullWidth
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                        placeholder="Enter image URL"
+                        variant="outlined"
+                        size="medium"
+                    />
+                    <IconButton onClick={handleCopy} title="Copy URL">
+                        <ContentCopyIcon />
+                    </IconButton>
+                    <IconButton onClick={handlePaste} title="Paste URL">
+                        <ContentPasteIcon />
+                    </IconButton>
+                    <IconButton onClick={handleSaveCard} title="Save Card">
+                        <SaveIcon />
+                    </IconButton>
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={onClose} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleSave} color="primary" variant="contained">
+                    Save
+                </Button>
+            </DialogActions>
+        </Dialog>
+    );
+};
+
+
+
 
 
 // Main Component
